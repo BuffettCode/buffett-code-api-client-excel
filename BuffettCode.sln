@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCode", "BuffettCode\BuffettCode.csproj", "{151A2480-CC5E-4EDA-A163-9F50173026A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeTest", "Buffett\BuffettCodeTest.csproj", "{1E24A2C4-0474-472A-A37A-F4D347D64BF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeTest", "BuffettCodeTest\BuffettCodeTest.csproj", "{1E24A2C4-0474-472A-A37A-F4D347D64BF5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallerCA", "InstallerCA\InstallerCA.csproj", "{F135D7B8-747C-4C4F-A9FC-1F3A25FBD403}"
 EndProject
