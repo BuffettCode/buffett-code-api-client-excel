@@ -1,6 +1,6 @@
 ﻿namespace BuffettCodeAddin.Formatter
 {
-    class FormatterFactory
+    public class FormatterFactory
     {
         public static Formatter Create(string value, PropertyDescrption description = null)
         {

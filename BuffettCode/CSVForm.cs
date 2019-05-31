@@ -2,6 +2,7 @@
 using BuffettCodeAddin.Client;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -9,7 +10,7 @@ namespace BuffettCode
 {
     public partial class CSVForm : Form
     {
-        private string apiKey;
+        private readonly string apiKey;
 
         public CSVForm(string apiKey)
         {
@@ -39,16 +40,11 @@ namespace BuffettCode
                 string json = task.Result;
                 IList<Quarter> quarters = Quarter.parse(ticker, json);
 
-                System.IO.Stream stream;
-                stream = sfd.OpenFile();
-                if (stream != null)
+                using (var stream = sfd.OpenFile())
                 {
-                    System.IO.StreamWriter sw = new System.IO.StreamWriter(stream);
-                    sw.Write(ToCSV(quarters));
-                    sw.Close();
-                    stream.Close();
+                    CSVGenerator.GenerateAndWrite(stream, Encoding.UTF8, quarters);
                 }
-
+                MessageBox.Show("CSVファイルを保存しました。", "CSV出力", MessageBoxButtons.OK);
             }
 
             DialogResult = DialogResult.OK;
@@ -59,30 +55,6 @@ namespace BuffettCode
         {
             DialogResult = DialogResult.Cancel;
             Close();
-        }
-
-        private string ToCSV(IList<Quarter> quarters)
-        {
-            string csv = "";
-            // header
-            string header = "";
-            foreach (Quarter quarter in quarters)
-            {
-                header = header + "," + quarter.GetQuarter();
-            }
-            csv = header + "\r\n";
-
-            // rows
-            IList<string> columns = quarters[0].GetNames();
-            foreach (string column in columns) {
-                string row = column;
-                foreach(Quarter quarter in quarters)
-                {
-                    row = row + "," + quarter.GetValue(column);
-                }
-                csv = csv + row + "\r\n";
-            }
-            return csv;
         }
     }
 }
