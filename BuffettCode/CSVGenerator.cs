@@ -57,7 +57,7 @@ namespace BuffettCode
 
         private static IList<string> GetPropertyNames(Quarter quarter)
         {
-            IList<string> result = ORDERED_PROPERTIES.ToList<string>();
+            var result = ORDERED_PROPERTIES.ToList<string>();
             foreach (var propertyName in quarter.GetNames())
             {
                 if (!ORDERED_PROPERTIES.Contains(propertyName) && !EXCLUDE_PROPERTIES.Contains(propertyName))
