@@ -38,7 +38,7 @@ namespace BuffettCode
                 var client = new BuffettCodeClientV2();
                 Task<string> task = client.GetQuarterRange(apiKey, ticker, from, to, false);
                 string json = task.Result;
-                IList<Quarter> quarters = Quarter.parse(ticker, json);
+                IList<Quarter> quarters = Quarter.Parse(ticker, json);
 
                 using (var stream = sfd.OpenFile())
                 {

@@ -2,7 +2,10 @@
 
 namespace BuffettCodeAddin.Formatter
 {
-    class RatioFormatter : Formatter
+    /// <summary>
+    /// 割合のフォーマッタ
+    /// </summary>
+    class RatioFormatter : IFormatter
     {
         private static RatioFormatter _instance = new RatioFormatter();
 
@@ -16,6 +19,7 @@ namespace BuffettCodeAddin.Formatter
             return _instance;
         }
 
+        /// <inheritdoc/>
         public string Format(string value, PropertyDescrption description)
         {
             var format = GetFormat(description);

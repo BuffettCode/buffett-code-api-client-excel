@@ -2,12 +2,27 @@
 
 namespace BuffettCodeAddin
 {
+    /// <summary>
+    /// Excelアドイン設定
+    /// </summary>
+    /// <remarks>
+    /// バフェットコードのExcelアドインでは設定をレジストリで管理します。
+    /// レジストリへの入出力をこのクラスで行います。
+    /// </remarks>
     public class Configuration
     {
         private static string apiKey;
-        private static bool clearCache;
-        private static string REGISTRY_KEY = @"Software\BuffettCode";
 
+        private static bool clearCache;
+
+        /// <summary>
+        /// バフェットコードの設定を格納するレジストリのキー名
+        /// </summary>
+        private static readonly string REGISTRY_KEY_NAME = @"Software\BuffettCode";
+
+        /// <summary>
+        /// バフェットコードのAPIキー
+        /// </summary>
         public static string ApiKey
         {
             get { return apiKey; }
@@ -18,6 +33,9 @@ namespace BuffettCodeAddin
             }
         }
 
+        /// <summary>
+        /// キャッシュクリアフラグ
+        /// </summary>
         public static bool ClearCache
         {
             get { return clearCache; }
@@ -28,6 +46,9 @@ namespace BuffettCodeAddin
             }
         }
 
+        /// <summary>
+        /// 全ての設定値をレジストリから読み直して最新化します。
+        /// </summary>
         public static void Reload()
         {
             ReloadAllValuesFromRegistry();
@@ -35,7 +56,7 @@ namespace BuffettCodeAddin
 
         private static void ReloadAllValuesFromRegistry()
         {
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(REGISTRY_KEY, false);
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(REGISTRY_KEY_NAME, false);
             if (registryKey == null)
             {
                 return;
@@ -57,16 +78,19 @@ namespace BuffettCodeAddin
 
         private static void SaveRegistry(string key, object value)
         {
-            RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(REGISTRY_KEY);
+            RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(REGISTRY_KEY_NAME);
             registryKey.SetValue(key, value);
             registryKey.Close();
 
         }
 
+        /// <summary>
+        /// <see cref="RegistryMonitor"/>の監視対象とするレジストリキーを取得します。
+        /// </summary>
+        /// <returns></returns>
         public static RegistryKey GetMonitoringRegistryKey()
         {
-            return Registry.CurrentUser.CreateSubKey(REGISTRY_KEY);
-
+            return Registry.CurrentUser.CreateSubKey(REGISTRY_KEY_NAME);
         }
     }
 }

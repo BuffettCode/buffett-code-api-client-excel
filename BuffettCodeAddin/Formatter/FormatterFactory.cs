@@ -2,7 +2,7 @@
 {
     public class FormatterFactory
     {
-        public static Formatter Create(string value, PropertyDescrption description = null)
+        public static IFormatter Create(string value, PropertyDescrption description = null)
         {
             if (description == null)
             {

@@ -6,8 +6,17 @@ using System.Linq;
 
 namespace BuffettCodeAddin
 {
+    /// <summary>
+    /// 指標
+    /// </summary>
+    /// <remarks>
+    /// /api/{version}/indicator のレスポンスに対応します。
+    /// </remarks>
     public class Indicator : IPropertyAggregation
     {
+        /// <summary>
+        /// 銘柄コード
+        /// </summary>
         public string Ticker { get { return properties["ticker"]; } }
 
         private IDictionary<string, string> properties { get; set; }
@@ -20,6 +29,7 @@ namespace BuffettCodeAddin
             this.descriptions = descriptions;
         }
 
+        /// <inheritdoc/>
         public string GetValue(string name)
         {
             if (!properties.Keys.Contains(name))
@@ -29,17 +39,25 @@ namespace BuffettCodeAddin
             return properties[name];
         }
 
+        /// <inheritdoc/>
         public PropertyDescrption GetDescription(string name)
         {
             return properties.Keys.Contains(name) ? descriptions[name] : null;
         }
 
+        /// <inheritdoc/>
         public string GetIdentifier()
         {
             return Ticker;
         }
 
-        public static IList<Indicator> parse(string ticker, string jsonString)
+        /// <summary>
+        /// バフェットコードWebAPIのレスポンスをパースします。
+        /// </summary>
+        /// <param name="ticker">銘柄コード</param>
+        /// <param name="jsonString">JSON文字列</param>
+        /// <returns><see cref="Indicator"/>のリスト</returns>
+        public static IList<Indicator> Parse(string ticker, string jsonString)
         {
             JObject json = JsonConvert.DeserializeObject(jsonString) as JObject;
 
@@ -78,6 +96,5 @@ namespace BuffettCodeAddin
             }
             return value;
         }
-
     }
 }

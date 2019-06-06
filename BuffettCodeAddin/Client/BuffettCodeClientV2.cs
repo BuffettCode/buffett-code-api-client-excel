@@ -3,8 +3,12 @@ using System.Threading.Tasks;
 
 namespace BuffettCodeAddin.Client
 {
+    /// <summary>
+    /// バフェットコードクライアント(v2)
+    /// </summary>
     public class BuffettCodeClientV2 : AbstractBuffettCodeClient
     {
+        /// <inheritdoc/>
         public override async Task<string> GetQuarter(string apiKey, string ticker, string fiscalYear, string fiscalQuarter, bool isConfigureAwait = true)
         {
             var parameters = new Dictionary<string, string>()
@@ -17,6 +21,7 @@ namespace BuffettCodeAddin.Client
             return await Request(apiKey, path, isConfigureAwait).ConfigureAwait(isConfigureAwait);
         }
 
+        /// <inheritdoc/>
         public override async Task<string> GetQuarterRange(string apiKey, string ticker, string from, string to, bool isConfigureAwait = true)
         {
             var parameters = new Dictionary<string, string>()
@@ -29,6 +34,7 @@ namespace BuffettCodeAddin.Client
             return await Request(apiKey, path, isConfigureAwait).ConfigureAwait(isConfigureAwait);
         }
 
+        /// <inheritdoc/>
         public override async Task<string> GetIndicator(string apiKey, string ticker, bool isConfigureAwait = true)
         {
             var parameters = new Dictionary<string, string>()
@@ -38,6 +44,5 @@ namespace BuffettCodeAddin.Client
             var path = BuildGetPath("/api/v2/indicator", parameters);
             return await Request(apiKey, path, isConfigureAwait).ConfigureAwait(isConfigureAwait);
         }
-
     }
 }

@@ -2,8 +2,23 @@
 
 namespace BuffettCodeAddin
 {
+    /// <summary>
+    /// APIリゾルバ
+    /// </summary>
+    /// <remarks>
+    /// ExcelアドインではBCODEという関数1つで全ての値を取れるようにしていますが、
+    /// バフェットコードでは複数のAPIを提供しており、取得したい値によって使用するAPIが異なります。
+    /// BCODE関数で指定された項目名に対して、どのAPIを使用すべきか決定する機能をこのクラスに持たせています。
+    /// </remarks>
     class APIResolver
     {
+        /// <summary>
+        /// 財務数値の項目名
+        /// </summary>
+        /// <remarks>
+        /// より具体的には /api/{version}/quarter が返却する項目名。
+        /// APIの仕様が変更されたら反映する必要があります。
+        /// </remarks>
         private static readonly string[] INDICATORS = {
             "stockprice",
             "trading_volume",
@@ -79,9 +94,14 @@ namespace BuffettCodeAddin
             "cash_monthly_sales_ratio",
             "accrual" };
 
-        public static bool IsIndicator(string name)
+        /// <summary>
+        /// 項目名が財務数値かどうかを判定します
+        /// </summary>
+        /// <param name="propertyName">項目名</param>
+        /// <returns>財務数値の場合はtrue</returns>
+        public static bool IsIndicator(string propertyName)
         {
-            return INDICATORS.Contains(name);
+            return INDICATORS.Contains(propertyName);
         }
     }
 }

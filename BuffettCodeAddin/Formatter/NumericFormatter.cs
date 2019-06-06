@@ -2,7 +2,10 @@
 
 namespace BuffettCodeAddin.Formatter
 {
-    class NumericFormatter : Formatter
+    /// <summary>
+    /// 数値のフォーマッタ
+    /// </summary>
+    class NumericFormatter : IFormatter
     {
         private static NumericFormatter _instance = new NumericFormatter();
 
@@ -11,6 +14,7 @@ namespace BuffettCodeAddin.Formatter
             // do nothing.
         }
 
+        /// <inheritdoc/>
         public static NumericFormatter GetInstance()
         {
             return _instance;

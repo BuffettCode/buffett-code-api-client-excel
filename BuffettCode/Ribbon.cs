@@ -36,7 +36,7 @@ namespace BuffettCode
             form.ShowDialog();
             if (form.DialogResult == DialogResult.OK)
             {
-                Console.Write("dummy");
+
             }
         }
 

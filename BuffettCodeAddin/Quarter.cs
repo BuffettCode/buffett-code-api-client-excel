@@ -7,12 +7,27 @@ using System.Linq;
 
 namespace BuffettCodeAddin
 {
+    /// <summary>
+    /// 財務数値
+    /// </summary>
+    /// <remarks>
+    /// /api/{version}/quarter のレスポンスに対応します。
+    /// </remarks>
     public class Quarter : IPropertyAggregation
     {
+        /// <summary>
+        /// 銘柄コード
+        /// </summary>
         public string Ticker { get { return properties["ticker"]; } }
 
+        /// <summary>
+        /// 会計年度
+        /// </summary>
         public int FiscalYear { get { return Int32.Parse(properties["fiscal_year"]); } }
 
+        /// <summary>
+        /// 会計四半期
+        /// </summary>
         public int FiscalQuarter { get { return Int32.Parse(properties["fiscal_quarter"]); } }
 
         private IDictionary<string, string> properties { get; set; }
@@ -25,6 +40,7 @@ namespace BuffettCodeAddin
             this.descriptions = descriptions;
         }
 
+        /// <inheritdoc/>
         public string GetValue(string propertyName)
         {
             if (!properties.Keys.Contains(propertyName))
@@ -34,21 +50,22 @@ namespace BuffettCodeAddin
             return properties[propertyName];
         }
 
+        /// <inheritdoc/>
         public PropertyDescrption GetDescription(string propertyName)
         {
             return descriptions.Keys.Contains(propertyName) ? descriptions[propertyName] : null;
         }
 
-        public string GetQuarter()
-        {
-            return FiscalYear + "Q" + FiscalQuarter;
-        }
-
+        /// <summary>
+        /// 項目名のリストを取得します。
+        /// </summary>
+        /// <returns>項目名のリスト</returns>
         public IList<string> GetNames()
         {
             return properties.Keys.ToList();
         }
 
+        /// <inheritdoc/>
         public string GetIdentifier()
         {
             return Quarter.GetIdentifier(Ticker, FiscalYear, FiscalQuarter);
@@ -59,7 +76,13 @@ namespace BuffettCodeAddin
             return String.Join("_", ticker, fiscalYear, fiscalQuarter);
         }
 
-        public static IList<Quarter> parse(string ticker, string jsonString)
+        /// <summary>
+        /// バフェットコードWebAPIのレスポンスをパースします。
+        /// </summary>
+        /// <param name="ticker">銘柄コード</param>
+        /// <param name="jsonString">JSON文字列</param>
+        /// <returns><see cref="Quarter"/>のリスト</returns>
+        public static IList<Quarter> Parse(string ticker, string jsonString)
         {
             JObject json = JsonConvert.DeserializeObject(jsonString) as JObject;
 

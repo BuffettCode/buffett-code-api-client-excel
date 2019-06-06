@@ -7,12 +7,18 @@ using System.Threading.Tasks;
 
 namespace BuffettCodeAddin.Client
 {
+    /// <summary>
+    /// バフェットコードクライアントの抽象クラス
+    /// </summary>
     public abstract class AbstractBuffettCodeClient : IBuffettCodeClient
     {
+        /// <inheritdoc/>
         abstract public Task<string> GetIndicator(string apiKey, string ticker, bool isConfigureAwait = true);
 
+        /// <inheritdoc/>
         abstract public Task<string> GetQuarter(string apiKey, string ticker, string fiscalYear, string fiscalQuarter, bool isConfigureAwait = true);
 
+        /// <inheritdoc/>
         abstract public Task<string> GetQuarterRange(string apiKey, string ticker, string from, string to, bool isConfigureAwait = true);
 
         protected async Task<string> Request(string apiKey, string path, bool isConfigureAwait)

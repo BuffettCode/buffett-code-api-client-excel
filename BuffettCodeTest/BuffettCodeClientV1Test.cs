@@ -13,7 +13,7 @@ namespace Buffett
         {
             var client = new BuffettCodeClientV1();
             var json = client.GetQuarter(BuffettCodeTestUtils.GetValidApiKey(), "6501", "2018", "4").Result;
-            var quarters = Quarter.parse("6501", json);
+            var quarters = Quarter.Parse("6501", json);
 
             Assert.IsFalse(quarters.Count == 0);
             Assert.AreEqual("6501", quarters[0].Ticker);

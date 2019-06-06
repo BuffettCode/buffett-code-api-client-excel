@@ -8,12 +8,21 @@ using System.Text;
 
 namespace BuffettCode
 {
+    /// <summary>
+    /// CSV出力
+    /// </summary>
     class CSVGenerator
     {
         private static readonly string[] EXCLUDE_PROPERTIES = { "ticker" };
 
         private static readonly string[] ORDERED_PROPERTIES = { "company_name", "ceo_name", "headquarters_address", "accounting_standard", "fiscal_year", "fiscal_quarter" };
 
+        /// <summary>
+        /// 財務数値データからCSVを作成し、ファイルに出力します。
+        /// </summary>
+        /// <param name="stream">出力先のファイルストリーム</param>
+        /// <param name="encoding">文字コード</param>
+        /// <param name="quarters">財務数値</param>
         public static void GenerateAndWrite(Stream stream, Encoding encoding, IList<Quarter> quarters)
         {
             if (quarters.Count == 0)

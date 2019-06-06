@@ -2,7 +2,10 @@
 
 namespace BuffettCodeAddin.Formatter
 {
-    class CurrencyFormatter : Formatter
+    /// <summary>
+    /// 金額のフォーマッタ
+    /// </summary>
+    class CurrencyFormatter : IFormatter
     {
         private static CurrencyFormatter _instance = new CurrencyFormatter();
 
@@ -16,6 +19,7 @@ namespace BuffettCodeAddin.Formatter
             return _instance;
         }
 
+        /// <inheritdoc/>
         public string Format(string value, PropertyDescrption description)
         {
             var denominator = GetDenominator(description);

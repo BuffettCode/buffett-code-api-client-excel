@@ -1,6 +1,6 @@
 ﻿namespace BuffettCodeAddin.Formatter
 {
-    class InactionFormatter : Formatter
+    class InactionFormatter : IFormatter
      {
         private static InactionFormatter _instance = new InactionFormatter();
 
@@ -9,6 +9,7 @@
             return _instance;
         }
 
+        /// <inheritdoc/>
         public string Format(string value, PropertyDescrption description)
         {
             return value;
