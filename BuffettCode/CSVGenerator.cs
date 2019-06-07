@@ -17,6 +17,11 @@ namespace BuffettCode
 
         private static readonly string[] ORDERED_PROPERTIES = { "company_name", "ceo_name", "headquarters_address", "accounting_standard", "fiscal_year", "fiscal_quarter" };
 
+        public static void GetQuarters()
+        {
+
+        }
+
         /// <summary>
         /// 財務数値データからCSVを作成し、ファイルに出力します。
         /// </summary>
@@ -64,7 +69,7 @@ namespace BuffettCode
             }
         }
 
-        private static IList<string> GetPropertyNames(Quarter quarter)
+        public static IList<string> GetPropertyNames(Quarter quarter)
         {
             var result = ORDERED_PROPERTIES.ToList<string>();
             foreach (var propertyName in quarter.GetNames())
