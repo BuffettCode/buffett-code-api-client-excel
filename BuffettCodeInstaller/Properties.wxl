@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WixLocalization Culture="ja-JP" xmlns="http://schemas.microsoft.com/wix/2006/localization">
   <String Id="LANG">1033</String>
-  <String Id="ProductName">バフェットコード Excelアドイン</String>
+  <String Id="ProductName">バフェットコードExcelアドイン</String>
   <String Id="ProductNameNoSpace">BuffettCodeAddin</String>
   <String Id="ProductDescription">BuffettCode Excel Add-In Installer</String>
-  <String Id="ProductManufacturer">Buffett Code Inc.</String>
+  <String Id="ProductManufacturer">BuffettCode</String>
   <String Id="ProductVersion">1</String>
   <String Id="ProductCopyright">Copyright (C) 2019 Buffett Code Inc. All rights reserved</String>
   <String Id="ProductUninstallDescription">Uninstall !(loc.ProductName)</String>
-  <String Id="AppName">バフェットコード Excelアドイン</String>
+  <String Id="AppName">バフェットコードExcelアドイン</String>
 </WixLocalization>

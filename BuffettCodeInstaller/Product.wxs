@@ -33,7 +33,7 @@
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
         <Directory Id="COMPANYDIR" Name="!(loc.ProductManufacturer)">
-          <Directory Id="AddinFolder" Name="!(loc.ProductName)">
+          <Directory Id="AddinFolder" Name="!(loc.ProductNameNoSpace)">
           </Directory>
         </Directory>
       </Directory>
