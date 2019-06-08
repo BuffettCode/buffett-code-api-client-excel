@@ -95,6 +95,10 @@ namespace BuffettCodeAddin
                 string json = task.Result;
                 cache.Add(Indicator.Parse(ticker, json));
             }
+            if (!cache.HasIndicator(ticker))
+            {
+                throw new AggregationNotFoundException();
+            }
 
             return cache.GetIndicator(ticker);
         }
@@ -107,8 +111,17 @@ namespace BuffettCodeAddin
                 string json = task.Result;
                 cache.Add(Quarter.Parse(ticker, json));
             }
+            if (!cache.HasQuarter(ticker, fiscalYear, fiscalQuarter))
+            {
+                throw new AggregationNotFoundException();
+            }
 
             return cache.GetQuarter(ticker, fiscalYear, fiscalQuarter);
+        }
+
+        private void ValidateJson(string json)
+        {
+
         }
     }
 }

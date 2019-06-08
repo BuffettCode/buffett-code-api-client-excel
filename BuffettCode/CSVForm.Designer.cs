@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.textTicker = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,10 +41,12 @@
             this.radioSheet = new System.Windows.Forms.RadioButton();
             this.radioCSV = new System.Windows.Forms.RadioButton();
             this.groupEncoding = new System.Windows.Forms.GroupBox();
-            this.radioUTF8 = new System.Windows.Forms.RadioButton();
             this.radioShiftJIS = new System.Windows.Forms.RadioButton();
+            this.radioUTF8 = new System.Windows.Forms.RadioButton();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupOutput.SuspendLayout();
             this.groupEncoding.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -59,7 +62,7 @@
             // 
             this.textTicker.Location = new System.Drawing.Point(36, 48);
             this.textTicker.Name = "textTicker";
-            this.textTicker.Size = new System.Drawing.Size(146, 25);
+            this.textTicker.Size = new System.Drawing.Size(118, 25);
             this.textTicker.TabIndex = 1;
             this.textTicker.Text = "6501";
             // 
@@ -76,14 +79,16 @@
             // 
             this.textFrom.Location = new System.Drawing.Point(36, 117);
             this.textFrom.Name = "textFrom";
-            this.textFrom.Size = new System.Drawing.Size(146, 25);
-            this.textFrom.TabIndex = 3;
+            this.textFrom.Size = new System.Drawing.Size(118, 25);
+            this.textFrom.TabIndex = 2;
             this.textFrom.Text = "2017Q1";
+            this.textFrom.Validating += new System.ComponentModel.CancelEventHandler(this.TextFrom_Validating);
+            this.textFrom.Validated += new System.EventHandler(this.TextFrom_Validated);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(192, 120);
+            this.label3.Location = new System.Drawing.Point(186, 120);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(26, 18);
             this.label3.TabIndex = 4;
@@ -93,9 +98,11 @@
             // 
             this.textTo.Location = new System.Drawing.Point(228, 117);
             this.textTo.Name = "textTo";
-            this.textTo.Size = new System.Drawing.Size(147, 25);
-            this.textTo.TabIndex = 5;
+            this.textTo.Size = new System.Drawing.Size(118, 25);
+            this.textTo.TabIndex = 3;
             this.textTo.Text = "2017Q4";
+            this.textTo.Validating += new System.ComponentModel.CancelEventHandler(this.TextTo_Validating);
+            this.textTo.Validated += new System.EventHandler(this.TextTo_Validated);
             // 
             // buttonOK
             // 
@@ -134,7 +141,7 @@
             this.radioSheet.Location = new System.Drawing.Point(201, 24);
             this.radioSheet.Name = "radioSheet";
             this.radioSheet.Size = new System.Drawing.Size(122, 22);
-            this.radioSheet.TabIndex = 9;
+            this.radioSheet.TabIndex = 5;
             this.radioSheet.TabStop = true;
             this.radioSheet.Text = "新しいシート";
             this.radioSheet.UseVisualStyleBackColor = true;
@@ -147,7 +154,7 @@
             this.radioCSV.Location = new System.Drawing.Point(9, 24);
             this.radioCSV.Name = "radioCSV";
             this.radioCSV.Size = new System.Drawing.Size(118, 22);
-            this.radioCSV.TabIndex = 8;
+            this.radioCSV.TabIndex = 4;
             this.radioCSV.TabStop = true;
             this.radioCSV.Text = "CSVファイル";
             this.radioCSV.UseVisualStyleBackColor = true;
@@ -164,6 +171,16 @@
             this.groupEncoding.TabStop = false;
             this.groupEncoding.Text = "文字コード";
             // 
+            // radioShiftJIS
+            // 
+            this.radioShiftJIS.AutoSize = true;
+            this.radioShiftJIS.Location = new System.Drawing.Point(201, 24);
+            this.radioShiftJIS.Name = "radioShiftJIS";
+            this.radioShiftJIS.Size = new System.Drawing.Size(93, 22);
+            this.radioShiftJIS.TabIndex = 7;
+            this.radioShiftJIS.Text = "ShiftJIS";
+            this.radioShiftJIS.UseVisualStyleBackColor = true;
+            // 
             // radioUTF8
             // 
             this.radioUTF8.AutoSize = true;
@@ -171,20 +188,14 @@
             this.radioUTF8.Location = new System.Drawing.Point(9, 25);
             this.radioUTF8.Name = "radioUTF8";
             this.radioUTF8.Size = new System.Drawing.Size(75, 22);
-            this.radioUTF8.TabIndex = 0;
+            this.radioUTF8.TabIndex = 6;
             this.radioUTF8.TabStop = true;
             this.radioUTF8.Text = "UTF8";
             this.radioUTF8.UseVisualStyleBackColor = true;
             // 
-            // radioShiftJIS
+            // errorProvider
             // 
-            this.radioShiftJIS.AutoSize = true;
-            this.radioShiftJIS.Location = new System.Drawing.Point(201, 24);
-            this.radioShiftJIS.Name = "radioShiftJIS";
-            this.radioShiftJIS.Size = new System.Drawing.Size(93, 22);
-            this.radioShiftJIS.TabIndex = 1;
-            this.radioShiftJIS.Text = "ShiftJIS";
-            this.radioShiftJIS.UseVisualStyleBackColor = true;
+            this.errorProvider.ContainerControl = this;
             // 
             // CSVForm
             // 
@@ -205,10 +216,12 @@
             this.MinimizeBox = false;
             this.Name = "CSVForm";
             this.Text = "CSV出力";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CSVForm_FormClosing);
             this.groupOutput.ResumeLayout(false);
             this.groupOutput.PerformLayout();
             this.groupEncoding.ResumeLayout(false);
             this.groupEncoding.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,5 +243,6 @@
         private System.Windows.Forms.GroupBox groupEncoding;
         private System.Windows.Forms.RadioButton radioShiftJIS;
         private System.Windows.Forms.RadioButton radioUTF8;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

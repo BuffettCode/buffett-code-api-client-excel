@@ -1,7 +1,21 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="BuffettCode.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="CSVTicker" Type="System.String" Scope="User">
+      <Value Profile="(Default)">6501</Value>
+    </Setting>
+    <Setting Name="CSVFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2016Q1</Value>
+    </Setting>
+    <Setting Name="CSVTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2018Q4</Value>
+    </Setting>
+    <Setting Name="CSVIsFile" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CSVUTF8" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

@@ -179,6 +179,10 @@ namespace BuffettCodeAddin
             {
                 message = "指定された項目が見つかりません:" + propertyName;
             }
+            else if (bce is AggregationNotFoundException)
+            {
+                message = "指定されたデータを取得できませんでした";
+            }
             else if (bce is QuotaException)
             {
                 message = "APIの実行回数が上限に達しました";
@@ -186,7 +190,12 @@ namespace BuffettCodeAddin
             else if (bce is InvalidAPIKeyException)
             {
                 message = "APIキーが有効ではありません";
-            } else
+            }
+            else if (bce is TestAPIConstraintException)
+            {
+                message = "テスト用のAPIキーでは取得できないデータです";
+            }
+            else
             {
                 message = "未定義のエラー";
             }
@@ -200,11 +209,11 @@ namespace BuffettCodeAddin
             {
                 if (cursor is BuffettCodeException)
                 {
-                    return cursor;
+                    break;
                 }
                 cursor = cursor.InnerException;
             } while (cursor != null);
-            return null;
+            return cursor;
         }
     }
 }

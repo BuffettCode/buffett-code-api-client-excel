@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AggregationNotFoundException.cs" />
     <Compile Include="APIResolver.cs" />
     <Compile Include="BuffettCodeAPI.cs" />
     <Compile Include="BuffettCodeException.cs" />
@@ -69,7 +70,9 @@
     <Compile Include="Client\AbstractBuffettCodeClient.cs" />
     <Compile Include="Client\BuffettCodeClientV1.cs" />
     <Compile Include="Client\BuffettCodeClientV2.cs" />
+    <Compile Include="Client\BuffettCodeValidator.cs" />
     <Compile Include="Client\IBuffettCodeClient.cs" />
+    <Compile Include="Client\TestAPIConstraintException.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Formatter\NumericFormatter.cs" />
     <Compile Include="Formatter\Formatter.cs" />

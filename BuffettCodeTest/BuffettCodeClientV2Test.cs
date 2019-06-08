@@ -22,6 +22,19 @@ namespace Buffett
         }
 
         [TestMethod]
+        public void TestGetQuarterRange()
+        {
+            var client = new BuffettCodeClientV2();
+            var json = client.GetQuarterRange(BuffettCodeTestUtils.GetValidApiKey(), "6501", "2013Q1", "2015Q4").Result;
+            var quarters = Quarter.Parse("6501", json);
+
+            Assert.IsFalse(quarters.Count == 0);
+            Assert.AreEqual("6501", quarters[0].Ticker);
+            Assert.IsNotNull(quarters[0].GetValue("assets")); // 値は変わりうるのでNullかどうかだけチェック
+            Assert.IsNotNull(quarters[0].GetDescription("assets"));
+        }
+
+        [TestMethod]
         public void TestGetIndicator()
         {
             var client = new BuffettCodeClientV2();

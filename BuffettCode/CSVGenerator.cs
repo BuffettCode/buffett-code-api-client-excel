@@ -30,20 +30,13 @@ namespace BuffettCode
         /// <param name="quarters">財務数値</param>
         public static void GenerateAndWrite(Stream stream, Encoding encoding, IList<Quarter> quarters)
         {
-            if (quarters.Count == 0)
-            {
-                return;
-            }
-
-            var sorted = quarters.ToList();
-            sorted.Sort((left, right) => { return left.GetIdentifier().CompareTo(right.GetIdentifier()); });
             using (var writer = new CsvWriter(new StreamWriter(stream, encoding)))
             {
                 // header
                 writer.WriteField("キー");
                 writer.WriteField("項目名");
                 writer.WriteField("単位");
-                foreach (var quarter in sorted)
+                foreach (var quarter in quarters)
                 {
                     writer.WriteField(quarter.FiscalYear + "Q" + quarter.FiscalQuarter);
                 }
@@ -57,7 +50,7 @@ namespace BuffettCode
                     writer.WriteField(propertyName);
                     writer.WriteField(description.Label);
                     writer.WriteField(description.Unit);
-                    foreach (var quarter in sorted)
+                    foreach (var quarter in quarters)
                     {
                         var rawValue = quarter.GetValue(propertyName);
                         var formatter = FormatterFactory.Create(rawValue, description);

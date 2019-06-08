@@ -13,10 +13,41 @@ namespace BuffettCode
     {
         private readonly string apiKey;
 
+        private static readonly int lowerLimitYear = 2008;
+
+        private static readonly int upperLimitYear = DateTime.Today.Year;
+
         public CSVForm(string apiKey)
         {
             InitializeComponent();
+            LoadSettings();
             this.apiKey = apiKey;
+        }
+
+        private void LoadSettings()
+        {
+            textTicker.Text = Properties.Settings.Default.CSVTicker;
+            textFrom.Text = Properties.Settings.Default.CSVFrom;
+            textTo.Text = Properties.Settings.Default.CSVTo;
+            radioCSV.Checked = Properties.Settings.Default.CSVIsFile;
+            radioSheet.Checked = !Properties.Settings.Default.CSVIsFile;
+            radioUTF8.Checked = Properties.Settings.Default.CSVUTF8;
+            radioShiftJIS.Checked = !Properties.Settings.Default.CSVUTF8;
+        }
+
+        private void CSVForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveSettings();
+        }
+
+        private void SaveSettings()
+        {
+            Properties.Settings.Default.CSVTicker = textTicker.Text;
+            Properties.Settings.Default.CSVFrom = textFrom.Text;
+            Properties.Settings.Default.CSVTo = textTo.Text;
+            Properties.Settings.Default.CSVIsFile = radioCSV.Checked;
+            Properties.Settings.Default.CSVUTF8 = radioUTF8.Checked;
+            Properties.Settings.Default.Save();
         }
 
         private void ButtonOK_Click(object sender, EventArgs e)
@@ -55,11 +86,7 @@ namespace BuffettCode
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                var client = new BuffettCodeClientV2();
-                Task<string> task = client.GetQuarterRange(apiKey, ticker, from, to, false);
-                string json = task.Result;
-                IList<Quarter> quarters = Quarter.Parse(ticker, json);
-
+                var quarters = GetSortedQuarters(ticker, from, to);
                 using (var stream = sfd.OpenFile())
                 {
                     var encoding = radioUTF8.Checked ? Encoding.UTF8 : Encoding.GetEncoding("shift_jis");
@@ -72,19 +99,12 @@ namespace BuffettCode
             Close();
         }
 
-
         private void WriteNewSheet()
         {
             string ticker = textTicker.Text;
             string from = textFrom.Text;
             string to = textTo.Text;
-
-            var client = new BuffettCodeClientV2();
-            Task<string> task = client.GetQuarterRange(apiKey, ticker, from, to, false);
-            string json = task.Result;
-            IList<Quarter> quarters = Quarter.Parse(ticker, json);
-            var sorted = new List<Quarter>(quarters);
-            sorted.Sort((left, right) => { return left.GetIdentifier().CompareTo(right.GetIdentifier()); });
+            var quarters = GetSortedQuarters(ticker, from, to);
 
             // create new sheet
             Microsoft.Office.Interop.Excel.Worksheet worksheet;
@@ -104,7 +124,7 @@ namespace BuffettCode
             worksheet.Cells[col, row++] = "キー";
             worksheet.Cells[col, row++] = "項目名";
             worksheet.Cells[col, row++] = "単位";
-            foreach (var quarter in sorted)
+            foreach (var quarter in quarters)
             {
                 worksheet.Cells[col, row++] = quarter.FiscalYear + "Q" + quarter.FiscalQuarter;
             }
@@ -120,7 +140,7 @@ namespace BuffettCode
                 worksheet.Cells[col, row++] = propertyName;
                 worksheet.Cells[col, row++] = description.Label;
                 worksheet.Cells[col, row++] = description.Unit;
-                foreach (var quarter in sorted)
+                foreach (var quarter in quarters)
                 {
                     var rawValue = quarter.GetValue(propertyName);
                     var formatter = FormatterFactory.Create(rawValue, description);
@@ -134,19 +154,157 @@ namespace BuffettCode
             Close();
         }
 
+        private IList<Quarter> GetSortedQuarters(string ticker, string from, string to)
+        {
+            var client = new BuffettCodeClientV2();
+            var quarters = new List<Quarter>();
+
+            foreach (KeyValuePair<string, string> range in SliceRange(from, to))
+            {
+                Task<string> task = client.GetQuarterRange(apiKey, ticker, range.Key, range.Value, false);
+                string json = task.Result;
+                quarters.AddRange(Quarter.Parse(ticker, json));
+            }
+            //            IList<Quarter> quarters = Quarter.Parse(ticker, json);
+
+            var sorted = new List<Quarter>(quarters);
+            sorted.Sort((left, right) => { return left.GetIdentifier().CompareTo(right.GetIdentifier()); });
+            return sorted;
+        }
+
+        private IDictionary<string, string> SliceRange(string from, string to)
+        {
+            // 2010Q1 to 2012Q4 -> 12
+            // 2010Q1 to 2013Q1 -> 13
+            // 2010Q4 to 2013Q1 -> 10
+            var result = new Dictionary<string, string>();
+            var gap = GetGap(from, to);
+
+            var cursor = from;
+            while (gap > 12)
+            {
+                result.Add(cursor, ToRange(cursor));
+                cursor = Add3Years(cursor);
+                gap -= 12;
+            }
+            result.Add(cursor, to);
+            /*
+            if (gap > 12)
+            {
+                result.Add(from, to);
+            }
+            else
+            {
+                result.Add(from, to);
+            }
+            */
+            return result;
+        }
+
+        private int GetGap(string from, string to)
+        {
+            int ty = int.Parse(to.Split('Q')[0]);
+            int fy = int.Parse(from.Split('Q')[0]);
+            int tq = int.Parse(to.Split('Q')[1]);
+            int fq = int.Parse(from.Split('Q')[1]);
+            return (ty - fy) * 4 + (tq - fq) + 1;
+        }
+
+        private string ToRange(string from)
+        {
+            int y = int.Parse(from.Split('Q')[0]);
+            int q = int.Parse(from.Split('Q')[1]);
+            return q == 1 ? (y + 2) + "Q4" : (y + 3) + "Q" + (q - 1);
+        }
+
+        private string Add3Years(string quarter)
+        {
+            int y = int.Parse(quarter.Split('Q')[0]);
+            int q = int.Parse(quarter.Split('Q')[1]);
+            return (y + 3) + "Q" + q;
+        }
+
+        private int GetYear(string quarter)
+        {
+            return int.Parse(quarter.Split('Q')[0]);
+        }
+
+        private int GetQuarter(string quarter)
+        {
+            return int.Parse(quarter.Split('Q')[1]);
+        }
+
         private void RadioCSV_CheckedChanged(object sender, EventArgs e)
         {
             UpdateForm();
         }
 
+        private void RadioSheet_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateForm();
+        }
         private void UpdateForm()
         {
             groupEncoding.Visible = radioCSV.Checked;
         }
 
-        private void RadioSheet_CheckedChanged(object sender, EventArgs e)
+        private void TextFrom_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            UpdateForm();
+            var message = ValidateQuarter(textFrom.Text);
+            if (!String.IsNullOrEmpty(message))
+            {
+                e.Cancel = true;
+                errorProvider.SetError(textFrom, message);
+            }
+        }
+
+        private void TextFrom_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(textFrom, "");
+        }
+        private void TextTo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var message = ValidateQuarter(textTo.Text);
+            if (!String.IsNullOrEmpty(message))
+            {
+                e.Cancel = true;
+                errorProvider.SetError(textTo, message);
+            }
+        }
+
+        private void TextTo_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(textTo, "");
+        }
+
+        private string ValidateQuarter(string param)
+        {
+            var tokens = param.Split('Q');
+            if (tokens.Length != 2)
+            {
+                return "フォーマットが正しくありません。(例: 2017Q1)";
+            }
+            if (!int.TryParse(tokens[0], out int year))
+            {
+                return "年が数値ではありません。";
+            }
+            else if (year < lowerLimitYear)
+            {
+                return lowerLimitYear + "年以降で指定してください。";
+            }
+            else if (year > upperLimitYear)
+            {
+                return upperLimitYear + "年以前で指定してください。";
+            }
+            if (!int.TryParse(tokens[1], out int quarter))
+            {
+                return "四半期が数値ではありません。";
+            }
+            else if (quarter < 1 || quarter > 4)
+            {
+                return lowerLimitYear + "四半期は1~4を指定してください。";
+            }
+            return null;
         }
     }
 }

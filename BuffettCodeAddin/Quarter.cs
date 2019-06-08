@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BuffettCodeAddin.Client;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -85,6 +86,7 @@ namespace BuffettCodeAddin
         public static IList<Quarter> Parse(string ticker, string jsonString)
         {
             JObject json = JsonConvert.DeserializeObject(jsonString) as JObject;
+            BuffettCodeValidator.Validate(json);
 
             IDictionary<string, PropertyDescrption> descriptions = null;
             IList<JToken> columnDescription = json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => t.Path.Equals("column_description")).ToList();
