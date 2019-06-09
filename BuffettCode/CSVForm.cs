@@ -64,26 +64,47 @@ namespace BuffettCode
             {
                 return;
             }
-            if (radioCSV.Checked)
+            try
             {
-                WriteCSVFile();
+                if (radioCSV.Checked)
+                {
+                    WriteCSVFile();
+                }
+                else
+                {
+                    WriteNewSheet();
+                }
+            } catch (TestAPIConstraintException)
+            {
+                MessageBox.Show("テスト用のAPIキーでは末尾が01の銘柄コードのみ使用できます。", "CSV出力", MessageBoxButtons.OK);
+                return;
+            } catch (QuotaException)
+            {
+                MessageBox.Show("APIの実行回数が上限に達しました。", "CSV出力", MessageBoxButtons.OK);
+                return;
             }
-            else
+            catch (InvalidAPIKeyException)
             {
-                WriteNewSheet();
+                MessageBox.Show("APIキーが有効ではありません。", "CSV出力", MessageBoxButtons.OK);
+                return;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("データの取得中にエラーが発生しました。", "CSV出力", MessageBoxButtons.OK);
+                return;
             }
         }
 
-        private Boolean ValidateControls()
+        private bool ValidateControls()
         {
             var message = ValidateQuarter(textFrom.Text);
-            if (!String.IsNullOrEmpty(message))
+            if (!string.IsNullOrEmpty(message))
             {
                 textFrom.Select();
                 return false;
             }
             message = ValidateQuarter(textTo.Text);
-            if (!String.IsNullOrEmpty(message))
+            if (!string.IsNullOrEmpty(message))
             {
                 textTo.Select();
                 return false;
@@ -148,7 +169,7 @@ namespace BuffettCode
             { 
                 worksheet = BuffettCode.Globals.ThisAddIn.Application.Worksheets.Add();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 MessageBox.Show("新しいシートの作成に失敗しました。", "CSV出力", MessageBoxButtons.OK);
                 return;
@@ -264,7 +285,7 @@ namespace BuffettCode
         private void TextFrom_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var message = ValidateQuarter(textFrom.Text);
-            if (!String.IsNullOrEmpty(message))
+            if (!string.IsNullOrEmpty(message))
             {
                 e.Cancel = true;
                 errorProvider.SetError(textFrom, message);
@@ -279,7 +300,7 @@ namespace BuffettCode
         private void TextTo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var message = ValidateQuarter(textTo.Text);
-            if (!String.IsNullOrEmpty(message))
+            if (!string.IsNullOrEmpty(message))
             {
                 e.Cancel = true;
                 errorProvider.SetError(textTo, message);

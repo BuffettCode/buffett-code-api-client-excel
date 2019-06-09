@@ -9,7 +9,7 @@ namespace BuffettCodeAddin.Client
     /// <summary>
     /// テストAPIキーの機能制限に引っかかったときにthrowされる例外
     /// </summary>
-    class TestAPIConstraintException : BuffettCodeException
+    public class TestAPIConstraintException : BuffettCodeException
     {
     }
 }

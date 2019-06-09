@@ -12,7 +12,7 @@ namespace BuffettCodeAddin
     /// <remarks>
     /// 基本的にユーザの入力したパラメタのミス(存在しない銘柄コードを指定した場合など)が原因で起こるはず
     /// </remarks>
-    class AggregationNotFoundException : BuffettCodeException
+    public class AggregationNotFoundException : BuffettCodeException
     {
     }
 }
