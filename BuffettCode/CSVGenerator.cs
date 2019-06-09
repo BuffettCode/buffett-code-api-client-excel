@@ -15,7 +15,7 @@ namespace BuffettCode
     {
         private static readonly string[] EXCLUDE_PROPERTIES = { "ticker" };
 
-        private static readonly string[] ORDERED_PROPERTIES = { "company_name", "ceo_name", "headquarters_address", "accounting_standard", "fiscal_year", "fiscal_quarter" };
+        private static readonly string[] ORDERED_PROPERTIES = { "company_name", "ceo_name", "headquarters_address", "accounting_standard", "fiscal_year", "fiscal_quarter", "tdnet_title", "edinet_title" };
 
         public static void GetQuarters()
         {

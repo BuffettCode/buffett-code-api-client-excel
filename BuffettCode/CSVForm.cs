@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace BuffettCode
 {
@@ -223,7 +224,8 @@ namespace BuffettCode
                 quarters.AddRange(Quarter.Parse(ticker, json));
             }
 
-            var sorted = new List<Quarter>(quarters);
+            var distinct = new List<Quarter>(quarters).Distinct(new IPropertyAggregationComparer()).Cast<Quarter>();
+            var sorted = new List<Quarter>(distinct);
             sorted.Sort((left, right) => { return left.GetIdentifier().CompareTo(right.GetIdentifier()); });
             return sorted;
         }

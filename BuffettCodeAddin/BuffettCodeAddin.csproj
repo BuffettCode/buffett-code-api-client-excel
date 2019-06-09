@@ -83,6 +83,7 @@
     <Compile Include="Client\InvalidAPIKeyException.cs" />
     <Compile Include="Formatter\CurrencyFormatter.cs" />
     <Compile Include="Formatter\RatioFormatter.cs" />
+    <Compile Include="IPropertyAggregationComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IPropertyAggregation.cs" />
     <Compile Include="PropertyDescrption.cs" />

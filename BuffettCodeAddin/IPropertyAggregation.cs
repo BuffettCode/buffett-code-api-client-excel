@@ -7,7 +7,7 @@
     /// バフェットコードのAPIが提供する項目を集めたもの。
     /// 基本的にAPIのレスポンスに対応します。
     /// </remarks>
-    interface IPropertyAggregation
+    public interface IPropertyAggregation
     {
         /// <summary>
         /// 自身を一意に特定する文字列を返します。
