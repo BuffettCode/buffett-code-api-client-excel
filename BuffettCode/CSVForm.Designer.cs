@@ -200,6 +200,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textTicker);
             this.Controls.Add(this.label1);
+            this.Location = new System.Drawing.Point(100, 100);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CSVForm";

@@ -3,10 +3,10 @@ using BuffettCodeAddin.Client;
 using BuffettCodeAddin.Formatter;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Linq;
 
 namespace BuffettCode
 {
@@ -28,7 +28,6 @@ namespace BuffettCode
 
         private void LoadSettings()
         {
-            Bounds = Properties.Settings.Default.CSVBounds;
             textTicker.Text = Properties.Settings.Default.CSVTicker;
             textFrom.Text = Properties.Settings.Default.CSVFrom;
             textTo.Text = Properties.Settings.Default.CSVTo;
@@ -45,7 +44,6 @@ namespace BuffettCode
 
         private void SaveSettings()
         {
-            Properties.Settings.Default.CSVBounds = Bounds;
             Properties.Settings.Default.CSVTicker = textTicker.Text;
             Properties.Settings.Default.CSVFrom = textFrom.Text;
             Properties.Settings.Default.CSVTo = textTo.Text;

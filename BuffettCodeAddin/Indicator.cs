@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 
 namespace BuffettCodeAddin
@@ -79,7 +78,7 @@ namespace BuffettCodeAddin
         {
             IDictionary<string, string> properties = token.Where(t => t is JProperty).Cast<JProperty>().ToDictionary(p => p.Name, p => NormalizeValue(p.Value.ToString()));
             properties.Add("ticker", ticker);
-            return new Indicator(properties, descriptions ?? ImmutableDictionary<string, PropertyDescrption>.Empty);
+            return new Indicator(properties, descriptions ?? new Dictionary<string, PropertyDescrption>());
         }
 
         private static PropertyDescrption ToPropertyDescription(JProperty property)

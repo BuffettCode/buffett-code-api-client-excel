@@ -1,7 +1,5 @@
 ﻿using BuffettCodeAddin;
 using Microsoft.Office.Tools.Ribbon;
-using Microsoft.Win32;
-using System;
 using System.Windows.Forms;
 
 namespace BuffettCode
@@ -40,10 +38,6 @@ namespace BuffettCode
             string apiKey = AddinFacade.GetApiKey();
             CSVForm form = new CSVForm(apiKey);
             form.ShowDialog();
-            if (form.DialogResult == DialogResult.OK)
-            {
-
-            }
         }
 
         private void RefreshButton_Click(object sender, RibbonControlEventArgs e)
@@ -51,23 +45,5 @@ namespace BuffettCode
             AddinFacade.ClearCache();
             BuffettCode.Globals.ThisAddIn.Application.CalculateFullRebuild();
         }
-
-        [Obsolete]
-        private void SaveApiKeyToRegistry(string apiKey)
-        {
-            RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(@"Software\BuffettCode");
-            registryKey.SetValue("ApiKey", apiKey);
-            registryKey.Close();
-        }
-
-        [Obsolete]
-        private void UpdateApiKeyByFunction(string key)
-        {
-            var activeSheet = BuffettCode.Globals.ThisAddIn.Application.ActiveSheet as Microsoft.Office.Interop.Excel.Worksheet;
-            activeSheet.Cells[1, 1] = "=BCODE_KEY(\"" + key + "\")";
-            activeSheet.Cells[1, 1] = "";
-            BuffettCodeAddin.Configuration.ApiKey = key;
-        }
-
     }
 }

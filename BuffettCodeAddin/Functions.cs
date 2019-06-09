@@ -166,10 +166,11 @@ namespace BuffettCodeAddin
             return api.GetDescription("1301", "2017", "4", propertyName);
         }
 
-        private static string ToErrorMessage(Exception e, string propertyName = "", bool isDebug = true)
+        private static string ToErrorMessage(Exception e, string propertyName = "")
         {
             System.Diagnostics.Debug.WriteLine(e.StackTrace); // for debug
 
+            // デバッグモードが設定されていたらエラメッセージの代わりにスタックトレースをセルに表示
             if (Configuration.DebugMode)
             {
                 return e.ToString();
