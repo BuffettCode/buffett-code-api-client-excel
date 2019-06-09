@@ -15,6 +15,8 @@ namespace BuffettCodeAddin
 
         private static bool clearCache;
 
+        private static bool debugMode;
+
         /// <summary>
         /// バフェットコードの設定を格納するレジストリのキー名
         /// </summary>
@@ -47,6 +49,19 @@ namespace BuffettCodeAddin
         }
 
         /// <summary>
+        /// デバッグモード
+        /// </summary>
+        public static bool DebugMode
+        {
+            get { return debugMode; }
+            set
+            {
+                SaveRegistry("DebugMode", value ? 1 : 0);
+                debugMode = value;
+            }
+        }
+
+        /// <summary>
         /// 全ての設定値をレジストリから読み直して最新化します。
         /// </summary>
         public static void Reload()
@@ -71,7 +86,11 @@ namespace BuffettCodeAddin
             if (value != null)
             {
                 clearCache = (int)value == 0 ? false : true;
-
+            }
+            value = registryKey.GetValue("DebugMode");
+            if (value != null)
+            {
+                debugMode = (int)value == 0 ? false : true;
             }
             registryKey.Close();
         }

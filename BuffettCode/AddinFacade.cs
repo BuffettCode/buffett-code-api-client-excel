@@ -27,6 +27,25 @@ namespace BuffettCode
         }
 
         /// <summary>
+        /// デバッグモードかどうかを取得します。
+        /// </summary>
+        /// <returns>デバッグモードかどうか</returns>
+        public static bool IsDebugMode()
+        {
+            Configuration.Reload();
+            return Configuration.DebugMode;
+        }
+
+        /// <summary>
+        /// デバッグモードかどうかを更新します。
+        /// </summary>
+        /// <param name="debugMode">デバッグモードかどうか</param>
+        public static void UpdateDebugMode(bool debugMode)
+        {
+            Configuration.DebugMode = debugMode;
+        }
+
+        /// <summary>
         /// キャッシュをクリアします。
         /// </summary>
         public static void ClearCache()

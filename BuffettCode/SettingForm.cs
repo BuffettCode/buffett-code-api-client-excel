@@ -5,10 +5,11 @@ namespace BuffettCode
 {
     public partial class SettingForm : Form
     {
-        public SettingForm(string apiKey)
+        public SettingForm(string apiKey, bool debugMode)
         {
             InitializeComponent();
             textAPIKey.Text = apiKey;
+            checkDebugMode.Checked = debugMode;
         }
 
         private void SettingForm_Load(object sender, EventArgs e)
@@ -19,6 +20,11 @@ namespace BuffettCode
         public string GetAPIKey()
         {
             return textAPIKey.Text;
+        }
+
+        public bool IsDebugMode()
+        {
+            return checkDebugMode.Checked;
         }
 
         private void ButtonOK_Click(object sender, EventArgs e)

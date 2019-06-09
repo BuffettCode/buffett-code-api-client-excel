@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.checkDebugMode = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // textAPIKey
@@ -53,7 +54,7 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(335, 98);
+            this.buttonOK.Location = new System.Drawing.Point(335, 152);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(86, 30);
             this.buttonOK.TabIndex = 2;
@@ -63,7 +64,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(442, 98);
+            this.buttonCancel.Location = new System.Drawing.Point(442, 152);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(86, 30);
             this.buttonCancel.TabIndex = 3;
@@ -71,11 +72,22 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
+            // checkDebugMode
+            // 
+            this.checkDebugMode.AutoSize = true;
+            this.checkDebugMode.Location = new System.Drawing.Point(15, 103);
+            this.checkDebugMode.Name = "checkDebugMode";
+            this.checkDebugMode.Size = new System.Drawing.Size(223, 22);
+            this.checkDebugMode.TabIndex = 5;
+            this.checkDebugMode.Text = "デバッグモードを有効にする";
+            this.checkDebugMode.UseVisualStyleBackColor = true;
+            // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(542, 140);
+            this.ClientSize = new System.Drawing.Size(542, 200);
+            this.Controls.Add(this.checkDebugMode);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.label1);
@@ -97,5 +109,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.CheckBox checkDebugMode;
     }
 }

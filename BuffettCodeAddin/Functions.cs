@@ -166,9 +166,14 @@ namespace BuffettCodeAddin
             return api.GetDescription("1301", "2017", "4", propertyName);
         }
 
-        private static string ToErrorMessage(Exception e, string propertyName = "")
+        private static string ToErrorMessage(Exception e, string propertyName = "", bool isDebug = true)
         {
             System.Diagnostics.Debug.WriteLine(e.StackTrace); // for debug
+
+            if (Configuration.DebugMode)
+            {
+                return e.ToString();
+            }
 
             // 例外によってはBuffettCodeExceptionがInnerExceptionに入ってくるので、
             // 再帰的にスキャンして取り出している

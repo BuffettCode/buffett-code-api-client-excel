@@ -17,7 +17,8 @@ namespace BuffettCode
         {
             Configuration.Reload();
             var configuredKey = AddinFacade.GetApiKey();
-            var form = new SettingForm(configuredKey);
+            var debugMode = AddinFacade.IsDebugMode();
+            var form = new SettingForm(configuredKey, debugMode);
             form.ShowDialog();
             if (form.DialogResult == DialogResult.OK)
             {
@@ -25,6 +26,11 @@ namespace BuffettCode
                 if (!string.IsNullOrEmpty(inputtedKey) && !inputtedKey.Equals(configuredKey))
                 {
                     AddinFacade.UpdateApiKey(inputtedKey);
+                }
+                var inputtedDebugMode = form.IsDebugMode();
+                if (debugMode != inputtedDebugMode)
+                {
+                    AddinFacade.UpdateDebugMode(inputtedDebugMode);
                 }
             }
         }
