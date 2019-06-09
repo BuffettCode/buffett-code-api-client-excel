@@ -89,9 +89,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="BuffettCodeAddin.dna" />
-    <None Include="BuffettCodeAddin-AddIn.dna" />
     <None Include="packages.config" />
     <None Include="Properties\ExcelDna.Build.props" />
+    <None Include="BuffettCodeAddin-AddIn.dna" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

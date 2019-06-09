@@ -118,6 +118,8 @@
         <File Id="EXCEL.VstoManifest" Source="$(var.BuffettCode.TargetDir)$(var.BuffettCode.TargetName).vsto" />
         <File Id="EXCEL.DLL" Source="$(var.BuffettCode.TargetDir)BuffettCodeAddin.dll" />
         <File Id="EXCEL.JsonDLL" Source="$(var.BuffettCode.TargetDir)Newtonsoft.Json.dll" />
+        <File Id="EXCEL.CsvHelper" Source="$(var.BuffettCode.TargetDir)CsvHelper.dll" />
+        <File Id="EXCEL.ValueTuple" Source="$(var.BuffettCode.TargetDir)System.ValueTuple.dll" />
         <File Id="EXCEL.ToolsCommon" Source="$(var.BuffettCode.TargetDir)Microsoft.Office.Tools.Common.v4.0.Utilities.dll" />
         <!-- VSTOのレジストリ定義 -->
         <RegistryKey Root="HKLM" Key="Software\Microsoft\Office\Excel\Addins\BuffettCode">
