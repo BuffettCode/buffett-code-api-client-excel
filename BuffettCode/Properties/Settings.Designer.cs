@@ -82,5 +82,17 @@ namespace BuffettCode.Properties {
                 this["CSVUTF8"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0, 415, 445")]
+        public global::System.Drawing.Rectangle CSVBounds {
+            get {
+                return ((global::System.Drawing.Rectangle)(this["CSVBounds"]));
+            }
+            set {
+                this["CSVBounds"] = value;
+            }
+        }
     }
 }

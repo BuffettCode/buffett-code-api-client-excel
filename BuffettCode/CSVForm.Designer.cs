@@ -36,7 +36,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textTo = new System.Windows.Forms.TextBox();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this.groupOutput = new System.Windows.Forms.GroupBox();
             this.radioSheet = new System.Windows.Forms.RadioButton();
             this.radioCSV = new System.Windows.Forms.RadioButton();
@@ -81,7 +80,7 @@
             this.textFrom.Name = "textFrom";
             this.textFrom.Size = new System.Drawing.Size(118, 25);
             this.textFrom.TabIndex = 2;
-            this.textFrom.Text = "2017Q1";
+            this.textFrom.Text = "2016Q1";
             this.textFrom.Validating += new System.ComponentModel.CancelEventHandler(this.TextFrom_Validating);
             this.textFrom.Validated += new System.EventHandler(this.TextFrom_Validated);
             // 
@@ -100,29 +99,19 @@
             this.textTo.Name = "textTo";
             this.textTo.Size = new System.Drawing.Size(118, 25);
             this.textTo.TabIndex = 3;
-            this.textTo.Text = "2017Q4";
+            this.textTo.Text = "2018Q4";
             this.textTo.Validating += new System.ComponentModel.CancelEventHandler(this.TextTo_Validating);
             this.textTo.Validated += new System.EventHandler(this.TextTo_Validated);
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(173, 353);
+            this.buttonOK.Location = new System.Drawing.Point(296, 352);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(92, 30);
             this.buttonOK.TabIndex = 8;
-            this.buttonOK.Text = "OK";
+            this.buttonOK.Text = "出力";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.ButtonOK_Click);
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Location = new System.Drawing.Point(283, 353);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(92, 30);
-            this.buttonCancel.TabIndex = 9;
-            this.buttonCancel.Text = "キャンセル";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // groupOutput
             // 
@@ -204,7 +193,6 @@
             this.ClientSize = new System.Drawing.Size(413, 409);
             this.Controls.Add(this.groupEncoding);
             this.Controls.Add(this.groupOutput);
-            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.textTo);
             this.Controls.Add(this.label3);
@@ -236,7 +224,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textTo;
         private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.GroupBox groupOutput;
         private System.Windows.Forms.RadioButton radioSheet;
         private System.Windows.Forms.RadioButton radioCSV;

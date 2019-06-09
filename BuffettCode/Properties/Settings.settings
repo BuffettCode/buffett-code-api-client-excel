@@ -17,5 +17,8 @@
     <Setting Name="CSVUTF8" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="CSVBounds" Type="System.Drawing.Rectangle" Scope="User">
+      <Value Profile="(Default)">0, 0, 415, 445</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

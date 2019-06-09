@@ -22,10 +22,12 @@ namespace BuffettCode
             InitializeComponent();
             LoadSettings();
             this.apiKey = apiKey;
+            AcceptButton = buttonOK;
         }
 
         private void LoadSettings()
         {
+            Bounds = Properties.Settings.Default.CSVBounds;
             textTicker.Text = Properties.Settings.Default.CSVTicker;
             textFrom.Text = Properties.Settings.Default.CSVFrom;
             textTo.Text = Properties.Settings.Default.CSVTo;
@@ -42,6 +44,7 @@ namespace BuffettCode
 
         private void SaveSettings()
         {
+            Properties.Settings.Default.CSVBounds = Bounds;
             Properties.Settings.Default.CSVTicker = textTicker.Text;
             Properties.Settings.Default.CSVFrom = textFrom.Text;
             Properties.Settings.Default.CSVTo = textTo.Text;
@@ -52,19 +55,40 @@ namespace BuffettCode
 
         private void ButtonOK_Click(object sender, EventArgs e)
         {
+            Execute();
+        }
+
+        private void Execute()
+        {
+            if (!ValidateControls())
+            {
+                return;
+            }
             if (radioCSV.Checked)
             {
                 WriteCSVFile();
-            } else
+            }
+            else
             {
                 WriteNewSheet();
             }
         }
 
-        private void ButtonCancel_Click(object sender, EventArgs e)
+        private Boolean ValidateControls()
         {
-            DialogResult = DialogResult.Cancel;
-            Close();
+            var message = ValidateQuarter(textFrom.Text);
+            if (!String.IsNullOrEmpty(message))
+            {
+                textFrom.Select();
+                return false;
+            }
+            message = ValidateQuarter(textTo.Text);
+            if (!String.IsNullOrEmpty(message))
+            {
+                textTo.Select();
+                return false;
+            }
+            return true;
         }
 
         private void WriteCSVFile()
@@ -87,6 +111,12 @@ namespace BuffettCode
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 var quarters = GetSortedQuarters(ticker, from, to);
+                if (quarters.Count == 0)
+                {
+                    MessageBox.Show("条件に当てはまる財務データがありませんでした。", "CSV出力", MessageBoxButtons.OK);
+                    return;
+                }
+
                 using (var stream = sfd.OpenFile())
                 {
                     var encoding = radioUTF8.Checked ? Encoding.UTF8 : Encoding.GetEncoding("shift_jis");
@@ -105,6 +135,12 @@ namespace BuffettCode
             string from = textFrom.Text;
             string to = textTo.Text;
             var quarters = GetSortedQuarters(ticker, from, to);
+
+            if (quarters.Count == 0)
+            {
+                MessageBox.Show("条件に当てはまる財務データがありませんでした。", "CSV出力", MessageBoxButtons.OK);
+                return;
+            }
 
             // create new sheet
             Microsoft.Office.Interop.Excel.Worksheet worksheet;
@@ -165,7 +201,6 @@ namespace BuffettCode
                 string json = task.Result;
                 quarters.AddRange(Quarter.Parse(ticker, json));
             }
-            //            IList<Quarter> quarters = Quarter.Parse(ticker, json);
 
             var sorted = new List<Quarter>(quarters);
             sorted.Sort((left, right) => { return left.GetIdentifier().CompareTo(right.GetIdentifier()); });
@@ -174,9 +209,6 @@ namespace BuffettCode
 
         private IDictionary<string, string> SliceRange(string from, string to)
         {
-            // 2010Q1 to 2012Q4 -> 12
-            // 2010Q1 to 2013Q1 -> 13
-            // 2010Q4 to 2013Q1 -> 10
             var result = new Dictionary<string, string>();
             var gap = GetGap(from, to);
 
@@ -188,16 +220,7 @@ namespace BuffettCode
                 gap -= 12;
             }
             result.Add(cursor, to);
-            /*
-            if (gap > 12)
-            {
-                result.Add(from, to);
-            }
-            else
-            {
-                result.Add(from, to);
-            }
-            */
+
             return result;
         }
 
@@ -222,16 +245,6 @@ namespace BuffettCode
             int y = int.Parse(quarter.Split('Q')[0]);
             int q = int.Parse(quarter.Split('Q')[1]);
             return (y + 3) + "Q" + q;
-        }
-
-        private int GetYear(string quarter)
-        {
-            return int.Parse(quarter.Split('Q')[0]);
-        }
-
-        private int GetQuarter(string quarter)
-        {
-            return int.Parse(quarter.Split('Q')[1]);
         }
 
         private void RadioCSV_CheckedChanged(object sender, EventArgs e)
@@ -262,6 +275,7 @@ namespace BuffettCode
         {
             errorProvider.SetError(textFrom, "");
         }
+
         private void TextTo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var message = ValidateQuarter(textTo.Text);
