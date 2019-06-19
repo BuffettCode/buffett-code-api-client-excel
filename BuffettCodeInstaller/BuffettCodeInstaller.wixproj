@@ -17,6 +17,7 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <DefineConstants>Debug;MSIProductVersion=$(MSIProductVersion)</DefineConstants>
     <Cultures>ja-JP</Cultures>
+    <SuppressIces>ICE57</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -24,6 +25,8 @@
     <LinkerAdditionalOptions>
     </LinkerAdditionalOptions>
     <DefineConstants>MSIProductVersion=$(MSIProductVersion)</DefineConstants>
+    <Cultures>ja-JP</Cultures>
+    <SuppressIces>ICE57</SuppressIces>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Product.wxs" />

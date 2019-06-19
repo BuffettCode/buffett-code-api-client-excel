@@ -5,7 +5,6 @@
   <String Id="ProductNameNoSpace">BuffettCodeAddin</String>
   <String Id="ProductDescription">BuffettCode Excel Add-In Installer</String>
   <String Id="ProductManufacturer">BuffettCode</String>
-  <String Id="ProductVersion">1</String>
   <String Id="ProductCopyright">Copyright (C) 2019 Buffett Code Inc. All rights reserved</String>
   <String Id="ProductUninstallDescription">Uninstall !(loc.ProductName)</String>
   <String Id="AppName">バフェットコードExcelアドイン</String>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?define ProductVersion = "1.0.1"?>
+<?define ProductVersion = "1.0.2"?>
 <?define ProductUpgradeCode = "E4CF053E-BB35-4A48-8EF7-D124F7A52C1A"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-  <Product Id="E4CF053E-BB35-4A48-8EF7-D124F7A52C1A"
+  <Product Id="$(var.ProductUpgradeCode)"
            Name="!(loc.ProductName)" 
            Language="!(loc.LANG)"
            Version="$(var.ProductVersion)" 
@@ -122,7 +122,7 @@
         <File Id="EXCEL.ValueTuple" Source="$(var.BuffettCode.TargetDir)System.ValueTuple.dll" />
         <File Id="EXCEL.ToolsCommon" Source="$(var.BuffettCode.TargetDir)Microsoft.Office.Tools.Common.v4.0.Utilities.dll" />
         <!-- VSTOのレジストリ定義 -->
-        <RegistryKey Root="HKLM" Key="Software\Microsoft\Office\Excel\Addins\BuffettCode">
+        <RegistryKey Root="HKCU" Key="Software\Microsoft\Office\Excel\Addins\BuffettCode">
           <RegistryValue Name="Description" Value="BuffettCode" Type="string" Action="write" />
           <RegistryValue Name="FriendlyName" Value="BuffettCode" Type="string" Action="write" />
           <RegistryValue Name="LoadBehavior" Value="3" Type="integer" Action="write" />
