@@ -56,7 +56,12 @@
     <Compile Include="BuffettCodeClientV1Test.cs" />
     <Compile Include="BuffettCodeClientV2Test.cs" />
     <Compile Include="BuffettCodeTestUtils.cs" />
+    <Compile Include="CurrencyFormatterTest.cs" />
+    <Compile Include="FormatterFactoryTest.cs" />
+    <Compile Include="NumericFormatterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RatioFormatterTest.cs" />
+    <Compile Include="UserDefinedFunctionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

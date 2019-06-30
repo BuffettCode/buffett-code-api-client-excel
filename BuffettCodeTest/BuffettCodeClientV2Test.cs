@@ -1,9 +1,8 @@
-﻿using BuffettCodeAddin;
-using BuffettCodeAddin.Client;
+﻿using BuffettCodeAddin.UnitTests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Buffett
+namespace BuffettCodeAddin.Client.UnitTests
 {
     [TestClass]
     public class BuffettCodeClientV2Test
@@ -19,6 +18,29 @@ namespace Buffett
             Assert.AreEqual("6501", quarters[0].Ticker);
             Assert.IsNotNull(quarters[0].GetValue("assets")); // 値は変わりうるのでNullかどうかだけチェック
             Assert.IsNotNull(quarters[0].GetDescription("assets"));
+        }
+
+        [TestMethod]
+        public void TestGetQuarterByTestApiKey()
+        {
+            var client = new BuffettCodeClientV2();
+            var json = client.GetQuarter(BuffettCodeTestUtils.GetTestApiKey(), "6501", "2018", "4").Result;
+            var quarters = Quarter.Parse("6501", json);
+
+            Assert.IsFalse(quarters.Count == 0);
+            Assert.AreEqual("6501", quarters[0].Ticker);
+            Assert.IsNotNull(quarters[0].GetValue("assets")); // 値は変わりうるのでNullかどうかだけチェック
+            Assert.IsNotNull(quarters[0].GetDescription("assets"));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestAPIConstraintException))]
+        public void TestGetQuarterByTestApiKeyDenied()
+        {
+            // テスト用のAPIキーではゼロイチ銘柄のみデータを取得できる
+            var client = new BuffettCodeClientV2();
+            var json = client.GetQuarter(BuffettCodeTestUtils.GetTestApiKey(), "6502", "2018", "4").Result;
+            var quarters = Quarter.Parse("6502", json);
         }
 
         [TestMethod]

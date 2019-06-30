@@ -13,7 +13,7 @@ namespace BuffettCodeAddin
     /// メインとなるBCODE関数と、デバッグおよびサポートのために作られたいくつかの隠し関数を含みます。
     /// それぞれの関数のリファレンスはバフェットコードのWebサイトを参照のこと。
     /// </remarks>
-    public class Functions
+    public class UserDefinedFunctions
     {
         private static BuffettCodeAPI api;
 

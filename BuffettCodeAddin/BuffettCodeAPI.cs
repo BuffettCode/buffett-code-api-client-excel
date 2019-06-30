@@ -118,10 +118,5 @@ namespace BuffettCodeAddin
 
             return cache.GetQuarter(ticker, fiscalYear, fiscalQuarter);
         }
-
-        private void ValidateJson(string json)
-        {
-
-        }
     }
 }

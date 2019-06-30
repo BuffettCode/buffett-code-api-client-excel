@@ -5,7 +5,7 @@ namespace BuffettCodeAddin.Formatter
     /// <summary>
     /// 割合のフォーマッタ
     /// </summary>
-    class RatioFormatter : IFormatter
+    public class RatioFormatter : IFormatter
     {
         private static RatioFormatter _instance = new RatioFormatter();
 

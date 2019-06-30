@@ -5,7 +5,7 @@ namespace BuffettCodeAddin.Formatter
     /// <summary>
     /// 金額のフォーマッタ
     /// </summary>
-    class CurrencyFormatter : IFormatter
+    public class CurrencyFormatter : IFormatter
     {
         private static CurrencyFormatter _instance = new CurrencyFormatter();
 

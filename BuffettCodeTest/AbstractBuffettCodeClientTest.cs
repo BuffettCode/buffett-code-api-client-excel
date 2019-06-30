@@ -1,9 +1,8 @@
-﻿using BuffettCodeAddin.Client;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Threading.Tasks;
 
-namespace Buffett
+namespace BuffettCodeAddin.Client.UnitTests
 {
     [TestClass]
     public class AbstractBuffettCodeClientTest : AbstractBuffettCodeClient

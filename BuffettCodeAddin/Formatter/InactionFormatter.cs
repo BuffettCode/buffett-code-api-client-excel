@@ -1,6 +1,6 @@
 ﻿namespace BuffettCodeAddin.Formatter
 {
-    class InactionFormatter : IFormatter
+    public class InactionFormatter : IFormatter
      {
         private static InactionFormatter _instance = new InactionFormatter();
 

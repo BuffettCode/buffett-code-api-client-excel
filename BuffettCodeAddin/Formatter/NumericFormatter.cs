@@ -5,7 +5,7 @@ namespace BuffettCodeAddin.Formatter
     /// <summary>
     /// 数値のフォーマッタ
     /// </summary>
-    class NumericFormatter : IFormatter
+    public class NumericFormatter : IFormatter
     {
         private static NumericFormatter _instance = new NumericFormatter();
 

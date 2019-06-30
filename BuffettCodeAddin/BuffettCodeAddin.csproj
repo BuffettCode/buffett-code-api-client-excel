@@ -71,7 +71,7 @@
     <Compile Include="Formatter\NumericFormatter.cs" />
     <Compile Include="Formatter\Formatter.cs" />
     <Compile Include="Formatter\FormatterFactory.cs" />
-    <Compile Include="Functions.cs" />
+    <Compile Include="UserDefinedFunctions.cs" />
     <Compile Include="Formatter\InactionFormatter.cs" />
     <Compile Include="Indicator.cs" />
     <Compile Include="Client\InvalidAPIKeyException.cs" />
