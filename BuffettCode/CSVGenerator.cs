@@ -11,16 +11,11 @@ namespace BuffettCode
     /// <summary>
     /// CSV出力
     /// </summary>
-    class CSVGenerator
+    public class CSVGenerator
     {
         private static readonly string[] EXCLUDE_PROPERTIES = { "ticker" };
 
         private static readonly string[] ORDERED_PROPERTIES = { "company_name", "ceo_name", "headquarters_address", "accounting_standard", "fiscal_year", "fiscal_quarter", "tdnet_title", "edinet_title" };
-
-        public static void GetQuarters()
-        {
-
-        }
 
         /// <summary>
         /// 財務数値データからCSVを作成し、ファイルに出力します。
@@ -62,6 +57,11 @@ namespace BuffettCode
             }
         }
 
+        /// <summary>
+        /// CSV出力用にソートされた項目名のリストを返します。
+        /// </summary>
+        /// <param name="quarter">任意のquarter</param>
+        /// <returns>項目名のリスト</returns>
         public static IList<string> GetPropertyNames(Quarter quarter)
         {
             var result = ORDERED_PROPERTIES.ToList<string>();

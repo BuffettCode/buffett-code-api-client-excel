@@ -1,4 +1,6 @@
-﻿namespace BuffettCodeAddin.UnitTests
+﻿using System;
+
+namespace BuffettCodeAddin.UnitTests
 {
     /// <summary>
     /// 単体テストのサポートクラス
@@ -11,8 +13,16 @@
         /// <returns>APIキー</returns>
         public static string GetValidApiKey()
         {
-            Configuration.Reload();
-            return Configuration.ApiKey;
+            var key = Environment.GetEnvironmentVariable("BCODE_KEY");
+            if (string.IsNullOrEmpty(key))
+            {
+                Configuration.Reload();
+                return Configuration.ApiKey;
+            }
+            else
+            {
+                return key;
+            }
         }
 
         /// <summary>
