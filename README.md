@@ -2,9 +2,7 @@
 
 [バフェットコード](https://www.buffett-code.com/)の提供する[WebAPI](https://docs.buffett-code.com/)から上場企業の財務情報を取得し、ユーザ定義関数(UDF)によりデータの操作ができるExcelアドインです。
 
-## Build Status
-
-[![Build status](https://ci.appveyor.com/api/projects/status/po221rdjm7i6r77x?svg=true)](https://ci.appveyor.com/project/shinsuke/buffett-code-api-client-excel)
+[![Build status](https://ci.appveyor.com/api/projects/status/po221rdjm7i6r77x?svg=true)](https://ci.appveyor.com/project/shinsuke/buffett-code-api-client-excel) ![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2019-red.svg)  [![NetFramework](https://img.shields.io/badge/Language-C%23%207.0-orange.svg)](https://blogs.msdn.microsoft.com/dotnet/2016/08/24/whats-new-in-csharp-7-0/) 
 
 ## Environment & Build
 
@@ -82,6 +80,4 @@ Apache Lisence 2.0
 
 ## コンタクト
 
-バグレポートはissueを作成いただくか、[駄犬 (@daken_in_market)](https://twitter.com/daken_in_market)までご連絡ください。
-
-Pull Requestも歓迎します。その他お聞きになりたいことがあればTwitterで[駄犬 (@daken_in_market)](https://twitter.com/daken_in_market)にコンタクトください。
+バグレポートはissueを作成いただくか、[駄犬 (@daken_in_market)](https://twitter.com/daken_in_market)までご連絡ください。Pull Requestも歓迎します。
