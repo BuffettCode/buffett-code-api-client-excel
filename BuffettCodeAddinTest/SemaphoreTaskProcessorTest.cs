@@ -23,7 +23,7 @@ namespace BuffettCodeAddin.Processor.UnitTests
             // 約10秒かかってるはず
             var elapsed = stopwatch.ElapsedMilliseconds;
             System.Console.WriteLine(elapsed + " milliseconds elapsed.");
-            Assert.IsTrue(12000 > elapsed && elapsed > 8000);
+            Assert.IsTrue(20000 > elapsed && elapsed > 8000);
         }
 
         [TestMethod]
