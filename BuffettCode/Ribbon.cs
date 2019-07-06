@@ -15,8 +15,9 @@ namespace BuffettCode
         {
             Configuration.Reload();
             var configuredKey = AddinFacade.GetApiKey();
+            var maxDegreeOfParallelism = AddinFacade.GetMaxDegreeOfParallelism();
             var debugMode = AddinFacade.IsDebugMode();
-            var form = new SettingForm(configuredKey, debugMode);
+            var form = new SettingForm(configuredKey, maxDegreeOfParallelism, debugMode);
             form.ShowDialog();
             if (form.DialogResult == DialogResult.OK)
             {
@@ -24,6 +25,11 @@ namespace BuffettCode
                 if (!string.IsNullOrEmpty(inputtedKey) && !inputtedKey.Equals(configuredKey))
                 {
                     AddinFacade.UpdateApiKey(inputtedKey);
+                }
+                var inputtedMaxDegreeOfParallelism = form.GetMaxDegreeOfParallelism();
+                if (maxDegreeOfParallelism != inputtedMaxDegreeOfParallelism)
+                {
+                    AddinFacade.UpdateMaxDegreeOfParallelism(inputtedMaxDegreeOfParallelism);
                 }
                 var inputtedDebugMode = form.IsDebugMode();
                 if (debugMode != inputtedDebugMode)

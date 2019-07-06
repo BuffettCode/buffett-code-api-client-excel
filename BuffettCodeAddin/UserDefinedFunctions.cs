@@ -19,6 +19,8 @@ namespace BuffettCodeAddin
 
         private static RegistryMonitor monitor;
 
+        private static readonly object initializeLock = new object();
+
         /// <summary>
         /// Excelのユーザー定義関数BCODE。銘柄コードを指定して財務数値や指標を取得します
         /// </summary>
@@ -140,13 +142,16 @@ namespace BuffettCodeAddin
 
         private static void InitializeIfNeeded()
         {
-            if (api == null)
+            lock (initializeLock)
             {
-                Configuration.Reload();
-                monitor = new RegistryMonitor(Configuration.GetMonitoringRegistryKey());
-                monitor.RegChanged += new EventHandler(OnRegistryChanged);
-                monitor.Start();
-                api = new BuffettCodeAPI();
+                if (api == null)
+                {
+                    Configuration.Reload();
+                    monitor = new RegistryMonitor(Configuration.GetMonitoringRegistryKey());
+                    monitor.RegChanged += new EventHandler(OnRegistryChanged);
+                    monitor.Start();
+                    api = new BuffettCodeAPI(Configuration.MaxDegreeOfParallelism);
+                }
             }
         }
 
@@ -170,7 +175,7 @@ namespace BuffettCodeAddin
         {
             System.Diagnostics.Debug.WriteLine(e.StackTrace); // for debug
 
-            // デバッグモードが設定されていたらエラメッセージの代わりにスタックトレースをセルに表示
+            // デバッグモードが設定されていたらエラーメッセージの代わりにスタックトレースをセルに表示
             if (Configuration.DebugMode)
             {
                 return e.ToString();

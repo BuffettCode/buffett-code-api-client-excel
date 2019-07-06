@@ -3,8 +3,12 @@
 namespace BuffettCode
 {
     /// <summary>
-    /// XLL Addinが主体となる機能やデータを抽象化するためのクラス
+    /// XLLが主体となる機能やデータを抽象化するためのfacadeクラス
     /// </summary>
+    /// <remarks>
+    /// BuffettCodeAddinの提供するインタフェースがまだrobustでないので、
+    /// 間に1つ挟んでおくために作成したもの
+    /// </remarks>
     class AddinFacade
     {
         /// <summary>
@@ -24,6 +28,25 @@ namespace BuffettCode
         public static void UpdateApiKey(string apiKey)
         {
             Configuration.ApiKey = apiKey;
+        }
+
+        /// <summary>
+        /// APIコールの最大同時実行数を取得します。
+        /// </summary>
+        /// <returns>APIコールの最大同時実行数</returns>
+        public static int GetMaxDegreeOfParallelism()
+        {
+            Configuration.Reload();
+            return Configuration.MaxDegreeOfParallelism;
+        }
+
+        /// <summary>
+        /// APIコールの最大同時実行数を更新します。
+        /// </summary>
+        /// <param name="maxDegreeOfParallelism">APIコールの最大同時実行数</param>
+        public static void UpdateMaxDegreeOfParallelism(int maxDegreeOfParallelism)
+        {
+            Configuration.MaxDegreeOfParallelism = maxDegreeOfParallelism;
         }
 
         /// <summary>

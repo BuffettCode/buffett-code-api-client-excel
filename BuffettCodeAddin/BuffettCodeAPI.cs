@@ -1,5 +1,7 @@
 ﻿using BuffettCodeAddin.Client;
 using BuffettCodeAddin.Formatter;
+using BuffettCodeAddin.Processor;
+using System.Threading.Tasks;
 
 namespace BuffettCodeAddin
 {
@@ -18,10 +20,17 @@ namespace BuffettCodeAddin
 
         private readonly CacheStore cache;
 
-        public BuffettCodeAPI()
+        private readonly ITaskProcessor<string> processor;
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="maxDegreeOfParallelism">APIコールの最大同時実行数</param>
+        public BuffettCodeAPI(int maxDegreeOfParallelism)
         {
             client = new BuffettCodeClientV2();
             cache = new CacheStore();
+            processor = new SemaphoreTaskProcessor<string>(maxDegreeOfParallelism);
         }
 
         /// <summary>
@@ -92,7 +101,7 @@ namespace BuffettCodeAddin
             if (!cache.HasIndicator(ticker))
             {
                 var task = client.GetIndicator(Configuration.ApiKey, ticker);
-                string json = task.Result;
+                string json = processor.Process(task);
                 cache.Add(Indicator.Parse(ticker, json));
             }
             if (!cache.HasIndicator(ticker))
@@ -108,7 +117,7 @@ namespace BuffettCodeAddin
             if (!cache.HasQuarter(ticker, fiscalYear, fiscalQuarter))
             {
                 var task = client.GetQuarter(Configuration.ApiKey, ticker, fiscalYear, fiscalQuarter);
-                string json = task.Result;
+                string json = processor.Process(task);
                 cache.Add(Quarter.Parse(ticker, json));
             }
             if (!cache.HasQuarter(ticker, fiscalYear, fiscalQuarter))

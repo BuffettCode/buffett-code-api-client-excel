@@ -5,11 +5,23 @@ namespace BuffettCode
 {
     public partial class SettingForm : Form
     {
-        public SettingForm(string apiKey, bool debugMode)
+        public SettingForm(string apiKey, int maxDegreeOfParallelism, bool debugMode)
         {
             InitializeComponent();
             textAPIKey.Text = apiKey;
             checkDebugMode.Checked = debugMode;
+
+            if (maxDegreeOfParallelism == 0)
+            {
+                checkParallelism.Checked = false;
+                textParallelism.Text = "";
+                textParallelism.Enabled = false;
+            } else
+            {
+                checkParallelism.Checked = true;
+                textParallelism.Text = maxDegreeOfParallelism.ToString();
+                textParallelism.Enabled = true;
+            }
         }
 
         private void SettingForm_Load(object sender, EventArgs e)
@@ -20,6 +32,23 @@ namespace BuffettCode
         public string GetAPIKey()
         {
             return textAPIKey.Text;
+        }
+
+        public int GetMaxDegreeOfParallelism()
+        {
+            if (!checkParallelism.Checked)
+            {
+                return 0;
+            }
+            else if (string.IsNullOrWhiteSpace(textParallelism.Text))
+            {
+                return 0;
+            }
+            else if (int.TryParse(textParallelism.Text, out int i))
+            {
+                return i;
+            }
+            return 0;
         }
 
         public bool IsDebugMode()
@@ -46,6 +75,11 @@ namespace BuffettCode
                 DialogResult = DialogResult.OK;
                 Close();
             }
+        }
+
+        private void CheckParallelism_CheckedChanged(object sender, EventArgs e)
+        {
+            textParallelism.Enabled = checkParallelism.Checked;
         }
     }
 }

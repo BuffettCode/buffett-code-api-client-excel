@@ -13,6 +13,8 @@ namespace BuffettCodeAddin
     {
         private static string apiKey;
 
+        private static int maxDegreeOfParallelism;
+
         private static bool clearCache;
 
         private static bool debugMode;
@@ -21,6 +23,11 @@ namespace BuffettCodeAddin
         /// バフェットコードの設定を格納するレジストリのキー名
         /// </summary>
         private static readonly string REGISTRY_KEY_NAME = @"Software\BuffettCode";
+
+        /// <summary>
+        /// APIコールの最大同時実行数にデフォルトを使用
+        /// </summary>
+        public static readonly int USE_DEFAULT_MAX_DEGREE_OF_PARALLELISM = 0;
 
         /// <summary>
         /// バフェットコードのAPIキー
@@ -32,6 +39,19 @@ namespace BuffettCodeAddin
             {
                 SaveRegistry("ApiKey", value);
                 apiKey = value;
+            }
+        }
+
+        /// <summary>
+        /// APIコールの最大同時実行数
+        /// </summary>
+        public static int MaxDegreeOfParallelism
+        {
+            get { return maxDegreeOfParallelism; }
+            set
+            {
+                SaveRegistry("MaxDegreeOfParallelism", value);
+                maxDegreeOfParallelism = value;
             }
         }
 
@@ -81,17 +101,13 @@ namespace BuffettCodeAddin
             if (value != null)
             {
                 apiKey = (string)value;
-            } 
-            value = registryKey.GetValue("ClearCache");
-            if (value != null)
-            {
-                clearCache = (int)value == 0 ? false : true;
             }
-            value = registryKey.GetValue("DebugMode");
-            if (value != null)
-            {
-                debugMode = (int)value == 0 ? false : true;
-            }
+            value = registryKey.GetValue("maxDegreeOfParallelism", USE_DEFAULT_MAX_DEGREE_OF_PARALLELISM);
+            maxDegreeOfParallelism = (int)value;
+            value = registryKey.GetValue("ClearCache", 0);
+            clearCache = (int)value == 0 ? false : true;
+            value = registryKey.GetValue("DebugMode", 0);
+            debugMode = (int)value == 0 ? false : true;
             registryKey.Close();
         }
 

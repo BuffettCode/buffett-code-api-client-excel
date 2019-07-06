@@ -59,6 +59,7 @@
     <Compile Include="NumericFormatterTest.cs" />
     <Compile Include="RatioFormatterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SemaphoreTaskProcessorTest.cs" />
     <Compile Include="UserDefinedFunctionsTest.cs" />
   </ItemGroup>
   <ItemGroup>

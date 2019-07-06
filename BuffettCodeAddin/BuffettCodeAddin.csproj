@@ -78,8 +78,10 @@
     <Compile Include="Client\TestAPIConstraintException.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Formatter\NumericFormatter.cs" />
-    <Compile Include="Formatter\Formatter.cs" />
+    <Compile Include="Formatter\IFormatter.cs" />
     <Compile Include="Formatter\FormatterFactory.cs" />
+    <Compile Include="Processor\ITaskProcessor.cs" />
+    <Compile Include="Processor\SemaphoreTaskProcessor.cs" />
     <Compile Include="UserDefinedFunctions.cs" />
     <Compile Include="Formatter\InactionFormatter.cs" />
     <Compile Include="Indicator.cs" />
