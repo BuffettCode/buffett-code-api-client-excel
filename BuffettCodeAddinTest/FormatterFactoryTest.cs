@@ -37,14 +37,14 @@ namespace BuffettCodeAddin.Formatter.UnitTests
             Assert.IsTrue(formatter is InactionFormatter);
 
             // プロパティの定義を渡さなかったら常にInactionFormatter
-            formatter = FormatterFactory.Create("value", null);
+            formatter = FormatterFactory.Create(null);
             Assert.IsTrue(formatter is InactionFormatter);
         }
 
         private IFormatter CreateFormatter(string name, string label, string unit)
         {
             PropertyDescrption description = new PropertyDescrption(name, label, unit);
-            return FormatterFactory.Create("value", description);
+            return FormatterFactory.Create(description);
         }
     }
 }

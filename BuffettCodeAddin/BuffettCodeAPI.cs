@@ -1,7 +1,7 @@
 ﻿using BuffettCodeAddin.Client;
 using BuffettCodeAddin.Formatter;
 using BuffettCodeAddin.Processor;
-using System.Threading.Tasks;
+using BuffettCodeAddin.Resolver;
 
 namespace BuffettCodeAddin
 {
@@ -18,6 +18,8 @@ namespace BuffettCodeAddin
     {
         private readonly IBuffettCodeClient client;
 
+        private readonly IAPIResolver resolver;
+
         private readonly CacheStore cache;
 
         private readonly ITaskProcessor<string> processor;
@@ -29,6 +31,7 @@ namespace BuffettCodeAddin
         public BuffettCodeAPI(int maxDegreeOfParallelism)
         {
             client = new BuffettCodeClientV2();
+            resolver = APIResolverFactory.Create();
             cache = new CacheStore();
             processor = new SemaphoreTaskProcessor<string>(maxDegreeOfParallelism);
         }
@@ -61,7 +64,7 @@ namespace BuffettCodeAddin
             }
 
             var description = aggregation.GetDescription(propertyName);
-            var formatter = FormatterFactory.Create(rawValue, description);
+            var formatter = FormatterFactory.Create(description);
             string formattedValue = formatter.Format(rawValue, description);
             if (isPostfixUnit)
             {
@@ -86,13 +89,14 @@ namespace BuffettCodeAddin
 
         private IPropertyAggregation GetAggregation(string ticker, string parameter1, string parameter2, string propertyName)
         {
-            if (APIResolver.IsIndicator(propertyName))
+            switch (resolver.Resolve(propertyName))
             {
-                return GetIndicator(ticker);
-            }
-            else
-            {
-                return GetQuarter(ticker, parameter1, parameter2);
+                case APIType.Quarter:
+                    return GetQuarter(ticker, parameter1, parameter2);
+                case APIType.Indicator:
+                    return GetIndicator(ticker);
+                default:
+                    throw new ResolveAPIException();
             }
         }
 

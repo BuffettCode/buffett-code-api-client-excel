@@ -60,7 +60,7 @@ namespace BuffettCodeAddin
         public static IList<Indicator> Parse(string ticker, string jsonString)
         {
             JObject json = JsonConvert.DeserializeObject(jsonString) as JObject;
-            BuffettCodeValidator.Validate(json);
+            APIResponseValidator.Validate(json);
 
             IDictionary<string, PropertyDescrption> descriptions = null;
             IList<JToken> columnDescription = json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => t.Path.Equals("column_description")).ToList();

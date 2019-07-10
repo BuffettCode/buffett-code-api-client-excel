@@ -206,6 +206,10 @@ namespace BuffettCodeAddin
             {
                 message = "テスト用のAPIキーでは取得できないデータです";
             }
+            else if (bce is ResolveAPIException)
+            {
+                message = "未定義の項目名です";
+            }
             else
             {
                 message = "未定義のエラー";

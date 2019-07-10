@@ -199,7 +199,7 @@ namespace BuffettCode
                 foreach (var quarter in quarters)
                 {
                     var rawValue = quarter.GetValue(propertyName);
-                    var formatter = FormatterFactory.Create(rawValue, description);
+                    var formatter = FormatterFactory.Create(description);
                     string formattedValue = formatter.Format(rawValue, description);
                     worksheet.Cells[col, row++] = formattedValue;
                 }

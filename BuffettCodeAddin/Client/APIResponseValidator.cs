@@ -6,7 +6,7 @@ namespace BuffettCodeAddin.Client
     /// <summary>
     /// バフェットコードWebAPIのレスポンスのバリデーションロジック
     /// </summary>
-    class BuffettCodeValidator
+    class APIResponseValidator
     {
         /// <summary>
         /// APIのレスポンスをチェックし、問題があれば<see cref="BuffettCodeException"/>をthrowします。

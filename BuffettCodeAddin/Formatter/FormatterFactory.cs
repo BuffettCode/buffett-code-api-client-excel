@@ -1,8 +1,16 @@
 ﻿namespace BuffettCodeAddin.Formatter
 {
-    public class FormatterFactory
+    /// <summary>
+    /// フォーマッタファクトリ
+    /// </summary>
+    public static class FormatterFactory
     {
-        public static IFormatter Create(string value, PropertyDescrption description = null)
+        /// <summary>
+        /// 使用すべきフォーマッタを返します。
+        /// </summary>
+        /// <param name="description">項目定義</param>
+        /// <returns>フォーマッタ</returns>
+        public static IFormatter Create(PropertyDescrption description = null)
         {
             if (description == null)
             {

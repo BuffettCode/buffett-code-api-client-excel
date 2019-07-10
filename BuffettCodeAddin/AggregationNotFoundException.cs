@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BuffettCodeAddin
+﻿namespace BuffettCodeAddin
 {
     /// <summary>
     /// 指定されたパラメタに対して<see cref="IPropertyAggregation"/>を取得できなかったときにthrowされる例外
