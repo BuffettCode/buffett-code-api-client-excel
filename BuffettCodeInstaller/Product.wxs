@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?define ProductVersion = "1.0.2"?>
+<?define ProductVersion = "1.0.3"?>
 <?define ProductUpgradeCode = "E4CF053E-BB35-4A48-8EF7-D124F7A52C1A"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
@@ -132,9 +132,11 @@
       <Component Id="XLL32" Guid="D3488836-8EE7-4035-9539-4539A72F9D80" Directory="AddinFolder">
         <RegistryValue Root="HKCU" Key="Software\!(loc.ProductManufacturer)\Excel Add-In" Name="Xll32Bit" Value="AddIns" KeyPath="yes" Type="string" />
         <!-- テスト用のAPIキーをインストール時に設定する (β版のみ) -->
+        <!--
         <RegistryKey Root="HKCU" Key="Software\BuffettCode">
           <RegistryValue Name="ApiKey" Value="sAJGq9JH193KiwnF947v74KnDYkO7z634LWQQfPY" Type="string" Action="write" />
         </RegistryKey>
+        -->
         <File Id="EXCELXLL32PACKED.XLL" Name="!(loc.ProductNameNoSpace)32.xll" Source="$(var.BuffettCodeAddin.TargetDir)BuffettCodeAddin-packed.xll" >
           <netfx:NativeImage Id="ngen_32Xll" Platform="32bit" Priority="0"/>
         </File>
@@ -142,9 +144,11 @@
       <Component Id="XLL64" Guid="17F10CB0-03A8-4F9E-A681-62A67E5BE2B7" Directory="AddinFolder">
         <RegistryValue Root="HKCU" Key="Software\!(loc.ProductManufacturer)\Excel Add-In" Name="Xll64Bit" Value="AddIns" KeyPath="yes" Type="string" />
         <!-- テスト用のAPIキーをインストール時に設定する (β版のみ) -->
+        <!--
         <RegistryKey Root="HKCU" Key="Software\BuffettCode">
           <RegistryValue Name="ApiKey" Value="sAJGq9JH193KiwnF947v74KnDYkO7z634LWQQfPY" Type="string" Action="write" />
         </RegistryKey>
+        -->
         <File Id="EXCELXLL64PACKED.XLL" Name="!(loc.ProductNameNoSpace)64.xll" Source="$(var.BuffettCodeAddin.TargetDir)BuffettCodeAddin64-packed.xll" >
           <netfx:NativeImage Id="ngen_64Xll" Platform="64bit" Priority="0"/>
         </File>
