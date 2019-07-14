@@ -10,9 +10,11 @@
 
 * Visual Studio 2019
 * Office 2010 or later
+* .NET framework 4.6.1 or later
 * Wix Toolset 3.1.1
 * Wix Toolset Visual Studio 2019 Extension
-* .NET framework 4.6.1 or later
+* .NET framework 3.5
+* Windows only
 
 ### Getting Started
 
@@ -29,6 +31,7 @@ Office/SharePoint development
 
 [Individual components]
 .NET framework 3.5 development tools
+ClickOnce Publishing
 Git for windows
 GitHub extension for Visual Studio
 ```
