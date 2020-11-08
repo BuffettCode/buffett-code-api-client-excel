@@ -1,0 +1,15 @@
+# ref https://github.com/microsoft/setup-msbuild
+name: Build
+
+on:
+  push:
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.2 
+    - run: .\scripts\install_dependencies.ps1
+    - run: msbuild BuffettCode.sln
+
