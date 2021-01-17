@@ -12,16 +12,16 @@
 - [install scoop](https://scoop.sh)
 - [install ssh using scoop](https://github.com/lukesampson/scoop/wiki/SSH-on-Windows)
 - install git using scoop `scoop install git`
-- install nuget usgin scoop `scoop install nuget`
-- install wixtoolset usgin scoop `scoop install wixtoolset`
+- install nuget using scoop `scoop install nuget`
+- install wixtoolset using scoop `scoop install wixtoolset`
 
 # Install dependencies and build 
 Execute following powershell cmd in a cloned folder.
 
 ```powershell
 # install dependencies
- .\scripts\install_dependencies.ps1
+.\scripts\install_dependencies.ps1
 
 # Run Build Command
- Invoke-MsBuild -Path .\BuffettCode.sln
+Invoke-MsBuild -Path .\BuffettCode.sln
 ```
