@@ -11,8 +11,8 @@ namespace BuffettCode.UnitTests
     {
 
         [TestMethod]
-        [DeploymentItem("quarter.json", "data")]
-        [DeploymentItem("csv.txt", "data")]
+        [DeploymentItem(@"data\quarter.json", "data")]
+        [DeploymentItem(@"data\csv.txt", "data")]
         public void TestGenerateAndWrite()
         {
             var json = File.ReadAllText(@"data\quarter.json");
@@ -28,8 +28,8 @@ namespace BuffettCode.UnitTests
         }
 
         [TestMethod]
-        [DeploymentItem("quarter.json", "data")]
-        [DeploymentItem("propertyNames.txt", "data")]
+        [DeploymentItem(@"data\quarter.json", "data")]
+        [DeploymentItem(@"data\propertyNames.txt", "data")]
         public void TestGetPropertyNames()
         {
             var json = File.ReadAllText(@"data\quarter.json");
