@@ -13,3 +13,5 @@ jobs:
     - run: .\scripts\install_dependencies.ps1
     - run: MSBuild BuffettCode.sln
     - run: VSTest.Console.exe .\BuffettCodeTest\bin\Debug\BuffettCodeTest.dll
+      env:
+        BCODE_KEY: sAJGq9JH193KiwnF947v74KnDYkO7z634LWQQfPY
