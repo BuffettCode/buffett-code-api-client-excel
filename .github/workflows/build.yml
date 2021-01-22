@@ -14,6 +14,6 @@ jobs:
       uses: darenm/Setup-VSTest@v1
     - run: .\scripts\install_dependencies.ps1
     - run: MSBuild BuffettCode.sln
-    - run: VSTest.Console.exe .\BuffettCodeTest\bin\Debug\BuffettCodeTest.dll
+    - run: VSTest.Console.exe .\BuffettCodeTest\bin\Debug\BuffettCodeTest.dll .\BuffettCodeAddinTest\bin\Debug\BuffettCodeAddinTest.dll
       env:
         BCODE_KEY: sAJGq9JH193KiwnF947v74KnDYkO7z634LWQQfPY
