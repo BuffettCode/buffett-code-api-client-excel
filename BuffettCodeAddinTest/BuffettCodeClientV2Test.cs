@@ -34,7 +34,7 @@ namespace BuffettCodeAddin.Client.UnitTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TestAPIConstraintException))]
+       [ExpectedException(typeof(TestAPIConstraintException))]
         public void TestGetQuarterByTestApiKeyDenied()
         {
             // テスト用のAPIキーではゼロイチ銘柄のみデータを取得できる

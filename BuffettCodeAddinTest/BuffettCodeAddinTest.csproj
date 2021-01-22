@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractBuffettCodeClientTest.cs" />
-    <Compile Include="BuffettCodeClientV1Test.cs" />
     <Compile Include="BuffettCodeClientV2Test.cs" />
     <Compile Include="BuffettCodeTestUtils.cs" />
     <Compile Include="ConstAPIResolverTest.cs" />
