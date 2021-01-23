@@ -34,14 +34,13 @@ namespace BuffettCodeAddin.Client.UnitTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(AggregateException))]
         public void TestGetQuarterByTestApiKeyDenied()
         {
             // テスト用のAPIキーではゼロイチ銘柄以外は失敗し、 InvalidApiKeyException を投げる
-            var invalid_token_request = new BuffettCodeClientV2().GetQuarter(BuffettCodeTestUtils.GetTestApiKey(), "6502", "2018", "4");
+            var testTokenRequest = new BuffettCodeClientV2().GetQuarter(BuffettCodeTestUtils.GetTestApiKey(), "6502", "2018", "4");
             try
             {
-                invalid_token_request.Wait();
+                testTokenRequest.Wait();
                 Assert.Fail();
             }
             catch (AggregateException ae){
@@ -49,7 +48,6 @@ namespace BuffettCodeAddin.Client.UnitTests
                 {
                     Assert.IsInstanceOfType(e, typeof(InvalidAPIKeyException));
                 }
-                throw ae;
             }
         }
 
