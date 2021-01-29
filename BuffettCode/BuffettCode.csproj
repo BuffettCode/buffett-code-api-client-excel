@@ -266,10 +266,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>BuffettCode_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>BuffettCodeTest.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>26DBFE25E3999F969845670CFBA7B76E7805B61A</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>9843c635bcd976868ffcb98ecc2877408cd5ff61</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AppVeyor|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>

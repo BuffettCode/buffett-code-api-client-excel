@@ -17,12 +17,10 @@ namespace BuffettCodeAddin.UnitTests
             if (string.IsNullOrEmpty(key))
             {
                 Configuration.Reload();
-                return Configuration.ApiKey;
+                key = Configuration.ApiKey;
             }
-            else
-            {
-                return key;
-            }
+
+            return key;
         }
 
         /// <summary>

@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractBuffettCodeClientTest.cs" />
-    <Compile Include="BuffettCodeClientV1Test.cs" />
     <Compile Include="BuffettCodeClientV2Test.cs" />
     <Compile Include="BuffettCodeTestUtils.cs" />
     <Compile Include="ConstAPIResolverTest.cs" />
@@ -60,7 +59,6 @@
     <Compile Include="NumericFormatterTest.cs" />
     <Compile Include="RatioFormatterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SemaphoreTaskProcessorTest.cs" />
     <Compile Include="UserDefinedFunctionsTest.cs" />
     <Compile Include="WebResourceAPIResolverTest.cs" />
   </ItemGroup>
