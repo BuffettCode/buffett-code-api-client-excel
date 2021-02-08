@@ -13,7 +13,7 @@ namespace BuffettCodeAddin.UnitTests
         /// <returns>APIキー</returns>
         public static string GetValidApiKey()
         {
-            var key = Environment.GetEnvironmentVariable("BCODE_KEY");
+            var key = Environment.GetEnvironmentVariable("BCApiKey");
             if (string.IsNullOrEmpty(key))
             {
                 Configuration.Reload();
