@@ -33,5 +33,5 @@ jobs:
     - name: Upload new Installer to s3
       env:
         S3_BUCKET: ${{ secrets.S3_INSTALLER_BUCKET }}
-        GITHUB_BRANCH: ${{ github.ref }}
-      run: .\scripts\upload_new_installer.ps1 "$env:S3_BUCKET" "$env:GITHUB_BRANCH".Replace('ref/heads', 'build')
+        GIT_BRANCH: ${{ github.ref }}
+      run: .\scripts\upload_new_installer.ps1 "$env:S3_BUCKET" "$env:GIT_BRANCH".Replace('refs/heads', 'build')

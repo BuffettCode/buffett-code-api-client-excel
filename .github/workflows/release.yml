@@ -51,11 +51,11 @@ jobs:
       name: Alpha Release for CI test
       env:
         S3_BUCKET: ${{ secrets.S3_INSTALLER_BUCKET }}
-        GITHUB_BRANCH: ${{ github.ref }}
-      run: .\scripts\upload_new_installer.ps1 "$env:S3_BUCKET" "$env:GITHUB_BRANCH".Replace('ref/heads', 'alpha')
-    - if: ${{ startsWith(github.ref, 'ref/tags/') }}
+        GIT_BRANCH: ${{ github.ref }}
+      run: .\scripts\upload_new_installer.ps1 "$env:S3_BUCKET" "$env:GIT_BRANCH".Replace('refs/heads', 'alpha')
+    - if: ${{ startsWith(github.ref, 'refs/tags/') }}
       name: Release By tags
       env:
         S3_BUCKET: ${{ secrets.S3_INSTALLER_BUCKET }}
-        GITHUB_TAG: ${{ github.ref }}
-      run: .\scripts\upload_new_installer.ps1 "$env:S3_BUCKET" "$env:GITHUB_TAG".Replace('ref/tags', 'release')
+        GIT_TAG: ${{ github.ref }}
+      run: .\scripts\upload_new_installer.ps1 "$env:S3_BUCKET" "$env:GIT_TAG".Replace('refs/tags', 'release')
