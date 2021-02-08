@@ -9,7 +9,7 @@ on:
     - 'master' # to run beta release
     - 'release_by_git_tag' # for test , trigger ci by this branch
 
-    tags-ignore:
+    tags:
       - 'v*' # only v* tag trigger release.yml
 jobs:
   build_and_release:
