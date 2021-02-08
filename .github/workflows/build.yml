@@ -3,6 +3,12 @@ name: Build
 
 on:
   push:
+    branches:
+      # build at all branches except "master"
+      - '**' 
+      - '!master' 
+    tags-ignore:
+      - 'v*' # v* trigger release.yml
 jobs:
   build:
     runs-on: windows-latest
@@ -12,8 +18,20 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2 
     - name: Setup VSTest Path
       uses: darenm/Setup-VSTest@v1
-    - run: .\scripts\install_dependencies.ps1
-    - run: MSBuild BuffettCode.sln
-    - run: VSTest.Console.exe .\BuffettCodeTest\bin\Debug\BuffettCodeTest.dll .\BuffettCodeAddinTest\bin\Debug\BuffettCodeAddinTest.dll
+    - name: Install dependencies
+      run: .\scripts\install_dependencies.ps1
+    - name: Run MSBuild as Release mode
+      run: MSBuild BuffettCode.sln /p:Configuration=Release
+    - name: Run VSTest using Test API Token
+      run: .\scripts\run_all_tests.ps1
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-northeast-1
+    - name: Upload new Installer to s3
       env:
-        BCODE_KEY: sAJGq9JH193KiwnF947v74KnDYkO7z634LWQQfPY
+        S3_BUCKET: ${{ secrets.S3_INSTALLER_BUCKET }}
+        GIT_BRANCH: ${{ github.ref }}
+      run: .\scripts\upload_new_installer.ps1 "$env:S3_BUCKET" "$env:GIT_BRANCH".Replace('refs/heads', 'build')
