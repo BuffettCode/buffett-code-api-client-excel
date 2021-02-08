@@ -7,7 +7,7 @@ on:
   push:
     branches:
     - 'master' # to run beta release
-    - 'release_by_git_tag' # for test , trigger ci by this branch
+    - 'create_installer_release' # for test , trigger ci by this branch
 
     tags:
       - 'v*' # only v* tag trigger release.yml
@@ -47,7 +47,7 @@ jobs:
         S3_BUCKET: ${{ secrets.S3_INSTALLER_BUCKET }}
       run: .\scripts\upload_new_installer.ps1 "$env:S3_BUCKET" "beta/latest"
     # for test
-    - if: ${{ github.ref == 'refs/heads/release_by_git_tag' }}
+    - if: ${{ github.ref == 'refs/heads/create_installer_release' }}
       name: Alpha Release for CI test
       env:
         S3_BUCKET: ${{ secrets.S3_INSTALLER_BUCKET }}
