@@ -2,19 +2,16 @@
 
 [バフェットコード](https://www.buffett-code.com/)の提供する[WebAPI](https://docs.buffett-code.com/)から上場企業の財務情報を取得し、ユーザ定義関数(UDF)によりデータの操作ができるExcelアドインです。
 
-[![Build status](https://ci.appveyor.com/api/projects/status/po221rdjm7i6r77x?svg=true)](https://ci.appveyor.com/project/shinsuke/buffett-code-api-client-excel) ![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2019-red.svg)  [![NetFramework](https://img.shields.io/badge/Language-C%23%207.0-orange.svg)](https://blogs.msdn.microsoft.com/dotnet/2016/08/24/whats-new-in-csharp-7-0/) 
+![Build status](https://github.com/BuffettCode/buffett-code-api-client-excel/workflows/Build/badge.svg) [![Release](https://github.com/BuffettCode/buffett-code-api-client-excel/workflows/Release/badge.svg)](https://ci.appveyor.com/project/shinsuke/buffett-code-api-client-excel) ![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2019-red.svg)  [![NetFramework](https://img.shields.io/badge/Language-C%23%207.0-orange.svg)](https://blogs.msdn.microsoft.com/dotnet/2016/08/24/whats-new-in-csharp-7-0/) 
 
 ## Environment & Build
-
 ### Requirements
-
+* Windows PC and Office 2010 or later
 * Visual Studio 2019
-* Office 2010 or later
 * .NET framework 4.6.1 or later
 * Wix Toolset 3.1.1
 * Wix Toolset Visual Studio 2019 Extension
 * .NET framework 3.5
-* Windows only
 
 ### Getting Started
 
@@ -57,15 +54,14 @@ GitHub extension for Visual Studio
 
 [https://github.com/BuffettCode/buffett-code-api-client-excel.git](https://github.com/BuffettCode/buffett-code-api-client-excel.git)
 
-#### デジタル署名の証明書配置
+#### デジタル署名の登録
 
-バフェットコードのExcelアドインはVSTO(Visual Studio Tools for Office)を利用しており、ClickOnceのマニフェストにデジタル署名が必要です。そのための証明書はレポジトリにコミットされておらず、開発者自身で用意してください。
+バフェットコードのExcelアドインはVSTO(Visual Studio Tools for Office)を利用しており、ClickOnceのマニフェストにデジタル署名が必要です。`BuffettCode` プロジェクトにデジタル署名の設定がされている必要があります。リポジトリにコミットされたテスト証明書([BuffettCodeTest.pfx](./BuffettCode/BuffettCodeTest.pfx))を使う場合は以下のように設定します。
 
-`BuffettCode` プロジェクトにデジタル署名の設定がされている必要があります。Visual Studioで作成できる自己証明書(テスト証明書)を使う場合は以下のように設定します。
 
 * ソリューションエクスプローラから `BuffettCode` プロジェクトのプロパティを開く
 * Signingタブで `Sign the ClickOnce manifests` のチェックを付ける
-* `Create Test Certificate...` ボタンを押す
+* "Select from File..." より "BuffettCodeTest.pfx" を選択する
 
 #### ビルド
 
@@ -77,10 +73,19 @@ Update-Package -reinstall
 
 * メニューから Build -> Rebuild Solution を実行
 
+### Excelとつないで開発する
+Visual StudioとExcelを使って、実際にアドオンをExcelから動かしながら開発することができます。
+
+1. Debug モードでビルドを行い、Debugを開始する
+2. Excelが立ち上がるので、新規のBookを作成する
+
+作成された新規のBookは開発中のアドオンをインストール済みの状態で作成されます。
+
+
 ## ライセンス
 
 Apache Lisence 2.0
 
 ## コンタクト
 
-バグレポートはissueを作成いただくか、[駄犬 (@daken_in_market)](https://twitter.com/daken_in_market)までご連絡ください。Pull Requestも歓迎します。
+バグレポートはissueを作成いただくか、[Shu Suzuki (@shoe116)](https://twitter.com/shoe116)までご連絡ください。Pull Requestも歓迎します。
