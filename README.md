@@ -76,8 +76,9 @@ Update-Package -reinstall
 ### Excelとつないで開発する
 Visual StudioとExcelを使って、実際にアドオンをExcelから動かしながら開発することができます。
 
-1. Debug モードでビルドを行い、Debugを開始する
-2. Excelが立ち上がるので、新規のBookを作成する
+1. Debug モードでビルドを行う
+2. Debugしたいパッケージを選択し、Debugを開始する（BCODE関数とCSV DLは別パッケージなので注意）
+3. Excelが立ち上がるので、新規のBookを作成する
 
 作成された新規のBookは開発中のアドオンをインストール済みの状態で作成されます。
 
