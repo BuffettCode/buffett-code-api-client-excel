@@ -2,7 +2,7 @@
 
 [バフェットコード](https://www.buffett-code.com/)の提供する[WebAPI](https://docs.buffett-code.com/)から上場企業の財務情報を取得し、ユーザ定義関数(UDF)によりデータの操作ができるExcelアドインです。
 
-![Build status](https://github.com/BuffettCode/buffett-code-api-client-excel/workflows/Build/badge.svg) [![Release](https://github.com/BuffettCode/buffett-code-api-client-excel/workflows/Release/badge.svg)](https://ci.appveyor.com/project/shinsuke/buffett-code-api-client-excel) ![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2019-red.svg)  [![NetFramework](https://img.shields.io/badge/Language-C%23%207.0-orange.svg)](https://blogs.msdn.microsoft.com/dotnet/2016/08/24/whats-new-in-csharp-7-0/) 
+![Build status](https://github.com/BuffettCode/buffett-code-api-client-excel/workflows/Build/badge.svg) ![Release](https://github.com/BuffettCode/buffett-code-api-client-excel/workflows/Release/badge.svg) ![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2019-red.svg)  [![NetFramework](https://img.shields.io/badge/Language-C%23%207.0-orange.svg)](https://blogs.msdn.microsoft.com/dotnet/2016/08/24/whats-new-in-csharp-7-0/) 
 
 ## Environment & Build
 ### Requirements
