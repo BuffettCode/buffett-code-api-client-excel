@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BuffettCodeAddin.UnitTests
+namespace BuffettCodeAPIAdapter.UnitTests
 {
     /// <summary>
     /// 単体テストのサポートクラス

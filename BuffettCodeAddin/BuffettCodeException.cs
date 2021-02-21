@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BuffettCodeAddin
+namespace BuffettCodeAPIAdapter
 {
     /// <summary>
     /// バフェットコードに関連する例外の基底クラス

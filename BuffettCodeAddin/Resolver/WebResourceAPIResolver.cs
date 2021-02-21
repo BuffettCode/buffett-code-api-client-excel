@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 
-namespace BuffettCodeAddin.Resolver
+namespace BuffettCodeAPIAdapter.Resolver
 {
     /// <summary>
     /// Webから取得した定義ファイルを用いるAPIリゾルバ

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BuffettCodeAddin
+namespace BuffettCodeAPIAdapter
 {
     /// <summary>
     /// APIレスポンスのキャッシュストア

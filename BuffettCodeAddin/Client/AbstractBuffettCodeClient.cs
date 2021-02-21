@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace BuffettCodeAddin.Client
+namespace BuffettCodeAPIAdapter.Client
 {
     /// <summary>
     /// バフェットコードクライアントの抽象クラス

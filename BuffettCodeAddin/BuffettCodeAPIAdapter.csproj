@@ -7,8 +7,8 @@
     <ProjectGuid>{44A5BFAB-ACD6-492F-B0C6-29E0EA07A90A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BuffettCodeAddin</RootNamespace>
-    <AssemblyName>BuffettCodeAddin</AssemblyName>
+    <RootNamespace>BuffettCodeAPIAdapter</RootNamespace>
+    <AssemblyName>BuffettCodeAPIAdapter</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

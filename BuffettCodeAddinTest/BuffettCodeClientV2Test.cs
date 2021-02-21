@@ -1,8 +1,8 @@
-﻿using BuffettCodeAddin.UnitTests;
+﻿using BuffettCodeAPIAdapter.UnitTests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace BuffettCodeAddin.Client.UnitTests
+namespace BuffettCodeAPIAdapter.Client.UnitTests
 {
     [TestClass]
     public class BuffettCodeClientV2Test

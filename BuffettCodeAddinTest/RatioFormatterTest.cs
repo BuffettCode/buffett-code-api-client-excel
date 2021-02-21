@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BuffettCodeAddin.Formatter.UnitTests
+namespace BuffettCodeAPIAdapter.Formatter.UnitTests
 {
     [TestClass]
     public class RatioFormatterTest

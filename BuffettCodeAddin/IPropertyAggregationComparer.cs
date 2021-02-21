@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuffettCodeAddin
+namespace BuffettCodeAPIAdapter
 {
     public class IPropertyAggregationComparer : IEqualityComparer<IPropertyAggregation>
     {

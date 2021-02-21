@@ -65,9 +65,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BuffettCodeAddin\BuffettCodeAddin.csproj">
+    <ProjectReference Include="..\BuffettCodeAddin\BuffettCodeAPIAdapter.csproj">
       <Project>{44a5bfab-acd6-492f-b0c6-29e0ea07a90a}</Project>
-      <Name>BuffettCodeAddin</Name>
+      <Name>BuffettCodeAPIAdapter</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

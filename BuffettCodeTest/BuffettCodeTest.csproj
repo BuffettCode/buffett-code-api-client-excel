@@ -73,22 +73,22 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BuffettCodeAddin\BuffettCodeAddin.csproj">
-      <Project>{44a5bfab-acd6-492f-b0c6-29e0ea07a90a}</Project>
-      <Name>BuffettCodeAddin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BuffettCode\BuffettCode.csproj">
-      <Project>{151a2480-cc5e-4eda-a163-9f50173026a8}</Project>
-      <Name>BuffettCode</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="data\csv.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data\propertyNames.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BuffettCodeAddin\BuffettCodeAPIAdapter.csproj">
+      <Project>{44a5bfab-acd6-492f-b0c6-29e0ea07a90a}</Project>
+      <Name>BuffettCodeAPIAdapter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BuffettCode\BuffettCode.csproj">
+      <Project>{151a2480-cc5e-4eda-a163-9f50173026a8}</Project>
+      <Name>BuffettCode</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

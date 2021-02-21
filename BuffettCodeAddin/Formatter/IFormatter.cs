@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeAddin.Formatter
+﻿namespace BuffettCodeAPIAdapter.Formatter
 {
     /// <summary>
     /// バフェットコードのWebAPIから取得した値のフォーマッタ

@@ -1,9 +1,9 @@
 ﻿namespace BuffettCodeExcelFunctions
 {
-    using BuffettCodeAddin;
-    using BuffettCodeAddin.Client;
-    using ExcelDna.Integration;
+    using BuffettCodeAPIAdapter;
+    using BuffettCodeAPIAdapter.Client;
     using RegistryUtils;
+    using ExcelDna.Integration;
     using System;
 
     /// <summary>

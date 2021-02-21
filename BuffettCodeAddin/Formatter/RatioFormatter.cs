@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BuffettCodeAddin.Formatter
+namespace BuffettCodeAPIAdapter.Formatter
 {
     /// <summary>
     /// 割合のフォーマッタ

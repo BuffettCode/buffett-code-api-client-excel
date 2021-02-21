@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BuffettCodeAddin.Processor
+namespace BuffettCodeAPIAdapter.Processor
 {
     /// <summary>
     /// タスクプロセッサインタフェース

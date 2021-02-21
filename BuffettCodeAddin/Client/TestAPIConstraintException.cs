@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuffettCodeAddin.Client
+namespace BuffettCodeAPIAdapter.Client
 {
     /// <summary>
     /// テストAPIキーの機能制限に引っかかったときにthrowされる例外

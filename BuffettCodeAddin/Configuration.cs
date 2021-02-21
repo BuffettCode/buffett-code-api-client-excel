@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
 
-namespace BuffettCodeAddin
+namespace BuffettCodeAPIAdapter
 {
     /// <summary>
     /// Excelアドイン設定

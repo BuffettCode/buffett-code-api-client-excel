@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace BuffettCodeAddin
+namespace BuffettCodeAPIAdapter
 {
     /// <summary>
     /// 項目の定義

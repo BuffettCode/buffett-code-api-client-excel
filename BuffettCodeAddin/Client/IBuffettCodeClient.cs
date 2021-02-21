@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BuffettCodeAddin.Client
+namespace BuffettCodeAPIAdapter.Client
 {
     /// <summary>
     /// バフェットコードWebAPIクライアント

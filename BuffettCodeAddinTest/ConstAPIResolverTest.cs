@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BuffettCodeAddin.Resolver.UnitTests
+namespace BuffettCodeAPIAdapter.Resolver.UnitTests
 {
     [TestClass]
     public class ConstAPIResolverTest

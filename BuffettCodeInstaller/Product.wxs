@@ -116,7 +116,7 @@
         <File Id="EXCEL.VSTO" Source="$(var.BuffettCode.TargetPath)" />
         <File Id="EXCEL.MANIFEST" Source="$(var.BuffettCode.TargetPath).manifest" />
         <File Id="EXCEL.VstoManifest" Source="$(var.BuffettCode.TargetDir)$(var.BuffettCode.TargetName).vsto" />
-        <File Id="EXCEL.DLL" Source="$(var.BuffettCode.TargetDir)BuffettCodeAddin.dll" />
+        <File Id="EXCEL.DLL" Source="$(var.BuffettCode.TargetDir)BuffettCodeAPIAdapter.dll" />
         <File Id="EXCEL.JsonDLL" Source="$(var.BuffettCode.TargetDir)Newtonsoft.Json.dll" />
         <File Id="EXCEL.CsvHelper" Source="$(var.BuffettCode.TargetDir)CsvHelper.dll" />
         <File Id="EXCEL.ValueTuple" Source="$(var.BuffettCode.TargetDir)System.ValueTuple.dll" />
@@ -137,7 +137,7 @@
           <RegistryValue Name="ApiKey" Value="sAJGq9JH193KiwnF947v74KnDYkO7z634LWQQfPY" Type="string" Action="write" />
         </RegistryKey>
         -->
-        <File Id="EXCELXLL32PACKED.XLL" Name="!(loc.ProductNameNoSpace)32.xll" Source="$(var.BuffettCodeAddin.TargetDir)BuffettCodeAddin-packed.xll" >
+        <File Id="EXCELXLL32PACKED.XLL" Name="!(loc.ProductNameNoSpace)32.xll" Source="$(var.BuffettCodeExcelFunctions.TargetDir)BuffettCodeExcelFunctions-AddIn-packed.xll" >
           <netfx:NativeImage Id="ngen_32Xll" Platform="32bit" Priority="0"/>
         </File>
       </Component>
@@ -149,7 +149,7 @@
           <RegistryValue Name="ApiKey" Value="sAJGq9JH193KiwnF947v74KnDYkO7z634LWQQfPY" Type="string" Action="write" />
         </RegistryKey>
         -->
-        <File Id="EXCELXLL64PACKED.XLL" Name="!(loc.ProductNameNoSpace)64.xll" Source="$(var.BuffettCodeAddin.TargetDir)BuffettCodeAddin64-packed.xll" >
+        <File Id="EXCELXLL64PACKED.XLL" Name="!(loc.ProductNameNoSpace)64.xll" Source="$(var.BuffettCodeExcelFunctions.TargetDir)BuffettCodeExcelFunctions-AddIn-packed.xll" >
           <netfx:NativeImage Id="ngen_64Xll" Platform="64bit" Priority="0"/>
         </File>
         <RemoveFile On="uninstall" Id="XLL32" Directory="AddinFolder" Name="!(loc.ProductNameNoSpace)32.xll" />

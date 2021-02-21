@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeAddin.Resolver
+﻿namespace BuffettCodeAPIAdapter.Resolver
 {
     /// <summary>
     /// バフェットコードAPI

@@ -1,4 +1,4 @@
-﻿using BuffettCodeAddin;
+﻿using BuffettCodeAPIAdapter;
 
 namespace BuffettCode
 {

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Linq;
 
-namespace BuffettCodeAddin.Client
+namespace BuffettCodeAPIAdapter.Client
 {
     /// <summary>
     /// バフェットコードWebAPIのレスポンスのバリデーションロジック

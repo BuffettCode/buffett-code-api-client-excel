@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace BuffettCodeAddin.Resolver
+namespace BuffettCodeAPIAdapter.Resolver
 {
     /// <summary>
     /// ハードコードされた定数を用いるAPIリゾルバ

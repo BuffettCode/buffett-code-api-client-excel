@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallerCA", "InstallerCA\
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "BuffettCodeInstaller", "BuffettCodeInstaller\BuffettCodeInstaller.wixproj", "{9787F6FE-2779-410B-B4EF-A04D2C6C7EEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeAddin", "BuffettCodeAddin\BuffettCodeAddin.csproj", "{44A5BFAB-ACD6-492F-B0C6-29E0EA07A90A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeAPIAdapter", "BuffettCodeAddin\BuffettCodeAPIAdapter.csproj", "{44A5BFAB-ACD6-492F-B0C6-29E0EA07A90A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeAddinTest", "BuffettCodeAddinTest\BuffettCodeAddinTest.csproj", "{4E36644A-8C51-40AC-98DC-26471E12A4E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeAPIAdapterTest", "BuffettCodeAddinTest\BuffettCodeAPIAdapterTest.csproj", "{4E36644A-8C51-40AC-98DC-26471E12A4E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeExcelFunctions", "BuffettCodeExcelFunctions\BuffettCodeExcelFunctions.csproj", "{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}"
 	ProjectSection(ProjectDependencies) = postProject

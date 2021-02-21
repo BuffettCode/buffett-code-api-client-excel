@@ -1,9 +1,9 @@
-﻿using BuffettCodeAddin.Client;
-using BuffettCodeAddin.Formatter;
-using BuffettCodeAddin.Processor;
-using BuffettCodeAddin.Resolver;
+﻿using BuffettCodeAPIAdapter.Client;
+using BuffettCodeAPIAdapter.Formatter;
+using BuffettCodeAPIAdapter.Processor;
+using BuffettCodeAPIAdapter.Resolver;
 
-namespace BuffettCodeAddin
+namespace BuffettCodeAPIAdapter
 {
     /// <summary>
     /// バフェットコードAPI

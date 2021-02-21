@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeAddin.Formatter
+﻿namespace BuffettCodeAPIAdapter.Formatter
 {
     /// <summary>
     /// 値をそのまま返すだけのフォーマッタ

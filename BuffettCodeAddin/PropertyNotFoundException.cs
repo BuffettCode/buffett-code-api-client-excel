@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeAddin
+﻿namespace BuffettCodeAPIAdapter
 {
     /// <summary>
     /// 指定された名称の項目が存在しなかったときにthrowされる例外

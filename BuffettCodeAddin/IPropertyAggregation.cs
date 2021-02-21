@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeAddin
+﻿namespace BuffettCodeAPIAdapter
 {
     /// <summary>
     /// 項目の集約

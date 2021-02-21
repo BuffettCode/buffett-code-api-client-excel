@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace BuffettCodeAddin.Processor
+namespace BuffettCodeAPIAdapter.Processor
 {
     /// <summary>
     /// <see cref="SemaphoreSlim"/>を利用した<see cref="ITaskProcessor"/>

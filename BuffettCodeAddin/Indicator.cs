@@ -1,10 +1,10 @@
-﻿using BuffettCodeAddin.Client;
+﻿using BuffettCodeAPIAdapter.Client;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BuffettCodeAddin
+namespace BuffettCodeAPIAdapter
 {
     /// <summary>
     /// 指標

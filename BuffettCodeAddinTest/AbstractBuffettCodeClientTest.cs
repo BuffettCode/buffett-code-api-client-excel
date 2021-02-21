@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace BuffettCodeAddin.Client.UnitTests
+namespace BuffettCodeAPIAdapter.Client.UnitTests
 {
     [TestClass]
     public class AbstractBuffettCodeClientTest : AbstractBuffettCodeClient

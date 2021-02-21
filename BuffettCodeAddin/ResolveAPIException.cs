@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeAddin
+﻿namespace BuffettCodeAPIAdapter
 {
     /// <summary>
     /// APIのリゾルブに失敗したときにthrowされる例外
