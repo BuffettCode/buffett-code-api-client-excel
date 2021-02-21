@@ -6,9 +6,16 @@
     using ExcelDna.Integration;
     using System;
 
-     public class UserDefinedFunctions
+    /// <summary>
+    /// Excelのユーザー定義関数(UDF)
+    /// </summary>
+    /// <remarks>
+    /// バフェットコードのExcelアドインがユーザに提供する関数の実装。
+    /// メインとなるBCODE関数と、デバッグおよびサポートのために作られたいくつかの隠し関数を含みます。
+    /// それぞれの関数のリファレンスはバフェットコードのWebサイトを参照のこと。
+    /// </remarks>
+    public class UserDefinedFunctions
     {
- 
         private static BuffettCodeAPI api;
 
         private static RegistryMonitor monitor;
