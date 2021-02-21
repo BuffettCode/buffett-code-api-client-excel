@@ -50,6 +50,7 @@
     <Compile Include="UserDefinedFunctions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="BuffettCodeExcelFunctions-AddIn.dna" />
     <None Include="packages.config" />
     <None Include="Properties\ExcelDna.Build.props" />
