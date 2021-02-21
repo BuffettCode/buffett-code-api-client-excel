@@ -253,7 +253,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BuffettCodeAddin\BuffettCodeAPIAdapter.csproj">
+    <ProjectReference Include="..\BuffettCodeAPIAdapter\BuffettCodeAPIAdapter.csproj">
       <Project>{44a5bfab-acd6-492f-b0c6-29e0ea07a90a}</Project>
       <Name>BuffettCodeAPIAdapter</Name>
     </ProjectReference>

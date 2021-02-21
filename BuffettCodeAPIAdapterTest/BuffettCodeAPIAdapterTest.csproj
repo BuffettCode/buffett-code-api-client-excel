@@ -8,8 +8,8 @@
     <ProjectGuid>{4E36644A-8C51-40AC-98DC-26471E12A4E8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BuffettCodeAddin.UnitTests</RootNamespace>
-    <AssemblyName>BuffettCodeAddinTest</AssemblyName>
+    <RootNamespace>BuffettCodeAPIAdapter.UnitTests</RootNamespace>
+    <AssemblyName>BuffettCodeAPIAdapterTest</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -65,7 +65,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BuffettCodeAddin\BuffettCodeAPIAdapter.csproj">
+    <ProjectReference Include="..\BuffettCodeAPIAdapter\BuffettCodeAPIAdapter.csproj">
       <Project>{44a5bfab-acd6-492f-b0c6-29e0ea07a90a}</Project>
       <Name>BuffettCodeAPIAdapter</Name>
     </ProjectReference>
