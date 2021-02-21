@@ -56,7 +56,7 @@ GitHub extension for Visual Studio
 
 #### デジタル署名の登録
 
-バフェットコードのExcelアドインはVSTO(Visual Studio Tools for Office)を利用しており、ClickOnceのマニフェストにデジタル署名が必要です。`BuffettCode` プロジェクトにデジタル署名の設定がされている必要があります。リポジトリにコミットされたテスト証明書([BuffettCodeTest.pfx](./BuffettCode/BuffettCodeTest.pfx))を使う場合は以下のように設定します。
+バフェットコードのExcelアドインの一部（`BuffettCodeAddinRibbon`）はVSTO(Visual Studio Tools for Office)を利用しており、ClickOnceのマニフェストにデジタル署名が必要です。`BuffettCode` プロジェクトにデジタル署名の設定がされている必要があります。リポジトリにコミットされたテスト証明書([BuffettCodeTest.pfx](./BuffettCodeAddinRibbon/BuffettCodeTest.pfx))を使う場合は以下のように設定します。
 
 
 * ソリューションエクスプローラから `BuffettCode` プロジェクトのプロパティを開く
@@ -77,8 +77,10 @@ Update-Package -reinstall
 Visual StudioとExcelを使って、実際にアドオンをExcelから動かしながら開発することができます。
 
 1. Debug モードでビルドを行う
-2. Debugしたいパッケージを選択し、Debugを開始する（BCODE関数とCSV DLは別パッケージなので注意）
-3. Excelが立ち上がるので、新規のBookを作成する
+2. Debugしたいパッケージを選択し、Debugを開始する
+  - UDF(BCODE関数)は `BuffettCodeExcelFunctions`
+  - 「エクセルアドインのリボン（tokenの設定やCSVダウンロード）」は`BuffettCodeAddinRibbon`
+3. Excelが立ち上がるので、新規のBookを作成して動かしてみてください
 
 作成された新規のBookは開発中のアドオンをインストール済みの状態で作成されます。
 
