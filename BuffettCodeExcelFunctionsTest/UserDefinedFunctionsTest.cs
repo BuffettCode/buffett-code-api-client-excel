@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BuffettCodeAddin.UnitTests
+namespace BuffettCodeExcelFunctions.UnitTests
 {
     [TestClass]
     public class UserDefinedFunctionsTest

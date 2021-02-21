@@ -1,36 +1,41 @@
-﻿using BuffettCodeAddin.Client;
-using ExcelDna.Integration;
-using RegistryUtils;
-using System;
-
-namespace BuffettCodeAddin
+﻿namespace BuffettCodeExcelFunctions
 {
+    using BuffettCodeAddin;
+    using BuffettCodeAddin.Client;
+    using ExcelDna.Integration;
+    using RegistryUtils;
+    using System;
+
     /// <summary>
-    /// Excelのユーザー定義関数(UDF)
+    /// Excelのユーザー定義関数(UDF).
     /// </summary>
-    /// <remarks>
-    /// バフェットコードのExcelアドインがユーザに提供する関数の実装。
-    /// メインとなるBCODE関数と、デバッグおよびサポートのために作られたいくつかの隠し関数を含みます。
-    /// それぞれの関数のリファレンスはバフェットコードのWebサイトを参照のこと。
-    /// </remarks>
     public class UserDefinedFunctions
     {
+        /// <summary>
+        /// Defines the api.
+        /// </summary>
         private static BuffettCodeAPI api;
 
+        /// <summary>
+        /// Defines the monitor.
+        /// </summary>
         private static RegistryMonitor monitor;
 
+        /// <summary>
+        /// Defines the initializeLock.
+        /// </summary>
         private static readonly object initializeLock = new object();
 
         /// <summary>
-        /// Excelのユーザー定義関数BCODE。銘柄コードを指定して財務数値や指標を取得します
+        /// Excelのユーザー定義関数BCODE。銘柄コードを指定して財務数値や指標を取得します.
         /// </summary>
-        /// <param name="ticker">銘柄コード</param>
-        /// <param name="parameter1">パラメタ1</param>
-        /// <param name="parameter2">パラメタ2</param>
-        /// <param name="propertyName">項目名</param>
-        /// <param name="isRawValue">rawデータフラグ</param>
-        /// <param name="isPostfixUnit">単位フラグ</param>
-        /// <returns>Excelのセルに表示する文字列</returns>
+        /// <param name="ticker">銘柄コード.</param>
+        /// <param name="parameter1">パラメタ1.</param>
+        /// <param name="parameter2">パラメタ2.</param>
+        /// <param name="propertyName">項目名.</param>
+        /// <param name="isRawValue">rawデータフラグ.</param>
+        /// <param name="isPostfixUnit">単位フラグ.</param>
+        /// <returns>Excelのセルに表示する文字列.</returns>
         [ExcelFunction(Description = "Get indicators, stock prices, and any further values by BuffettCode API")]
         public static string BCODE(string ticker, string parameter1, string parameter2, string propertyName, bool isRawValue = false, bool isPostfixUnit = false)
         {
@@ -46,10 +51,10 @@ namespace BuffettCodeAddin
         }
 
         /// <summary>
-        /// Excelのユーザー定義関数BCODE_LABEL。項目名を指定して日本語の名称を取得します
+        /// Excelのユーザー定義関数BCODE_LABEL。項目名を指定して日本語の名称を取得します.
         /// </summary>
-        /// <param name="propertyName">項目名</param>
-        /// <returns>Excelのセルに表示する文字列</returns>
+        /// <param name="propertyName">項目名.</param>
+        /// <returns>Excelのセルに表示する文字列.</returns>
         [ExcelFunction(IsHidden = true, Description = "Get property name in Japanese")]
         public static string BCODE_LABEL(string propertyName)
         {
@@ -65,10 +70,10 @@ namespace BuffettCodeAddin
         }
 
         /// <summary>
-        /// Excelのユーザー定義関数BCODE_UNIT。項目名を指定して単位の名称を取得します
+        /// Excelのユーザー定義関数BCODE_UNIT。項目名を指定して単位の名称を取得します.
         /// </summary>
-        /// <param name="propertyName">項目名</param>
-        /// <returns>Excelのセルに表示する文字列</returns>
+        /// <param name="propertyName">項目名.</param>
+        /// <returns>Excelのセルに表示する文字列.</returns>
         [ExcelFunction(IsHidden = true, Description = "Get unit name in Japanese")]
         public static string BCODE_UNIT(string propertyName)
         {
@@ -84,10 +89,10 @@ namespace BuffettCodeAddin
         }
 
         /// <summary>
-        /// Excelのユーザー定義関数BCODE_KEY。APIキーを設定します。デバッグ用
+        /// Excelのユーザー定義関数BCODE_KEY。APIキーを設定します。デバッグ用.
         /// </summary>
-        /// <param name="apiKey">APIキー</param>
-        /// <returns>Excelのセルに表示する文字列。常に空文字列</returns>
+        /// <param name="apiKey">APIキー.</param>
+        /// <returns>Excelのセルに表示する文字列。常に空文字列.</returns>
         [ExcelFunction(IsHidden = true, Description = "Set BuffettCode API Key to XLL Add-in")]
         public static string BCODE_KEY(string apiKey)
         {
@@ -104,9 +109,9 @@ namespace BuffettCodeAddin
         }
 
         /// <summary>
-        /// Excelのユーザー定義関数BCODE_CLEAR。XLLアドインがヒープに持つAPIレスポンスのキャッシュをクリアします。デバッグ用
+        /// Excelのユーザー定義関数BCODE_CLEAR。XLLアドインがヒープに持つAPIレスポンスのキャッシュをクリアします。デバッグ用.
         /// </summary>
-        /// <returns>Excelのセルに表示する文字列。常に空文字列</returns>
+        /// <returns>Excelのセルに表示する文字列。常に空文字列.</returns>
         [ExcelFunction(IsHidden = true, Description = "Clear CacheStore")]
         public static string BCODE_CLEAR()
         {
@@ -123,9 +128,9 @@ namespace BuffettCodeAddin
         }
 
         /// <summary>
-        /// Excelのユーザー定義関数BCODE_PING。ExcelからXLLアドインへのファンクションコールをチェックします。デバッグ用
+        /// Excelのユーザー定義関数BCODE_PING。ExcelからXLLアドインへのファンクションコールをチェックします。デバッグ用.
         /// </summary>
-        /// <returns>Excelのセルに表示する文字列。ランダムな整数値</returns>
+        /// <returns>Excelのセルに表示する文字列。ランダムな整数値.</returns>
         [ExcelFunction(IsHidden = true, Description = "Check function call (from Excel to XLL)")]
         public static string BCODE_PING()
         {
@@ -140,6 +145,9 @@ namespace BuffettCodeAddin
             }
         }
 
+        /// <summary>
+        /// The InitializeIfNeeded.
+        /// </summary>
         private static void InitializeIfNeeded()
         {
             lock (initializeLock)
@@ -155,6 +163,11 @@ namespace BuffettCodeAddin
             }
         }
 
+        /// <summary>
+        /// The OnRegistryChanged.
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/>.</param>
+        /// <param name="e">The e<see cref="EventArgs"/>.</param>
         private static void OnRegistryChanged(object sender, EventArgs e)
         {
             Configuration.Reload();
@@ -165,12 +178,23 @@ namespace BuffettCodeAddin
             }
         }
 
+        /// <summary>
+        /// The GetDescription.
+        /// </summary>
+        /// <param name="propertyName">The propertyName<see cref="string"/>.</param>
+        /// <returns>The <see cref="PropertyDescrption"/>.</returns>
         private static PropertyDescrption GetDescription(string propertyName)
         {
             // column_descriptionをAPIから取得させるため、適当なパラメタを渡している
             return api.GetDescription("1301", "2017", "4", propertyName);
         }
 
+        /// <summary>
+        /// The ToErrorMessage.
+        /// </summary>
+        /// <param name="e">The e<see cref="Exception"/>.</param>
+        /// <param name="propertyName">The propertyName<see cref="string"/>.</param>
+        /// <returns>The <see cref="string"/>.</returns>
         private static string ToErrorMessage(Exception e, string propertyName = "")
         {
             System.Diagnostics.Debug.WriteLine(e.StackTrace); // for debug
@@ -217,6 +241,11 @@ namespace BuffettCodeAddin
             return "<<" + message + ">>";
         }
 
+        /// <summary>
+        /// The GetBuffettCodeException.
+        /// </summary>
+        /// <param name="e">The e<see cref="Exception"/>.</param>
+        /// <returns>The <see cref="Exception"/>.</returns>
         private static Exception GetBuffettCodeException(Exception e)
         {
             Exception cursor = e;

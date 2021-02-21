@@ -15,6 +15,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeAddin", "Buffett
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeAddinTest", "BuffettCodeAddinTest\BuffettCodeAddinTest.csproj", "{4E36644A-8C51-40AC-98DC-26471E12A4E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeExcelFunctions", "BuffettCodeExcelFunctions\BuffettCodeExcelFunctions.csproj", "{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{44A5BFAB-ACD6-492F-B0C6-29E0EA07A90A} = {44A5BFAB-ACD6-492F-B0C6-29E0EA07A90A}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeExcelFunctionsTest", "BuffettCodeExcelFunctionsTest\BuffettCodeExcelFunctionsTest.csproj", "{DB6AC57E-12E1-4020-ABA0-AD76F4066BB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AppVeyor|Any CPU = AppVeyor|Any CPU
@@ -93,6 +100,30 @@ Global
 		{4E36644A-8C51-40AC-98DC-26471E12A4E8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4E36644A-8C51-40AC-98DC-26471E12A4E8}.Release|x86.ActiveCfg = Release|Any CPU
 		{4E36644A-8C51-40AC-98DC-26471E12A4E8}.Release|x86.Build.0 = Release|Any CPU
+		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.AppVeyor|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.AppVeyor|Any CPU.Build.0 = Debug|Any CPU
+		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.AppVeyor|x86.ActiveCfg = Debug|Any CPU
+		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.AppVeyor|x86.Build.0 = Debug|Any CPU
+		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.Debug|x86.Build.0 = Debug|Any CPU
+		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.Release|x86.ActiveCfg = Release|Any CPU
+		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.Release|x86.Build.0 = Release|Any CPU
+		{DB6AC57E-12E1-4020-ABA0-AD76F4066BB9}.AppVeyor|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB6AC57E-12E1-4020-ABA0-AD76F4066BB9}.AppVeyor|Any CPU.Build.0 = Debug|Any CPU
+		{DB6AC57E-12E1-4020-ABA0-AD76F4066BB9}.AppVeyor|x86.ActiveCfg = Debug|Any CPU
+		{DB6AC57E-12E1-4020-ABA0-AD76F4066BB9}.AppVeyor|x86.Build.0 = Debug|Any CPU
+		{DB6AC57E-12E1-4020-ABA0-AD76F4066BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB6AC57E-12E1-4020-ABA0-AD76F4066BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB6AC57E-12E1-4020-ABA0-AD76F4066BB9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DB6AC57E-12E1-4020-ABA0-AD76F4066BB9}.Debug|x86.Build.0 = Debug|Any CPU
+		{DB6AC57E-12E1-4020-ABA0-AD76F4066BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB6AC57E-12E1-4020-ABA0-AD76F4066BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB6AC57E-12E1-4020-ABA0-AD76F4066BB9}.Release|x86.ActiveCfg = Release|Any CPU
+		{DB6AC57E-12E1-4020-ABA0-AD76F4066BB9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

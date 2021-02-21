@@ -3,7 +3,7 @@
     /// <summary>
     /// APIのリゾルブに失敗したときにthrowされる例外
     /// </summary>
-    class ResolveAPIException : BuffettCodeException
+    public class ResolveAPIException : BuffettCodeException
     {
     }
 }

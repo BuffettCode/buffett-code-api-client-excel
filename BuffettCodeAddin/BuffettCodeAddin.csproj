@@ -86,7 +86,6 @@
     <Compile Include="Resolver\APIType.cs" />
     <Compile Include="Resolver\IAPIResolver.cs" />
     <Compile Include="Resolver\WebResourceAPIResolver.cs" />
-    <Compile Include="UserDefinedFunctions.cs" />
     <Compile Include="Formatter\InactionFormatter.cs" />
     <Compile Include="Indicator.cs" />
     <Compile Include="Client\InvalidAPIKeyException.cs" />
@@ -103,10 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="BuffettCodeAddin.dna" />
     <None Include="packages.config" />
-    <None Include="Properties\ExcelDna.Build.props" />
-    <None Include="BuffettCodeAddin-AddIn.dna" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
