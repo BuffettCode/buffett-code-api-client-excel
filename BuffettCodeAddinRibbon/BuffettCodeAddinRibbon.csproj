@@ -24,8 +24,8 @@
     <ProjectGuid>{151A2480-CC5E-4EDA-A163-9F50173026A8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
-    <RootNamespace>BuffettCode</RootNamespace>
-    <AssemblyName>BuffettCode</AssemblyName>
+    <RootNamespace>BuffettCodeAddinRibbon</RootNamespace>
+    <AssemblyName>BuffettCodeAddinRibbon</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
     <IsWebBootstrapper>False</IsWebBootstrapper>
@@ -208,9 +208,11 @@
     </Compile>
     <EmbeddedResource Include="CSVForm.resx">
       <DependentUpon>CSVForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

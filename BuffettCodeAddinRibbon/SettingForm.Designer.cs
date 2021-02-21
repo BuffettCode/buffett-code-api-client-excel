@@ -1,4 +1,4 @@
-﻿namespace BuffettCode
+﻿namespace BuffettCodeAddinRibbon
 {
     partial class SettingForm
     {

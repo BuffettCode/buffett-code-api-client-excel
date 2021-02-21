@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BuffettCode
+namespace BuffettCodeAddinRibbon
 {
     public partial class CSVForm : Form
     {
@@ -166,7 +166,7 @@ namespace BuffettCode
             Microsoft.Office.Interop.Excel.Worksheet worksheet;
             try
             { 
-                worksheet = BuffettCode.Globals.ThisAddIn.Application.Worksheets.Add();
+                worksheet = BuffettCodeAddinRibbon.Globals.ThisAddIn.Application.Worksheets.Add();
             }
             catch (Exception)
             {

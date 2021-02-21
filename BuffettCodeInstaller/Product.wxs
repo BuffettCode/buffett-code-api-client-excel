@@ -113,14 +113,14 @@
     <ComponentGroup Id="XLLDistributables">
       <Component Id="VSTO" Guid="6C761D06-FF04-4FAA-A072-A02E5B5B724D" Directory="AddinFolder">
         <!-- VSTOの構成ファイル -->
-        <File Id="EXCEL.VSTO" Source="$(var.BuffettCode.TargetPath)" />
-        <File Id="EXCEL.MANIFEST" Source="$(var.BuffettCode.TargetPath).manifest" />
-        <File Id="EXCEL.VstoManifest" Source="$(var.BuffettCode.TargetDir)$(var.BuffettCode.TargetName).vsto" />
-        <File Id="EXCEL.DLL" Source="$(var.BuffettCode.TargetDir)BuffettCodeAPIAdapter.dll" />
-        <File Id="EXCEL.JsonDLL" Source="$(var.BuffettCode.TargetDir)Newtonsoft.Json.dll" />
-        <File Id="EXCEL.CsvHelper" Source="$(var.BuffettCode.TargetDir)CsvHelper.dll" />
-        <File Id="EXCEL.ValueTuple" Source="$(var.BuffettCode.TargetDir)System.ValueTuple.dll" />
-        <File Id="EXCEL.ToolsCommon" Source="$(var.BuffettCode.TargetDir)Microsoft.Office.Tools.Common.v4.0.Utilities.dll" />
+        <File Id="EXCEL.VSTO" Source="$(var.BuffettCodeAddinRibbon.TargetPath)" />
+        <File Id="EXCEL.MANIFEST" Source="$(var.BuffettCodeAddinRibbon.TargetPath).manifest" />
+        <File Id="EXCEL.VstoManifest" Source="$(var.BuffettCodeAddinRibbon.TargetDir)$(var.BuffettCodeAddinRibbon.TargetName).vsto" />
+        <File Id="EXCEL.DLL" Source="$(var.BuffettCodeAddinRibbon.TargetDir)BuffettCodeAPIAdapter.dll" />
+        <File Id="EXCEL.JsonDLL" Source="$(var.BuffettCodeAddinRibbon.TargetDir)Newtonsoft.Json.dll" />
+        <File Id="EXCEL.CsvHelper" Source="$(var.BuffettCodeAddinRibbon.TargetDir)CsvHelper.dll" />
+        <File Id="EXCEL.ValueTuple" Source="$(var.BuffettCodeAddinRibbon.TargetDir)System.ValueTuple.dll" />
+        <File Id="EXCEL.ToolsCommon" Source="$(var.BuffettCodeAddinRibbon.TargetDir)Microsoft.Office.Tools.Common.v4.0.Utilities.dll" />
         <!-- VSTOのレジストリ定義 -->
         <RegistryKey Root="HKCU" Key="Software\Microsoft\Office\Excel\Addins\BuffettCode">
           <RegistryValue Name="Description" Value="BuffettCode" Type="string" Action="write" />

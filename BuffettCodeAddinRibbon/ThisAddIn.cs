@@ -7,7 +7,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Excel;
 
-namespace BuffettCode
+namespace BuffettCodeAddinRibbon
 {
     public partial class ThisAddIn
     {

@@ -1,6 +1,6 @@
 ﻿using BuffettCodeAPIAdapter;
 
-namespace BuffettCode
+namespace BuffettCodeAddinRibbon
 {
     /// <summary>
     /// XLLが主体となる機能やデータを抽象化するためのfacadeクラス

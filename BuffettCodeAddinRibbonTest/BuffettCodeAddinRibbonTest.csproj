@@ -8,8 +8,8 @@
     <ProjectGuid>{1E24A2C4-0474-472A-A37A-F4D347D64BF5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BuffettCodeTest.UnitTests</RootNamespace>
-    <AssemblyName>BuffettCodeTest</AssemblyName>
+    <RootNamespace>BuffettCodeAddinRibbon.UnitTests</RootNamespace>
+    <AssemblyName>BuffettCodeAddinRibbonTest</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -81,13 +81,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BuffettCodeAddinRibbon\BuffettCodeAddinRibbon.csproj">
+      <Project>{151a2480-cc5e-4eda-a163-9f50173026a8}</Project>
+      <Name>BuffettCodeAddinRibbon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BuffettCodeAPIAdapter\BuffettCodeAPIAdapter.csproj">
       <Project>{44a5bfab-acd6-492f-b0c6-29e0ea07a90a}</Project>
       <Name>BuffettCodeAPIAdapter</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BuffettCode\BuffettCode.csproj">
-      <Project>{151a2480-cc5e-4eda-a163-9f50173026a8}</Project>
-      <Name>BuffettCode</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace BuffettCode
+namespace BuffettCodeAddinRibbon
 {
     public partial class SettingForm : Form
     {

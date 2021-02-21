@@ -3,13 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCode", "BuffettCode\BuffettCode.csproj", "{151A2480-CC5E-4EDA-A163-9F50173026A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeAddinRibbon", "BuffettCodeAddinRibbon\BuffettCodeAddinRibbon.csproj", "{151A2480-CC5E-4EDA-A163-9F50173026A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeTest", "BuffettCodeTest\BuffettCodeTest.csproj", "{1E24A2C4-0474-472A-A37A-F4D347D64BF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeAddinRibbonTest", "BuffettCodeAddinRibbonTest\BuffettCodeAddinRibbonTest.csproj", "{1E24A2C4-0474-472A-A37A-F4D347D64BF5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallerCA", "InstallerCA\InstallerCA.csproj", "{F135D7B8-747C-4C4F-A9FC-1F3A25FBD403}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "BuffettCodeInstaller", "BuffettCodeInstaller\BuffettCodeInstaller.wixproj", "{9787F6FE-2779-410B-B4EF-A04D2C6C7EEA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7} = {5DE695F0-1E03-4337-B8CE-C99EB350F6D7}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeAPIAdapter", "BuffettCodeAPIAdapter\BuffettCodeAPIAdapter.csproj", "{44A5BFAB-ACD6-492F-B0C6-29E0EA07A90A}"
 EndProject

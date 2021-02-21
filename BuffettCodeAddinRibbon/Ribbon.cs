@@ -2,7 +2,7 @@
 using Microsoft.Office.Tools.Ribbon;
 using System.Windows.Forms;
 
-namespace BuffettCode
+namespace BuffettCodeAddinRibbon
 {
     public partial class Ribbon
     {
@@ -49,7 +49,7 @@ namespace BuffettCode
         private void RefreshButton_Click(object sender, RibbonControlEventArgs e)
         {
             AddinFacade.ClearCache();
-            BuffettCode.Globals.ThisAddIn.Application.CalculateFullRebuild();
+            BuffettCodeAddinRibbon.Globals.ThisAddIn.Application.CalculateFullRebuild();
         }
     }
 }
