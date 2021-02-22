@@ -6,4 +6,4 @@ foreach($TestTarget in $TestTargets) {
     }
 }
 
-VSTest.Console.exe[system.String]::Join(" ", $TestTarget)
+VSTest.Console.exe [system.String]::Join(" ", $TestTarget)
