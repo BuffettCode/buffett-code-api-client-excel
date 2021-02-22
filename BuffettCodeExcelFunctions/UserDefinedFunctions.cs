@@ -1,7 +1,7 @@
 ﻿namespace BuffettCodeExcelFunctions
 {
-    using BuffettCodeAPIAdapter;
-    using BuffettCodeAPIAdapter.Client;
+    using BuffettCodeIO;
+    using BuffettCodeIO.Client;
     using RegistryUtils;
     using ExcelDna.Integration;
     using System;

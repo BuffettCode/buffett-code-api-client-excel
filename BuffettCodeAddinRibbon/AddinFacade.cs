@@ -1,4 +1,4 @@
-﻿using BuffettCodeAPIAdapter;
+﻿using BuffettCodeIO;
 
 namespace BuffettCodeAddinRibbon
 {

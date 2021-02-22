@@ -1,5 +1,5 @@
-﻿using BuffettCodeAPIAdapter;
-using BuffettCodeAPIAdapter.Formatter;
+﻿using BuffettCodeIO;
+using BuffettCodeIO.Formatter;
 using CsvHelper;
 using System.Collections.Generic;
 using System.IO;

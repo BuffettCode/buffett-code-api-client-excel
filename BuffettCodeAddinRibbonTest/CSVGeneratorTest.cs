@@ -1,5 +1,5 @@
 ﻿using BuffettCodeAddinRibbon;
-using BuffettCodeAPIAdapter;
+using BuffettCodeIO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Text;

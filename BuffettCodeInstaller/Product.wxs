@@ -116,7 +116,7 @@
         <File Id="EXCEL.VSTO" Source="$(var.BuffettCodeAddinRibbon.TargetPath)" />
         <File Id="EXCEL.MANIFEST" Source="$(var.BuffettCodeAddinRibbon.TargetPath).manifest" />
         <File Id="EXCEL.VstoManifest" Source="$(var.BuffettCodeAddinRibbon.TargetDir)$(var.BuffettCodeAddinRibbon.TargetName).vsto" />
-        <File Id="EXCEL.DLL" Source="$(var.BuffettCodeAddinRibbon.TargetDir)BuffettCodeAPIAdapter.dll" />
+        <File Id="EXCEL.DLL" Source="$(var.BuffettCodeAddinRibbon.TargetDir)BuffettCodeIO.dll" />
         <File Id="EXCEL.JsonDLL" Source="$(var.BuffettCodeAddinRibbon.TargetDir)Newtonsoft.Json.dll" />
         <File Id="EXCEL.CsvHelper" Source="$(var.BuffettCodeAddinRibbon.TargetDir)CsvHelper.dll" />
         <File Id="EXCEL.ValueTuple" Source="$(var.BuffettCodeAddinRibbon.TargetDir)System.ValueTuple.dll" />

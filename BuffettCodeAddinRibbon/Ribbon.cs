@@ -1,4 +1,4 @@
-﻿using BuffettCodeAPIAdapter;
+﻿using BuffettCodeIO;
 using Microsoft.Office.Tools.Ribbon;
 using System.Windows.Forms;
 

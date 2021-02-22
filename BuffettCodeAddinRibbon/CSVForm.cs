@@ -1,6 +1,6 @@
-﻿using BuffettCodeAPIAdapter;
-using BuffettCodeAPIAdapter.Client;
-using BuffettCodeAPIAdapter.Formatter;
+﻿using BuffettCodeIO;
+using BuffettCodeIO.Client;
+using BuffettCodeIO.Formatter;
 using System;
 using System.Collections.Generic;
 using System.Linq;

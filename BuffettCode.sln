@@ -14,9 +14,9 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "BuffettCodeInstaller", "Buf
 		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7} = {5DE695F0-1E03-4337-B8CE-C99EB350F6D7}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeAPIAdapter", "BuffettCodeAPIAdapter\BuffettCodeAPIAdapter.csproj", "{44A5BFAB-ACD6-492F-B0C6-29E0EA07A90A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeIO", "BuffettCodeIO\BuffettCodeIO.csproj", "{44A5BFAB-ACD6-492F-B0C6-29E0EA07A90A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeAPIAdapterTest", "BuffettCodeAPIAdapterTest\BuffettCodeAPIAdapterTest.csproj", "{4E36644A-8C51-40AC-98DC-26471E12A4E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeIOTest", "BuffettCodeIOTest\BuffettCodeIOTest.csproj", "{4E36644A-8C51-40AC-98DC-26471E12A4E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeExcelFunctions", "BuffettCodeExcelFunctions\BuffettCodeExcelFunctions.csproj", "{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}"
 	ProjectSection(ProjectDependencies) = postProject
