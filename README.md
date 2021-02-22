@@ -78,8 +78,8 @@ Visual StudioとExcelを使って、実際にアドオンをExcelから動かし
 
 1. Debug モードでビルドを行う
 2. Debugしたいパッケージを選択し、Debugを開始する
-  - UDF(BCODE関数)は `BuffettCodeExcelFunctions`
-  - 「エクセルアドインのリボン（tokenの設定やCSVダウンロード）」は`BuffettCodeAddinRibbon`
+    - UDF(BCODE関数)は `BuffettCodeExcelFunctions`
+    - 「エクセルアドインのリボン（tokenの設定やCSVダウンロード）」は`BuffettCodeAddinRibbon`
 3. Excelが立ち上がるので、新規のBookを作成して動かしてみてください
 
 作成された新規のBookは開発中のアドオンをインストール済みの状態で作成されます。
