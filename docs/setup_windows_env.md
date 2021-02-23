@@ -1,9 +1,9 @@
-# Set up your Windows Environment
+# Set up your Windows Environment using Powershell
 ## Install .Net Freamwork and Wix
 - [install .Netfreamwork 3.5](https://dotnet.microsoft.com/download/dotnet-framework/net35-sp1)
 - [install Wix](https://github.com/wixtoolset/wix3/releases/tag/wix3112rtm)
 
-## Install Visual Studio 2019 and extentions
+## Install Visual Studio 2019 and extensions
 - [install Visual Studio 2019 with MsBuild](https://visualstudio.microsoft.com/downloads/)
 - [Wix Toolset Visual Studio 2019 Extension](https://marketplace.visualstudio.com/items?itemName=WixToolset.WixToolsetVisualStudio2019Extension)
 - [install Invoke MsBuild](https://www.powershellgallery.com/packages/Invoke-MsBuild/)
