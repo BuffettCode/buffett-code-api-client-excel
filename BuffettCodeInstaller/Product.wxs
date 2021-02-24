@@ -113,14 +113,14 @@
     <ComponentGroup Id="XLLDistributables">
       <Component Id="VSTO" Guid="6C761D06-FF04-4FAA-A072-A02E5B5B724D" Directory="AddinFolder">
         <!-- VSTOの構成ファイル -->
-        <File Id="EXCEL.VSTO" Source="$(var.BuffettCode.TargetPath)" />
-        <File Id="EXCEL.MANIFEST" Source="$(var.BuffettCode.TargetPath).manifest" />
-        <File Id="EXCEL.VstoManifest" Source="$(var.BuffettCode.TargetDir)$(var.BuffettCode.TargetName).vsto" />
-        <File Id="EXCEL.DLL" Source="$(var.BuffettCode.TargetDir)BuffettCodeAddin.dll" />
-        <File Id="EXCEL.JsonDLL" Source="$(var.BuffettCode.TargetDir)Newtonsoft.Json.dll" />
-        <File Id="EXCEL.CsvHelper" Source="$(var.BuffettCode.TargetDir)CsvHelper.dll" />
-        <File Id="EXCEL.ValueTuple" Source="$(var.BuffettCode.TargetDir)System.ValueTuple.dll" />
-        <File Id="EXCEL.ToolsCommon" Source="$(var.BuffettCode.TargetDir)Microsoft.Office.Tools.Common.v4.0.Utilities.dll" />
+        <File Id="EXCEL.VSTO" Source="$(var.BuffettCodeAddinRibbon.TargetPath)" />
+        <File Id="EXCEL.MANIFEST" Source="$(var.BuffettCodeAddinRibbon.TargetPath).manifest" />
+        <File Id="EXCEL.VstoManifest" Source="$(var.BuffettCodeAddinRibbon.TargetDir)$(var.BuffettCodeAddinRibbon.TargetName).vsto" />
+        <File Id="EXCEL.DLL" Source="$(var.BuffettCodeAddinRibbon.TargetDir)BuffettCodeIO.dll" />
+        <File Id="EXCEL.JsonDLL" Source="$(var.BuffettCodeAddinRibbon.TargetDir)Newtonsoft.Json.dll" />
+        <File Id="EXCEL.CsvHelper" Source="$(var.BuffettCodeAddinRibbon.TargetDir)CsvHelper.dll" />
+        <File Id="EXCEL.ValueTuple" Source="$(var.BuffettCodeAddinRibbon.TargetDir)System.ValueTuple.dll" />
+        <File Id="EXCEL.ToolsCommon" Source="$(var.BuffettCodeAddinRibbon.TargetDir)Microsoft.Office.Tools.Common.v4.0.Utilities.dll" />
         <!-- VSTOのレジストリ定義 -->
         <RegistryKey Root="HKCU" Key="Software\Microsoft\Office\Excel\Addins\BuffettCode">
           <RegistryValue Name="Description" Value="BuffettCode" Type="string" Action="write" />
@@ -137,7 +137,7 @@
           <RegistryValue Name="ApiKey" Value="sAJGq9JH193KiwnF947v74KnDYkO7z634LWQQfPY" Type="string" Action="write" />
         </RegistryKey>
         -->
-        <File Id="EXCELXLL32PACKED.XLL" Name="!(loc.ProductNameNoSpace)32.xll" Source="$(var.BuffettCodeAddin.TargetDir)BuffettCodeAddin-packed.xll" >
+        <File Id="EXCELXLL32PACKED.XLL" Name="!(loc.ProductNameNoSpace)32.xll" Source="$(var.BuffettCodeExcelFunctions.TargetDir)BuffettCodeExcelFunctions-AddIn-packed.xll" >
           <netfx:NativeImage Id="ngen_32Xll" Platform="32bit" Priority="0"/>
         </File>
       </Component>
@@ -149,7 +149,7 @@
           <RegistryValue Name="ApiKey" Value="sAJGq9JH193KiwnF947v74KnDYkO7z634LWQQfPY" Type="string" Action="write" />
         </RegistryKey>
         -->
-        <File Id="EXCELXLL64PACKED.XLL" Name="!(loc.ProductNameNoSpace)64.xll" Source="$(var.BuffettCodeAddin.TargetDir)BuffettCodeAddin64-packed.xll" >
+        <File Id="EXCELXLL64PACKED.XLL" Name="!(loc.ProductNameNoSpace)64.xll" Source="$(var.BuffettCodeExcelFunctions.TargetDir)BuffettCodeExcelFunctions-AddIn-packed.xll" >
           <netfx:NativeImage Id="ngen_64Xll" Platform="64bit" Priority="0"/>
         </File>
         <RemoveFile On="uninstall" Id="XLL32" Directory="AddinFolder" Name="!(loc.ProductNameNoSpace)32.xll" />
