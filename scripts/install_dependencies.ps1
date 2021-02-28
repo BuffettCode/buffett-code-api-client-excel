@@ -1,4 +1,18 @@
-$Packages = ("BuffettCodeAddinRibbon", "BuffettCodeAddinRibbonTest", "BuffettCodeIO", "BuffettCodeIOTest", "BuffettCodeInstaller", "InstallerCA", "BuffettCodeExcelFunctions", "BuffettCodeExcelFunctionsTest")
+$Packages = (
+    "BuffettCodeAddinRibbon",
+    "BuffettCodeAddinRibbonTest",
+    "BuffettCodeIO",
+    "BuffettCodeIOTest",
+    "BuffettCodeInstaller",
+    "InstallerCA",
+    "BuffettCodeExcelFunctions",
+    "BuffettCodeExcelFunctionsTest",
+    "BuffettCodeAPIClient",
+    "BuffettCodeAPIClientTests",
+    "BuffettCodeCommon",
+    "BuffettCodeCommonTests"
+    )
+
 foreach($Pkg in $Packages) {
     echo "install package in $Pkg"
     nuget install $Pkg\packages.config -OutputDirectory packages
