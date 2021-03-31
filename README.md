@@ -55,6 +55,7 @@ GitHub extension for Visual Studio
 [https://github.com/BuffettCode/buffett-code-api-client-excel.git](https://github.com/BuffettCode/buffett-code-api-client-excel.git)
 
 #### デジタル署名の登録
+
 バフェットコードのExcelアドインの一部（`BuffettCodeAddinRibbon`）はVSTO(Visual Studio Tools for Office)を利用しており、ClickOnceのマニフェストにデジタル署名が必要です。`BuffettCode` プロジェクトにデジタル署名の設定がされている必要があります。リポジトリにコミットされたテスト証明書([BuffettCodeTest.pfx](./BuffettCodeAddinRibbon/BuffettCodeTest.pfx))を使う場合は以下のように設定します。
 
 
