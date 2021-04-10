@@ -2,7 +2,11 @@
 
 [バフェットコード](https://www.buffett-code.com/)の提供する[WebAPI](https://docs.buffett-code.com/)から上場企業の財務情報を取得し、ユーザ定義関数(UDF)によりデータの操作ができるExcelアドインです。
 
-![Build status](https://github.com/BuffettCode/buffett-code-api-client-excel/workflows/Build/badge.svg) ![Release](https://github.com/BuffettCode/buffett-code-api-client-excel/workflows/Release/badge.svg) ![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2019-red.svg)  [![NetFramework](https://img.shields.io/badge/Language-C%23%207.0-orange.svg)](https://blogs.msdn.microsoft.com/dotnet/2016/08/24/whats-new-in-csharp-7-0/) 
+![Build status](https://github.com/BuffettCode/buffett-code-api-client-excel/workflows/Build/badge.svg)
+![Release](https://github.com/BuffettCode/buffett-code-api-client-excel/workflows/Release/badge.svg)
+![Lint](https://github.com/BuffettCode/buffett-code-api-client-excel/workflows/Lint/badge.svg)
+![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2019-red.svg)
+[![NetFramework](https://img.shields.io/badge/Language-C%23%207.0-orange.svg)](https://blogs.msdn.microsoft.com/dotnet/2016/08/24/whats-new-in-csharp-7-0/)
 
 ## Environment & Build
 ### Requirements
@@ -12,6 +16,7 @@
 * Wix Toolset 3.1.1
 * Wix Toolset Visual Studio 2019 Extension
 * .NET framework 3.5
+* dotnet-format
 
 ### Getting Started
 
@@ -20,7 +25,7 @@
 * [オフィシャルサイト](https://visualstudio.microsoft.com/ja/downloads/)からインストーラをダウンロード
 * インストールオプションの選択で以下のチェックボックスにチェックをつけてインストール
 
-```
+```text
 [Workloads]
 .NET desktop development
 Visual Studio extension development
@@ -67,7 +72,7 @@ GitHub extension for Visual Studio
 
 * メニューから Tools -> NuGet Package Manager -> Package Manager Console でコンソールを開いて、以下のコマンドを実行
 
-```
+```powershell
 Update-Package -reinstall
 ```
 
@@ -84,6 +89,15 @@ Visual StudioとExcelを使って、実際にアドオンをExcelから動かし
 
 作成された新規のBookは開発中のアドオンをインストール済みの状態で作成されます。
 
+### Code Format
+`dotnet-format` が `.editorconfig` を参照して CI で lint をしています。
+[how-to-install](https://github.com/dotnet/format#how-to-install) を参考に dotnet format をinstallし
+
+```powershell
+dotnet-format
+```
+
+してください。
 
 ## ライセンス
 

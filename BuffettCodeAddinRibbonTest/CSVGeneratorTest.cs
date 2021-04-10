@@ -1,4 +1,4 @@
-﻿using BuffettCodeAddinRibbon;
+using BuffettCodeAddinRibbon;
 using BuffettCodeIO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;

@@ -1,7 +1,7 @@
-﻿using BuffettCodeAPIClient;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BuffettCodeAPIClient;
 using BuffettCodeAPIClient.Config;
 using BuffettCodeCommon.Validator;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 namespace BuffettCodeAPIClient.Tests

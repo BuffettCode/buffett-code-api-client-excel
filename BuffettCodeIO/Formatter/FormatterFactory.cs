@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeIO.Formatter
+namespace BuffettCodeIO.Formatter
 {
     /// <summary>
     /// フォーマッタファクトリ

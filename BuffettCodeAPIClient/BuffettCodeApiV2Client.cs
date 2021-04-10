@@ -1,8 +1,8 @@
-﻿using System;
+using BuffettCodeAPIClient.Config;
+using BuffettCodeCommon.Validator;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BuffettCodeCommon.Validator;
-using BuffettCodeAPIClient.Config;
 
 
 
@@ -19,14 +19,14 @@ namespace BuffettCodeAPIClient
         public async Task<String> GetQuarter(string ticker, uint fiscalYear, uint fiscalQuarter, bool useOndemand, bool isConfigureAwait)
         {
             var (endpoint, paramaters) = BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, fiscalYear, fiscalQuarter, useOndemand);
-           return await httpClient.Get(endpoint, paramaters, isConfigureAwait);
+            return await httpClient.Get(endpoint, paramaters, isConfigureAwait);
         }
 
         public async Task<String> GetIndicator(string ticker, bool isConfigureAwait)
         {
             var (endpoint, paramaters) = BuffettCodeApiV2RequestCreator.CreateGetIndicatorRequest
                 (ticker);
-           return await httpClient.Get(endpoint, paramaters, isConfigureAwait);
+            return await httpClient.Get(endpoint, paramaters, isConfigureAwait);
         }
 
 

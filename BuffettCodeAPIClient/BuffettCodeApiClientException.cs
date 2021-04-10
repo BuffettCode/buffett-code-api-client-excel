@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 namespace BuffettCodeAPIClient
 {
     /// <summary>
@@ -8,13 +8,13 @@ namespace BuffettCodeAPIClient
     {
     }
 
-    public class  InvalidAPIKeyException : BuffettCodeApiClientException 
+    public class InvalidAPIKeyException : BuffettCodeApiClientException
     {
-    }   
+    }
 
     public class QuotaException : BuffettCodeApiClientException
     {
     }
 
-    
+
 }

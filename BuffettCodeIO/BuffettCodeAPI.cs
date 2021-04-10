@@ -1,4 +1,4 @@
-﻿using BuffettCodeIO.Client;
+using BuffettCodeIO.Client;
 using BuffettCodeIO.Formatter;
 using BuffettCodeIO.Processor;
 using BuffettCodeIO.Resolver;

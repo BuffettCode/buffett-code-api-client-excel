@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeAPIClient.Tests
+namespace BuffettCodeAPIClient.Tests
 {
     using BuffettCodeAPIClient;
     using Microsoft.VisualStudio.TestTools.UnitTesting;

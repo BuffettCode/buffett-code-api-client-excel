@@ -1,4 +1,4 @@
-﻿using BuffettCodeIO.UnitTests;
+using BuffettCodeIO.UnitTests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -43,8 +43,9 @@ namespace BuffettCodeIO.Client.UnitTests
                 testTokenRequest.Wait();
                 Assert.Fail();
             }
-            catch (AggregateException ae){
-                foreach ( var e in ae.InnerExceptions)
+            catch (AggregateException ae)
+            {
+                foreach (var e in ae.InnerExceptions)
                 {
                     Assert.IsInstanceOfType(e, typeof(InvalidAPIKeyException));
                 }

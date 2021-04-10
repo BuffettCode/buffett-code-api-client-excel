@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -49,7 +49,8 @@ namespace BuffettCodeIO.Resolver
                         result[description.Name] = api;
                     }
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.StackTrace);
                 return null;
@@ -90,7 +91,8 @@ namespace BuffettCodeIO.Resolver
             if (mappingTable.ContainsKey(propertyName))
             {
                 return mappingTable[propertyName];
-            } else
+            }
+            else
             {
                 return APIType.Quarter; // default value
             }
