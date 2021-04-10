@@ -55,7 +55,7 @@ namespace BuffettCodeIO.Client.UnitTests
         public void TestGetQuarterRange()
         {
             var client = new BuffettCodeClientV2();
-            var json = client.GetQuarterRange(BuffettCodeTestUtils.GetValidApiKey(), "6501", "2013Q1", "2015Q4").Result;
+            var json = client.GetQuarterRange(BuffettCodeTestUtils.GetValidApiKey(), "6501", "2019Q1", "2019Q4").Result;
             var quarters = Quarter.Parse("6501", json);
 
             Assert.IsFalse(quarters.Count == 0);
