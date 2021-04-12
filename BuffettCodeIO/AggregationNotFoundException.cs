@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeIO
+namespace BuffettCodeIO
 {
     /// <summary>
     /// 指定されたパラメタに対して<see cref="IPropertyAggregation"/>を取得できなかったときにthrowされる例外

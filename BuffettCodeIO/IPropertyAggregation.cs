@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeIO
+namespace BuffettCodeIO
 {
     /// <summary>
     /// 項目の集約

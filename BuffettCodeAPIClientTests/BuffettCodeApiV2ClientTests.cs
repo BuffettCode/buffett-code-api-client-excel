@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BuffettCodeAPIClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BuffettCodeAPIClient.Tests
 {

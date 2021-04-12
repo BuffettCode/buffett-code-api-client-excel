@@ -1,4 +1,4 @@
-﻿using BuffettCodeIO.Client;
+using BuffettCodeIO.Client;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;

@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeCommon.Validator.Tests
+namespace BuffettCodeCommon.Validator.Tests
 {
     using BuffettCodeCommon.Validator;
     using Microsoft.VisualStudio.TestTools.UnitTesting;

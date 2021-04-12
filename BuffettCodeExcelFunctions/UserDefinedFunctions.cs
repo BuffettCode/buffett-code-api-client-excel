@@ -1,9 +1,9 @@
-﻿namespace BuffettCodeExcelFunctions
+namespace BuffettCodeExcelFunctions
 {
     using BuffettCodeIO;
     using BuffettCodeIO.Client;
-    using RegistryUtils;
     using ExcelDna.Integration;
+    using RegistryUtils;
     using System;
 
     /// <summary>

@@ -1,8 +1,8 @@
-﻿using System;
+using BuffettCodeAPIClient.Config;
+using BuffettCodeCommon.Validator;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BuffettCodeCommon.Validator;
-using BuffettCodeAPIClient.Config;
 
 
 namespace BuffettCodeAPIClient
@@ -21,7 +21,7 @@ namespace BuffettCodeAPIClient
             var (endPoint, paramaters) = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(ticker, day, useOndemand);
             JpTickerValidator.Validate(ticker);
             return await httpClient.Get(endPoint, paramaters, isConfigureAwait);
-       }
+        }
 
     }
 }

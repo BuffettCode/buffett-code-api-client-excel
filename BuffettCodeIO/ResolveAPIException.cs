@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeIO
+namespace BuffettCodeIO
 {
     /// <summary>
     /// APIのリゾルブに失敗したときにthrowされる例外

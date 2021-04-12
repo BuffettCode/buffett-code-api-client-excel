@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using BuffettCodeCommon.Validator;
 using BuffettCodeAPIClient.Config;
+using BuffettCodeCommon.Validator;
+using System.Collections.Generic;
 
 
 
@@ -14,11 +14,11 @@ namespace BuffettCodeAPIClient
             FiscalYearValidator.Validate(fiscalYear);
             FiscalQuarterValidator.Validate(fiscalQuarter);
             var paramaters = new Dictionary<string, string>()
-             {
-                 {"ticker", ticker },
-                 {"fy", fiscalYear.ToString() },
-                 {"fq", fiscalQuarter.ToString() },
-             };
+            {
+                {"ticker", ticker },
+                {"fy", fiscalYear.ToString() },
+                {"fq", fiscalQuarter.ToString() },
+            };
 
             var endpoint = useOndemand ?
                 BuffettCodeApiV2Config.ENDPOINT_ONDEMAND_QUARTER : BuffettCodeApiV2Config.ENDPOINT_QUARTER;
@@ -29,9 +29,9 @@ namespace BuffettCodeAPIClient
         {
             JpTickerValidator.Validate(ticker);
             var paramaters = new Dictionary<string, string>()
-             {
-                 {"tickers", ticker },
-             };
+            {
+                {"tickers", ticker },
+            };
 
             return (BuffettCodeApiV2Config.ENDPOINT_INDICATOR, paramaters);
         }

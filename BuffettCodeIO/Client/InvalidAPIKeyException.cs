@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeIO.Client
+namespace BuffettCodeIO.Client
 {
     /// <summary>
     /// APIキーが不正だったときにthrowされる例外

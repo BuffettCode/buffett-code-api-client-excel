@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeAPIClient.Tests
+namespace BuffettCodeAPIClient.Tests
 {
     /// <summary>
     /// Defines the <see cref="ApiTestConfig" />.

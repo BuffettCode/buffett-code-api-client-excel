@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeIO.Client
+namespace BuffettCodeIO.Client
 {
     /// <summary>
     /// APIのQuotaを使い切ったときにthrowされる例外

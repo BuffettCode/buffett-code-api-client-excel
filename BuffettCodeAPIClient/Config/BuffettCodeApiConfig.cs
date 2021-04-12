@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeAPIClient.Config
+namespace BuffettCodeAPIClient.Config
 {
 
     public static class BuffettCodeApiConfig
@@ -10,9 +10,9 @@
     public static class BuffettCodeApiV2Config
     {
         public static readonly string BASE_URL = "https://api.buffett-code.com/api/v2/";
-        public static readonly string ENDPOINT_QUARTER  = "quarter";
-        public static readonly string ENDPOINT_ONDEMAND_QUARTER  = "ondemand/quarter";
-        public static readonly string ENDPOINT_INDICATOR  = "indicator";
+        public static readonly string ENDPOINT_QUARTER = "quarter";
+        public static readonly string ENDPOINT_ONDEMAND_QUARTER = "ondemand/quarter";
+        public static readonly string ENDPOINT_INDICATOR = "indicator";
         public static readonly string ENDPOINT_DAILY = "daily";
     }
 

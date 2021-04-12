@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeCommon.Validator
+namespace BuffettCodeCommon.Validator
 {
     /// <summary>
     /// Defines the <see cref="FiscalYearValidator" />.

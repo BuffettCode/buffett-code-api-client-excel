@@ -1,10 +1,10 @@
-﻿namespace BuffettCodeIO.Formatter
+namespace BuffettCodeIO.Formatter
 {
     /// <summary>
     /// 値をそのまま返すだけのフォーマッタ
     /// </summary>
     public class InactionFormatter : IFormatter
-     {
+    {
         private static InactionFormatter _instance = new InactionFormatter();
 
         public static InactionFormatter GetInstance()

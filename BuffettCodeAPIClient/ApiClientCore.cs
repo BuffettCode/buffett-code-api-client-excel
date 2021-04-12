@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -10,12 +10,12 @@ namespace BuffettCodeAPIClient
     /// <summary>
     /// BuffettCode API と Http でやり取りする Client のコアクラス
     /// </summary>
-        
+
     public class ApiClientCore
     {
         private readonly string apiKey;
         private readonly Uri baseUri;
-        private static long TimeoutMilliseconds = 5000; 
+        private static long TimeoutMilliseconds = 5000;
 
         private ApiClientCore(string apiKey, Uri baseUri)
         {
@@ -33,7 +33,7 @@ namespace BuffettCodeAPIClient
             return new ApiClientCore(apiKey, baseUrl);
         }
 
-         
+
         private HttpClient NewHttpClient()
         {
             var httpClient = new HttpClient();
@@ -50,7 +50,7 @@ namespace BuffettCodeAPIClient
         {
             return $"{endpoint}?{new FormUrlEncodedContent(parameters).ReadAsStringAsync().Result}";
         }
-        
+
         public async Task<string> Get(string endpoint, Dictionary<string, string> parameters, bool isConfigureAwait)
         {
             var path = BuildGetPath(endpoint, parameters);
