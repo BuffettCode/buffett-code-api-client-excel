@@ -1,5 +1,3 @@
-using BuffettCodeAPIClient;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BuffettCodeCommon.Exception;
 
 namespace BuffettCodeAPIClient.Tests
@@ -16,7 +14,7 @@ namespace BuffettCodeAPIClient.Tests
         /// <summary>
         /// Defines the client.
         /// </summary>
-        private BuffettCodeApiV2Client client = new BuffettCodeApiV2Client(ApiTestConfig.TEST_API_KEY);
+        private readonly BuffettCodeApiV2Client client = new BuffettCodeApiV2Client(ApiTestConfig.TEST_API_KEY);
 
         /// <summary>
         /// The GetQuarterTest.
@@ -51,7 +49,7 @@ namespace BuffettCodeAPIClient.Tests
             string to = "2019Q4";
 
             // test api key can get ticker=xx01
-            Assert.IsNotNull(client.GetQuarterRange("6501", from, to,  true).Result);
+            Assert.IsNotNull(client.GetQuarterRange("6501", from, to, true).Result);
 
             // test api key can get ticker=xx02
             Assert.ThrowsExceptionAsync<InvalidAPIKeyException>(() => client.GetQuarterRange("6502", from, to, true));

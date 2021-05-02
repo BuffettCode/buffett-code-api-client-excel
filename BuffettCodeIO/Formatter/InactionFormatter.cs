@@ -5,7 +5,7 @@ namespace BuffettCodeIO.Formatter
     /// </summary>
     public class InactionFormatter : IFormatter
     {
-        private static InactionFormatter _instance = new InactionFormatter();
+        private static readonly InactionFormatter _instance = new InactionFormatter();
 
         public static InactionFormatter GetInstance()
         {

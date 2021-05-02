@@ -136,10 +136,10 @@ namespace RegistryUtils
 
         private IntPtr _registryHive;
         private string _registrySubName;
-        private object _threadLock = new object();
+        private readonly object _threadLock = new object();
         private Thread _thread;
         private bool _disposed = false;
-        private ManualResetEvent _eventTerminate = new ManualResetEvent(false);
+        private readonly ManualResetEvent _eventTerminate = new ManualResetEvent(false);
 
         private RegChangeNotifyFilter _regFilter = RegChangeNotifyFilter.Key
             | RegChangeNotifyFilter.Attribute

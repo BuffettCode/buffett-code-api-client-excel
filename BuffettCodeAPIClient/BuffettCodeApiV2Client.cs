@@ -1,7 +1,5 @@
 using BuffettCodeAPIClient.Config;
-using BuffettCodeCommon.Validator;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 

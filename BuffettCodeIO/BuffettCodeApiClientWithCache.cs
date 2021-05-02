@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using BuffettCodeAPIClient;
 using BuffettCodeIO.Formatter;
 using BuffettCodeIO.Processor;
@@ -16,7 +14,7 @@ namespace BuffettCodeIO
     /// 値はパラメタおよび定義に従ってフォーマットされます（カンマ区切りや金額の桁など）。
     /// 実行したWeb APIのレスポンスはクラス内部でキャッシュされます。
     /// </remarks>
-    public class BuffettCodeApiAdapter
+    public class BuffettCodeApiClientWithCache
     {
         private readonly BuffettCodeApiV2Client client;
 
@@ -30,7 +28,7 @@ namespace BuffettCodeIO
         /// コンストラクタ
         /// </summary>
         /// <param name="maxDegreeOfParallelism">APIコールの最大同時実行数</param>
-        public BuffettCodeApiAdapter(string apiKey, int maxDegreeOfParallelism)
+        public BuffettCodeApiClientWithCache(string apiKey, int maxDegreeOfParallelism)
         {
             client = new BuffettCodeApiV2Client(apiKey);
             resolver = APIResolverFactory.Create();

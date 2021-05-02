@@ -7,7 +7,7 @@ namespace BuffettCodeIO.Formatter
     /// </summary>
     public class RatioFormatter : IFormatter
     {
-        private static RatioFormatter _instance = new RatioFormatter();
+        private static readonly RatioFormatter _instance = new RatioFormatter();
 
         private RatioFormatter()
         {

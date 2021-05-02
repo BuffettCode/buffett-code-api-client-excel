@@ -7,7 +7,7 @@ namespace BuffettCodeIO.Formatter
     /// </summary>
     public class CurrencyFormatter : IFormatter
     {
-        private static CurrencyFormatter _instance = new CurrencyFormatter();
+        private static readonly CurrencyFormatter _instance = new CurrencyFormatter();
 
         private CurrencyFormatter()
         {

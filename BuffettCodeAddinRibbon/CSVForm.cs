@@ -1,7 +1,7 @@
-using BuffettCodeIO;
+using BuffettCodeAPIClient;
 using BuffettCodeCommon;
 using BuffettCodeCommon.Exception;
-using BuffettCodeAPIClient;
+using BuffettCodeIO;
 using BuffettCodeIO.Formatter;
 using System;
 using System.Collections.Generic;
@@ -75,11 +75,13 @@ namespace BuffettCodeAddinRibbon
                 {
                     WriteNewSheet();
                 }
-            } catch (TestAPIConstraintException)
+            }
+            catch (TestAPIConstraintException)
             {
                 MessageBox.Show("テスト用のAPIキーでは末尾が01の銘柄コードのみ使用できます。", "CSV出力", MessageBoxButtons.OK);
                 return;
-            } catch (QuotaException)
+            }
+            catch (QuotaException)
             {
                 MessageBox.Show("APIの実行回数が上限に達しました。", "CSV出力", MessageBoxButtons.OK);
                 return;
@@ -167,7 +169,7 @@ namespace BuffettCodeAddinRibbon
             // create new sheet
             Microsoft.Office.Interop.Excel.Worksheet worksheet;
             try
-            { 
+            {
                 worksheet = BuffettCodeAddinRibbon.Globals.ThisAddIn.Application.Worksheets.Add();
             }
             catch (Exception)

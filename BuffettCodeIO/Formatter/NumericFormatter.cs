@@ -7,7 +7,7 @@ namespace BuffettCodeIO.Formatter
     /// </summary>
     public class NumericFormatter : IFormatter
     {
-        private static NumericFormatter _instance = new NumericFormatter();
+        private static readonly NumericFormatter _instance = new NumericFormatter();
 
         private NumericFormatter()
         {

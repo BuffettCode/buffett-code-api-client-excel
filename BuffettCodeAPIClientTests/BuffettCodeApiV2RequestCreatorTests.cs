@@ -1,6 +1,5 @@
-using BuffettCodeAPIClient;
-using BuffettCodeCommon.Exception;
 using BuffettCodeAPIClient.Config;
+using BuffettCodeCommon.Exception;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 

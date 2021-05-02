@@ -1,7 +1,7 @@
+using BuffettCodeAPIClient.Config;
+using BuffettCodeCommon.Exception;
 using Newtonsoft.Json.Linq;
 using System.Linq;
-using BuffettCodeCommon.Exception;
-using BuffettCodeAPIClient.Config;
 
 namespace BuffettCodeAPIClient
 {
