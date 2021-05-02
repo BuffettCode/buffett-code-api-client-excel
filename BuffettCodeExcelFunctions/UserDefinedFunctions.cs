@@ -1,7 +1,8 @@
 namespace BuffettCodeExcelFunctions
 {
+    using BuffettCodeCommon;
+    using BuffettCodeCommon.Exception;
     using BuffettCodeIO;
-    using BuffettCodeIO.Client;
     using ExcelDna.Integration;
     using RegistryUtils;
     using System;
@@ -16,7 +17,7 @@ namespace BuffettCodeExcelFunctions
     /// </remarks>
     public class UserDefinedFunctions
     {
-        private static BuffettCodeAPI api;
+        private static BuffettCodeApiAdapter apiAdapter;
 
         private static RegistryMonitor monitor;
 
@@ -38,7 +39,7 @@ namespace BuffettCodeExcelFunctions
             try
             {
                 InitializeIfNeeded();
-                return api.GetValue(ticker, parameter1, parameter2, propertyName, isRawValue, isPostfixUnit);
+                return apiAdapter.GetValue(ticker, parameter1, parameter2, propertyName, isRawValue, isPostfixUnit);
             }
             catch (Exception e)
             {
@@ -114,7 +115,7 @@ namespace BuffettCodeExcelFunctions
             try
             {
                 InitializeIfNeeded();
-                api.ClearCache();
+                apiAdapter.ClearCache();
                 return "";
             }
             catch (Exception e)
@@ -145,13 +146,13 @@ namespace BuffettCodeExcelFunctions
         {
             lock (initializeLock)
             {
-                if (api == null)
+                if (apiAdapter == null)
                 {
                     Configuration.Reload();
                     monitor = new RegistryMonitor(Configuration.GetMonitoringRegistryKey());
                     monitor.RegChanged += new EventHandler(OnRegistryChanged);
                     monitor.Start();
-                    api = new BuffettCodeAPI(Configuration.MaxDegreeOfParallelism);
+                    apiAdapter = new BuffettCodeApiAdapter(Configuration.ApiKey, Configuration.MaxDegreeOfParallelism);
                 }
             }
         }
@@ -161,7 +162,7 @@ namespace BuffettCodeExcelFunctions
             Configuration.Reload();
             if (Configuration.ClearCache)
             {
-                api.ClearCache();
+                apiAdapter.ClearCache();
                 Configuration.ClearCache = false;
             }
         }
@@ -169,7 +170,7 @@ namespace BuffettCodeExcelFunctions
         private static PropertyDescrption GetDescription(string propertyName)
         {
             // column_descriptionをAPIから取得させるため、適当なパラメタを渡している
-            return api.GetDescription("1301", "2017", "4", propertyName);
+            return apiAdapter.GetDescription("1301", "2017", "4", propertyName);
         }
 
         private static string ToErrorMessage(Exception e, string propertyName = "")

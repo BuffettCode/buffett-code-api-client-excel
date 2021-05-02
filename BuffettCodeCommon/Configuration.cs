@@ -1,6 +1,6 @@
 using Microsoft.Win32;
 
-namespace BuffettCodeIO
+namespace BuffettCodeCommon
 {
     /// <summary>
     /// Excelアドイン設定

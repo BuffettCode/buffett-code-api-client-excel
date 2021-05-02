@@ -8,5 +8,6 @@ namespace BuffettCodeAPIClient
 {
     interface IBuffettCodeApiClient
     {
+
     }
 }

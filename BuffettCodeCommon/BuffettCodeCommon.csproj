@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BuffettCodeCommon</RootNamespace>
     <AssemblyName>BuffettCodeCommon</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,9 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exception\BuffettCodeApiClientException.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="Validator\FiscalQuarterValidator.cs" />
     <Compile Include="Validator\FiscalYearValidator.cs" />
-    <Compile Include="Validator\ValidationError.cs" />
+    <Compile Include="Exception\ValidationError.cs" />
     <Compile Include="Validator\TickerValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,12 +1,14 @@
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using BuffettCodeCommon.Exception;
+using BuffettCodeAPIClient.Config;
 
-namespace BuffettCodeIO.Client
+namespace BuffettCodeAPIClient
 {
     /// <summary>
     /// バフェットコードWebAPIのレスポンスのバリデーションロジック
     /// </summary>
-    class APIResponseValidator
+    public class ApiResponseValidator
     {
         /// <summary>
         /// APIのレスポンスをチェックし、問題があれば<see cref="BuffettCodeException"/>をthrowします。
@@ -15,7 +17,7 @@ namespace BuffettCodeIO.Client
         public static void Validate(JObject json)
         {
             var message = json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => t.Path.Equals("message")).ToArray();
-            if (message.Count() > 0 && message.First().ToString().Contains("Testing Apikey is only allowed to ticker ending with"))
+            if (message.Count() > 0 && message.First().ToString().Contains(ApiErrorMessageConfig.TEST_API_CONSTRAINT))
             {
                 throw new TestAPIConstraintException();
             }

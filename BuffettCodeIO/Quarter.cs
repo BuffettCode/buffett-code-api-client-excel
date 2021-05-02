@@ -1,4 +1,4 @@
-using BuffettCodeIO.Client;
+using BuffettCodeAPIClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -18,42 +18,42 @@ namespace BuffettCodeIO
         /// <summary>
         /// 銘柄コード
         /// </summary>
-        public string Ticker { get { return properties["ticker"]; } }
+        public string Ticker { get { return Properties["ticker"]; } }
 
         /// <summary>
         /// 会計年度
         /// </summary>
-        public int FiscalYear { get { return Int32.Parse(properties["fiscal_year"]); } }
+        public int FiscalYear { get { return Int32.Parse(Properties["fiscal_year"]); } }
 
         /// <summary>
         /// 会計四半期
         /// </summary>
-        public int FiscalQuarter { get { return Int32.Parse(properties["fiscal_quarter"]); } }
+        public int FiscalQuarter { get { return Int32.Parse(Properties["fiscal_quarter"]); } }
 
-        private IDictionary<string, string> properties { get; set; }
+        private IDictionary<string, string> Properties { get; set; }
 
-        private IDictionary<string, PropertyDescrption> descriptions { get; set; }
+        private IDictionary<string, PropertyDescrption> Descriptions { get; set; }
 
         public Quarter(IDictionary<string, string> properties, IDictionary<string, PropertyDescrption> descriptions)
         {
-            this.properties = properties;
-            this.descriptions = descriptions;
+            this.Properties = properties;
+            this.Descriptions = descriptions;
         }
 
         /// <inheritdoc/>
         public string GetValue(string propertyName)
         {
-            if (!properties.Keys.Contains(propertyName))
+            if (!Properties.Keys.Contains(propertyName))
             {
                 throw new PropertyNotFoundException();
             }
-            return properties[propertyName];
+            return Properties[propertyName];
         }
 
         /// <inheritdoc/>
         public PropertyDescrption GetDescription(string propertyName)
         {
-            return descriptions.Keys.Contains(propertyName) ? descriptions[propertyName] : null;
+            return Descriptions.Keys.Contains(propertyName) ? Descriptions[propertyName] : null;
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace BuffettCodeIO
         /// <returns>項目名のリスト</returns>
         public IList<string> GetNames()
         {
-            return properties.Keys.ToList();
+            return Properties.Keys.ToList();
         }
 
         /// <inheritdoc/>
@@ -85,7 +85,7 @@ namespace BuffettCodeIO
         public static IList<Quarter> Parse(string ticker, string jsonString)
         {
             JObject json = JsonConvert.DeserializeObject(jsonString) as JObject;
-            APIResponseValidator.Validate(json);
+            ApiResponseValidator.Validate(json);
 
             IDictionary<string, PropertyDescrption> descriptions = null;
             IList<JToken> columnDescription = json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => t.Path.Equals("column_description")).ToList();

@@ -2,8 +2,6 @@ using BuffettCodeAPIClient.Config;
 using BuffettCodeCommon.Validator;
 using System.Collections.Generic;
 
-
-
 namespace BuffettCodeAPIClient
 {
     public class BuffettCodeApiV2RequestCreator
@@ -25,6 +23,19 @@ namespace BuffettCodeAPIClient
 
             return (endpoint, paramaters);
         }
+
+        public static (string, Dictionary<string, string>) CreateGetQuarterRangeRequest(string ticker, string from, string to)
+        {
+            JpTickerValidator.Validate(ticker);
+            var paramaters = new Dictionary<string, string>()
+            {
+                {"tickers", ticker },
+                {"from", from },
+                {"to", to },
+            };
+            return (BuffettCodeApiV2Config.ENDPOINT_QUARTER, paramaters);
+        }
+
         public static (string, Dictionary<string, string>) CreateGetIndicatorRequest(string ticker)
         {
             JpTickerValidator.Validate(ticker);

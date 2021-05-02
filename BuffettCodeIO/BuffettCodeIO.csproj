@@ -14,6 +14,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,15 +53,9 @@
     <Compile Include="AggregationNotFoundException.cs" />
     <Compile Include="ResolveAPIException.cs" />
     <Compile Include="Resolver\ConstAPIResolver.cs" />
-    <Compile Include="BuffettCodeAPI.cs" />
+    <Compile Include="BuffettCodeApiAdapter.cs" />
     <Compile Include="BuffettCodeException.cs" />
     <Compile Include="CacheStore.cs" />
-    <Compile Include="Client\AbstractBuffettCodeClient.cs" />
-    <Compile Include="Client\BuffettCodeClientV2.cs" />
-    <Compile Include="Client\APIResponseValidator.cs" />
-    <Compile Include="Client\IBuffettCodeClient.cs" />
-    <Compile Include="Client\TestAPIConstraintException.cs" />
-    <Compile Include="Configuration.cs" />
     <Compile Include="Formatter\NumericFormatter.cs" />
     <Compile Include="Formatter\IFormatter.cs" />
     <Compile Include="Formatter\FormatterFactory.cs" />
@@ -72,7 +67,6 @@
     <Compile Include="Resolver\WebResourceAPIResolver.cs" />
     <Compile Include="Formatter\InactionFormatter.cs" />
     <Compile Include="Indicator.cs" />
-    <Compile Include="Client\InvalidAPIKeyException.cs" />
     <Compile Include="Formatter\CurrencyFormatter.cs" />
     <Compile Include="Formatter\RatioFormatter.cs" />
     <Compile Include="IPropertyAggregationComparer.cs" />
@@ -81,13 +75,21 @@
     <Compile Include="PropertyDescrption.cs" />
     <Compile Include="PropertyNotFoundException.cs" />
     <Compile Include="Quarter.cs" />
-    <Compile Include="Client\QuotaException.cs" />
     <Compile Include="RegistryMonitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BuffettCodeAPIClient\BuffettCodeAPIClient.csproj">
+      <Project>{79daca04-c2b5-4d1b-996d-2ea1ad79909f}</Project>
+      <Name>BuffettCodeAPIClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BuffettCodeCommon\BuffettCodeCommon.csproj">
+      <Project>{8552cfd4-39c4-47d9-a0fa-be33b952465a}</Project>
+      <Name>BuffettCodeCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

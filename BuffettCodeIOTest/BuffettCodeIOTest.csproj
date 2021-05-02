@@ -50,8 +50,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractBuffettCodeClientTest.cs" />
-    <Compile Include="BuffettCodeClientV2Test.cs" />
     <Compile Include="BuffettCodeTestUtils.cs" />
     <Compile Include="ConstAPIResolverTest.cs" />
     <Compile Include="CurrencyFormatterTest.cs" />
@@ -66,6 +64,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BuffettCodeCommon\BuffettCodeCommon.csproj">
+      <Project>{8552cfd4-39c4-47d9-a0fa-be33b952465a}</Project>
+      <Name>BuffettCodeCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BuffettCodeIO\BuffettCodeIO.csproj">
       <Project>{44a5bfab-acd6-492f-b0c6-29e0ea07a90a}</Project>
       <Name>BuffettCodeIO</Name>

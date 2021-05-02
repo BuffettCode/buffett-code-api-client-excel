@@ -1,4 +1,4 @@
-using BuffettCodeIO.Client;
+using BuffettCodeAPIClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
@@ -17,32 +17,32 @@ namespace BuffettCodeIO
         /// <summary>
         /// 銘柄コード
         /// </summary>
-        public string Ticker { get { return properties["ticker"]; } }
+        public string Ticker { get { return Properties["ticker"]; } }
 
-        private IDictionary<string, string> properties { get; set; }
+        private IDictionary<string, string> Properties { get; set; }
 
-        private IDictionary<string, PropertyDescrption> descriptions { get; set; }
+        private IDictionary<string, PropertyDescrption> Descriptions { get; set; }
 
         public Indicator(IDictionary<string, string> properties, IDictionary<string, PropertyDescrption> descriptions)
         {
-            this.properties = properties;
-            this.descriptions = descriptions;
+            this.Properties = properties;
+            this.Descriptions = descriptions;
         }
 
         /// <inheritdoc/>
         public string GetValue(string name)
         {
-            if (!properties.Keys.Contains(name))
+            if (!Properties.Keys.Contains(name))
             {
                 throw new PropertyNotFoundException();
             }
-            return properties[name];
+            return Properties[name];
         }
 
         /// <inheritdoc/>
         public PropertyDescrption GetDescription(string name)
         {
-            return properties.Keys.Contains(name) ? descriptions[name] : null;
+            return Properties.Keys.Contains(name) ? Descriptions[name] : null;
         }
 
         /// <inheritdoc/>
@@ -60,7 +60,7 @@ namespace BuffettCodeIO
         public static IList<Indicator> Parse(string ticker, string jsonString)
         {
             JObject json = JsonConvert.DeserializeObject(jsonString) as JObject;
-            APIResponseValidator.Validate(json);
+            ApiResponseValidator.Validate(json);
 
             IDictionary<string, PropertyDescrption> descriptions = null;
             IList<JToken> columnDescription = json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => t.Path.Equals("column_description")).ToList();
