@@ -1,5 +1,7 @@
-﻿using BuffettCodeIO;
-using BuffettCodeIO.Client;
+using BuffettCodeAPIClient;
+using BuffettCodeCommon;
+using BuffettCodeCommon.Exception;
+using BuffettCodeIO;
 using BuffettCodeIO.Formatter;
 using System;
 using System.Collections.Generic;
@@ -73,11 +75,13 @@ namespace BuffettCodeAddinRibbon
                 {
                     WriteNewSheet();
                 }
-            } catch (TestAPIConstraintException)
+            }
+            catch (TestAPIConstraintException)
             {
                 MessageBox.Show("テスト用のAPIキーでは末尾が01の銘柄コードのみ使用できます。", "CSV出力", MessageBoxButtons.OK);
                 return;
-            } catch (QuotaException)
+            }
+            catch (QuotaException)
             {
                 MessageBox.Show("APIの実行回数が上限に達しました。", "CSV出力", MessageBoxButtons.OK);
                 return;
@@ -165,7 +169,7 @@ namespace BuffettCodeAddinRibbon
             // create new sheet
             Microsoft.Office.Interop.Excel.Worksheet worksheet;
             try
-            { 
+            {
                 worksheet = BuffettCodeAddinRibbon.Globals.ThisAddIn.Application.Worksheets.Add();
             }
             catch (Exception)
@@ -212,12 +216,12 @@ namespace BuffettCodeAddinRibbon
 
         private IList<Quarter> GetSortedQuarters(string ticker, string from, string to)
         {
-            var client = new BuffettCodeClientV2();
+            var client = new BuffettCodeApiV2Client(Configuration.ApiKey);
             var quarters = new List<Quarter>();
 
             foreach (KeyValuePair<string, string> range in SliceRange(from, to))
             {
-                Task<string> task = client.GetQuarterRange(apiKey, ticker, range.Key, range.Value, false);
+                Task<string> task = client.GetQuarterRange(ticker, range.Key, range.Value, false);
                 string json = task.Result;
                 quarters.AddRange(Quarter.Parse(ticker, json));
             }

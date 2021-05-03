@@ -21,7 +21,7 @@ namespace BuffettCodeIO.Resolver
             {APIType.Indicator, @"https://docs.buffett-code.com/v2-indicator.json" }
         };
 
-        private static WebResourceAPIResolver _instance = new WebResourceAPIResolver();
+        private static readonly WebResourceAPIResolver _instance = new WebResourceAPIResolver();
         public static WebResourceAPIResolver GetInstance()
         {
             return _instance;

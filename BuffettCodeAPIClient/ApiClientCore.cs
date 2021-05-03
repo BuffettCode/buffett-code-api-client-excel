@@ -1,3 +1,4 @@
+using BuffettCodeCommon.Exception;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -15,7 +16,7 @@ namespace BuffettCodeAPIClient
     {
         private readonly string apiKey;
         private readonly Uri baseUri;
-        private static long TimeoutMilliseconds = 5000;
+        private static readonly long TimeoutMilliseconds = 5000;
 
         private ApiClientCore(string apiKey, Uri baseUri)
         {

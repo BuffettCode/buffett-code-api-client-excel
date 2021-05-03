@@ -1,3 +1,4 @@
+using BuffettCodeCommon;
 using System;
 
 namespace BuffettCodeIO.UnitTests

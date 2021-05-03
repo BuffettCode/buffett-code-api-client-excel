@@ -1,12 +1,7 @@
-using BuffettCodeAPIClient;
 using BuffettCodeAPIClient.Config;
-using BuffettCodeCommon.Validator;
+using BuffettCodeCommon.Exception;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuffettCodeAPIClient.Tests
 {

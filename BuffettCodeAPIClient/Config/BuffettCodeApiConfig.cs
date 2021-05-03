@@ -22,4 +22,9 @@ namespace BuffettCodeAPIClient.Config
         public static readonly string ENDPOINT_DAILY = "daily";
         public static readonly string ENDPOINT_ONDEMAND_DAILY = "ondemand/daily";
     }
+
+    public static class ApiErrorMessageConfig
+    {
+        public static readonly string TEST_API_CONSTRAINT = "Testing Apikey is only allowed to ticker ending with";
+    }
 }

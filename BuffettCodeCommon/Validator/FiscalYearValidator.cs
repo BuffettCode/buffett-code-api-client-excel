@@ -1,3 +1,4 @@
+using BuffettCodeCommon.Exception;
 namespace BuffettCodeCommon.Validator
 {
     /// <summary>

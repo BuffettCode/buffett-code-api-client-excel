@@ -1,6 +1,5 @@
-using BuffettCodeAPIClient;
 using BuffettCodeAPIClient.Config;
-using BuffettCodeCommon.Validator;
+using BuffettCodeCommon.Exception;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
@@ -60,6 +59,25 @@ namespace BuffettCodeAPIClient.Tests
 
             // validation errors
             Assert.ThrowsException<ValidationError>(() => BuffettCodeApiV2RequestCreator.CreateGetIndicatorRequest("aaa"));
+        }
+
+        [TestMethod()]
+        public void CreateGetQuarterRangeRequestTest()
+        {
+            // ok case
+            var ticker = "6501";
+            var from = "2020Q1";
+            var to = "2022Q4";
+
+            var (endpoint, param) = BuffettCodeApiV2RequestCreator.CreateGetQuarterRangeRequest(ticker, from, to);
+            Assert.AreEqual(endpoint, BuffettCodeApiV2Config.ENDPOINT_QUARTER);
+            Assert.AreEqual(ticker, param["tickers"]);
+            Assert.AreEqual(from, param["from"]);
+            Assert.AreEqual(to, param["to"]);
+
+            // validation errors
+            Assert.ThrowsException<ValidationError>(() => BuffettCodeApiV2RequestCreator.CreateGetQuarterRangeRequest("aaa", from, to));
+
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace BuffettCodeCommon.Validator
+namespace BuffettCodeCommon.Exception
 {
     using System;
 

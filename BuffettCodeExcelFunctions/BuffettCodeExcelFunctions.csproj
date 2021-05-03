@@ -56,6 +56,14 @@
     <None Include="Properties\ExcelDna.Build.props" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BuffettCodeAPIClient\BuffettCodeAPIClient.csproj">
+      <Project>{79daca04-c2b5-4d1b-996d-2ea1ad79909f}</Project>
+      <Name>BuffettCodeAPIClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BuffettCodeCommon\BuffettCodeCommon.csproj">
+      <Project>{8552cfd4-39c4-47d9-a0fa-be33b952465a}</Project>
+      <Name>BuffettCodeCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BuffettCodeIO\BuffettCodeIO.csproj">
       <Project>{44a5bfab-acd6-492f-b0c6-29e0ea07a90a}</Project>
       <Name>BuffettCodeIO</Name>

@@ -89,7 +89,7 @@ namespace BuffettCodeIO.Resolver
             "cash_monthly_sales_ratio",
             "accrual" };
 
-        private static ConstAPIResolver _instance = new ConstAPIResolver();
+        private static readonly ConstAPIResolver _instance = new ConstAPIResolver();
 
         public static ConstAPIResolver GetInstance()
         {

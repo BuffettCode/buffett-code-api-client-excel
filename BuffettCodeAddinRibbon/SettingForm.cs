@@ -16,7 +16,8 @@ namespace BuffettCodeAddinRibbon
                 checkParallelism.Checked = false;
                 textParallelism.Text = "";
                 textParallelism.Enabled = false;
-            } else
+            }
+            else
             {
                 checkParallelism.Checked = true;
                 textParallelism.Text = maxDegreeOfParallelism.ToString();

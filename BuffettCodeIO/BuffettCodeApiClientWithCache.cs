@@ -1,4 +1,4 @@
-using BuffettCodeIO.Client;
+using BuffettCodeAPIClient;
 using BuffettCodeIO.Formatter;
 using BuffettCodeIO.Processor;
 using BuffettCodeIO.Resolver;
@@ -14,9 +14,9 @@ namespace BuffettCodeIO
     /// 値はパラメタおよび定義に従ってフォーマットされます（カンマ区切りや金額の桁など）。
     /// 実行したWeb APIのレスポンスはクラス内部でキャッシュされます。
     /// </remarks>
-    public class BuffettCodeAPI
+    public class BuffettCodeApiClientWithCache
     {
-        private readonly IBuffettCodeClient client;
+        private readonly BuffettCodeApiV2Client client;
 
         private readonly IAPIResolver resolver;
 
@@ -28,9 +28,9 @@ namespace BuffettCodeIO
         /// コンストラクタ
         /// </summary>
         /// <param name="maxDegreeOfParallelism">APIコールの最大同時実行数</param>
-        public BuffettCodeAPI(int maxDegreeOfParallelism)
+        public BuffettCodeApiClientWithCache(string apiKey, int maxDegreeOfParallelism)
         {
-            client = new BuffettCodeClientV2();
+            client = new BuffettCodeApiV2Client(apiKey);
             resolver = APIResolverFactory.Create();
             cache = new CacheStore();
             processor = new SemaphoreTaskProcessor<string>(maxDegreeOfParallelism);
@@ -104,7 +104,7 @@ namespace BuffettCodeIO
         {
             if (!cache.HasIndicator(ticker))
             {
-                var task = client.GetIndicator(Configuration.ApiKey, ticker);
+                var task = client.GetIndicator(ticker, true);
                 string json = processor.Process(task);
                 cache.Add(Indicator.Parse(ticker, json));
             }
@@ -120,7 +120,7 @@ namespace BuffettCodeIO
         {
             if (!cache.HasQuarter(ticker, fiscalYear, fiscalQuarter))
             {
-                var task = client.GetQuarter(Configuration.ApiKey, ticker, fiscalYear, fiscalQuarter);
+                var task = client.GetQuarter(ticker, uint.Parse(fiscalYear), uint.Parse(fiscalQuarter), false);
                 string json = processor.Process(task);
                 cache.Add(Quarter.Parse(ticker, json));
             }
@@ -132,4 +132,5 @@ namespace BuffettCodeIO
             return cache.GetQuarter(ticker, fiscalYear, fiscalQuarter);
         }
     }
+
 }

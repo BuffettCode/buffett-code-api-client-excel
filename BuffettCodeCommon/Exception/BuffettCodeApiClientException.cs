@@ -1,10 +1,9 @@
-using System;
-namespace BuffettCodeAPIClient
+namespace BuffettCodeCommon.Exception
 {
     /// <summary>
     /// Default Exception on BuffettCode Api Client
     /// </summary>
-    public class BuffettCodeApiClientException : Exception
+    public class BuffettCodeApiClientException : System.Exception
     {
     }
 
@@ -16,5 +15,7 @@ namespace BuffettCodeAPIClient
     {
     }
 
-
+    public class TestAPIConstraintException : BuffettCodeApiClientException
+    {
+    }
 }
