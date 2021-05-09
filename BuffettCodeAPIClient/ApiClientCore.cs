@@ -1,6 +1,5 @@
 using BuffettCodeCommon.Exception;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -14,26 +13,14 @@ namespace BuffettCodeAPIClient
 
     public class ApiClientCore
     {
-        private readonly string apiKey;
+        public string ApiKey { set; get; }
         private readonly Uri baseUri;
         private static readonly long TimeoutMilliseconds = 5000;
-
-        private ApiClientCore(string apiKey, Uri baseUri)
+        public ApiClientCore(string apiKey, Uri baseUri)
         {
-            this.apiKey = apiKey;
+            this.ApiKey = apiKey;
             this.baseUri = baseUri;
         }
-
-        public static ApiClientCore Create(string apiKey, string baseUrl)
-        {
-            return new ApiClientCore(apiKey, new Uri(baseUrl));
-        }
-
-        public static ApiClientCore Create(string apiKey, Uri baseUrl)
-        {
-            return new ApiClientCore(apiKey, baseUrl);
-        }
-
 
         private HttpClient NewHttpClient()
         {
@@ -43,18 +30,18 @@ namespace BuffettCodeAPIClient
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
-            httpClient.DefaultRequestHeaders.Add("x-api-key", apiKey);
+            httpClient.DefaultRequestHeaders.Add("x-api-key", ApiKey);
             return httpClient;
         }
 
-        public static string BuildGetPath(string endpoint, Dictionary<string, string> parameters)
+        public static string BuildGetPath(ApiGetRequest request)
         {
-            return $"{endpoint}?{new FormUrlEncodedContent(parameters).ReadAsStringAsync().Result}";
+            return $"{request.EndPoint}?{new FormUrlEncodedContent(request.Parameters).ReadAsStringAsync().Result}";
         }
 
-        public async Task<string> Get(string endpoint, Dictionary<string, string> parameters, bool isConfigureAwait)
+        public async Task<string> Get(ApiGetRequest request, bool isConfigureAwait)
         {
-            var path = BuildGetPath(endpoint, parameters);
+            var path = BuildGetPath(request);
             using (var client = NewHttpClient())
             {
                 var response = await client.GetAsync(path).ConfigureAwait(isConfigureAwait);
@@ -74,6 +61,5 @@ namespace BuffettCodeAPIClient
             }
         }
     }
-
 
 }

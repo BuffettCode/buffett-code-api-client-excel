@@ -17,19 +17,19 @@ namespace BuffettCodeAPIClient.Tests
             uint fiscalQuarter = 3;
 
             // use ondemand
-            var (endpoint, param) = BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, fiscalYear, fiscalQuarter, true);
-            Assert.AreEqual(endpoint, BuffettCodeApiV2Config.ENDPOINT_ONDEMAND_QUARTER);
-            Assert.AreEqual(ticker, param["ticker"]);
-            Assert.AreEqual(fiscalYear.ToString(), param["fy"]);
-            Assert.AreEqual(fiscalQuarter.ToString(), param["fq"]);
+            var request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, fiscalYear, fiscalQuarter, true);
+            Assert.AreEqual(request.EndPoint, BuffettCodeApiV2Config.ENDPOINT_ONDEMAND_QUARTER);
+            Assert.AreEqual(ticker, request.Parameters["ticker"]);
+            Assert.AreEqual(fiscalYear.ToString(), request.Parameters["fy"]);
+            Assert.AreEqual(fiscalQuarter.ToString(), request.Parameters["fq"]);
 
 
             // not use ondemand
-            (endpoint, param) = BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, fiscalYear, fiscalQuarter, false);
-            Assert.AreEqual(endpoint, BuffettCodeApiV2Config.ENDPOINT_QUARTER);
-            Assert.AreEqual(ticker, param["ticker"]);
-            Assert.AreEqual(fiscalYear.ToString(), param["fy"]);
-            Assert.AreEqual(fiscalQuarter.ToString(), param["fq"]);
+            request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, fiscalYear, fiscalQuarter, false);
+            Assert.AreEqual(request.EndPoint, BuffettCodeApiV2Config.ENDPOINT_QUARTER);
+            Assert.AreEqual(ticker, request.Parameters["ticker"]);
+            Assert.AreEqual(fiscalYear.ToString(), request.Parameters["fy"]);
+            Assert.AreEqual(fiscalQuarter.ToString(), request.Parameters["fq"]);
 
 
             // validation Errors
@@ -53,9 +53,9 @@ namespace BuffettCodeAPIClient.Tests
         {
             // ok case
             var ticker = "6501";
-            var (endpoint, param) = BuffettCodeApiV2RequestCreator.CreateGetIndicatorRequest(ticker);
-            Assert.AreEqual(endpoint, BuffettCodeApiV2Config.ENDPOINT_INDICATOR);
-            Assert.AreEqual(ticker, param["tickers"]);
+            var request = BuffettCodeApiV2RequestCreator.CreateGetIndicatorRequest(ticker);
+            Assert.AreEqual(request.EndPoint, BuffettCodeApiV2Config.ENDPOINT_INDICATOR);
+            Assert.AreEqual(ticker, request.Parameters["tickers"]);
 
             // validation errors
             Assert.ThrowsException<ValidationError>(() => BuffettCodeApiV2RequestCreator.CreateGetIndicatorRequest("aaa"));
@@ -69,11 +69,11 @@ namespace BuffettCodeAPIClient.Tests
             var from = "2020Q1";
             var to = "2022Q4";
 
-            var (endpoint, param) = BuffettCodeApiV2RequestCreator.CreateGetQuarterRangeRequest(ticker, from, to);
-            Assert.AreEqual(endpoint, BuffettCodeApiV2Config.ENDPOINT_QUARTER);
-            Assert.AreEqual(ticker, param["tickers"]);
-            Assert.AreEqual(from, param["from"]);
-            Assert.AreEqual(to, param["to"]);
+            var request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRangeRequest(ticker, from, to);
+            Assert.AreEqual(request.EndPoint, BuffettCodeApiV2Config.ENDPOINT_QUARTER);
+            Assert.AreEqual(ticker, request.Parameters["tickers"]);
+            Assert.AreEqual(from, request.Parameters["from"]);
+            Assert.AreEqual(to, request.Parameters["to"]);
 
             // validation errors
             Assert.ThrowsException<ValidationError>(() => BuffettCodeApiV2RequestCreator.CreateGetQuarterRangeRequest("aaa", from, to));

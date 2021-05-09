@@ -37,10 +37,12 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Text.Json, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,6 +57,10 @@
     <Compile Include="BuffettCodeApiV2Client.cs" />
     <Compile Include="BuffettCodeApiV2RequestCreator.cs" />
     <Compile Include="ApiResponseValidator.cs" />
+    <Compile Include="ApiGetRequest.cs" />
+    <Compile Include="CacheKeyCreator.cs" />
+    <Compile Include="ApiRequestCacheHelper.cs" />
+    <Compile Include="ApiClientCoreWithCache.cs" />
     <Compile Include="Config\BuffettCodeApiConfig.cs" />
     <Compile Include="IBuffettCodeApiClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

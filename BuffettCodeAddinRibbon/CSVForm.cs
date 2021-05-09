@@ -14,7 +14,6 @@ namespace BuffettCodeAddinRibbon
 {
     public partial class CSVForm : Form
     {
-        private readonly string apiKey;
 
         private static readonly int lowerLimitYear = 2008;
 
@@ -24,7 +23,6 @@ namespace BuffettCodeAddinRibbon
         {
             InitializeComponent();
             LoadSettings();
-            this.apiKey = apiKey;
             AcceptButton = buttonOK;
         }
 
@@ -216,7 +214,7 @@ namespace BuffettCodeAddinRibbon
 
         private IList<Quarter> GetSortedQuarters(string ticker, string from, string to)
         {
-            var client = new BuffettCodeApiV2Client(Configuration.ApiKey);
+            var client = BuffettCodeApiV2Client.GetInstance(Configuration.ApiKey);
             var quarters = new List<Quarter>();
 
             foreach (KeyValuePair<string, string> range in SliceRange(from, to))

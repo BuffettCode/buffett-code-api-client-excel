@@ -53,9 +53,8 @@
     <Compile Include="AggregationNotFoundException.cs" />
     <Compile Include="ResolveAPIException.cs" />
     <Compile Include="Resolver\ConstAPIResolver.cs" />
-    <Compile Include="BuffettCodeApiClientWithCache.cs" />
+    <Compile Include="BuffettCodeApiTaskProcessor.cs" />
     <Compile Include="BuffettCodeException.cs" />
-    <Compile Include="CacheStore.cs" />
     <Compile Include="Formatter\NumericFormatter.cs" />
     <Compile Include="Formatter\IFormatter.cs" />
     <Compile Include="Formatter\FormatterFactory.cs" />
