@@ -3,6 +3,7 @@ namespace BuffettCodeAPIClient.Config
 
     public static class BuffettCodeApiConfig
     {
+        public static readonly string TEST_API_KEY = "sAJGq9JH193KiwnF947v74KnDYkO7z634LWQQfPY";
         public static readonly string VERSION_V2 = "v2";
         public static readonly string VERSION_V3 = "v3";
     }

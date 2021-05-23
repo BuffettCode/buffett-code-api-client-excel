@@ -19,16 +19,16 @@ namespace BuffettCodeAPIClient.Tests
         public void NewHttpClientTest()
         {
             var apiKey = "dummy_api_key";
-            var baseUrl = "https://example.com";
-            var clientCore = ApiClientCore.Create(apiKey, baseUrl);
-
+            var baseUri = new Uri(@"https://example.com");
+            var clentCore
+                = new ApiClientCore(apiKey, baseUri);
             // to test private method
-            var privateObj = new PrivateObject(clientCore).Invoke("NewHttpClient");
+            var privateObj = new PrivateObject(clentCore).Invoke("NewHttpClient");
 
             Assert.IsInstanceOfType(privateObj, typeof(HttpClient));
             HttpClient httpClient = (HttpClient)privateObj;
             var xApiKeyHeaders = new List<string>(httpClient.DefaultRequestHeaders.GetValues("x-api-key"));
-            Assert.AreEqual(new Uri(baseUrl), httpClient.BaseAddress);
+            Assert.AreEqual(baseUri, httpClient.BaseAddress);
             Assert.AreEqual(1, xApiKeyHeaders.Count);
             Assert.AreEqual(apiKey, xApiKeyHeaders[0]);
         }

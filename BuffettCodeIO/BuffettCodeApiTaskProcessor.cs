@@ -12,15 +12,12 @@ namespace BuffettCodeIO
     /// バフェットコードのWeb APIへのアクセスを抽象化するクラス。
     /// 銘柄コード、項目名、付随するパラメタから値や定義を取得します。
     /// 値はパラメタおよび定義に従ってフォーマットされます（カンマ区切りや金額の桁など）。
-    /// 実行したWeb APIのレスポンスはクラス内部でキャッシュされます。
     /// </remarks>
-    public class BuffettCodeApiClientWithCache
+    public class BuffettCodeApiTaskProcessor
     {
         private readonly BuffettCodeApiV2Client client;
 
         private readonly IAPIResolver resolver;
-
-        private readonly CacheStore cache;
 
         private readonly ITaskProcessor<string> processor;
 
@@ -28,20 +25,18 @@ namespace BuffettCodeIO
         /// コンストラクタ
         /// </summary>
         /// <param name="maxDegreeOfParallelism">APIコールの最大同時実行数</param>
-        public BuffettCodeApiClientWithCache(string apiKey, int maxDegreeOfParallelism)
+        public BuffettCodeApiTaskProcessor(string apiKey, int maxDegreeOfParallelism)
         {
-            client = new BuffettCodeApiV2Client(apiKey);
+            client = BuffettCodeApiV2Client.GetInstance(apiKey);
             resolver = APIResolverFactory.Create();
-            cache = new CacheStore();
             processor = new SemaphoreTaskProcessor<string>(maxDegreeOfParallelism);
         }
-
         /// <summary>
         /// 全てのキャッシュをクリアします。
         /// </summary>
         public void ClearCache()
         {
-            cache.ClearAllCache();
+            client.ClearCache();
         }
 
         /// <summary>
@@ -102,34 +97,17 @@ namespace BuffettCodeIO
 
         private Indicator GetIndicator(string ticker)
         {
-            if (!cache.HasIndicator(ticker))
-            {
-                var task = client.GetIndicator(ticker, true);
-                string json = processor.Process(task);
-                cache.Add(Indicator.Parse(ticker, json));
-            }
-            if (!cache.HasIndicator(ticker))
-            {
-                throw new AggregationNotFoundException();
-            }
-
-            return cache.GetIndicator(ticker);
+            var task = client.GetIndicator(ticker, true);
+            string json = processor.Process(task);
+            return Indicator.Parse(ticker, json)[0];
         }
 
         private Quarter GetQuarter(string ticker, string fiscalYear, string fiscalQuarter)
         {
-            if (!cache.HasQuarter(ticker, fiscalYear, fiscalQuarter))
-            {
-                var task = client.GetQuarter(ticker, uint.Parse(fiscalYear), uint.Parse(fiscalQuarter), false);
-                string json = processor.Process(task);
-                cache.Add(Quarter.Parse(ticker, json));
-            }
-            if (!cache.HasQuarter(ticker, fiscalYear, fiscalQuarter))
-            {
-                throw new AggregationNotFoundException();
-            }
 
-            return cache.GetQuarter(ticker, fiscalYear, fiscalQuarter);
+            var task = client.GetQuarter(ticker, uint.Parse(fiscalYear), uint.Parse(fiscalQuarter), false);
+            string json = processor.Process(task);
+            return Quarter.Parse(ticker, json)[0];
         }
     }
 

@@ -1,7 +1,9 @@
 namespace BuffettCodeAPIClient
 {
-    interface IBuffettCodeApiClient
+    public interface IBuffettCodeApiClient
     {
-
+        string GetApiKey();
+        void UpdateApiKey(string apiKey);
+        void ClearCache();
     }
 }

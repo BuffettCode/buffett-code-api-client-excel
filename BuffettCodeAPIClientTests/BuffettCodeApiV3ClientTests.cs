@@ -1,3 +1,4 @@
+using BuffettCodeAPIClient.Config;
 using BuffettCodeCommon.Exception;
 namespace BuffettCodeAPIClient.Tests
 {
@@ -14,7 +15,8 @@ namespace BuffettCodeAPIClient.Tests
         /// <summary>
         /// Defines the client.
         /// </summary>
-        private readonly BuffettCodeApiV3Client client = new BuffettCodeApiV3Client(ApiTestConfig.TEST_API_KEY);
+        private readonly BuffettCodeApiV3Client client = BuffettCodeApiV3Client.GetInstance
+            (BuffettCodeApiConfig.TEST_API_KEY);
 
         /// <summary>
         /// The GetDailyTest.
@@ -24,11 +26,11 @@ namespace BuffettCodeAPIClient.Tests
         {
             // test api key can get ticker=xx01 data
             var day = new DateTime(2021, 2, 1);
-            Assert.IsNotNull(client.GetDaily("6501", day, false, true).Result);
+            Assert.IsNotNull(client.GetDaily("6501", day, false, true, false).Result);
 
             // test api key can get ticker=xx02
             Assert.ThrowsExceptionAsync<InvalidAPIKeyException>
-                (() => client.GetDaily("6502", day, true, true));
+                (() => client.GetDaily("6502", day, true, true, false));
         }
     }
 }

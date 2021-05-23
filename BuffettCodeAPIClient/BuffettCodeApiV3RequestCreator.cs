@@ -9,7 +9,7 @@ namespace BuffettCodeAPIClient
 {
     public class BuffettCodeApiV3RequestCreator
     {
-        public static (string, Dictionary<string, string>) CreateGetDailyRequest(string ticker, DateTime date, bool useOndemand)
+        public static ApiGetRequest CreateGetDailyRequest(string ticker, DateTime date, bool useOndemand)
         {
             JpTickerValidator.Validate(ticker);
             var paramaters = new Dictionary<string, string>()
@@ -21,7 +21,7 @@ namespace BuffettCodeAPIClient
             var endpoint = useOndemand ?
                 BuffettCodeApiV3Config.ENDPOINT_ONDEMAND_DAILY : BuffettCodeApiV3Config.ENDPOINT_DAILY;
 
-            return (endpoint, paramaters);
+            return new ApiGetRequest(endpoint, paramaters);
         }
     }
 }
