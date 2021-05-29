@@ -99,6 +99,16 @@ dotnet-format
 
 してください。
 
+### Registryに保存された設定を編集する
+[レジストリエディタ](https://support.microsoft.com/ja-jp/windows/windows-10-%E3%81%A7%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA-%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF%E3%83%BC%E3%82%92%E9%96%8B%E3%81%8F%E6%96%B9%E6%B3%95-deab38e6-91d6-e0aa-4b7c-8878d9e07b11)を利用してください。
+
+下記2つの領域に設定が保存されています
+
+- アドオンの設定: `HKEY_CURRENT_USER\SOFTWARE\BuffettCode\ExcelAddin`
+- 開発用の設定: `HKEY_CURRENT_USER\SOFTWARE\BuffettCode\ExcelAddinDev`
+- UnitTestで利用: `HKEY_CURRENT_USER\SOFTWARE\BuffettCode\ExcelAddinDevTest`
+
+
 ## ライセンス
 
 Apache Lisence 2.0

@@ -1,4 +1,6 @@
-using Microsoft.Win32;
+using BuffettCodeCommon.Exception;
+using BuffettCodeCommon.Registry;
+using BuffettCodeCommon.Validator;
 
 namespace BuffettCodeCommon
 {
@@ -11,121 +13,100 @@ namespace BuffettCodeCommon
     /// </remarks>
     public class Configuration
     {
-        private static string apiKey;
+        private readonly BuffettCodeRegistryAccessor registryAccessor;
 
-        private static int maxDegreeOfParallelism;
+        // todo refactoring: build の context (release/debug) でハンドリングするべき
+        private static readonly Configuration configration = new Configuration(BuffettCodeRegistryConfig.SubKeyBuffettCodeExcelAddinRelease);
+        private static readonly Configuration devConfigration = new Configuration(BuffettCodeRegistryConfig.SubKeyBuffettCodeExcelAddinDev);
 
-        private static bool clearCache;
+        protected Configuration(string keyName)
+        {
+            registryAccessor = BuffettCodeRegistryAccessor.Create(keyName);
+            // delete old unsupported values 
+            registryAccessor.DeleteUnSupportedValues();
+        }
 
-        private static bool debugMode;
+        public static Configuration GetInstance(bool isDev = false)
+        {
+            return isDev ? devConfigration : configration;
+        }
+
 
         /// <summary>
-        /// バフェットコードの設定を格納するレジストリのキー名
+        /// デフォルトでは Test 用のAPI KEY
         /// </summary>
-        private static readonly string REGISTRY_KEY_NAME = @"Software\BuffettCode";
+        public static readonly string ApiKeyDefault = @"sAJGq9JH193KiwnF947v74KnDYkO7z634LWQQfPY";
 
         /// <summary>
-        /// APIコールの最大同時実行数にデフォルトを使用
+        /// 最大同時実行数のデフォルト値
         /// </summary>
-        public static readonly int USE_DEFAULT_MAX_DEGREE_OF_PARALLELISM = 0;
+        private static readonly int MaxDegreeOfParallelismDefault = 8;
+
+
+        /// <summary>
+        /// デフォルトでは Ondemand Endpoint は利用不可
+        /// </summary>
+        private static readonly bool UseOndemandEndpointDefault = false;
+
+        /// <summary>
+        /// デフォルトでは DebugMode は false
+        /// </summary>
+        private static readonly bool DebugModeDefault = false;
+
 
         /// <summary>
         /// バフェットコードのAPIキー
         /// </summary>
-        public static string ApiKey
+        public string ApiKey
         {
-            get { return apiKey; }
+            get => (string)registryAccessor.GetRegistryValue(BuffettCodeRegistryConfig.NameApiKey, ApiKeyDefault);
+
             set
             {
-                SaveRegistry("ApiKey", value);
-                apiKey = value;
+                try
+                {
+                    ApiKeyValidator.Validate(value);
+                }
+                catch (ValidationError e)
+                {
+                    throw new AddinConfigurationException(e.Message);
+                }
+                registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameApiKey, value);
             }
+
         }
 
         /// <summary>
         /// APIコールの最大同時実行数
         /// </summary>
-        public static int MaxDegreeOfParallelism
+        public int MaxDegreeOfParallelism
         {
-            get { return maxDegreeOfParallelism; }
-            set
-            {
-                SaveRegistry("MaxDegreeOfParallelism", value);
-                maxDegreeOfParallelism = value;
-            }
+            get => (int)registryAccessor.GetRegistryValue(BuffettCodeRegistryConfig.NameMaxDegreeOfParallelism, MaxDegreeOfParallelismDefault);
+            set => registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameMaxDegreeOfParallelism, value);
         }
 
+        // Registryには"True" "False" の文字列で書き込まれる
+        private bool IsTrue(string name, bool defaultValue) => registryAccessor.GetRegistryValue(name, defaultValue).ToString().Equals(true.ToString());
+
         /// <summary>
-        /// キャッシュクリアフラグ
+        /// Ondemand Endpoint の利用可否
         /// </summary>
-        public static bool ClearCache
+        public bool UseOndemandEndpoint
         {
-            get { return clearCache; }
-            set
-            {
-                SaveRegistry("ClearCache", value ? 1 : 0);
-                clearCache = value;
-            }
+            get => IsTrue(BuffettCodeRegistryConfig.NameUseOndemandEndpoint, UseOndemandEndpointDefault);
+            set => registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameUseOndemandEndpoint, value);
         }
+
 
         /// <summary>
         /// デバッグモード
         /// </summary>
-        public static bool DebugMode
+        public bool DebugMode
         {
-            get { return debugMode; }
-            set
-            {
-                SaveRegistry("DebugMode", value ? 1 : 0);
-                debugMode = value;
-            }
+            get => IsTrue(BuffettCodeRegistryConfig.NameDebugMode, DebugModeDefault);
+            set => registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameDebugMode, value);
         }
 
-        /// <summary>
-        /// 全ての設定値をレジストリから読み直して最新化します。
-        /// </summary>
-        public static void Reload()
-        {
-            ReloadAllValuesFromRegistry();
-        }
-
-        private static void ReloadAllValuesFromRegistry()
-        {
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(REGISTRY_KEY_NAME, false);
-            if (registryKey == null)
-            {
-                return;
-            }
-
-            object value = registryKey.GetValue("ApiKey");
-            if (value != null)
-            {
-                apiKey = (string)value;
-            }
-            value = registryKey.GetValue("maxDegreeOfParallelism", USE_DEFAULT_MAX_DEGREE_OF_PARALLELISM);
-            maxDegreeOfParallelism = (int)value;
-            value = registryKey.GetValue("ClearCache", 0);
-            clearCache = (int)value == 0 ? false : true;
-            value = registryKey.GetValue("DebugMode", 0);
-            debugMode = (int)value == 0 ? false : true;
-            registryKey.Close();
-        }
-
-        private static void SaveRegistry(string key, object value)
-        {
-            RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(REGISTRY_KEY_NAME);
-            registryKey.SetValue(key, value);
-            registryKey.Close();
-
-        }
-
-        /// <summary>
-        /// <see cref="RegistryMonitor"/>の監視対象とするレジストリキーを取得します。
-        /// </summary>
-        /// <returns></returns>
-        public static RegistryKey GetMonitoringRegistryKey()
-        {
-            return Registry.CurrentUser.CreateSubKey(REGISTRY_KEY_NAME);
-        }
+        public string KeyName => registryAccessor.KeyName;
     }
 }

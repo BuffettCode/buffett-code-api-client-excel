@@ -31,6 +31,15 @@ namespace BuffettCodeIO
             resolver = APIResolverFactory.Create();
             processor = new SemaphoreTaskProcessor<string>(maxDegreeOfParallelism);
         }
+
+        public void UpdateMaxDegreeOfParallelism(int maxDegreeOfParallelism) => processor.UpdateMaxDegreeOfParallelism(maxDegreeOfParallelism);
+
+        public int MaxDegreeOfParallelism => processor.GetMaxDegreeOfParallelism();
+
+        public void UpdateApiKey(string apiKey) => client.UpdateApiKey(apiKey);
+
+        public string ApiKey => client.GetApiKey();
+
         /// <summary>
         /// 全てのキャッシュをクリアします。
         /// </summary>

@@ -42,8 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exception\AddinConfigurationException.cs" />
+    <Compile Include="Registry\BuffettCodeRegistryConfig.cs" />
     <Compile Include="Exception\BuffettCodeApiClientException.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="Registry\BuffettCodeRegistryAccessor.cs" />
+    <Compile Include="Validator\ApiKeyValidator.cs" />
     <Compile Include="Validator\FiscalQuarterValidator.cs" />
     <Compile Include="Validator\FiscalYearValidator.cs" />
     <Compile Include="Exception\ValidationError.cs" />

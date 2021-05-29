@@ -74,7 +74,6 @@
     <Compile Include="PropertyDescrption.cs" />
     <Compile Include="PropertyNotFoundException.cs" />
     <Compile Include="Quarter.cs" />
-    <Compile Include="RegistryMonitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

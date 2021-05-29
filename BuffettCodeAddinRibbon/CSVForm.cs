@@ -1,5 +1,3 @@
-using BuffettCodeAPIClient;
-using BuffettCodeCommon;
 using BuffettCodeCommon.Exception;
 using BuffettCodeIO;
 using BuffettCodeIO.Formatter;
@@ -19,7 +17,7 @@ namespace BuffettCodeAddinRibbon
 
         private static readonly int upperLimitYear = DateTime.Today.Year;
 
-        public CSVForm(string apiKey)
+        public CSVForm()
         {
             InitializeComponent();
             LoadSettings();
@@ -214,7 +212,7 @@ namespace BuffettCodeAddinRibbon
 
         private IList<Quarter> GetSortedQuarters(string ticker, string from, string to)
         {
-            var client = BuffettCodeApiV2Client.GetInstance(Configuration.ApiKey);
+            var client = AddinFacade.GetApiClient();
             var quarters = new List<Quarter>();
 
             foreach (KeyValuePair<string, string> range in SliceRange(from, to))
