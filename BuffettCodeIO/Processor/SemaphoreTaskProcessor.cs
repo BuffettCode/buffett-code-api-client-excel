@@ -1,4 +1,4 @@
-using BuffettCodeCommon;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,16 +10,8 @@ namespace BuffettCodeIO.Processor
     /// <typeparam name="Type">Taskの型</typeparam>
     public class SemaphoreTaskProcessor<Type> : ITaskProcessor<Type>
     {
-        private readonly SemaphoreSlim semaphore;
-
-        /// <summary>
-        /// 最大同時実行数のデフォルト値
-        /// </summary>
-        /// <remarks>
-        /// API Gatewayの設定値が20リクエスト数/秒。
-        /// 1リクエストあたりのレスポンスタイムをざっくり0.5秒として10並列。少し余裕を見て8。
-        /// </remarks>
-        private static readonly int DEFAULT_MAX_DEGREE_OF_PARALLELISM = 8;
+        private SemaphoreSlim semaphore;
+        private int maxDegreeOfParallelism;
 
         /// <summary>
         /// コンストラクタ
@@ -27,12 +19,21 @@ namespace BuffettCodeIO.Processor
         /// <param name="maxDegreeOfParallelism">同時に実行可能なタスクの数</param>
         public SemaphoreTaskProcessor(int maxDegreeOfParallelism)
         {
-            if (maxDegreeOfParallelism == Configuration.USE_DEFAULT_MAX_DEGREE_OF_PARALLELISM)
+            if (maxDegreeOfParallelism < 1)
             {
-                maxDegreeOfParallelism = DEFAULT_MAX_DEGREE_OF_PARALLELISM;
+                throw new ArgumentOutOfRangeException($"maxDegreeOfParallelism must be positive integer, but given {maxDegreeOfParallelism}");
             }
+            this.maxDegreeOfParallelism = maxDegreeOfParallelism;
             semaphore = new SemaphoreSlim(maxDegreeOfParallelism);
         }
+
+        public void UpdateMaxDegreeOfParallelism(int maxDegreeOfParallelism)
+        {
+            this.maxDegreeOfParallelism = maxDegreeOfParallelism;
+            semaphore = new SemaphoreSlim(maxDegreeOfParallelism);
+        }
+
+        public int GetMaxDegreeOfParallelism() => maxDegreeOfParallelism;
 
         /// <inheritdoc/>
         public Type Process(Task<Type> task)

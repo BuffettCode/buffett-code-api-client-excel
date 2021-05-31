@@ -6,7 +6,7 @@ namespace BuffettCodeCommon.Validator
     /// <summary>
     /// Defines the <see cref="FiscalQuarterValidator" />.
     /// </summary>
-    public class FiscalQuarterValidator
+    public static class FiscalQuarterValidator
     {
         /// <summary>
         /// Defines the QUARTERS.

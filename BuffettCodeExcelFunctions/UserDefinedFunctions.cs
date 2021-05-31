@@ -4,7 +4,6 @@ namespace BuffettCodeExcelFunctions
     using BuffettCodeCommon.Exception;
     using BuffettCodeIO;
     using ExcelDna.Integration;
-    using RegistryUtils;
     using System;
 
     /// <summary>
@@ -17,10 +16,9 @@ namespace BuffettCodeExcelFunctions
     /// </remarks>
     public class UserDefinedFunctions
     {
-        private static BuffettCodeApiTaskProcessor apiTaskProcessor;
-        private static RegistryMonitor monitor;
-
-        private static readonly object initializeLock = new object();
+        private static readonly Configuration config = Configuration.GetInstance();
+        private static readonly BuffettCodeApiTaskProcessor apiTaskProcessor = new BuffettCodeApiTaskProcessor(config.ApiKey, config.MaxDegreeOfParallelism);
+        private static readonly object updateLock = new object();
 
         /// <summary>
         /// Excelのユーザー定義関数BCODE。銘柄コードを指定して財務数値や指標を取得します
@@ -37,7 +35,7 @@ namespace BuffettCodeExcelFunctions
         {
             try
             {
-                InitializeIfNeeded();
+                UpdateProcessorIfNeeded();
                 return apiTaskProcessor.GetValue(ticker, parameter1, parameter2, propertyName, isRawValue, isPostfixUnit);
             }
             catch (Exception e)
@@ -56,7 +54,7 @@ namespace BuffettCodeExcelFunctions
         {
             try
             {
-                InitializeIfNeeded();
+                UpdateProcessorIfNeeded();
                 return GetDescription(propertyName).Label;
             }
             catch (Exception e)
@@ -75,7 +73,7 @@ namespace BuffettCodeExcelFunctions
         {
             try
             {
-                InitializeIfNeeded();
+                UpdateProcessorIfNeeded();
                 return GetDescription(propertyName).Unit;
             }
             catch (Exception e)
@@ -85,18 +83,16 @@ namespace BuffettCodeExcelFunctions
         }
 
         /// <summary>
-        /// Excelのユーザー定義関数BCODE_KEY。APIキーを設定します。デバッグ用
+        /// Excelのユーザー定義関数BCODE_API_KEY。
         /// </summary>
-        /// <param name="apiKey">APIキー</param>
-        /// <returns>Excelのセルに表示する文字列。常に空文字列</returns>
-        [ExcelFunction(IsHidden = true, Description = "Set BuffettCode API Key to XLL Add-in")]
-        public static string BCODE_KEY(string apiKey)
+        /// <returns>Registryに格納されたAPI Token</returns>
+        [ExcelFunction(IsHidden = true, Description = "Clear CacheStore")]
+        public static string BCODE_API_KEY()
         {
             try
             {
-                InitializeIfNeeded();
-                Configuration.ApiKey = apiKey;
-                return "";
+                UpdateProcessorIfNeeded();
+                return config.ApiKey;
             }
             catch (Exception e)
             {
@@ -104,8 +100,10 @@ namespace BuffettCodeExcelFunctions
             }
         }
 
+
+
         /// <summary>
-        /// Excelのユーザー定義関数BCODE_CLEAR。XLLアドインがヒープに持つAPIレスポンスのキャッシュをクリアします。デバッグ用
+        /// Excelのユーザー定義関数BCODE_CLEAR。ApiClientが持つAPIレスポンスのキャッシュをクリアします。デバッグ用
         /// </summary>
         /// <returns>Excelのセルに表示する文字列。常に空文字列</returns>
         [ExcelFunction(IsHidden = true, Description = "Clear CacheStore")]
@@ -113,9 +111,9 @@ namespace BuffettCodeExcelFunctions
         {
             try
             {
-                InitializeIfNeeded();
+                UpdateProcessorIfNeeded();
                 apiTaskProcessor.ClearCache();
-                return "";
+                return "Succeed: CacheClear";
             }
             catch (Exception e)
             {
@@ -141,35 +139,26 @@ namespace BuffettCodeExcelFunctions
             }
         }
 
-        private static void InitializeIfNeeded()
+        private static void UpdateProcessorIfNeeded()
         {
-            lock (initializeLock)
+            lock (updateLock)
             {
-                if (apiTaskProcessor == null)
+                if (!apiTaskProcessor.ApiKey.Equals(config.ApiKey))
                 {
-                    Configuration.Reload();
-                    monitor = new RegistryMonitor(Configuration.GetMonitoringRegistryKey());
-                    monitor.RegChanged += new EventHandler(OnRegistryChanged);
-                    monitor.Start();
-                    apiTaskProcessor = new BuffettCodeApiTaskProcessor(Configuration.ApiKey, Configuration.MaxDegreeOfParallelism);
+                    apiTaskProcessor.UpdateApiKey(config.ApiKey);
                 }
-            }
-        }
-
-        private static void OnRegistryChanged(object sender, EventArgs e)
-        {
-            Configuration.Reload();
-            if (Configuration.ClearCache)
-            {
-                apiTaskProcessor.ClearCache();
-                Configuration.ClearCache = false;
+                if (!apiTaskProcessor.MaxDegreeOfParallelism.Equals
+                    (config.MaxDegreeOfParallelism))
+                {
+                    apiTaskProcessor.UpdateMaxDegreeOfParallelism(config.MaxDegreeOfParallelism);
+                }
             }
         }
 
         private static PropertyDescrption GetDescription(string propertyName)
         {
             // column_descriptionをAPIから取得させるため、適当なパラメタを渡している
-            return apiTaskProcessor.GetDescription("1301", "2017", "4", propertyName);
+            return apiTaskProcessor.GetDescription("1301", "2019", "4", propertyName);
         }
 
         private static string ToErrorMessage(Exception e, string propertyName = "")
@@ -177,7 +166,7 @@ namespace BuffettCodeExcelFunctions
             System.Diagnostics.Debug.WriteLine(e.StackTrace); // for debug
 
             // デバッグモードが設定されていたらエラーメッセージの代わりにスタックトレースをセルに表示
-            if (Configuration.DebugMode)
+            if (config.DebugMode)
             {
                 return e.ToString();
             }

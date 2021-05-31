@@ -17,8 +17,7 @@ namespace BuffettCodeIO.UnitTests
             var key = Environment.GetEnvironmentVariable("BCApiKey");
             if (string.IsNullOrEmpty(key))
             {
-                Configuration.Reload();
-                key = Configuration.ApiKey;
+                key = Configuration.GetInstance().ApiKey;
             }
 
             return key;

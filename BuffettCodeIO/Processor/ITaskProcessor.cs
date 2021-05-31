@@ -27,5 +27,8 @@ namespace BuffettCodeIO.Processor
         /// <param name="task">タスク</param>
         /// <returns>タスクの実行結果</returns>
         Type Process(Task<Type> task);
+        void UpdateMaxDegreeOfParallelism(int maxDegreeOfParallelism);
+
+        int GetMaxDegreeOfParallelism();
     }
 }

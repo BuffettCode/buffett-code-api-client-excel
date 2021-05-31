@@ -1,4 +1,4 @@
-using BuffettCodeAPIClient.Config;
+using BuffettCodeCommon;
 using BuffettCodeCommon.Exception;
 namespace BuffettCodeAPIClient.Tests
 {
@@ -16,7 +16,7 @@ namespace BuffettCodeAPIClient.Tests
         /// Defines the client.
         /// </summary>
         private readonly BuffettCodeApiV3Client client = BuffettCodeApiV3Client.GetInstance
-            (BuffettCodeApiConfig.TEST_API_KEY);
+            (Configuration.ApiKeyDefault);
 
         /// <summary>
         /// The GetDailyTest.

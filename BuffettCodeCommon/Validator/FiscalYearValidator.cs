@@ -4,7 +4,7 @@ namespace BuffettCodeCommon.Validator
     /// <summary>
     /// Defines the <see cref="FiscalYearValidator" />.
     /// </summary>
-    public class FiscalYearValidator
+    public static class FiscalYearValidator
     {
         /// <summary>
         /// The Validate.

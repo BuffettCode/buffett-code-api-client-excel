@@ -1,3 +1,4 @@
+using BuffettCodeAPIClient;
 using BuffettCodeCommon;
 
 namespace BuffettCodeAddinRibbon
@@ -11,15 +12,16 @@ namespace BuffettCodeAddinRibbon
     /// </remarks>
     class AddinFacade
     {
+        private static readonly Configuration config = Configuration.GetInstance();
+
+        private static readonly BuffettCodeApiV2Client apiClient = BuffettCodeApiV2Client.GetInstance(config.ApiKey);
+
         /// <summary>
         /// APIキーを取得します。
         /// </summary>
         /// <returns>APIキー</returns>
-        public static string GetApiKey()
-        {
-            Configuration.Reload();
-            return Configuration.ApiKey;
-        }
+
+        public static string GetApiKey() => config.ApiKey;
 
         /// <summary>
         /// APIキーを更新します。
@@ -27,18 +29,15 @@ namespace BuffettCodeAddinRibbon
         /// <param name="apiKey">APIキー</param>
         public static void UpdateApiKey(string apiKey)
         {
-            Configuration.ApiKey = apiKey;
+            config.ApiKey = apiKey;
         }
 
         /// <summary>
         /// APIコールの最大同時実行数を取得します。
         /// </summary>
         /// <returns>APIコールの最大同時実行数</returns>
-        public static int GetMaxDegreeOfParallelism()
-        {
-            Configuration.Reload();
-            return Configuration.MaxDegreeOfParallelism;
-        }
+        public static int GetMaxDegreeOfParallelism() => config.MaxDegreeOfParallelism;
+
 
         /// <summary>
         /// APIコールの最大同時実行数を更新します。
@@ -46,18 +45,15 @@ namespace BuffettCodeAddinRibbon
         /// <param name="maxDegreeOfParallelism">APIコールの最大同時実行数</param>
         public static void UpdateMaxDegreeOfParallelism(int maxDegreeOfParallelism)
         {
-            Configuration.MaxDegreeOfParallelism = maxDegreeOfParallelism;
+            config.MaxDegreeOfParallelism = maxDegreeOfParallelism;
         }
 
         /// <summary>
         /// デバッグモードかどうかを取得します。
         /// </summary>
         /// <returns>デバッグモードかどうか</returns>
-        public static bool IsDebugMode()
-        {
-            Configuration.Reload();
-            return Configuration.DebugMode;
-        }
+        public static bool IsDebugMode() => config.DebugMode;
+
 
         /// <summary>
         /// デバッグモードかどうかを更新します。
@@ -65,7 +61,7 @@ namespace BuffettCodeAddinRibbon
         /// <param name="debugMode">デバッグモードかどうか</param>
         public static void UpdateDebugMode(bool debugMode)
         {
-            Configuration.DebugMode = debugMode;
+            config.DebugMode = debugMode;
         }
 
         /// <summary>
@@ -73,7 +69,14 @@ namespace BuffettCodeAddinRibbon
         /// </summary>
         public static void ClearCache()
         {
-            Configuration.ClearCache = true;
+            apiClient.ClearCache();
+        }
+
+        public static BuffettCodeApiV2Client GetApiClient()
+        {
+            // update api key 
+            apiClient.UpdateApiKey(config.ApiKey);
+            return apiClient;
         }
     }
 }

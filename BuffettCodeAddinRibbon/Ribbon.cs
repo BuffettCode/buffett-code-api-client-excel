@@ -1,4 +1,5 @@
-using BuffettCodeCommon;
+using BuffettCodeCommon.Exception;
+using BuffettCodeCommon.Validator;
 using Microsoft.Office.Tools.Ribbon;
 using System.Windows.Forms;
 
@@ -13,7 +14,6 @@ namespace BuffettCodeAddinRibbon
 
         private void SettingButton_Click(object sender, RibbonControlEventArgs e)
         {
-            Configuration.Reload();
             var configuredKey = AddinFacade.GetApiKey();
             var maxDegreeOfParallelism = AddinFacade.GetMaxDegreeOfParallelism();
             var debugMode = AddinFacade.IsDebugMode();
@@ -21,11 +21,17 @@ namespace BuffettCodeAddinRibbon
             form.ShowDialog();
             if (form.DialogResult == DialogResult.OK)
             {
-                var inputtedKey = form.GetAPIKey();
-                if (!string.IsNullOrEmpty(inputtedKey) && !inputtedKey.Equals(configuredKey))
+                var apiKey = form.GetAPIKey();
+                try
                 {
-                    AddinFacade.UpdateApiKey(inputtedKey);
+                    ApiKeyValidator.Validate(apiKey);
+                    AddinFacade.UpdateApiKey(apiKey);
                 }
+                catch (AddinConfigurationException)
+                {
+                    MessageBox.Show("API KEYが間違っています", "設定", MessageBoxButtons.OK);
+                }
+
                 var inputtedMaxDegreeOfParallelism = form.GetMaxDegreeOfParallelism();
                 if (maxDegreeOfParallelism != inputtedMaxDegreeOfParallelism)
                 {
@@ -42,14 +48,14 @@ namespace BuffettCodeAddinRibbon
         private void CSVButton_Click(object sender, RibbonControlEventArgs e)
         {
             string apiKey = AddinFacade.GetApiKey();
-            CSVForm form = new CSVForm(apiKey);
+            CSVForm form = new CSVForm();
             form.ShowDialog();
         }
 
         private void RefreshButton_Click(object sender, RibbonControlEventArgs e)
         {
             AddinFacade.ClearCache();
-            BuffettCodeAddinRibbon.Globals.ThisAddIn.Application.CalculateFullRebuild();
+            Globals.ThisAddIn.Application.CalculateFullRebuild();
         }
     }
 }

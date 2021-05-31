@@ -1,4 +1,5 @@
 using BuffettCodeAPIClient.Config;
+using BuffettCodeCommon;
 using System;
 using System.Runtime.Caching;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace BuffettCodeAPIClient
         private BuffettCodeApiV2Client()
         {
             apiClientCore = ApiClientCoreWithCache.Create(
-                BuffettCodeApiConfig.TEST_API_KEY,
+                Configuration.ApiKeyDefault,
                 BuffettCodeApiV2Config.BASE_URL,
                 cache
             );
