@@ -1,6 +1,5 @@
-using BuffettCodeAPIClient.Config;
-using BuffettCodeCommon;
-using System;
+using BuffettCodeCommon.Config;
+using Newtonsoft.Json.Linq;
 using System.Runtime.Caching;
 using System.Threading.Tasks;
 
@@ -17,29 +16,32 @@ namespace BuffettCodeAPIClient
         private BuffettCodeApiV2Client()
         {
             apiClientCore = ApiClientCoreWithCache.Create(
-                Configuration.ApiKeyDefault,
+                BuffettCodeApiKeyConfig.TestApiKey,
                 BuffettCodeApiV2Config.BASE_URL,
                 cache
             );
         }
 
-        public async Task<String> GetQuarter(string ticker, uint fiscalYear, uint fiscalQuarter, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
+        public async Task<JObject> GetQuarter(string ticker, uint fiscalYear, uint fiscalQuarter, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
         {
             var request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, fiscalYear, fiscalQuarter, useOndemand);
-            return await apiClientCore.Get(request, isConfigureAwait, useCache);
+            var response = await apiClientCore.Get(request, isConfigureAwait, useCache);
+            return ApiGetResponseBodyParser.Parse(response);
         }
 
-        public async Task<String> GetIndicator(string ticker, bool isConfigureAwait = true, bool useCache = true)
+        public async Task<JObject> GetIndicator(string ticker, bool isConfigureAwait = true, bool useCache = true)
         {
             var request = BuffettCodeApiV2RequestCreator.CreateGetIndicatorRequest
                 (ticker);
-            return await apiClientCore.Get(request, isConfigureAwait, useCache);
+            var response = await apiClientCore.Get(request, isConfigureAwait, useCache);
+            return ApiGetResponseBodyParser.Parse(response);
         }
 
-        public async Task<String> GetQuarterRange(string ticker, string from, string to, bool isConfigureAwait = true, bool useCache = true)
+        public async Task<JObject> GetQuarterRange(string ticker, string from, string to, bool isConfigureAwait = true, bool useCache = true)
         {
             var request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRangeRequest(ticker, from, to);
-            return await apiClientCore.Get(request, isConfigureAwait, useCache);
+            var response = await apiClientCore.Get(request, isConfigureAwait, useCache);
+            return ApiGetResponseBodyParser.Parse(response);
         }
 
         public void ClearCache() => apiClientCore.ClearCache();

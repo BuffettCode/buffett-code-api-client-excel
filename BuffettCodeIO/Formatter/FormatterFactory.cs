@@ -1,3 +1,4 @@
+using BuffettCodeIO.Property;
 namespace BuffettCodeIO.Formatter
 {
     /// <summary>
@@ -10,7 +11,7 @@ namespace BuffettCodeIO.Formatter
         /// </summary>
         /// <param name="description">項目定義</param>
         /// <returns>フォーマッタ</returns>
-        public static IFormatter Create(PropertyDescrption description = null)
+        public static IExcelFormatter Create(PropertyDescription description = null)
         {
             if (description == null)
             {

@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeAddinRibbon
+namespace BuffettCodeAddinRibbon
 {
     partial class Ribbon : Microsoft.Office.Tools.Ribbon.RibbonBase
     {

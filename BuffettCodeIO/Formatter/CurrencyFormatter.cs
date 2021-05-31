@@ -1,11 +1,11 @@
+using BuffettCodeIO.Property;
 using System;
-
 namespace BuffettCodeIO.Formatter
 {
     /// <summary>
     /// 金額のフォーマッタ
     /// </summary>
-    public class CurrencyFormatter : IFormatter
+    public class CurrencyFormatter : IExcelFormatter
     {
         private static readonly CurrencyFormatter _instance = new CurrencyFormatter();
 
@@ -20,7 +20,7 @@ namespace BuffettCodeIO.Formatter
         }
 
         /// <inheritdoc/>
-        public string Format(string value, PropertyDescrption description)
+        public string Format(string value, PropertyDescription description)
         {
             var denominator = GetDenominator(description);
             if (long.TryParse(value, out long l))
@@ -37,7 +37,7 @@ namespace BuffettCodeIO.Formatter
             }
         }
 
-        private long GetDenominator(PropertyDescrption description)
+        private long GetDenominator(PropertyDescription description)
         {
             switch (description.Unit)
             {

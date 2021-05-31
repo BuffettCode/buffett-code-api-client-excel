@@ -1,3 +1,4 @@
+using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
 using BuffettCodeCommon.Registry;
 using BuffettCodeCommon.Validator;
@@ -35,7 +36,7 @@ namespace BuffettCodeCommon
         /// <summary>
         /// デフォルトでは Test 用のAPI KEY
         /// </summary>
-        public static readonly string ApiKeyDefault = @"sAJGq9JH193KiwnF947v74KnDYkO7z634LWQQfPY";
+        private static readonly string ApiKeyDefault = BuffettCodeApiKeyConfig.TestApiKey;
 
         /// <summary>
         /// 最大同時実行数のデフォルト値

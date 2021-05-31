@@ -1,7 +1,7 @@
 namespace BuffettCodeCommon.Exception
 {
     using System;
-    public class AddinConfigurationException : Exception
+    public class AddinConfigurationException : BaseBuffettCodeException
     {
         public AddinConfigurationException()
         {

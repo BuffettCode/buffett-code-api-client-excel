@@ -34,6 +34,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,10 +45,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\DataTypeConfig.cs" />
     <Compile Include="Exception\AddinConfigurationException.cs" />
-    <Compile Include="Registry\BuffettCodeRegistryConfig.cs" />
+    <Compile Include="Config\BuffettCodeRegistryConfig.cs" />
+    <Compile Include="Config\BuffettCodeApiConfig.cs" />
     <Compile Include="Exception\BuffettCodeApiClientException.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="Exception\AggregationNotFoundException.cs" />
+    <Compile Include="Exception\BaseBuffettCodeException.cs" />
+    <Compile Include="Exception\ApiResponseParserException.cs" />
+    <Compile Include="Exception\ResolveApiException.cs" />
+    <Compile Include="Exception\PropertyNotFoundException.cs" />
+    <Compile Include="Period\Day.cs" />
+    <Compile Include="Period\FiscalQuarterPeriod.cs" />
+    <Compile Include="Period\IPeriod.cs" />
+    <Compile Include="Period\Snapshot.cs" />
     <Compile Include="Registry\BuffettCodeRegistryAccessor.cs" />
     <Compile Include="Validator\ApiKeyValidator.cs" />
     <Compile Include="Validator\FiscalQuarterValidator.cs" />
@@ -53,6 +67,9 @@
     <Compile Include="Exception\ValidationError.cs" />
     <Compile Include="Validator\TickerValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

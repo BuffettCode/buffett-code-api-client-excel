@@ -66,7 +66,9 @@
   <ItemGroup>
     <Compile Include="ApiClientCoreTests.cs" />
     <Compile Include="ApiClientCoreWithCacheTests.cs" />
-    <Compile Include="ApiResponseValidatorTests.cs" />
+    <Compile Include="ApiGetResponseReaderTests.cs" />
+    <Compile Include="ApiClientInstanceGetterTests.cs" />
+    <Compile Include="ApiGetResponseValidatorTests.cs" />
     <Compile Include="BuffettCodeApiV2ClientTests.cs" />
     <Compile Include="BuffettCodeApiV2RequestCreatorTests.cs" />
     <Compile Include="BuffettCodeApiV3ClientTests.cs" />

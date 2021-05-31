@@ -1,6 +1,6 @@
-using BuffettCodeAPIClient.Config;
-using BuffettCodeCommon;
+using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Validator;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Runtime.Caching;
 using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace BuffettCodeAPIClient
         private BuffettCodeApiV3Client()
         {
             apiClientCore = ApiClientCoreWithCache.Create(
-                Configuration.ApiKeyDefault,
+                BuffettCodeApiKeyConfig.TestApiKey,
                 BuffettCodeApiV3Config.BASE_URL,
                 cache
             );
@@ -25,11 +25,12 @@ namespace BuffettCodeAPIClient
 
         }
 
-        public async Task<String> GetDaily(string ticker, DateTime day, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
+        public async Task<JObject> GetDaily(string ticker, DateTime day, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
         {
             var request = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(ticker, day, useOndemand);
             JpTickerValidator.Validate(ticker);
-            return await apiClientCore.Get(request, isConfigureAwait, useCache);
+            var response = await apiClientCore.Get(request, isConfigureAwait, useCache);
+            return ApiGetResponseBodyParser.Parse(response);
         }
 
         public void ClearCache() => apiClientCore.ClearCache();

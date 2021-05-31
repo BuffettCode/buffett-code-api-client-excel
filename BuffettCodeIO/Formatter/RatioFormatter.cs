@@ -1,3 +1,4 @@
+using BuffettCodeIO.Property;
 using System;
 
 namespace BuffettCodeIO.Formatter
@@ -5,7 +6,7 @@ namespace BuffettCodeIO.Formatter
     /// <summary>
     /// 割合のフォーマッタ
     /// </summary>
-    public class RatioFormatter : IFormatter
+    public class RatioFormatter : IExcelFormatter
     {
         private static readonly RatioFormatter _instance = new RatioFormatter();
 
@@ -20,13 +21,13 @@ namespace BuffettCodeIO.Formatter
         }
 
         /// <inheritdoc/>
-        public string Format(string value, PropertyDescrption description)
+        public string Format(string value, PropertyDescription description)
         {
             var format = GetFormat(description);
             return double.TryParse(value, out double d) ? String.Format(format, d) : value;
         }
 
-        private string GetFormat(PropertyDescrption description)
+        private string GetFormat(PropertyDescription description)
         {
             switch (description.Name)
             {

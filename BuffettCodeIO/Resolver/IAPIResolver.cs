@@ -1,3 +1,4 @@
+using BuffettCodeCommon.Config;
 namespace BuffettCodeIO.Resolver
 {
     /// <summary>
@@ -15,6 +16,6 @@ namespace BuffettCodeIO.Resolver
         /// </summary>
         /// <param name="propertyName">項目名</param>
         /// <returns>APIType</returns>
-        APIType Resolve(string propertyName);
+        DataTypeConfig Resolve(string propertyName);
     }
 }

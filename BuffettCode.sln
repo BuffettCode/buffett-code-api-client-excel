@@ -20,12 +20,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeIO", "BuffettCod
 		{8552CFD4-39C4-47D9-A0FA-BE33B952465A} = {8552CFD4-39C4-47D9-A0FA-BE33B952465A}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeIOTest", "BuffettCodeIOTest\BuffettCodeIOTest.csproj", "{4E36644A-8C51-40AC-98DC-26471E12A4E8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{79DACA04-C2B5-4D1B-996D-2EA1AD79909F} = {79DACA04-C2B5-4D1B-996D-2EA1AD79909F}
-		{44A5BFAB-ACD6-492F-B0C6-29E0EA07A90A} = {44A5BFAB-ACD6-492F-B0C6-29E0EA07A90A}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeExcelFunctions", "BuffettCodeExcelFunctions\BuffettCodeExcelFunctions.csproj", "{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{79DACA04-C2B5-4D1B-996D-2EA1AD79909F} = {79DACA04-C2B5-4D1B-996D-2EA1AD79909F}
@@ -50,6 +44,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeIOTests", "BuffettCodeIOTests\BuffettCodeIOTests.csproj", "{2BE80093-91C5-461C-A244-99C5B7F67AFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,14 +95,6 @@ Global
 		{44A5BFAB-ACD6-492F-B0C6-29E0EA07A90A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{44A5BFAB-ACD6-492F-B0C6-29E0EA07A90A}.Release|x86.ActiveCfg = Release|Any CPU
 		{44A5BFAB-ACD6-492F-B0C6-29E0EA07A90A}.Release|x86.Build.0 = Release|Any CPU
-		{4E36644A-8C51-40AC-98DC-26471E12A4E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E36644A-8C51-40AC-98DC-26471E12A4E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E36644A-8C51-40AC-98DC-26471E12A4E8}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4E36644A-8C51-40AC-98DC-26471E12A4E8}.Debug|x86.Build.0 = Debug|Any CPU
-		{4E36644A-8C51-40AC-98DC-26471E12A4E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E36644A-8C51-40AC-98DC-26471E12A4E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4E36644A-8C51-40AC-98DC-26471E12A4E8}.Release|x86.ActiveCfg = Release|Any CPU
-		{4E36644A-8C51-40AC-98DC-26471E12A4E8}.Release|x86.Build.0 = Release|Any CPU
 		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -155,6 +143,14 @@ Global
 		{E55D4F71-9AA4-435E-898A-7ADB72FBBA95}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E55D4F71-9AA4-435E-898A-7ADB72FBBA95}.Release|x86.ActiveCfg = Release|Any CPU
 		{E55D4F71-9AA4-435E-898A-7ADB72FBBA95}.Release|x86.Build.0 = Release|Any CPU
+		{2BE80093-91C5-461C-A244-99C5B7F67AFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BE80093-91C5-461C-A244-99C5B7F67AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BE80093-91C5-461C-A244-99C5B7F67AFA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2BE80093-91C5-461C-A244-99C5B7F67AFA}.Debug|x86.Build.0 = Debug|Any CPU
+		{2BE80093-91C5-461C-A244-99C5B7F67AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BE80093-91C5-461C-A244-99C5B7F67AFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BE80093-91C5-461C-A244-99C5B7F67AFA}.Release|x86.ActiveCfg = Release|Any CPU
+		{2BE80093-91C5-461C-A244-99C5B7F67AFA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

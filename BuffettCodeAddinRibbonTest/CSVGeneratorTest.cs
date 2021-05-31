@@ -1,5 +1,8 @@
-using BuffettCodeIO;
+using BuffettCodeAPIClient;
+using BuffettCodeIO.Parser;
+using BuffettCodeIO.Property;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -9,13 +12,18 @@ namespace BuffettCodeAddinRibbon.UnitTests
     public class CSVGeneratorTest
     {
 
+        private static IList<Quarter> ReadV2Quarter()
+        {
+            var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"data\quarter.json"));
+            return ApiV2ResponseParser.ParseQuarterRange(json);
+        }
+
         [TestMethod]
         [DeploymentItem(@"data\quarter.json", "data")]
         [DeploymentItem(@"data\csv.txt", "data")]
         public void TestGenerateAndWrite()
         {
-            var json = File.ReadAllText(@"data\quarter.json");
-            var quarters = Quarter.Parse("2371", json);
+            var quarters = ReadV2Quarter();
 
             using (var stream = new MemoryStream())
             {
@@ -31,8 +39,7 @@ namespace BuffettCodeAddinRibbon.UnitTests
         [DeploymentItem(@"data\propertyNames.txt", "data")]
         public void TestGetPropertyNames()
         {
-            var json = File.ReadAllText(@"data\quarter.json");
-            var quarters = Quarter.Parse("2371", json);
+            var quarters = ReadV2Quarter();
             var propertyNames = CSVGenerator.GetPropertyNames(quarters[0]);
 
             var actual = string.Join(",", propertyNames);

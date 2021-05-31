@@ -1,4 +1,4 @@
-using BuffettCodeCommon;
+using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
 
 namespace BuffettCodeAPIClient.Tests
@@ -15,7 +15,7 @@ namespace BuffettCodeAPIClient.Tests
         /// <summary>
         /// Defines the client.
         /// </summary>
-        private readonly BuffettCodeApiV2Client client = BuffettCodeApiV2Client.GetInstance(Configuration.ApiKeyDefault);
+        private readonly BuffettCodeApiV2Client client = BuffettCodeApiV2Client.GetInstance(BuffettCodeApiKeyConfig.TestApiKey);
 
         /// <summary>
         /// The GetQuarterTest.

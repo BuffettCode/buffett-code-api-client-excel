@@ -1,5 +1,5 @@
-﻿using BuffettCodeIO;
 using BuffettCodeIO.Formatter;
+using BuffettCodeIO.Property;
 using CsvHelper;
 using System.Collections.Generic;
 using System.IO;
@@ -33,7 +33,7 @@ namespace BuffettCodeAddinRibbon
                 writer.WriteField("単位");
                 foreach (var quarter in quarters)
                 {
-                    writer.WriteField(quarter.FiscalYear + "Q" + quarter.FiscalQuarter);
+                    writer.WriteField($"{quarter.Period.Year}Q{quarter.Period.Quarter}");
                 }
                 writer.NextRecord();
 
@@ -65,7 +65,7 @@ namespace BuffettCodeAddinRibbon
         public static IList<string> GetPropertyNames(Quarter quarter)
         {
             var result = ORDERED_PROPERTIES.ToList<string>();
-            foreach (var propertyName in quarter.GetNames())
+            foreach (var propertyName in quarter.GetPropartyNames())
             {
                 if (!ORDERED_PROPERTIES.Contains(propertyName) && !EXCLUDE_PROPERTIES.Contains(propertyName))
                 {

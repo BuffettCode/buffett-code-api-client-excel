@@ -76,6 +76,10 @@
       <Project>{151a2480-cc5e-4eda-a163-9f50173026a8}</Project>
       <Name>BuffettCodeAddinRibbon</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BuffettCodeAPIClient\BuffettCodeAPIClient.csproj">
+      <Project>{79daca04-c2b5-4d1b-996d-2ea1ad79909f}</Project>
+      <Name>BuffettCodeAPIClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BuffettCodeIO\BuffettCodeIO.csproj">
       <Project>{44a5bfab-acd6-492f-b0c6-29e0ea07a90a}</Project>
       <Name>BuffettCodeIO</Name>

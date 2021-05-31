@@ -1,4 +1,4 @@
-using BuffettCodeAPIClient.Config;
+using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Validator;
 using System.Collections.Generic;
 

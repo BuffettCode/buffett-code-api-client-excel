@@ -1,11 +1,11 @@
 using BuffettCodeCommon.Exception;
-using BuffettCodeIO;
 using BuffettCodeIO.Formatter;
+using BuffettCodeIO.Parser;
+using BuffettCodeIO.Property;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BuffettCodeAddinRibbon
@@ -85,6 +85,11 @@ namespace BuffettCodeAddinRibbon
             catch (InvalidAPIKeyException)
             {
                 MessageBox.Show("APIキーが有効ではありません。", "CSV出力", MessageBoxButtons.OK);
+                return;
+            }
+            catch (ApiResponseParserException)
+            {
+                MessageBox.Show("APIのレスポンスのパースに失敗しました。", "CSV出力", MessageBoxButtons.OK);
                 return;
             }
             catch (Exception)
@@ -182,7 +187,7 @@ namespace BuffettCodeAddinRibbon
             worksheet.Cells[col, row++] = "単位";
             foreach (var quarter in quarters)
             {
-                worksheet.Cells[col, row++] = quarter.FiscalYear + "Q" + quarter.FiscalQuarter;
+                worksheet.Cells[col, row++] = $"{quarter.Period.Year}Q{quarter.Period.Quarter}";
             }
 
             // write values
@@ -213,19 +218,16 @@ namespace BuffettCodeAddinRibbon
         private IList<Quarter> GetSortedQuarters(string ticker, string from, string to)
         {
             var client = AddinFacade.GetApiClient();
+
             var quarters = new List<Quarter>();
 
             foreach (KeyValuePair<string, string> range in SliceRange(from, to))
             {
-                Task<string> task = client.GetQuarterRange(ticker, range.Key, range.Value, false);
-                string json = task.Result;
-                quarters.AddRange(Quarter.Parse(ticker, json));
-            }
+                var json = client.GetQuarterRange(ticker, range.Key, range.Value, false).Result;
 
-            var distinct = new List<Quarter>(quarters).Distinct(new IPropertyAggregationComparer()).Cast<Quarter>();
-            var sorted = new List<Quarter>(distinct);
-            sorted.Sort((left, right) => { return left.GetIdentifier().CompareTo(right.GetIdentifier()); });
-            return sorted;
+                quarters.AddRange(ApiV2ResponseParser.ParseQuarterRange(json));
+            }
+            return quarters.Distinct().OrderBy(q => q.Period).ToArray();
         }
 
         private IDictionary<string, string> SliceRange(string from, string to)
