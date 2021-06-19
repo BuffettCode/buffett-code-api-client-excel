@@ -50,30 +50,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AggregationNotFoundException.cs" />
-    <Compile Include="ResolveAPIException.cs" />
+    <Compile Include="Parser\ApiV2ResponseParser.cs" />
+    <Compile Include="Parser\PropertyNames.cs" />
+    <Compile Include="Parser\PropertiesParser.cs" />
+    <Compile Include="Parser\ValueNormalizer.cs" />
+    <Compile Include="Parser\ColumnDescriptionParser.cs" />
+    <Compile Include="Parser\IApiResponseParser.cs" />
+    <Compile Include="Property\PropertyDescriptionDictionary.cs" />
+    <Compile Include="Property\PropertyDictionary.cs" />
     <Compile Include="Resolver\ConstAPIResolver.cs" />
-    <Compile Include="BuffettCodeApiTaskProcessor.cs" />
-    <Compile Include="BuffettCodeException.cs" />
+    <Compile Include="BuffettCodeApiV2TaskProcessor.cs" />
     <Compile Include="Formatter\NumericFormatter.cs" />
-    <Compile Include="Formatter\IFormatter.cs" />
+    <Compile Include="Formatter\IExcelFormatter.cs" />
     <Compile Include="Formatter\FormatterFactory.cs" />
     <Compile Include="Processor\ITaskProcessor.cs" />
     <Compile Include="Processor\SemaphoreTaskProcessor.cs" />
     <Compile Include="Resolver\APIResolverFactory.cs" />
-    <Compile Include="Resolver\APIType.cs" />
     <Compile Include="Resolver\IAPIResolver.cs" />
     <Compile Include="Resolver\WebResourceAPIResolver.cs" />
     <Compile Include="Formatter\InactionFormatter.cs" />
-    <Compile Include="Indicator.cs" />
+    <Compile Include="Property\Indicator.cs" />
     <Compile Include="Formatter\CurrencyFormatter.cs" />
     <Compile Include="Formatter\RatioFormatter.cs" />
-    <Compile Include="IPropertyAggregationComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IPropertyAggregation.cs" />
-    <Compile Include="PropertyDescrption.cs" />
-    <Compile Include="PropertyNotFoundException.cs" />
-    <Compile Include="Quarter.cs" />
+    <Compile Include="Property\IApiSchema.cs" />
+    <Compile Include="Property\PropertyDescription.cs" />
+    <Compile Include="Property\Quarter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

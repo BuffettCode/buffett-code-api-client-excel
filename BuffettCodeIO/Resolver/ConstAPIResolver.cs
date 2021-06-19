@@ -1,3 +1,4 @@
+using BuffettCodeCommon.Config;
 using System.Linq;
 
 namespace BuffettCodeIO.Resolver
@@ -107,9 +108,9 @@ namespace BuffettCodeIO.Resolver
         }
 
         /// <inheritdoc/>
-        public APIType Resolve(string propertyName)
+        public DataTypeConfig Resolve(string propertyName)
         {
-            return IsIndicator(propertyName) ? APIType.Indicator : APIType.Quarter;
+            return IsIndicator(propertyName) ? DataTypeConfig.Indicator : DataTypeConfig.Quarter;
         }
     }
 }

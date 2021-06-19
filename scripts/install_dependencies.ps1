@@ -2,7 +2,7 @@ $Packages = (
     "BuffettCodeAddinRibbon",
     "BuffettCodeAddinRibbonTest",
     "BuffettCodeIO",
-    "BuffettCodeIOTest",
+    "BuffettCodeIOTests",
     "BuffettCodeInstaller",
     "InstallerCA",
     "BuffettCodeExcelFunctions",

@@ -1,3 +1,5 @@
+using BuffettCodeCommon.Config;
+using BuffettCodeIO.Property;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -13,12 +15,12 @@ namespace BuffettCodeIO.Resolver
     /// </summary>
     public class WebResourceAPIResolver : IAPIResolver
     {
-        private static readonly Dictionary<string, APIType> mappingTable;
+        private static readonly Dictionary<string, DataTypeConfig> mappingTable;
 
-        private static readonly Dictionary<APIType, string> propertyDescriptionDefinitions = new Dictionary<APIType, string>
+        private static readonly Dictionary<DataTypeConfig, string> propertyDescriptionDefinitions = new Dictionary<DataTypeConfig, string>
         {
-            {APIType.Quarter, @"https://docs.buffett-code.com/v2-quarter.json" },
-            {APIType.Indicator, @"https://docs.buffett-code.com/v2-indicator.json" }
+            {DataTypeConfig.Quarter, @"https://docs.buffett-code.com/v2-quarter.json" },
+            {DataTypeConfig.Indicator, @"https://docs.buffett-code.com/v2-indicator.json" }
         };
 
         private static readonly WebResourceAPIResolver _instance = new WebResourceAPIResolver();
@@ -32,9 +34,9 @@ namespace BuffettCodeIO.Resolver
             mappingTable = CreateMappingTable();
         }
 
-        private static Dictionary<string, APIType> CreateMappingTable()
+        private static Dictionary<string, DataTypeConfig> CreateMappingTable()
         {
-            var result = new Dictionary<string, APIType>();
+            var result = new Dictionary<string, DataTypeConfig>();
             try
             {
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
@@ -59,18 +61,18 @@ namespace BuffettCodeIO.Resolver
             return result;
         }
 
-        private static IList<PropertyDescrption> Parse(string jsonString)
+        private static IList<PropertyDescription> Parse(string jsonString)
         {
             JObject json = JsonConvert.DeserializeObject(jsonString) as JObject;
             return json.Children().Where(t => t is JProperty).Cast<JProperty>().Select(t => ToPropertyDescription(t)).ToList();
         }
 
-        private static PropertyDescrption ToPropertyDescription(JProperty property)
+        private static PropertyDescription ToPropertyDescription(JProperty property)
         {
             string name = property.Name;
             string label = property.Value["name_jp"].ToString();
             string unit = property.Value["unit"].ToString();
-            return new PropertyDescrption(name, label, unit);
+            return new PropertyDescription(name, label, unit);
         }
         /// <summary>
         /// 初期化に成功したかどうかを返します。
@@ -86,7 +88,7 @@ namespace BuffettCodeIO.Resolver
         }
 
         /// <inheritdoc/>
-        public APIType Resolve(string propertyName)
+        public DataTypeConfig Resolve(string propertyName)
         {
             if (mappingTable.ContainsKey(propertyName))
             {
@@ -94,7 +96,7 @@ namespace BuffettCodeIO.Resolver
             }
             else
             {
-                return APIType.Quarter; // default value
+                return DataTypeConfig.Quarter; // default value
             }
         }
     }

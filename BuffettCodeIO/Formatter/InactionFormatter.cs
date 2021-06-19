@@ -1,9 +1,10 @@
+using BuffettCodeIO.Property;
 namespace BuffettCodeIO.Formatter
 {
     /// <summary>
     /// 値をそのまま返すだけのフォーマッタ
     /// </summary>
-    public class InactionFormatter : IFormatter
+    public class InactionFormatter : IExcelFormatter
     {
         private static readonly InactionFormatter _instance = new InactionFormatter();
 
@@ -13,7 +14,7 @@ namespace BuffettCodeIO.Formatter
         }
 
         /// <inheritdoc/>
-        public string Format(string value, PropertyDescrption description)
+        public string Format(string value, PropertyDescription description)
         {
             return value;
         }

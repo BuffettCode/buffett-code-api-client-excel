@@ -3,6 +3,7 @@ namespace BuffettCodeExcelFunctions
     using BuffettCodeCommon;
     using BuffettCodeCommon.Exception;
     using BuffettCodeIO;
+    using BuffettCodeIO.Property;
     using ExcelDna.Integration;
     using System;
 
@@ -17,7 +18,7 @@ namespace BuffettCodeExcelFunctions
     public class UserDefinedFunctions
     {
         private static readonly Configuration config = Configuration.GetInstance();
-        private static readonly BuffettCodeApiTaskProcessor apiTaskProcessor = new BuffettCodeApiTaskProcessor(config.ApiKey, config.MaxDegreeOfParallelism);
+        private static readonly BuffettCodeApiV2TaskProcessor apiTaskProcessor = new BuffettCodeApiV2TaskProcessor(config.ApiKey, config.MaxDegreeOfParallelism);
         private static readonly object updateLock = new object();
 
         /// <summary>
@@ -30,8 +31,8 @@ namespace BuffettCodeExcelFunctions
         /// <param name="isRawValue">rawデータフラグ</param>
         /// <param name="isPostfixUnit">単位フラグ</param>
         /// <returns>Excelのセルに表示する文字列</returns>
-        [ExcelFunction(Description = "Get indicators, stock prices, and any further values by BuffettCode API")]
-        public static string BCODE(string ticker, string parameter1, string parameter2, string propertyName, bool isRawValue = false, bool isPostfixUnit = false)
+        [ExcelFunction(Description = "Get indicators, stock prices, and any further values by BuffettCode API", Name = "BCODE")]
+        public static string BCodeLegacy(string ticker, string parameter1, string parameter2, string propertyName, bool isRawValue = false, bool isPostfixUnit = false)
         {
             try
             {
@@ -155,7 +156,7 @@ namespace BuffettCodeExcelFunctions
             }
         }
 
-        private static PropertyDescrption GetDescription(string propertyName)
+        private static PropertyDescription GetDescription(string propertyName)
         {
             // column_descriptionをAPIから取得させるため、適当なパラメタを渡している
             return apiTaskProcessor.GetDescription("1301", "2019", "4", propertyName);
@@ -196,9 +197,13 @@ namespace BuffettCodeExcelFunctions
             {
                 message = "テスト用のAPIキーでは取得できないデータです";
             }
-            else if (bce is ResolveAPIException)
+            else if (bce is ResolveApiException)
             {
                 message = "未定義の項目名です";
+            }
+            else if (bce is ApiResponseParserException)
+            {
+                message = "APIレスポンスのパースに失敗しました";
             }
             else
             {
@@ -212,7 +217,7 @@ namespace BuffettCodeExcelFunctions
             Exception cursor = e;
             do
             {
-                if (cursor is BuffettCodeException)
+                if (cursor is BaseBuffettCodeException)
                 {
                     break;
                 }

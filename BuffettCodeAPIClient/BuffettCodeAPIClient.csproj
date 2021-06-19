@@ -56,12 +56,13 @@
     <Compile Include="BuffettCodeApiV3Client.cs" />
     <Compile Include="BuffettCodeApiV2Client.cs" />
     <Compile Include="BuffettCodeApiV2RequestCreator.cs" />
-    <Compile Include="ApiResponseValidator.cs" />
+    <Compile Include="ApiGetResponseBodyParser.cs" />
     <Compile Include="ApiGetRequest.cs" />
     <Compile Include="CacheKeyCreator.cs" />
     <Compile Include="ApiRequestCacheHelper.cs" />
     <Compile Include="ApiClientCoreWithCache.cs" />
-    <Compile Include="Config\BuffettCodeApiConfig.cs" />
+    <Compile Include="ApiClientInstanceGetter.cs" />
+    <Compile Include="ApiGetResponseValidator.cs" />
     <Compile Include="IBuffettCodeApiClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

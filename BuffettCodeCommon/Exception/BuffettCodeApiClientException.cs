@@ -1,9 +1,6 @@
 namespace BuffettCodeCommon.Exception
 {
-    /// <summary>
-    /// Default Exception on BuffettCode Api Client
-    /// </summary>
-    public class BuffettCodeApiClientException : System.Exception
+    public class BuffettCodeApiClientException : BaseBuffettCodeException
     {
     }
 
@@ -16,6 +13,10 @@ namespace BuffettCodeCommon.Exception
     }
 
     public class TestAPIConstraintException : BuffettCodeApiClientException
+    {
+    }
+
+    public class UnsupportedTypeException : BuffettCodeApiClientException
     {
     }
 }
