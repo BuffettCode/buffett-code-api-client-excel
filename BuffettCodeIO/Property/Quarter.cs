@@ -11,7 +11,7 @@ namespace BuffettCodeIO.Property
     /// <remarks>
     /// /api/{version}/quarter のレスポンスに対応します。
     /// </remarks>
-    public class Quarter : IApiSchema
+    public class Quarter : IApiResource
     {
         private readonly string ticker;
         private readonly FiscalQuarterPeriod period;
@@ -30,7 +30,7 @@ namespace BuffettCodeIO.Property
             this.descriptions = descriptions;
         }
 
-        public ICollection<string> GetPropartyNames() => properties.Names;
+        public ICollection<string> GetPropertyNames() => properties.Names;
 
         public string GetValue(string propertyName) => properties.Get(propertyName);
         public PropertyDescription GetDescription(string propertyName) => descriptions.Get(propertyName);

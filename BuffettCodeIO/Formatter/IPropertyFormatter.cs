@@ -11,7 +11,7 @@ namespace BuffettCodeIO.Formatter
     /// DBから取得した値そのままで、財務データの一般的な表記ではありません。
     /// そこで、項目定義を参照しながら適切な表記に直す機能をそれぞれの派生クラスに持たせています。
     /// </remarks>
-    public interface IExcelFormatter
+    public interface IPropertyFormatter
     {
         /// <summary>
         /// 値をフォーマットします。

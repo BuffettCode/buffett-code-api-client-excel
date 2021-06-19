@@ -41,7 +41,7 @@ namespace BuffettCodeCommon
         /// <summary>
         /// 最大同時実行数のデフォルト値
         /// </summary>
-        private static readonly int MaxDegreeOfParallelismDefault = 8;
+        private static readonly uint MaxDegreeOfParallelismDefault = 8;
 
 
         /// <summary>
@@ -80,9 +80,9 @@ namespace BuffettCodeCommon
         /// <summary>
         /// APIコールの最大同時実行数
         /// </summary>
-        public int MaxDegreeOfParallelism
+        public uint MaxDegreeOfParallelism
         {
-            get => (int)registryAccessor.GetRegistryValue(BuffettCodeRegistryConfig.NameMaxDegreeOfParallelism, MaxDegreeOfParallelismDefault);
+            get => uint.Parse(registryAccessor.GetRegistryValue(BuffettCodeRegistryConfig.NameMaxDegreeOfParallelism, MaxDegreeOfParallelismDefault).ToString());
             set => registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameMaxDegreeOfParallelism, value);
         }
 
@@ -109,5 +109,7 @@ namespace BuffettCodeCommon
         }
 
         public string KeyName => registryAccessor.KeyName;
+
+        public BuffettCodeApiVersion ApiVersion => BuffettCodeApiVersion.Version2;
     }
 }

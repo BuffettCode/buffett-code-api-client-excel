@@ -1,4 +1,5 @@
 using BuffettCodeCommon.Config;
+using BuffettCodeCommon.Period;
 using BuffettCodeCommon.Validator;
 using System.Collections.Generic;
 
@@ -6,16 +7,14 @@ namespace BuffettCodeAPIClient
 {
     public class BuffettCodeApiV2RequestCreator
     {
-        public static ApiGetRequest CreateGetQuarterRequest(string ticker, uint fiscalYear, uint fiscalQuarter, bool useOndemand)
+        public static ApiGetRequest CreateGetQuarterRequest(string ticker, FiscalQuarterPeriod period, bool useOndemand)
         {
             JpTickerValidator.Validate(ticker);
-            FiscalYearValidator.Validate(fiscalYear);
-            FiscalQuarterValidator.Validate(fiscalQuarter);
             var paramaters = new Dictionary<string, string>()
             {
                 {"ticker", ticker },
-                {"fy", fiscalYear.ToString() },
-                {"fq", fiscalQuarter.ToString() },
+                {"fy", period.Year.ToString() },
+                {"fq", period.Quarter.ToString() },
             };
 
             var endpoint = useOndemand ?
@@ -24,14 +23,14 @@ namespace BuffettCodeAPIClient
             return new ApiGetRequest(endpoint, paramaters);
         }
 
-        public static ApiGetRequest CreateGetQuarterRangeRequest(string ticker, string from, string to)
+        public static ApiGetRequest CreateGetQuarterRangeRequest(string ticker, FiscalQuarterPeriod from, FiscalQuarterPeriod to)
         {
             JpTickerValidator.Validate(ticker);
             var paramaters = new Dictionary<string, string>()
             {
                 {"tickers", ticker },
-                {"from", from },
-                {"to", to },
+                {"from", from.ToString() },
+                {"to", to.ToString() },
             };
             return new ApiGetRequest(BuffettCodeApiV2Config.ENDPOINT_QUARTER, paramaters);
         }

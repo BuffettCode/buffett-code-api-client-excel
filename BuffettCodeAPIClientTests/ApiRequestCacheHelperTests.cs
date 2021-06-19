@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Caching;
 
@@ -11,7 +12,8 @@ namespace BuffettCodeAPIClient.Tests
         public void TestCacheLifeCycle()
         {
             var cache = new MemoryCache("TestCacheLifeCycle");
-            var cacheHelper = new ApiRequestCacheHelper(cache);
+            var baseUrl = "https://example.com/test";
+            var cacheHelper = new ApiRequestCacheHelper(cache, new Uri(baseUrl));
             var endPoint = "dummy";
             var parameters = new Dictionary<string, string> { { "key", "value" } };
             var response = "results";

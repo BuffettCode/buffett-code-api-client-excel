@@ -1,6 +1,6 @@
 using BuffettCodeCommon.Config;
+using BuffettCodeCommon.Period;
 using BuffettCodeCommon.Validator;
-using System;
 using System.Collections.Generic;
 
 
@@ -9,13 +9,13 @@ namespace BuffettCodeAPIClient
 {
     public class BuffettCodeApiV3RequestCreator
     {
-        public static ApiGetRequest CreateGetDailyRequest(string ticker, DateTime date, bool useOndemand)
+        public static ApiGetRequest CreateGetDailyRequest(string ticker, DayPeriod day, bool useOndemand)
         {
             JpTickerValidator.Validate(ticker);
             var paramaters = new Dictionary<string, string>()
             {
                 {"ticker", ticker },
-                {"date", date.Date.ToString("yyyy-MM-dd") },
+                {"date", day.ToString() },
             };
 
             var endpoint = useOndemand ?

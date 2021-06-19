@@ -9,7 +9,7 @@ namespace BuffettCodeIO.Formatter.Tests
         [TestMethod]
         public void TestCreate()
         {
-            IExcelFormatter formatter;
+            IPropertyFormatter formatter;
 
             // 通貨
             formatter = CreateFormatter("dividend", "配当金", "円");
@@ -38,14 +38,14 @@ namespace BuffettCodeIO.Formatter.Tests
             Assert.IsTrue(formatter is InactionFormatter);
 
             // プロパティの定義を渡さなかったら常にInactionFormatter
-            formatter = FormatterFactory.Create(null);
+            formatter = PropertyFormatterFactory.Create(null);
             Assert.IsTrue(formatter is InactionFormatter);
         }
 
-        private IExcelFormatter CreateFormatter(string name, string label, string unit)
+        private IPropertyFormatter CreateFormatter(string name, string label, string unit)
         {
             PropertyDescription description = new PropertyDescription(name, label, unit);
-            return FormatterFactory.Create(description);
+            return PropertyFormatterFactory.Create(description);
         }
 
 

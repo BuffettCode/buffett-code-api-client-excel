@@ -1,5 +1,6 @@
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
+using BuffettCodeCommon.Period;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
@@ -15,9 +16,10 @@ namespace BuffettCodeAPIClient.Tests
             var ticker = "6591";
             uint fiscalYear = 2019;
             uint fiscalQuarter = 3;
+            var period = FiscalQuarterPeriod.Create(fiscalYear, fiscalQuarter);
 
             // use ondemand
-            var request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, fiscalYear, fiscalQuarter, true);
+            var request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, period, true);
             Assert.AreEqual(request.EndPoint, BuffettCodeApiV2Config.ENDPOINT_ONDEMAND_QUARTER);
             Assert.AreEqual(ticker, request.Parameters["ticker"]);
             Assert.AreEqual(fiscalYear.ToString(), request.Parameters["fy"]);
@@ -25,7 +27,7 @@ namespace BuffettCodeAPIClient.Tests
 
 
             // not use ondemand
-            request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, fiscalYear, fiscalQuarter, false);
+            request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, period, false);
             Assert.AreEqual(request.EndPoint, BuffettCodeApiV2Config.ENDPOINT_QUARTER);
             Assert.AreEqual(ticker, request.Parameters["ticker"]);
             Assert.AreEqual(fiscalYear.ToString(), request.Parameters["fy"]);
@@ -35,15 +37,7 @@ namespace BuffettCodeAPIClient.Tests
             // validation Errors
             Assert.ThrowsException<ValidationError>(
                 () =>
-                BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest("aaa", fiscalYear, fiscalQuarter, false)
-                );
-            Assert.ThrowsException<ValidationError>(
-                () =>
-                BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, 1, fiscalQuarter, false)
-                );
-            Assert.ThrowsException<ValidationError>(
-                () =>
-                BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, fiscalYear, 10, false)
+                BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest("aaa", period, false)
                 );
 
         }
@@ -66,18 +60,20 @@ namespace BuffettCodeAPIClient.Tests
         {
             // ok case
             var ticker = "6501";
-            var from = "2020Q1";
-            var to = "2022Q4";
+            var fromStr = "2020Q1";
+            var toStr = "2022Q4";
+
+            var from = FiscalQuarterPeriod.Parse(fromStr);
+            var to = FiscalQuarterPeriod.Parse(toStr);
 
             var request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRangeRequest(ticker, from, to);
             Assert.AreEqual(request.EndPoint, BuffettCodeApiV2Config.ENDPOINT_QUARTER);
             Assert.AreEqual(ticker, request.Parameters["tickers"]);
-            Assert.AreEqual(from, request.Parameters["from"]);
-            Assert.AreEqual(to, request.Parameters["to"]);
+            Assert.AreEqual(fromStr, request.Parameters["from"]);
+            Assert.AreEqual(toStr, request.Parameters["to"]);
 
             // validation errors
             Assert.ThrowsException<ValidationError>(() => BuffettCodeApiV2RequestCreator.CreateGetQuarterRangeRequest("aaa", from, to));
-
         }
     }
 }

@@ -1,8 +1,9 @@
 namespace BuffettCodeExcelFunctions
 {
     using BuffettCodeCommon;
+    using BuffettCodeCommon.Config;
     using BuffettCodeCommon.Exception;
-    using BuffettCodeIO;
+    using BuffettCodeCommon.Period;
     using BuffettCodeIO.Property;
     using ExcelDna.Integration;
     using System;
@@ -18,8 +19,6 @@ namespace BuffettCodeExcelFunctions
     public class UserDefinedFunctions
     {
         private static readonly Configuration config = Configuration.GetInstance();
-        private static readonly BuffettCodeApiV2TaskProcessor apiTaskProcessor = new BuffettCodeApiV2TaskProcessor(config.ApiKey, config.MaxDegreeOfParallelism);
-        private static readonly object updateLock = new object();
 
         /// <summary>
         /// Excelのユーザー定義関数BCODE。銘柄コードを指定して財務数値や指標を取得します
@@ -31,13 +30,13 @@ namespace BuffettCodeExcelFunctions
         /// <param name="isRawValue">rawデータフラグ</param>
         /// <param name="isPostfixUnit">単位フラグ</param>
         /// <returns>Excelのセルに表示する文字列</returns>
-        [ExcelFunction(Description = "Get indicators, stock prices, and any further values by BuffettCode API", Name = "BCODE")]
+        [ExcelFunction(Description = "[deprecated] Get indicators, stock prices, and any further values by BuffettCode API", Name = "BCODE")]
         public static string BCodeLegacy(string ticker, string parameter1, string parameter2, string propertyName, bool isRawValue = false, bool isPostfixUnit = false)
         {
             try
             {
-                UpdateProcessorIfNeeded();
-                return apiTaskProcessor.GetValue(ticker, parameter1, parameter2, propertyName, isRawValue, isPostfixUnit);
+                var apiResouce = ApiResourceFetcher.FetchForLegacy(ticker, parameter1, parameter2, propertyName);
+                return PropertySelector.SelectFormattedValue(propertyName, apiResouce, isRawValue, isPostfixUnit);
             }
             catch (Exception e)
             {
@@ -45,18 +44,12 @@ namespace BuffettCodeExcelFunctions
             }
         }
 
-        /// <summary>
-        /// Excelのユーザー定義関数BCODE_LABEL。項目名を指定して日本語の名称を取得します
-        /// </summary>
-        /// <param name="propertyName">項目名</param>
-        /// <returns>Excelのセルに表示する文字列</returns>
-        [ExcelFunction(IsHidden = true, Description = "Get property name in Japanese")]
-        public static string BCODE_LABEL(string propertyName)
+        [ExcelFunction(IsHidden = true, Description = "Get property name in Japanese", Name = "BCODE_LABEL")]
+        public static string BCodeLabel(string propertyName)
         {
             try
             {
-                UpdateProcessorIfNeeded();
-                return GetDescription(propertyName).Label;
+                return FetchQuarterPropertyDefititon(propertyName).Label;
             }
             catch (Exception e)
             {
@@ -64,18 +57,12 @@ namespace BuffettCodeExcelFunctions
             }
         }
 
-        /// <summary>
-        /// Excelのユーザー定義関数BCODE_UNIT。項目名を指定して単位の名称を取得します
-        /// </summary>
-        /// <param name="propertyName">項目名</param>
-        /// <returns>Excelのセルに表示する文字列</returns>
-        [ExcelFunction(IsHidden = true, Description = "Get unit name in Japanese")]
-        public static string BCODE_UNIT(string propertyName)
+        [ExcelFunction(IsHidden = true, Description = "Get unit name in Japanese", Name = "BCODE_UNIT")]
+        public static string BCodeUnit(string propertyName)
         {
             try
             {
-                UpdateProcessorIfNeeded();
-                return GetDescription(propertyName).Unit;
+                return FetchQuarterPropertyDefititon(propertyName).Unit;
             }
             catch (Exception e)
             {
@@ -83,51 +70,12 @@ namespace BuffettCodeExcelFunctions
             }
         }
 
-        /// <summary>
-        /// Excelのユーザー定義関数BCODE_API_KEY。
-        /// </summary>
-        /// <returns>Registryに格納されたAPI Token</returns>
-        [ExcelFunction(IsHidden = true, Description = "Clear CacheStore")]
-        public static string BCODE_API_KEY()
-        {
-            try
-            {
-                UpdateProcessorIfNeeded();
-                return config.ApiKey;
-            }
-            catch (Exception e)
-            {
-                return ToErrorMessage(e);
-            }
-        }
+        [ExcelFunction(IsHidden = true, Description = "[DEBUG] Print Api Key in a Registry", Name = "BCODE_API_KEY")]
+        public static string PrintApiKeyInRegistry() => config.ApiKey;
 
 
-
-        /// <summary>
-        /// Excelのユーザー定義関数BCODE_CLEAR。ApiClientが持つAPIレスポンスのキャッシュをクリアします。デバッグ用
-        /// </summary>
-        /// <returns>Excelのセルに表示する文字列。常に空文字列</returns>
-        [ExcelFunction(IsHidden = true, Description = "Clear CacheStore")]
-        public static string BCODE_CLEAR()
-        {
-            try
-            {
-                UpdateProcessorIfNeeded();
-                apiTaskProcessor.ClearCache();
-                return "Succeed: CacheClear";
-            }
-            catch (Exception e)
-            {
-                return ToErrorMessage(e);
-            }
-        }
-
-        /// <summary>
-        /// Excelのユーザー定義関数BCODE_PING。ExcelからXLLアドインへのファンクションコールをチェックします。デバッグ用
-        /// </summary>
-        /// <returns>Excelのセルに表示する文字列。ランダムな整数値</returns>
-        [ExcelFunction(IsHidden = true, Description = "Check function call (from Excel to XLL)")]
-        public static string BCODE_PING()
+        [ExcelFunction(IsHidden = true, Description = "[DEBUG] Check function call (from Excel to XLL)", Name = "BCODE_PING")]
+        public static string PrintRandomInteger()
         {
             try
             {
@@ -140,26 +88,11 @@ namespace BuffettCodeExcelFunctions
             }
         }
 
-        private static void UpdateProcessorIfNeeded()
-        {
-            lock (updateLock)
-            {
-                if (!apiTaskProcessor.ApiKey.Equals(config.ApiKey))
-                {
-                    apiTaskProcessor.UpdateApiKey(config.ApiKey);
-                }
-                if (!apiTaskProcessor.MaxDegreeOfParallelism.Equals
-                    (config.MaxDegreeOfParallelism))
-                {
-                    apiTaskProcessor.UpdateMaxDegreeOfParallelism(config.MaxDegreeOfParallelism);
-                }
-            }
-        }
-
-        private static PropertyDescription GetDescription(string propertyName)
+        private static PropertyDescription FetchQuarterPropertyDefititon(string propertyName)
         {
             // column_descriptionをAPIから取得させるため、適当なパラメタを渡している
-            return apiTaskProcessor.GetDescription("1301", "2019", "4", propertyName);
+            var apiResouce = ApiResourceFetcher.Fetch(DataTypeConfig.Quarter, "1301", FiscalQuarterPeriod.Create(2019, 4));
+            return PropertySelector.SelectDescription(propertyName, apiResouce);
         }
 
         private static string ToErrorMessage(Exception e, string propertyName = "")
@@ -197,7 +130,7 @@ namespace BuffettCodeExcelFunctions
             {
                 message = "テスト用のAPIキーでは取得できないデータです";
             }
-            else if (bce is ResolveApiException)
+            else if (bce is NotSupportedDataTypeException)
             {
                 message = "未定義の項目名です";
             }

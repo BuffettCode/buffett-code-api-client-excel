@@ -11,7 +11,7 @@ namespace BuffettCodeIO.Formatter
         /// </summary>
         /// <param name="description">項目定義</param>
         /// <returns>フォーマッタ</returns>
-        public static IExcelFormatter Create(PropertyDescription description = null)
+        public static IPropertyFormatter Create(PropertyDescription description = null)
         {
             if (description == null)
             {

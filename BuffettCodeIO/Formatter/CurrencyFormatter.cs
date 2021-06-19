@@ -5,7 +5,7 @@ namespace BuffettCodeIO.Formatter
     /// <summary>
     /// 金額のフォーマッタ
     /// </summary>
-    public class CurrencyFormatter : IExcelFormatter
+    public class CurrencyFormatter : IPropertyFormatter
     {
         private static readonly CurrencyFormatter _instance = new CurrencyFormatter();
 

@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PropertySelector.cs" />
+    <Compile Include="ApiResourceFetcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDefinedFunctions.cs" />
   </ItemGroup>

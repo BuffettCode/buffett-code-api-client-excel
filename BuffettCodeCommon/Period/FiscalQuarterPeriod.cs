@@ -3,7 +3,7 @@ using System;
 
 namespace BuffettCodeCommon.Period
 {
-    public class FiscalQuarterPeriod : IPeriod, IComparable<FiscalQuarterPeriod>
+    public class FiscalQuarterPeriod : IPeriod, IComparable<IPeriod>
     {
         private readonly uint year;
         private readonly uint quarter;
@@ -24,23 +24,47 @@ namespace BuffettCodeCommon.Period
             return new FiscalQuarterPeriod(fiscalYear, fiscalQuarter);
         }
 
-        public int CompareTo(FiscalQuarterPeriod other)
+        public static FiscalQuarterPeriod Create(string fiscalYear, string fiscalQuarter)
+        {
+            var fy = uint.Parse(fiscalYear);
+            var fq = uint.Parse(fiscalQuarter);
+            FiscalYearValidator.Validate(fy);
+            FiscalQuarterValidator.Validate(fq);
+            return new FiscalQuarterPeriod(fy, fq);
+        }
+
+
+        public static FiscalQuarterPeriod Parse(string fyFqString)
+        {
+            var fyFq = fyFqString.Split('Q');
+            return FiscalQuarterPeriod.Create(fyFq[0], fyFq[1]);
+        }
+
+        public int CompareTo(IPeriod other)
         {
             if (other is null)
             {
                 throw new ArgumentNullException();
             }
-            else if (year != other.year)
+            else if (this.GetType() != other.GetType())
             {
-                return year < other.year ? -1 : 1;
-            }
-            else if (quarter != other.quarter)
-            {
-                return quarter < other.quarter ? -1 : 1;
+                throw new ArgumentException($"Compare to {other.GetType()} is not supported.");
             }
             else
             {
-                return 0;
+                var fqp = (FiscalQuarterPeriod)other;
+                if (year != fqp.year)
+                {
+                    return year < fqp.year ? -1 : 1;
+                }
+                else if (quarter != fqp.quarter)
+                {
+                    return quarter < fqp.quarter ? -1 : 1;
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
         public override bool Equals(object obj)

@@ -1,9 +1,10 @@
 using BuffettCodeCommon.Validator;
+using System.Collections.Generic;
 
 namespace BuffettCodeIO.Property
 
 {
-    public class Indicator : IApiSchema
+    public class Indicator : IApiResource
     {
 
         private readonly string ticker;
@@ -29,6 +30,7 @@ namespace BuffettCodeIO.Property
 
         public PropertyDescription GetDescription(string propertyName) => descriptions.Get(propertyName);
 
+        public ICollection<string> GetPropertyNames() => properties.Names;
 
     }
 }
