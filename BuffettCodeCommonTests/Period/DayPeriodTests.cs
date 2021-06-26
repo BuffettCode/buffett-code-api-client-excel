@@ -47,8 +47,12 @@ namespace BuffettCodeCommon.Period.Tests
             var a = DayPeriod.Create(2020, 1, 1).GetHashCode();
             var b = DayPeriod.Create(2020, 1, 1).GetHashCode();
             var c = DayPeriod.Create(2021, 1, 1).GetHashCode();
+            var d = DayPeriod.Create(2020, 2, 1).GetHashCode();
+            var e = DayPeriod.Create(2020, 1, 2).GetHashCode();
             Assert.AreEqual(a, b);
             Assert.AreNotEqual(a, c);
+            Assert.AreNotEqual(a, d);
+            Assert.AreNotEqual(a, e);
 
         }
 
@@ -82,6 +86,13 @@ namespace BuffettCodeCommon.Period.Tests
         public void ToStringTest()
         {
             Assert.AreEqual("2020-01-01", DayPeriod.Create(2020, 1, 1).ToString());
+        }
+
+        [TestMethod()]
+        public void NextTest()
+        {
+            var day = DayPeriod.Create(2020, 12, 31);
+            Assert.AreEqual(day.Next(), DayPeriod.Create(2021, 1, 1));
         }
     }
 }

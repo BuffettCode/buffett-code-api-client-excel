@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace BuffettCodeAddinRibbon
 {
-    public class CSVPropertyHelper
+    public class CsvPropertyHelper
     {
         public static IList<string> CreatePropertyNameList(Quarter quarter) =>
     CreatePropertyList(CSVOutputProperties.QuarterExcludeProperties, CSVOutputProperties.QuarterOrderedProperties, quarter);

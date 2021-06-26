@@ -3,7 +3,7 @@ using System;
 
 namespace BuffettCodeCommon.Period
 {
-    public class FiscalQuarterPeriod : IPeriod, IComparable<IPeriod>
+    public class FiscalQuarterPeriod : IComparablePeriod
     {
         private readonly uint year;
         private readonly uint quarter;
@@ -90,6 +90,8 @@ namespace BuffettCodeCommon.Period
         }
 
         public override int GetHashCode() => (year, quarter).GetHashCode();
+
+        public IComparablePeriod Next() => (Quarter < 4) ? Create(Year, Quarter + 1) : Create(Year + 1, 1);
 
         public override string ToString() => $"{year}Q{quarter}";
     }

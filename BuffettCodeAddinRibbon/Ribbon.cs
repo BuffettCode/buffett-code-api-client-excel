@@ -36,7 +36,7 @@ namespace BuffettCodeAddinRibbon
 
         private void CSVButton_Click(object sender, RibbonControlEventArgs e)
         {
-            CSVForm form = new CSVForm();
+            CsvDownloadForm form = new CsvDownloadForm();
             form.ShowDialog();
         }
 
