@@ -1,11 +1,10 @@
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
+using BuffettCodeCommon.Period;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace BuffettCodeAPIClient.Tests
 {
-    using BuffettCodeAPIClient;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System;
-
     /// <summary>
     /// Defines the <see cref="BuffettCodeApiV3ClientTests" />.
     /// </summary>
@@ -25,7 +24,7 @@ namespace BuffettCodeAPIClient.Tests
         public void GetDailyTest()
         {
             // test api key can get ticker=xx01 data
-            var day = new DateTime(2021, 2, 1);
+            var day = DayPeriod.Create(2021, 2, 1);
             Assert.IsNotNull(client.GetDaily("6501", day, false, true, false).Result);
 
             // test api key can get ticker=xx02

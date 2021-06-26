@@ -14,7 +14,7 @@ namespace BuffettCodeAPIClient
         {
             this.apiClientCore = new ApiClientCore(apiKey, baseUri);
             this.cache = cache;
-            this.cacheHelper = new ApiRequestCacheHelper(cache);
+            this.cacheHelper = new ApiRequestCacheHelper(cache, baseUri);
         }
 
         public static ApiClientCoreWithCache Create(string apiKey, string baseUrl, MemoryCache cache)
@@ -43,16 +43,5 @@ namespace BuffettCodeAPIClient
             cacheHelper.Set(request, response);
             return response;
         }
-
-        public long GetCacheCount()
-        {
-            return cache.GetCount();
-        }
-
-        public void ClearCache()
-        {
-            cache.Dispose();
-        }
-
     }
 }

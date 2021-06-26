@@ -30,11 +30,8 @@ namespace BuffettCodeCommon.Tests
         [TestCleanup()]
         public void CleanUpRegistry()
         {
-            if (accessor.IsEmpty())
-            {
-                BuffettCodeRegistryConfig.SupportedValueNames.ToList().ForEach(
+            BuffettCodeRegistryConfig.SupportedValueNames.ToList().ForEach(
                     name => accessor.SaveRegistryValue(name, null));
-            }
         }
 
         [TestMethod()]
@@ -67,10 +64,10 @@ namespace BuffettCodeCommon.Tests
         public void MaxDegreeOfParallelismTest()
         {
             // check default value
-            Assert.AreEqual(8, configForTest.MaxDegreeOfParallelism);
+            Assert.AreEqual((uint)8, configForTest.MaxDegreeOfParallelism);
 
             // set and get
-            var maxDegreeOfParallelism = randomizer.Next(100);
+            var maxDegreeOfParallelism = (uint)randomizer.Next(100);
             configForTest.MaxDegreeOfParallelism = maxDegreeOfParallelism;
             Assert.AreEqual(maxDegreeOfParallelism, configForTest.MaxDegreeOfParallelism);
         }

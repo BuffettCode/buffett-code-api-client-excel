@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 namespace BuffettCodeIO.Property
 {
-    public interface IApiSchema
+    public interface IApiResource
     {
         string GetValue(string propertyName);
 
         PropertyDescription GetDescription(string propertyName);
+
+        ICollection<string> GetPropertyNames();
     }
 }

@@ -60,11 +60,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ConfigurationTests.cs" />
-    <Compile Include="Period\DayTests.cs" />
-    <Compile Include="Period\FiscalQuarterTests.cs" />
+    <Compile Include="Period\DayPeriodTests.cs" />
+    <Compile Include="Period\FiscalQuarterPeriodTests.cs" />
+    <Compile Include="Period\PeriodRangeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registry\BuffettCodeRegistryAccessorTests.cs" />
     <Compile Include="Validator\ApiKeyValidatorTests.cs" />
+    <Compile Include="Validator\CSVOutputEncodingValidatorTests.cs" />
     <Compile Include="Validator\FiscalQuarterValidatorTests.cs" />
     <Compile Include="Validator\FiscalYearValidatorTests.cs" />
     <Compile Include="Validator\JpTickerValidatorTests.cs" />

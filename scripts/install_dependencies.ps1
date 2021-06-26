@@ -1,6 +1,6 @@
 $Packages = (
     "BuffettCodeAddinRibbon",
-    "BuffettCodeAddinRibbonTest",
+    "BuffettCodeAddinRibbonTests",
     "BuffettCodeIO",
     "BuffettCodeIOTests",
     "BuffettCodeInstaller",

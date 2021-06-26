@@ -4,7 +4,7 @@ using System;
 
 namespace BuffettCodeAPIClient
 {
-    public class ApiClinentInstanceGetter
+    public class ApiClientInstanceGetter
     {
         public static IBuffettCodeApiClient Get(BuffettCodeApiVersion version, string apiKey)
         {

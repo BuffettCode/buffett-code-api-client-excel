@@ -7,14 +7,23 @@ using System.Linq;
 namespace BuffettCodeCommon.Period.Tests
 {
     [TestClass()]
-    public class FiscalQuarterTests
+    public class FiscalQuarterPeriodTests
     {
+        [TestMethod()]
+        public void CreateFromStringTest()
+        {
+            var fyFqStr = "2018Q1";
+            var period = FiscalQuarterPeriod.Parse(fyFqStr);
+            Assert.AreEqual((uint)2018, period.Year);
+            Assert.AreEqual((uint)1, period.Quarter);
+            Assert.AreEqual(fyFqStr, period.ToString());
+        }
+
         [TestMethod()]
         public void EqualsTest()
         {
-
             var a = FiscalQuarterPeriod.Create(2018, 1);
-            var b = FiscalQuarterPeriod.Create(2018, 1);
+            var b = FiscalQuarterPeriod.Create("2018", "1");
             var c = FiscalQuarterPeriod.Create(2018, 2);
             Assert.IsTrue(a.Equals(b));
             Assert.IsTrue(b.Equals(a));
@@ -36,7 +45,7 @@ namespace BuffettCodeCommon.Period.Tests
         {
             var a = FiscalQuarterPeriod.Create(2018, 2);
             var b = FiscalQuarterPeriod.Create(2019, 1);
-            var c = FiscalQuarterPeriod.Create(2017, 1);
+            var c = FiscalQuarterPeriod.Create("2017", "1");
             var d = FiscalQuarterPeriod.Create(2018, 2);
 
             Assert.AreEqual(-1, a.CompareTo(b));
@@ -53,7 +62,7 @@ namespace BuffettCodeCommon.Period.Tests
         {
             var a = FiscalQuarterPeriod.Create(2018, 2);
             var b = FiscalQuarterPeriod.Create(2019, 1);
-            var c = FiscalQuarterPeriod.Create(2017, 1);
+            var c = FiscalQuarterPeriod.Create("2017", "1");
             var d = FiscalQuarterPeriod.Create(2018, 3);
             var sorted = new List<FiscalQuarterPeriod> { a, b, c, d }.OrderBy(_ => _).ToArray();
 

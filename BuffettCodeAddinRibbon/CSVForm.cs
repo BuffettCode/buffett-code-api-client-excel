@@ -1,11 +1,15 @@
+
+using BuffettCodeAddinRibbon.Settings;
+using BuffettCodeCommon;
+using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
+using BuffettCodeCommon.Period;
+using BuffettCodeIO;
 using BuffettCodeIO.Formatter;
-using BuffettCodeIO.Parser;
 using BuffettCodeIO.Property;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace BuffettCodeAddinRibbon
@@ -20,34 +24,35 @@ namespace BuffettCodeAddinRibbon
         public CSVForm()
         {
             InitializeComponent();
-            LoadSettings();
+            var settings = CSVFormDefaultSettingsHandler.Load();
+            UpdateFormValues(settings);
             AcceptButton = buttonOK;
         }
 
-        private void LoadSettings()
+        private void UpdateFormValues(CSVFormSettings settings)
         {
-            textTicker.Text = Properties.Settings.Default.CSVTicker;
-            textFrom.Text = Properties.Settings.Default.CSVFrom;
-            textTo.Text = Properties.Settings.Default.CSVTo;
-            radioCSV.Checked = Properties.Settings.Default.CSVIsFile;
-            radioSheet.Checked = !Properties.Settings.Default.CSVIsFile;
-            radioUTF8.Checked = Properties.Settings.Default.CSVUTF8;
-            radioShiftJIS.Checked = !Properties.Settings.Default.CSVUTF8;
+            textTicker.Text = settings.Ticker;
+            textFrom.Text = settings.Range.From.ToString();
+            textTo.Text = settings.Range.To.ToString();
+            radioCSV.Checked = settings.IsCreateNewFile();
+            radioUTF8.Checked = settings.IsUTF8Encoding();
+        }
+
+        private CSVFormSettings CreateSettingsFromFormValues()
+        {
+            var ticker = textTicker.Text;
+            var from = FiscalQuarterPeriod.Parse(textFrom.Text);
+            var to = FiscalQuarterPeriod.Parse(textTo.Text);
+            var encoding = radioUTF8.Checked ? CSVOutputEncoding.UTF8 : CSVOutputEncoding.SJIS;
+            var destination = radioCSV.Checked ? CSVOutputDestination.NewFile
+                : CSVOutputDestination.NewSheet;
+            return CSVFormSettings.Create(ticker, from, to, CSVOutputSettings.Create(encoding, destination));
         }
 
         private void CSVForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaveSettings();
-        }
-
-        private void SaveSettings()
-        {
-            Properties.Settings.Default.CSVTicker = textTicker.Text;
-            Properties.Settings.Default.CSVFrom = textFrom.Text;
-            Properties.Settings.Default.CSVTo = textTo.Text;
-            Properties.Settings.Default.CSVIsFile = radioCSV.Checked;
-            Properties.Settings.Default.CSVUTF8 = radioUTF8.Checked;
-            Properties.Settings.Default.Save();
+            var settings = CreateSettingsFromFormValues();
+            CSVFormDefaultSettingsHandler.Save(settings);
         }
 
         private void ButtonOK_Click(object sender, EventArgs e)
@@ -144,8 +149,8 @@ namespace BuffettCodeAddinRibbon
 
                 using (var stream = sfd.OpenFile())
                 {
-                    var encoding = radioUTF8.Checked ? Encoding.UTF8 : Encoding.GetEncoding("shift_jis");
-                    CSVGenerator.GenerateAndWrite(stream, encoding, quarters);
+                    var encoding = radioUTF8.Checked ? CSVOutputEncoding.UTF8 : CSVOutputEncoding.SJIS;
+                    CSVFileWriter.Write(stream, encoding, quarters);
                 }
                 MessageBox.Show("CSVファイルを保存しました。", "CSV出力", MessageBoxButtons.OK);
             }
@@ -171,7 +176,7 @@ namespace BuffettCodeAddinRibbon
             Microsoft.Office.Interop.Excel.Worksheet worksheet;
             try
             {
-                worksheet = BuffettCodeAddinRibbon.Globals.ThisAddIn.Application.Worksheets.Add();
+                worksheet = Globals.ThisAddIn.Application.Worksheets.Add();
             }
             catch (Exception)
             {
@@ -191,7 +196,7 @@ namespace BuffettCodeAddinRibbon
             }
 
             // write values
-            var propertyNames = CSVGenerator.GetPropertyNames(quarters[0]);
+            var propertyNames = CSVPropertyHelper.CreatePropertyNameList(quarters[0]);
             foreach (var propertyName in propertyNames)
             {
                 row = 1;
@@ -204,7 +209,7 @@ namespace BuffettCodeAddinRibbon
                 foreach (var quarter in quarters)
                 {
                     var rawValue = quarter.GetValue(propertyName);
-                    var formatter = FormatterFactory.Create(description);
+                    var formatter = PropertyFormatterFactory.Create(description);
                     string formattedValue = formatter.Format(rawValue, description);
                     worksheet.Cells[col, row++] = formattedValue;
                 }
@@ -217,20 +222,23 @@ namespace BuffettCodeAddinRibbon
 
         private IList<Quarter> GetSortedQuarters(string ticker, string from, string to)
         {
-            var client = AddinFacade.GetApiClient();
+            var config = Configuration.GetInstance();
+            var processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.MaxDegreeOfParallelism);
 
             var quarters = new List<Quarter>();
 
-            foreach (KeyValuePair<string, string> range in SliceRange(from, to))
+            foreach (KeyValuePair<string, string> range in SliceQuarterRange(from, to))
             {
-                var json = client.GetQuarterRange(ticker, range.Key, range.Value, false).Result;
+                var start = FiscalQuarterPeriod.Parse(range.Key);
+                var end = FiscalQuarterPeriod.Parse(range.Value);
+                var result = processor.GetApiResources(DataTypeConfig.Quarter, ticker, start, end);
 
-                quarters.AddRange(ApiV2ResponseParser.ParseQuarterRange(json));
+                quarters.AddRange(result.Cast<Quarter>());
             }
             return quarters.Distinct().OrderBy(q => q.Period).ToArray();
         }
 
-        private IDictionary<string, string> SliceRange(string from, string to)
+        private IDictionary<string, string> SliceQuarterRange(string from, string to)
         {
             var result = new Dictionary<string, string>();
             var gap = GetGap(from, to);

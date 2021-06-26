@@ -4,7 +4,7 @@ namespace BuffettCodeIO.Formatter
     /// <summary>
     /// 値をそのまま返すだけのフォーマッタ
     /// </summary>
-    public class InactionFormatter : IExcelFormatter
+    public class InactionFormatter : IPropertyFormatter
     {
         private static readonly InactionFormatter _instance = new InactionFormatter();
 

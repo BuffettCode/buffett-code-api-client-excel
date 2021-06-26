@@ -1,7 +1,7 @@
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
+using BuffettCodeCommon.Period;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace BuffettCodeAPIClient.Tests
 {
@@ -13,7 +13,7 @@ namespace BuffettCodeAPIClient.Tests
         {
             // use ondemand
             var ticker = "6501";
-            var day = new DateTime(2021, 1, 1);
+            var day = DayPeriod.Create(2021, 1, 1);
             var request = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(ticker, day, true);
             Assert.AreEqual(BuffettCodeApiV3Config.ENDPOINT_ONDEMAND_DAILY, request.EndPoint);
             Assert.AreEqual(ticker, request.Parameters["ticker"]);

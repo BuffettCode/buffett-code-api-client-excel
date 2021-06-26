@@ -1,3 +1,5 @@
+using BuffettCodeCommon.Config;
+using BuffettCodeCommon.Exception;
 using BuffettCodeIO.Property;
 using Newtonsoft.Json.Linq;
 using System;
@@ -68,5 +70,28 @@ namespace BuffettCodeIO.Parser
             );
         }
 
+        public IApiResource Parse(DataTypeConfig dataType, JObject json)
+        {
+            switch (dataType)
+            {
+                case DataTypeConfig.Quarter:
+                    return ParseQuarter(json);
+                case DataTypeConfig.Indicator:
+                    return ParseIndicator(json);
+                default:
+                    throw new NotSupportedDataTypeException($"Parse {dataType} is not supported at V2");
+            }
+        }
+
+        public IList<IApiResource> ParseRange(DataTypeConfig dataType, JObject json)
+        {
+            switch (dataType)
+            {
+                case DataTypeConfig.Quarter:
+                    return ParseQuarterRange(json).Cast<IApiResource>().ToList();
+                default:
+                    throw new NotSupportedDataTypeException($"ParseRange {dataType} is not supported at V3");
+            }
+        }
     }
 }

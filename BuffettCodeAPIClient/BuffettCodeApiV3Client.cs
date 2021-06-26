@@ -1,7 +1,9 @@
+using BuffettCodeCommon;
 using BuffettCodeCommon.Config;
+using BuffettCodeCommon.Exception;
+using BuffettCodeCommon.Period;
 using BuffettCodeCommon.Validator;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Runtime.Caching;
 using System.Threading.Tasks;
 
@@ -12,7 +14,7 @@ namespace BuffettCodeAPIClient
     {
         private readonly ApiClientCoreWithCache apiClientCore;
         private static readonly BuffettCodeApiV3Client instance = new BuffettCodeApiV3Client();
-        private readonly MemoryCache cache = new MemoryCache(nameof(BuffettCodeApiV3Client));
+        private readonly MemoryCache cache = BuffettCodeAddinCache.GetInstance();
 
         private BuffettCodeApiV3Client()
         {
@@ -25,15 +27,13 @@ namespace BuffettCodeAPIClient
 
         }
 
-        public async Task<JObject> GetDaily(string ticker, DateTime day, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
+        public async Task<JObject> GetDaily(string ticker, DayPeriod day, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
         {
             var request = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(ticker, day, useOndemand);
             JpTickerValidator.Validate(ticker);
             var response = await apiClientCore.Get(request, isConfigureAwait, useCache);
             return ApiGetResponseBodyParser.Parse(response);
         }
-
-        public void ClearCache() => apiClientCore.ClearCache();
 
         public void UpdateApiKey(string apiKey) => apiClientCore.UpdateApiKey(apiKey);
 
@@ -45,9 +45,24 @@ namespace BuffettCodeAPIClient
             return instance;
         }
 
-        ~BuffettCodeApiV3Client()
+        public Task<JObject> Get(DataTypeConfig dataType, string ticker, IPeriod period, bool useOndemand, bool isConfigureAwait, bool useCache)
         {
-            cache.Dispose();
+            switch (dataType)
+            {
+                case DataTypeConfig.Daily:
+                    return GetDaily(ticker, (DayPeriod)period, useOndemand, isConfigureAwait, useCache);
+                default:
+                    throw new NotSupportedDataTypeException($"Get {dataType} is not supported at V3");
+            }
+        }
+
+        public Task<JObject> GetRange(DataTypeConfig dataType, string ticker, IPeriod from, IPeriod to, bool useOndemand, bool isConfigureAwait, bool useCache)
+        {
+            switch (dataType)
+            {
+                default:
+                    throw new NotSupportedDataTypeException($"Get {dataType} is not supported at V3");
+            }
         }
     }
 }

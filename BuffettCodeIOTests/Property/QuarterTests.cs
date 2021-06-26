@@ -36,8 +36,8 @@ namespace BuffettCodeIO.Property.Tests
         public void GetPropartyNamesTest()
         {
             var quarter = CreateQuarter(ticker, period, properties, descriptions);
-            Assert.AreEqual("key", quarter.GetPropartyNames().First());
-            Assert.AreEqual(1, quarter.GetPropartyNames().Count());
+            Assert.AreEqual("key", quarter.GetPropertyNames().First());
+            Assert.AreEqual(1, quarter.GetPropertyNames().Count());
         }
 
         [TestMethod()]

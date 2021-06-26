@@ -6,7 +6,7 @@ namespace BuffettCodeIO.Formatter
     /// <summary>
     /// 割合のフォーマッタ
     /// </summary>
-    public class RatioFormatter : IExcelFormatter
+    public class RatioFormatter : IPropertyFormatter
     {
         private static readonly RatioFormatter _instance = new RatioFormatter();
 

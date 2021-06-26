@@ -1,6 +1,6 @@
 $Env:BCApiKey= "sAJGq9JH193KiwnF947v74KnDYkO7z634LWQQfPY"
 VSTest.Console.exe `
- .\BuffettCodeAddinRibbonTest\bin\Release\BuffettCodeAddinRibbonTest.dll `
+ .\BuffettCodeAddinRibbonTests\bin\Release\BuffettCodeAddinRibbonTests.dll `
  .\BuffettCodeIOTests\bin\Release\BuffettCodeIOTests.dll `
  .\BuffettCodeExcelFunctionsTest\bin\Release\BuffettCodeExcelFunctionsTest.dll `
  .\BuffettCodeAPIClientTests\bin\Release\BuffettCodeAPIClientTests.dll `

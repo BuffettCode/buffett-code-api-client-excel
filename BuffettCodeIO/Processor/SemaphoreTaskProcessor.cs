@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,29 +10,25 @@ namespace BuffettCodeIO.Processor
     public class SemaphoreTaskProcessor<Type> : ITaskProcessor<Type>
     {
         private SemaphoreSlim semaphore;
-        private int maxDegreeOfParallelism;
+        private uint maxDegreeOfParallelism;
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="maxDegreeOfParallelism">同時に実行可能なタスクの数</param>
-        public SemaphoreTaskProcessor(int maxDegreeOfParallelism)
-        {
-            if (maxDegreeOfParallelism < 1)
-            {
-                throw new ArgumentOutOfRangeException($"maxDegreeOfParallelism must be positive integer, but given {maxDegreeOfParallelism}");
-            }
-            this.maxDegreeOfParallelism = maxDegreeOfParallelism;
-            semaphore = new SemaphoreSlim(maxDegreeOfParallelism);
-        }
-
-        public void UpdateMaxDegreeOfParallelism(int maxDegreeOfParallelism)
+        public SemaphoreTaskProcessor(uint maxDegreeOfParallelism)
         {
             this.maxDegreeOfParallelism = maxDegreeOfParallelism;
-            semaphore = new SemaphoreSlim(maxDegreeOfParallelism);
+            semaphore = new SemaphoreSlim((int)maxDegreeOfParallelism);
         }
 
-        public int GetMaxDegreeOfParallelism() => maxDegreeOfParallelism;
+        public void UpdateMaxDegreeOfParallelism(uint maxDegreeOfParallelism)
+        {
+            this.maxDegreeOfParallelism = maxDegreeOfParallelism;
+            semaphore = new SemaphoreSlim((int)maxDegreeOfParallelism);
+        }
+
+        public uint GetMaxDegreeOfParallelism() => maxDegreeOfParallelism;
 
         /// <inheritdoc/>
         public Type Process(Task<Type> task)

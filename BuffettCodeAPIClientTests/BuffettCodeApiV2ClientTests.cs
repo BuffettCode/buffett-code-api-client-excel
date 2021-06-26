@@ -1,5 +1,6 @@
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
+using BuffettCodeCommon.Period;
 
 namespace BuffettCodeAPIClient.Tests
 {
@@ -23,14 +24,12 @@ namespace BuffettCodeAPIClient.Tests
         [TestMethod()]
         public void GetQuarterTest()
         {
-            uint fy = 2019;
-            uint fq = 4;
-
+            var period = FiscalQuarterPeriod.Create(2019, 4);
             // test api key can get ticker=xx01
-            Assert.IsNotNull(client.GetQuarter("6501", fy, fq, false, true, false).Result);
+            Assert.IsNotNull(client.GetQuarter("6501", period, false, true, false).Result);
 
             // test api key can get ticker=xx02
-            Assert.ThrowsExceptionAsync<InvalidAPIKeyException>(() => client.GetQuarter("6502", fy, fq, false, true, false));
+            Assert.ThrowsExceptionAsync<InvalidAPIKeyException>(() => client.GetQuarter("6502", period, false, true, false));
         }
 
         [TestMethod()]
@@ -46,17 +45,15 @@ namespace BuffettCodeAPIClient.Tests
         [TestMethod()]
         public void GetQuarterRangeTest()
         {
-            string from = "2019Q4";
-            string to = "2019Q4";
+            var from = FiscalQuarterPeriod.Create(2019, 4);
+            var to = FiscalQuarterPeriod.Create(2019, 4);
 
             // test api key can get ticker=xx01
             Assert.IsNotNull(client.GetQuarterRange("6501", from, to, true, false).Result);
 
             // test api key can get ticker=xx02
             Assert.ThrowsExceptionAsync<InvalidAPIKeyException>(() => client.GetQuarterRange("6502", from, to, true, false));
-
         }
-
 
     }
 }

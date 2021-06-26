@@ -6,7 +6,7 @@ namespace BuffettCodeIO.Formatter
     /// <summary>
     /// 数値のフォーマッタ
     /// </summary>
-    public class NumericFormatter : IExcelFormatter
+    public class NumericFormatter : IPropertyFormatter
     {
         private static readonly NumericFormatter _instance = new NumericFormatter();
 

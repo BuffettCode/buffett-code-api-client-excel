@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -45,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuffettCodeAddinCache.cs" />
+    <Compile Include="Config\CSVOutputConfig.cs" />
     <Compile Include="Config\DataTypeConfig.cs" />
     <Compile Include="Exception\AddinConfigurationException.cs" />
     <Compile Include="Config\BuffettCodeRegistryConfig.cs" />
@@ -54,14 +57,16 @@
     <Compile Include="Exception\AggregationNotFoundException.cs" />
     <Compile Include="Exception\BaseBuffettCodeException.cs" />
     <Compile Include="Exception\ApiResponseParserException.cs" />
-    <Compile Include="Exception\ResolveApiException.cs" />
+    <Compile Include="Exception\NotSupportedDataTypeException.cs" />
     <Compile Include="Exception\PropertyNotFoundException.cs" />
-    <Compile Include="Period\Day.cs" />
+    <Compile Include="Period\PeriodRange.cs" />
+    <Compile Include="Period\DayPeriod.cs" />
     <Compile Include="Period\FiscalQuarterPeriod.cs" />
     <Compile Include="Period\IPeriod.cs" />
     <Compile Include="Period\Snapshot.cs" />
     <Compile Include="Registry\BuffettCodeRegistryAccessor.cs" />
     <Compile Include="Validator\ApiKeyValidator.cs" />
+    <Compile Include="Validator\CSVOutputEncodingValidator.cs" />
     <Compile Include="Validator\FiscalQuarterValidator.cs" />
     <Compile Include="Validator\FiscalYearValidator.cs" />
     <Compile Include="Exception\ValidationError.cs" />

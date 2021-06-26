@@ -1,16 +1,18 @@
-﻿using System;
+using BuffettCodeAddinRibbon.Settings;
+using System;
 using System.Windows.Forms;
 
 namespace BuffettCodeAddinRibbon
 {
     public partial class SettingForm : Form
     {
-        public SettingForm(string apiKey, int maxDegreeOfParallelism, bool debugMode)
+        public SettingForm(AddinSettings setting)
         {
             InitializeComponent();
-            textAPIKey.Text = apiKey;
-            checkDebugMode.Checked = debugMode;
-
+            textAPIKey.Text = setting.ApiKey;
+            checkDebugMode.Checked = setting.DebugMode;
+            checkUseOndemandEndpoint.Checked = setting.UseOndemandEndpoint;
+            var maxDegreeOfParallelism = setting.MaxDegreeOfParallelism;
             if (maxDegreeOfParallelism == 0)
             {
                 checkParallelism.Checked = false;
@@ -35,7 +37,7 @@ namespace BuffettCodeAddinRibbon
             return textAPIKey.Text;
         }
 
-        public int GetMaxDegreeOfParallelism()
+        public uint GetMaxDegreeOfParallelism()
         {
             if (!checkParallelism.Checked)
             {
@@ -45,7 +47,7 @@ namespace BuffettCodeAddinRibbon
             {
                 return 0;
             }
-            else if (int.TryParse(textParallelism.Text, out int i))
+            else if (uint.TryParse(textParallelism.Text, out uint i))
             {
                 return i;
             }
@@ -56,6 +58,8 @@ namespace BuffettCodeAddinRibbon
         {
             return checkDebugMode.Checked;
         }
+
+        public bool IsUseOndemandEndpoint() => checkUseOndemandEndpoint.Checked;
 
         private void ButtonOK_Click(object sender, EventArgs e)
         {
@@ -69,18 +73,17 @@ namespace BuffettCodeAddinRibbon
             Close();
         }
 
-        private void TextAPIKey_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                DialogResult = DialogResult.OK;
-                Close();
-            }
-        }
-
         private void CheckParallelism_CheckedChanged(object sender, EventArgs e)
         {
             textParallelism.Enabled = checkParallelism.Checked;
         }
+
+
+        private void TabAPI_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

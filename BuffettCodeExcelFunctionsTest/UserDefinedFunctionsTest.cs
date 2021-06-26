@@ -9,7 +9,7 @@ namespace BuffettCodeExcelFunctions.UnitTests
         [TestMethod]
         public void TestBCODE_PING()
         {
-            var result = UserDefinedFunctions.BCODE_PING();
+            var result = UserDefinedFunctions.PrintRandomInteger();
             Assert.IsNotNull(result);
         }
     }
