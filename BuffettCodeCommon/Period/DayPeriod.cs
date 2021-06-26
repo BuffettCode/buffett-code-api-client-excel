@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace BuffettCodeCommon.Period
 {
-    public class DayPeriod : IPeriod, IComparable<IPeriod>
+    public class DayPeriod : IComparablePeriod
     {
         private static readonly string dateFormat = "yyyy-MM-dd";
         private readonly DateTime value;
@@ -53,7 +53,7 @@ namespace BuffettCodeCommon.Period
                 var d = (DayPeriod)obj;
                 return this.value.Year == d.value.Year
                     && this.value.Month == d.value.Month
-                    && this.value.Day == d.value.Month;
+                    && this.value.Day == d.value.Day;
             }
         }
         public override string ToString() => value.ToString(dateFormat);
@@ -73,6 +73,9 @@ namespace BuffettCodeCommon.Period
                 return value.CompareTo(((DayPeriod)other).value);
             }
         }
+
+        public IComparablePeriod Next() => Create(Value.AddDays(1));
+
     }
 
 }

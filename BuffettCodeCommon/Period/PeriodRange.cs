@@ -1,8 +1,10 @@
 using BuffettCodeCommon.Exception;
 using System;
+using System.Collections.Generic;
+
 namespace BuffettCodeCommon.Period
 {
-    public class PeriodRange<T> where T : IPeriod, IComparable<IPeriod>
+    public class PeriodRange<T> where T : IComparablePeriod
     {
         private readonly T from;
         private readonly T to;
@@ -31,6 +33,37 @@ namespace BuffettCodeCommon.Period
                 return new PeriodRange<T>(from, to);
             }
         }
+
+        public static IEnumerable<PeriodRange<T>> Slice(PeriodRange<T> range, uint size)
+        {
+            if (size == 0)
+            {
+                throw new ArgumentException("size must be positive number.");
+            }
+            uint totalGap = (uint)ComparablePeriodUtil.GetGap(range.From, range.To);
+            var cursor = range.From;
+            var start = cursor;
+
+            for (uint num = 1; num <= totalGap; num++)
+            {
+                if (num % size == 0)
+                {
+                    yield return Create(start, cursor);
+                    cursor = (T)cursor.Next();
+                    start = cursor;
+                }
+                else
+                {
+                    cursor = (T)cursor.Next();
+                }
+            }
+            // the last
+            if (start.CompareTo(range.To) <= 0)
+            {
+                yield return Create(start, range.To);
+            }
+        }
     }
+
 
 }

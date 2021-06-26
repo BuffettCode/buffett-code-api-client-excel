@@ -60,6 +60,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ConfigurationTests.cs" />
+    <Compile Include="Period\ComparablePeriodUtilTests.cs" />
     <Compile Include="Period\DayPeriodTests.cs" />
     <Compile Include="Period\FiscalQuarterPeriodTests.cs" />
     <Compile Include="Period\PeriodRangeTests.cs" />

@@ -59,6 +59,7 @@
     <Compile Include="Exception\ApiResponseParserException.cs" />
     <Compile Include="Exception\NotSupportedDataTypeException.cs" />
     <Compile Include="Exception\PropertyNotFoundException.cs" />
+    <Compile Include="Period\ComparablePeriodUtil.cs" />
     <Compile Include="Period\PeriodRange.cs" />
     <Compile Include="Period\DayPeriod.cs" />
     <Compile Include="Period\FiscalQuarterPeriod.cs" />
