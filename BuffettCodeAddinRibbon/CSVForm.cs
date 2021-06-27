@@ -72,7 +72,6 @@ namespace BuffettCodeAddinRibbon
                 var quarters = GetSortedQuarters(settings);
                 if (radioCSV.Checked)
                 {
-
                     WriteCSVFile(settings, quarters);
                 }
                 else
