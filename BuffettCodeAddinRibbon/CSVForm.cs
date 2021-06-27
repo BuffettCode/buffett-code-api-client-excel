@@ -139,7 +139,6 @@ namespace BuffettCodeAddinRibbon
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                //                var quarters = GetSortedQuarters(ticker, from, to);
                 if (quarters.Count == 0)
                 {
                     MessageBox.Show("条件に当てはまる財務データがありませんでした。", "CSV出力", MessageBoxButtons.OK);
