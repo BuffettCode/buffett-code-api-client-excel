@@ -59,5 +59,27 @@ namespace BuffettCodeIO.Parser.Tests
             Assert.AreEqual(indicator.GetValue("stockprice"), "3450");
             Assert.AreEqual(indicator.GetValue("num_of_shares"), "206003242");
         }
+
+        [TestMethod()]
+        [DeploymentItem(@"TestData\ApiV2Company.json", @"TestData")]
+        public void ParseCompanyTest()
+        {
+            var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData/ApiV2Company.json"));
+            var company = ApiV2ResponseParser.ParseCompany(json);
+            Assert.AreEqual(company.Ticker, "2371");
+            Assert.AreEqual(company.GetDescription("tosyo_33category").Label, "東証33業種");
+            Assert.AreEqual(company.GetDescription("url").Unit, "");
+            Assert.AreEqual(company.GetValue("url"), @"http://corporate.kakaku.com/");
+            Assert.AreEqual(company.GetValue("accounting_standard"), "IFRS");
+            Assert.AreEqual((uint)2001, company.OndemandTireRange.From.Year);
+            Assert.AreEqual((uint)4, company.OndemandTireRange.From.Quarter);
+            Assert.AreEqual((uint)2020, company.OndemandTireRange.To.Year);
+            Assert.AreEqual((uint)4, company.OndemandTireRange.To.Quarter);
+            Assert.AreEqual((uint)2016, company.FlatTierRange.From.Year);
+            Assert.AreEqual((uint)1, company.FlatTierRange.From.Quarter);
+        }
+
+
+
     }
 }

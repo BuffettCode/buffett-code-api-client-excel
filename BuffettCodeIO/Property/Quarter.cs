@@ -48,7 +48,6 @@ namespace BuffettCodeIO.Property
             return new Quarter(ticker, period, properties, descriptions);
         }
 
-
         public override bool Equals(object obj)
         {
             if (obj is null)

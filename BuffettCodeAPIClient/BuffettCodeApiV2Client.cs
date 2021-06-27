@@ -46,6 +46,12 @@ namespace BuffettCodeAPIClient
             var response = await apiClientCore.Get(request, isConfigureAwait, useCache);
             return ApiGetResponseBodyParser.Parse(response);
         }
+        public async Task<JObject> GetCompany(string ticker, bool isConfigureAwait = true, bool useCache = true)
+        {
+            var request = BuffettCodeApiV2RequestCreator.CreateGetCompanyRequest(ticker);
+            var response = await apiClientCore.Get(request, isConfigureAwait, useCache);
+            return ApiGetResponseBodyParser.Parse(response);
+        }
 
         public void UpdateApiKey(string apiKey) => apiClientCore.UpdateApiKey(apiKey);
 
@@ -57,6 +63,7 @@ namespace BuffettCodeAPIClient
             return instance;
         }
 
+
         public Task<JObject> Get(DataTypeConfig dataType, string ticker, IPeriod period, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
         {
             switch (dataType)
@@ -65,6 +72,8 @@ namespace BuffettCodeAPIClient
                     return GetQuarter(ticker, (FiscalQuarterPeriod)period, useOndemand, isConfigureAwait, useCache);
                 case DataTypeConfig.Indicator:
                     return GetIndicator(ticker, isConfigureAwait, useCache);
+                case DataTypeConfig.Company:
+                    return GetCompany(ticker, isConfigureAwait, useCache);
                 default:
                     throw new NotSupportedDataTypeException($"Get {dataType} is not supported at V2");
             }

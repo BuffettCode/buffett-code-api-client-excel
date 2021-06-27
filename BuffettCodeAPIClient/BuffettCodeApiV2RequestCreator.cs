@@ -45,6 +45,16 @@ namespace BuffettCodeAPIClient
 
             return new ApiGetRequest(BuffettCodeApiV2Config.ENDPOINT_INDICATOR, paramaters);
         }
+        public static ApiGetRequest CreateGetCompanyRequest(string ticker)
+        {
+            JpTickerValidator.Validate(ticker);
+            var paramaters = new Dictionary<string, string>()
+            {
+                {"ticker", ticker },
+            };
+
+            return new ApiGetRequest(BuffettCodeApiV2Config.ENDPOINT_COMPANY, paramaters);
+        }
 
     }
 }

@@ -15,7 +15,7 @@ namespace BuffettCodeIO.Parser
             {
                 try
                 {
-                    var dict = columnDescription.First().SelectMany(t => t.Children()).Where(t => t is JProperty).Cast<JProperty>().Select(t => ToPropertyDescription(t)).ToDictionary(p => p.Name, p => p);
+                    var dict = columnDescription.First().SelectMany(t => t.Children()).Where(t => t is JProperty).Cast<JProperty>().Where(_ => !_.Name.Equals(PropertyNames.FixedTierRange)).Select(t => ToPropertyDescription(t)).ToDictionary(p => p.Name, p => p);
                     return new PropertyDescriptionDictionary(dict);
                 }
                 catch (Exception e)
@@ -31,9 +31,10 @@ namespace BuffettCodeIO.Parser
 
         private static PropertyDescription ToPropertyDescription(JProperty property)
         {
-            string name = property.Name;
-            string label = property.Value[PropertyNames.NameJp].ToString();
-            string unit = property.Value[PropertyNames.Unit].ToString();
+            var name = property.Name;
+            var label = property.Value[PropertyNames.NameJp].ToString();
+            var unit = property.Value[PropertyNames.Unit].ToString();
+
             return new PropertyDescription(name, label, unit);
         }
 

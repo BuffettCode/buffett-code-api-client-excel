@@ -11,5 +11,10 @@ namespace BuffettCodeIO.Parser
         public static readonly string FiscalQuarter = "fiscal_quarter";
         public static readonly string NameJp = "name_jp";
         public static readonly string Unit = "unit";
+        public static readonly string FixedTierRange = "fixed_tier_range";
+        public static readonly string OldestFiscalYear = "oldest_fiscal_year";
+        public static readonly string OldestFiscalQuarter = "oldest_fiscal_quarter";
+        public static readonly string LatestFiscalYear = "latest_fiscal_year";
+        public static readonly string LatestFiscalQuarter = "latest_fiscal_quarter";
     }
 }

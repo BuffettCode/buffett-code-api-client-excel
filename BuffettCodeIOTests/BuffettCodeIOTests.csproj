@@ -68,6 +68,7 @@
     <Compile Include="Formatter\RatioFormatterTests.cs" />
     <Compile Include="Parser\ApiV2ResponseParserTests.cs" />
     <Compile Include="Parser\ColumnDescriptionParserTests.cs" />
+    <Compile Include="Parser\FixedTierRangeParserTests.cs" />
     <Compile Include="Parser\PropertiesParserTests.cs" />
     <Compile Include="Parser\ValueNormalizerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,6 +116,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="TestData\Properties.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestData\ApiV2Company.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

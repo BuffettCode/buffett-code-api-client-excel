@@ -17,6 +17,7 @@ namespace BuffettCodeCommon.Config
         public static readonly string ENDPOINT_ONDEMAND_QUARTER = "ondemand/quarter";
         public static readonly string ENDPOINT_INDICATOR = "indicator";
         public static readonly string ENDPOINT_DAILY = "daily";
+        public static readonly string ENDPOINT_COMPANY = "company";
     }
 
     public static class BuffettCodeApiV3Config
