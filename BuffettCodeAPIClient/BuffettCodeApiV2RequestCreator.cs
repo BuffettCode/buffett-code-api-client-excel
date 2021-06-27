@@ -50,7 +50,7 @@ namespace BuffettCodeAPIClient
             JpTickerValidator.Validate(ticker);
             var paramaters = new Dictionary<string, string>()
             {
-                {"ticker", ticker },
+                {"ticker", ticker},
             };
 
             return new ApiGetRequest(BuffettCodeApiV2Config.ENDPOINT_COMPANY, paramaters);
