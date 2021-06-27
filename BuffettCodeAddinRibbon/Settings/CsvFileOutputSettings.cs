@@ -8,15 +8,15 @@ namespace BuffettCodeAddinRibbon.Settings
         NewSheet = 1,
     }
 
-    public class CSVOutputSettings
+    public class CsvFileOutputSettings
     {
-        public static CSVOutputSettings Create(Encoding encoding, CSVOutputDestination destination)
+        public static CsvFileOutputSettings Create(Encoding encoding, CSVOutputDestination destination)
         {
             CSVOutputEncodingValidator.Validate(encoding);
-            return new CSVOutputSettings(encoding, destination);
+            return new CsvFileOutputSettings(encoding, destination);
         }
 
-        private CSVOutputSettings(Encoding encoding, CSVOutputDestination destination)
+        private CsvFileOutputSettings(Encoding encoding, CSVOutputDestination destination)
         {
             Encoding = encoding;
             Destination = destination;

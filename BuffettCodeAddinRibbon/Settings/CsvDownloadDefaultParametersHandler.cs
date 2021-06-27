@@ -5,9 +5,9 @@ using System.Text;
 
 namespace BuffettCodeAddinRibbon.Settings
 {
-    public static class CSVFormDefaultSettingsHandler
+    public static class CsvDownloadDefaultParametersHandler
     {
-        public static CSVFormSettings Load()
+        public static CsvDownloadParameters Load()
         {
             var ticker = Properties.Settings.Default.CSVTicker;
             JpTickerValidator.Validate(ticker);
@@ -15,18 +15,18 @@ namespace BuffettCodeAddinRibbon.Settings
             var to = FiscalQuarterPeriod.Parse(Properties.Settings.Default.CSVTo);
             var outputSettings = LoadOutputSettings();
 
-            return CSVFormSettings.Create(ticker, from, to, outputSettings);
+            return CsvDownloadParameters.Create(ticker, from, to, outputSettings);
         }
 
-        private static CSVOutputSettings LoadOutputSettings()
+        private static CsvFileOutputSettings LoadOutputSettings()
         {
             Encoding encoding = Properties.Settings.Default.CSVUTF8 ?
                  CSVOutputEncoding.UTF8 : CSVOutputEncoding.SJIS;
             CSVOutputDestination destination = Properties.Settings.Default.CSVIsFile ? CSVOutputDestination.NewFile : CSVOutputDestination.NewSheet;
-            return CSVOutputSettings.Create(encoding, destination);
+            return CsvFileOutputSettings.Create(encoding, destination);
         }
 
-        public static void Save(CSVFormSettings settings)
+        public static void Save(CsvDownloadParameters settings)
         {
             Properties.Settings.Default.CSVTicker = settings.Ticker;
             Properties.Settings.Default.CSVFrom = settings.Range.From.ToString();

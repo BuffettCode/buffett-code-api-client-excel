@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BuffettCodeAddinRibbon
 {
-    public class CSVFileWriter
+    public class CsvFileWriter
     {
 
         public static void Write(Stream stream, Encoding encoding, IList<Quarter> quarters)
@@ -26,7 +26,7 @@ namespace BuffettCodeAddinRibbon
                 writer.NextRecord();
 
                 // values
-                var propertyNames = CSVPropertyHelper.CreatePropertyNameList(quarters[0]);
+                var propertyNames = CsvPropertyHelper.CreatePropertyNameList(quarters[0]);
                 foreach (var propertyName in propertyNames)
                 {
                     var description = quarters[0].GetDescription(propertyName);
