@@ -14,7 +14,6 @@ namespace BuffettCodeAddinRibbon.Settings
             OutputSettings = outputSettings;
         }
 
-
         public static CSVFormSettings Create(string ticker, FiscalQuarterPeriod from, FiscalQuarterPeriod to, CSVOutputSettings outputSettings)
         {
             JpTickerValidator.Validate(ticker);

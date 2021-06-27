@@ -34,6 +34,22 @@ namespace BuffettCodeCommon.Period
             }
         }
 
+        public bool Includes(T period)
+        {
+            if (period.CompareTo(From) < 0)
+            {
+                return false;
+            }
+            else if (period.CompareTo(To) > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public static IEnumerable<PeriodRange<T>> Slice(PeriodRange<T> range, uint size)
         {
             if (size == 0)

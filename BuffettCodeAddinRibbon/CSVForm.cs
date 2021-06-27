@@ -62,19 +62,22 @@ namespace BuffettCodeAddinRibbon
 
         private void Execute()
         {
+            var settings = CreateSettingsFromFormValues();
             if (!ValidateControls())
             {
                 return;
             }
             try
             {
+                var quarters = GetSortedQuarters(settings);
                 if (radioCSV.Checked)
                 {
-                    WriteCSVFile();
+
+                    WriteCSVFile(settings, quarters);
                 }
                 else
                 {
-                    WriteNewSheet();
+                    WriteNewSheet(settings, quarters);
                 }
             }
             catch (TestAPIConstraintException)
@@ -121,13 +124,9 @@ namespace BuffettCodeAddinRibbon
             return true;
         }
 
-        private void WriteCSVFile()
+        private void WriteCSVFile(CSVFormSettings settings, IList<Quarter> quarters)
         {
-            string ticker = textTicker.Text;
-            string from = textFrom.Text;
-            string to = textTo.Text;
-            string filename = ticker + "_" + from + "_to_" + to + ".csv";
-
+            var filename = $@"{settings.Ticker}_{settings.Range.From}_{settings.Range.To}.csv";
             SaveFileDialog sfd = new SaveFileDialog
             {
                 FileName = filename,
@@ -140,7 +139,7 @@ namespace BuffettCodeAddinRibbon
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                var quarters = GetSortedQuarters(ticker, from, to);
+                //                var quarters = GetSortedQuarters(ticker, from, to);
                 if (quarters.Count == 0)
                 {
                     MessageBox.Show("条件に当てはまる財務データがありませんでした。", "CSV出力", MessageBoxButtons.OK);
@@ -149,8 +148,7 @@ namespace BuffettCodeAddinRibbon
 
                 using (var stream = sfd.OpenFile())
                 {
-                    var encoding = radioUTF8.Checked ? CSVOutputEncoding.UTF8 : CSVOutputEncoding.SJIS;
-                    CSVFileWriter.Write(stream, encoding, quarters);
+                    CSVFileWriter.Write(stream, settings.OutputSettings.Encoding, quarters);
                 }
                 MessageBox.Show("CSVファイルを保存しました。", "CSV出力", MessageBoxButtons.OK);
             }
@@ -159,13 +157,8 @@ namespace BuffettCodeAddinRibbon
             Close();
         }
 
-        private void WriteNewSheet()
+        private void WriteNewSheet(CSVFormSettings setting, IList<Quarter> quarters)
         {
-            string ticker = textTicker.Text;
-            string from = textFrom.Text;
-            string to = textTo.Text;
-            var quarters = GetSortedQuarters(ticker, from, to);
-
             if (quarters.Count == 0)
             {
                 MessageBox.Show("条件に当てはまる財務データがありませんでした。", "CSV出力", MessageBoxButtons.OK);
@@ -214,75 +207,28 @@ namespace BuffettCodeAddinRibbon
                     worksheet.Cells[col, row++] = formattedValue;
                 }
             }
+            worksheet.Name = $"{setting.Ticker}_{setting.Range.From}_{setting.Range.To}";
             MessageBox.Show("新しいシートを作成しました。", "CSV出力", MessageBoxButtons.OK);
 
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private IList<Quarter> GetSortedQuarters(string ticker, string from, string to)
+        private IList<Quarter> GetSortedQuarters(CSVFormSettings settings)
         {
             var config = Configuration.GetInstance();
             var processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.MaxDegreeOfParallelism);
 
-            var quarters = new List<Quarter>();
-
-            foreach (KeyValuePair<string, string> range in SliceQuarterRange(from, to))
-            {
-                var start = FiscalQuarterPeriod.Parse(range.Key);
-                var end = FiscalQuarterPeriod.Parse(range.Value);
-                var result = processor.GetApiResources(DataTypeConfig.Quarter, ticker, start, end);
-
-                quarters.AddRange(result.Cast<Quarter>());
-            }
+            var quarters = PeriodRange<FiscalQuarterPeriod>.Slice(settings.Range, 12).SelectMany(r =>
+           processor.GetApiResources(DataTypeConfig.Quarter, settings.Ticker, r.From, r.To)
+           ).Cast<Quarter>();
             return quarters.Distinct().OrderBy(q => q.Period).ToArray();
-        }
-
-        private IDictionary<string, string> SliceQuarterRange(string from, string to)
-        {
-            var result = new Dictionary<string, string>();
-            var gap = GetGap(from, to);
-
-            var cursor = from;
-            while (gap > 12)
-            {
-                result.Add(cursor, ToRange(cursor));
-                cursor = Add3Years(cursor);
-                gap -= 12;
-            }
-            result.Add(cursor, to);
-
-            return result;
-        }
-
-        private int GetGap(string from, string to)
-        {
-            int ty = int.Parse(to.Split('Q')[0]);
-            int fy = int.Parse(from.Split('Q')[0]);
-            int tq = int.Parse(to.Split('Q')[1]);
-            int fq = int.Parse(from.Split('Q')[1]);
-            return (ty - fy) * 4 + (tq - fq) + 1;
-        }
-
-        private string ToRange(string from)
-        {
-            int y = int.Parse(from.Split('Q')[0]);
-            int q = int.Parse(from.Split('Q')[1]);
-            return q == 1 ? (y + 2) + "Q4" : (y + 3) + "Q" + (q - 1);
-        }
-
-        private string Add3Years(string quarter)
-        {
-            int y = int.Parse(quarter.Split('Q')[0]);
-            int q = int.Parse(quarter.Split('Q')[1]);
-            return (y + 3) + "Q" + q;
         }
 
         private void RadioCSV_CheckedChanged(object sender, EventArgs e)
         {
             UpdateForm();
         }
-
         private void RadioSheet_CheckedChanged(object sender, EventArgs e)
         {
             UpdateForm();

@@ -122,6 +122,18 @@ namespace BuffettCodeCommon.Period.Tests
             Assert.AreEqual(1, ComparablePeriodUtil.GetGap(chunks.Last().From, chunks.Last().To));
         }
 
+        [TestMethod()]
+        public void IncludesTest()
+        {
+            var from = FiscalQuarterPeriod.Create(2020, 1);
+            var to = FiscalQuarterPeriod.Create(2020, 3);
+            var range = PeriodRange<FiscalQuarterPeriod>.Create(from, to);
+            Assert.IsTrue(range.Includes(from));
+            Assert.IsTrue(range.Includes(FiscalQuarterPeriod.Create(2020, 2)));
+            Assert.IsTrue(range.Includes(to));
+            Assert.IsFalse(range.Includes(FiscalQuarterPeriod.Create(2020, 4)));
+            Assert.IsFalse(range.Includes(FiscalQuarterPeriod.Create(2019, 4)));
+        }
     }
 
 

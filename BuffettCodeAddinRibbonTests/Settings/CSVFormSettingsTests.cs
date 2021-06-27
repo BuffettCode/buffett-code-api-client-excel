@@ -19,7 +19,6 @@ namespace BuffettCodeAddinRibbon.Settings.Tests
             var newSheetOutput = CSVOutputSettings.Create(CSVOutputEncoding.SJIS, CSVOutputDestination.NewSheet);
             Assert.IsTrue(CSVFormSettings.Create(ticker, from, to, newFileOutput).IsCreateNewFile());
             Assert.IsFalse(CSVFormSettings.Create(ticker, from, to, newSheetOutput).IsCreateNewFile());
-
         }
 
         [TestMethod()]
@@ -29,8 +28,6 @@ namespace BuffettCodeAddinRibbon.Settings.Tests
             var sjisOutput = CSVOutputSettings.Create(CSVOutputEncoding.SJIS, CSVOutputDestination.NewSheet);
             Assert.IsTrue(CSVFormSettings.Create(ticker, from, to, utf8Output).IsUTF8Encoding());
             Assert.IsFalse(CSVFormSettings.Create(ticker, from, to, sjisOutput).IsUTF8Encoding());
-
-
         }
 
         [TestMethod()]
