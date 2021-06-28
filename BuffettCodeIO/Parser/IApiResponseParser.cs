@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BuffettCodeIO.Parser
 {
-    interface IApiResponseParser
+    public interface IApiResponseParser
     {
         IApiResource Parse(DataTypeConfig dataType, JObject json);
         IList<IApiResource> ParseRange(DataTypeConfig dataType, JObject json);

@@ -1,5 +1,6 @@
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
+using BuffettCodeCommon.Period;
 using BuffettCodeIO.Property;
 using Newtonsoft.Json.Linq;
 using System;
@@ -10,41 +11,50 @@ namespace BuffettCodeIO.Parser
 {
     public class ApiV2ResponseParser : IApiResponseParser
     {
-        public static Quarter ParseQuarter(JObject json)
-        {
-            IList<JToken> columnDescription = json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => t.Path.Equals(PropertyNames.ColumnDescription)).ToList();
-            IList<JToken> data = json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => !t.Path.Equals(PropertyNames.ColumnDescription)).ToList();
+        private static IEnumerable<JToken> FindColumnDescriptions(JObject json) => json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => t.Path.Equals(PropertyNames.ColumnDescription)).ToList();
 
+        private static IEnumerable<JToken> FindDataBody(JObject json) => json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => !t.Path.Equals(PropertyNames.ColumnDescription));
+
+        private static Quarter ParseQuarter(IEnumerable<JToken> columnDescriptions, IEnumerable<JToken> data)
+        {
             var ticker = data.First().Path;
-            var descriptions = ColumnDescriptionParser.Parse(columnDescription);
+            var descriptions = ColumnDescriptionParser.Parse(columnDescriptions.ToList());
             var properties = ParseProperties(data.Children().Children().First());
 
             return CreateQuarter(ticker, properties, descriptions);
         }
 
-        public static IList<Quarter> ParseQuarterRange(JObject json)
+        private static IList<Quarter> ParseQuarterRange(IEnumerable<JToken> columnDescriptions, IEnumerable<JToken> data)
         {
-            IList<JToken> columnDescription = json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => t.Path.Equals(PropertyNames.ColumnDescription)).ToList();
-            JToken data = json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => !t.Path.Equals(PropertyNames.ColumnDescription)).First();
-            var descriptions = ColumnDescriptionParser.Parse(columnDescription);
+            var descriptions = ColumnDescriptionParser.Parse(columnDescriptions.ToList());
 
-            var ticker = data.Path;
+            var ticker = data.First().Path;
             var list = data.Children().Children().ToList();
             return list.Select(d => CreateQuarter(ticker, ParseProperties(d), descriptions)).ToList();
         }
 
-        public static Indicator ParseIndicator(JObject json)
+        private static Indicator ParseIndicator(IEnumerable<JToken> columnDescriptions, IEnumerable<JToken> data)
         {
-            IList<JToken> columnDescription = json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => t.Path.Equals(PropertyNames.ColumnDescription)).ToList();
-            IList<JToken> data = json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => !t.Path.Equals(PropertyNames.ColumnDescription)).ToList();
-
             var ticker = data.First().Path;
-            var properteis = ParseProperties(data.Children().Children().First());
-            var descriptions = ColumnDescriptionParser.Parse(columnDescription);
+            var properties = ParseProperties(data.Children().Children().First());
+            var descriptions = ColumnDescriptionParser.Parse(columnDescriptions.ToList());
 
             return Indicator.Create(
                 ticker,
-                properteis,
+                properties,
+                descriptions
+            );
+        }
+
+        private static Company ParseCompany(IEnumerable<JToken> columnDescriptions, IEnumerable<JToken> data)
+        {
+            var ticker = data.First().Path;
+            var properties = ParseProperties(data.Children().Children().First());
+            var descriptions = ColumnDescriptionParser.Parse(columnDescriptions.ToList());
+
+            return CreateCompany(
+                ticker,
+                properties,
                 descriptions
             );
         }
@@ -70,14 +80,48 @@ namespace BuffettCodeIO.Parser
             );
         }
 
+        private static Company CreateCompany(string ticker,
+            PropertyDictionary properties,
+            PropertyDescriptionDictionary descriptions)
+        {
+            var fixedTierRangeJson = JObject.Parse(properties.Get(PropertyNames.FixedTierRange));
+            var fixedTierRange = FixedTierRangeParser.Parse(fixedTierRangeJson.Properties());
+            var oldestFy = uint.Parse(properties.Get(PropertyNames.OldestFiscalYear));
+            var oldestFq = uint.Parse(properties.Get(PropertyNames.OldestFiscalQuarter));
+
+            var latestFy = uint.Parse(properties.Get(PropertyNames.LatestFiscalYear));
+            var latestFq = uint.Parse(properties.Get(PropertyNames.LatestFiscalQuarter));
+
+            var ondemandPeriodRange = PeriodRange<FiscalQuarterPeriod>.Create(
+                FiscalQuarterPeriod.Create(oldestFy, oldestFq),
+                FiscalQuarterPeriod.Create(latestFy, latestFq)
+              );
+
+            return Company.Create(
+                ticker,
+                fixedTierRange,
+                ondemandPeriodRange,
+                properties,
+                descriptions
+            );
+        }
+
         public IApiResource Parse(DataTypeConfig dataType, JObject json)
         {
+            var columnDescriptions = FindColumnDescriptions(json);
+            var data = FindDataBody(json);
+            if (data.Count() == 0)
+            {
+                return EmptyResource.GetInstance();
+            }
             switch (dataType)
             {
                 case DataTypeConfig.Quarter:
-                    return ParseQuarter(json);
+                    return ParseQuarter(columnDescriptions, data);
                 case DataTypeConfig.Indicator:
-                    return ParseIndicator(json);
+                    return ParseIndicator(columnDescriptions, data);
+                case DataTypeConfig.Company:
+                    return ParseCompany(columnDescriptions, data);
                 default:
                     throw new NotSupportedDataTypeException($"Parse {dataType} is not supported at V2");
             }
@@ -85,10 +129,16 @@ namespace BuffettCodeIO.Parser
 
         public IList<IApiResource> ParseRange(DataTypeConfig dataType, JObject json)
         {
+            var columnDescriptions = FindColumnDescriptions(json);
+            var data = FindDataBody(json);
+            if (data.Count() == 0)
+            {
+                return new List<IApiResource> { EmptyResource.GetInstance() };
+            }
             switch (dataType)
             {
                 case DataTypeConfig.Quarter:
-                    return ParseQuarterRange(json).Cast<IApiResource>().ToList();
+                    return ParseQuarterRange(columnDescriptions, data).Cast<IApiResource>().ToList();
                 default:
                     throw new NotSupportedDataTypeException($"ParseRange {dataType} is not supported at V3");
             }

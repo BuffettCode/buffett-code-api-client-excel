@@ -75,5 +75,18 @@ namespace BuffettCodeAPIClient.Tests
             // validation errors
             Assert.ThrowsException<ValidationError>(() => BuffettCodeApiV2RequestCreator.CreateGetQuarterRangeRequest("aaa", from, to));
         }
+
+        [TestMethod()]
+        public void CreateGetCompanyRequestTest()
+        {
+            // ok case
+            var ticker = "1234";
+            var request = BuffettCodeApiV2RequestCreator.CreateGetCompanyRequest(ticker);
+            Assert.AreEqual(request.EndPoint, BuffettCodeApiV2Config.ENDPOINT_COMPANY);
+            Assert.AreEqual(ticker, request.Parameters["ticker"]);
+
+            // validation errors
+            Assert.ThrowsException<ValidationError>(() => BuffettCodeApiV2RequestCreator.CreateGetCompanyRequest("aaa"));
+        }
     }
 }

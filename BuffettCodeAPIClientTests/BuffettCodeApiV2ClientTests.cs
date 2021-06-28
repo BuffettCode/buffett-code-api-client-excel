@@ -55,5 +55,16 @@ namespace BuffettCodeAPIClient.Tests
             Assert.ThrowsExceptionAsync<InvalidAPIKeyException>(() => client.GetQuarterRange("6502", from, to, true, false));
         }
 
+        [TestMethod()]
+        public void GetCompanyTest()
+        {
+            // test api key can get ticker=xx01
+            Assert.IsNotNull(client.GetCompany("6501", true, false).Result);
+
+            // test api key can get ticker=xx02
+            Assert.ThrowsExceptionAsync<InvalidAPIKeyException>(() => client.GetCompany("6502", true, false));
+        }
+
+
     }
 }
