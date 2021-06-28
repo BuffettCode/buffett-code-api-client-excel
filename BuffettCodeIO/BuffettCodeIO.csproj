@@ -66,6 +66,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiTaskHelper.cs" />
+    <Compile Include="Property\SupportedPeriodRange.cs" />
+    <Compile Include="Resolver\SupportedTierDictionary.cs" />
+    <Compile Include="Resolver\PeriodSupportedTierResolver.cs" />
     <Compile Include="Formatter\CurrencyFormatter.cs" />
     <Compile Include="Parser\ApiV2ResponseParser.cs" />
     <Compile Include="Parser\ApiResponseParserFactory.cs" />
@@ -79,16 +83,16 @@
     <Compile Include="Property\Company.cs" />
     <Compile Include="Property\PropertyDescriptionDictionary.cs" />
     <Compile Include="Property\PropertyDictionary.cs" />
-    <Compile Include="Resolver\ConstAPIResolver.cs" />
+    <Compile Include="Resolver\V2ConstDataTypeResolver.cs" />
     <Compile Include="BuffettCodeApiTaskProcessor.cs" />
     <Compile Include="Formatter\NumericFormatter.cs" />
     <Compile Include="Formatter\IPropertyFormatter.cs" />
     <Compile Include="Formatter\PropertyFormatterFactory.cs" />
     <Compile Include="Processor\ITaskProcessor.cs" />
     <Compile Include="Processor\SemaphoreTaskProcessor.cs" />
-    <Compile Include="Resolver\APIResolverFactory.cs" />
-    <Compile Include="Resolver\IAPIResolver.cs" />
-    <Compile Include="Resolver\WebResourceAPIResolver.cs" />
+    <Compile Include="Resolver\V2DataTypeResolverFactory.cs" />
+    <Compile Include="Resolver\IDataTypeResolver.cs" />
+    <Compile Include="Resolver\V2WebResourceDataTypeResolver.cs" />
     <Compile Include="Formatter\InactionFormatter.cs" />
     <Compile Include="Property\Indicator.cs" />
     <Compile Include="Formatter\RatioFormatter.cs" />

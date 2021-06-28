@@ -7,8 +7,7 @@ namespace BuffettCodeIO.Property
     public class Company : IApiResource
     {
         private readonly string ticker;
-        private readonly PeriodRange<FiscalQuarterPeriod> fixedTierRange;
-        private readonly PeriodRange<FiscalQuarterPeriod> ondemandTierRange;
+        private readonly SupportedTierRange<FiscalQuarterPeriod> supportedQuarterRanges;
         private readonly PropertyDictionary properties;
         private readonly PropertyDescriptionDictionary descriptions;
 
@@ -19,8 +18,7 @@ namespace BuffettCodeIO.Property
             PropertyDescriptionDictionary descriptions)
         {
             this.ticker = ticker;
-            this.fixedTierRange = fixedTireRange;
-            this.ondemandTierRange = ondemandTireRange;
+            this.supportedQuarterRanges = new SupportedTierRange<FiscalQuarterPeriod>(fixedTireRange, ondemandTireRange);
             this.properties = properties;
             this.descriptions = descriptions;
         }
@@ -42,8 +40,7 @@ namespace BuffettCodeIO.Property
 
         public string Ticker => ticker;
 
-        public PeriodRange<FiscalQuarterPeriod> FlatTierRange => fixedTierRange;
-        public PeriodRange<FiscalQuarterPeriod> OndemandTierRange => ondemandTierRange;
+        public SupportedTierRange<FiscalQuarterPeriod> SupportedQuarterRanges => supportedQuarterRanges;
     }
 
 }

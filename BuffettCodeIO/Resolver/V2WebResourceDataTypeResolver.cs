@@ -13,7 +13,7 @@ namespace BuffettCodeIO.Resolver
     /// <summary>
     /// Webから取得した定義ファイルを用いるAPIリゾルバ
     /// </summary>
-    public class WebResourceAPIResolver : IAPIResolver
+    public class V2WebResourceDataTypeResolver : IDataTypeResolver
     {
         private static readonly Dictionary<string, DataTypeConfig> mappingTable;
 
@@ -23,13 +23,13 @@ namespace BuffettCodeIO.Resolver
             {DataTypeConfig.Indicator, @"https://docs.buffett-code.com/v2-indicator.json" }
         };
 
-        private static readonly WebResourceAPIResolver _instance = new WebResourceAPIResolver();
-        public static WebResourceAPIResolver GetInstance()
+        private static readonly V2WebResourceDataTypeResolver _instance = new V2WebResourceDataTypeResolver();
+        public static V2WebResourceDataTypeResolver GetInstance()
         {
             return _instance;
         }
 
-        static WebResourceAPIResolver()
+        static V2WebResourceDataTypeResolver()
         {
             mappingTable = CreateMappingTable();
         }

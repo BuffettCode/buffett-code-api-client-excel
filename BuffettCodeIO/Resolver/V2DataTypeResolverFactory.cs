@@ -3,22 +3,22 @@ namespace BuffettCodeIO.Resolver
     /// <summary>
     /// APIリゾルバファクトリ
     /// </summary>
-    public static class APIResolverFactory
+    public static class V2DataTypeResolverFactory
     {
         /// <summary>
         /// APIリゾルバを返します
         /// </summary>
         /// <returns>APIリゾルバ</returns>
-        public static IAPIResolver Create()
+        public static IDataTypeResolver Create()
         {
-            bool isInitialized = WebResourceAPIResolver.IsInitialized();
+            bool isInitialized = V2WebResourceDataTypeResolver.IsInitialized();
             if (isInitialized)
             {
-                return WebResourceAPIResolver.GetInstance();
+                return V2WebResourceDataTypeResolver.GetInstance();
             }
             else
             {
-                return ConstAPIResolver.GetInstance();
+                return V2ConstDataTypeResolver.GetInstance();
             }
         }
     }

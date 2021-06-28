@@ -39,7 +39,7 @@ namespace BuffettCodeAddinRibbon
             this.labelMaxDegreeOfParallelism = new System.Windows.Forms.Label();
             this.checkParallelism = new System.Windows.Forms.CheckBox();
             this.checkDebugMode = new System.Windows.Forms.CheckBox();
-            this.checkUseOndemandEndpoint = new System.Windows.Forms.CheckBox();
+            this.checkIsOndemandEndpointEnabled = new System.Windows.Forms.CheckBox();
             this.tabConrtoll.SuspendLayout();
             this.tabAPI.SuspendLayout();
             this.tabDeveloper.SuspendLayout();
@@ -77,7 +77,7 @@ namespace BuffettCodeAddinRibbon
             // 
             // tabAPI
             // 
-            this.tabAPI.Controls.Add(checkUseOndemandEndpoint);
+            this.tabAPI.Controls.Add(checkIsOndemandEndpointEnabled);
             this.tabAPI.Controls.Add(this.labelAPIKey);
             this.tabAPI.Controls.Add(this.textAPIKey);
             this.tabAPI.Location = new System.Drawing.Point(4, 28);
@@ -159,13 +159,13 @@ namespace BuffettCodeAddinRibbon
             // 
             // useOndemandCheckBox
             // 
-            this.checkUseOndemandEndpoint.AutoSize = true;
-            this.checkUseOndemandEndpoint.Location = new System.Drawing.Point(34, 120);
-            this.checkUseOndemandEndpoint.Name = "useOndemandCheckBox";
-            this.checkUseOndemandEndpoint.Size = new System.Drawing.Size(211, 22);
-            this.checkUseOndemandEndpoint.TabIndex = 5;
-            this.checkUseOndemandEndpoint.Text = "従量課金エンドポイントを利用する";
-            this.checkUseOndemandEndpoint.UseVisualStyleBackColor = true;
+            this.checkIsOndemandEndpointEnabled.AutoSize = true;
+            this.checkIsOndemandEndpointEnabled.Location = new System.Drawing.Point(34, 120);
+            this.checkIsOndemandEndpointEnabled.Name = "useOndemandCheckBox";
+            this.checkIsOndemandEndpointEnabled.Size = new System.Drawing.Size(211, 22);
+            this.checkIsOndemandEndpointEnabled.TabIndex = 5;
+            this.checkIsOndemandEndpointEnabled.Text = "従量課金エンドポイントを利用する";
+            this.checkIsOndemandEndpointEnabled.UseVisualStyleBackColor = true;
 
             // 
             // SettingForm
@@ -203,7 +203,7 @@ namespace BuffettCodeAddinRibbon
         private System.Windows.Forms.Label labelMaxDegreeOfParallelism;
         private System.Windows.Forms.CheckBox checkParallelism;
         private System.Windows.Forms.CheckBox checkDebugMode;
-        private System.Windows.Forms.CheckBox checkUseOndemandEndpoint;
+        private System.Windows.Forms.CheckBox checkIsOndemandEndpointEnabled;
     }
 
 }

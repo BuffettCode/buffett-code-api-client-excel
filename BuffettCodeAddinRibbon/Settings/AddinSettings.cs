@@ -6,19 +6,19 @@ namespace BuffettCodeAddinRibbon.Settings
     public class AddinSettings
     {
         private readonly string apiKey;
-        private readonly bool useOndemandEndpoint;
+        private readonly bool enabledOndemandEndpoint;
         private readonly uint maxDegreeOfParallelism;
         private readonly bool debugMode;
 
         public string ApiKey => apiKey;
-        public bool UseOndemandEndpoint => useOndemandEndpoint;
+        public bool IsOndemandEndpointEnabled => enabledOndemandEndpoint;
         public uint MaxDegreeOfParallelism => maxDegreeOfParallelism;
         public bool DebugMode => debugMode;
 
         private AddinSettings(string apiKey, bool useOndemandEndpoint, uint maxDegreeOfParallelism, bool debugMode)
         {
             this.apiKey = apiKey;
-            this.useOndemandEndpoint = useOndemandEndpoint;
+            this.enabledOndemandEndpoint = useOndemandEndpoint;
             this.maxDegreeOfParallelism = maxDegreeOfParallelism;
             this.debugMode = debugMode;
         }
@@ -31,13 +31,13 @@ namespace BuffettCodeAddinRibbon.Settings
 
         public static AddinSettings Create(Configuration config)
         {
-            return new AddinSettings(config.ApiKey, config.UseOndemandEndpoint, config.MaxDegreeOfParallelism, config.DebugMode);
+            return new AddinSettings(config.ApiKey, config.IsOndemandEndpointEnabled, config.MaxDegreeOfParallelism, config.DebugMode);
         }
 
         public void SaveToConfiguration(Configuration config)
         {
             config.ApiKey = apiKey;
-            config.UseOndemandEndpoint = useOndemandEndpoint;
+            config.IsOndemandEndpointEnabled = enabledOndemandEndpoint;
             config.MaxDegreeOfParallelism = maxDegreeOfParallelism;
             config.DebugMode = debugMode;
         }

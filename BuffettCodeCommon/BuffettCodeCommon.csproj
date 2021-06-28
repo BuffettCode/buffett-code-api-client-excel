@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuffettCodeAddinCache.cs" />
+    <Compile Include="Config\SupportedTier.cs" />
     <Compile Include="Config\CSVOutputConfig.cs" />
     <Compile Include="Config\DataTypeConfig.cs" />
     <Compile Include="Exception\AddinConfigurationException.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Exception\AggregationNotFoundException.cs" />
     <Compile Include="Exception\BaseBuffettCodeException.cs" />
     <Compile Include="Exception\ApiResponseParserException.cs" />
+    <Compile Include="Exception\NotSupportedTierException.cs" />
     <Compile Include="Exception\NotSupportedDataTypeException.cs" />
     <Compile Include="Exception\PropertyNotFoundException.cs" />
     <Compile Include="Period\ComparablePeriodUtil.cs" />

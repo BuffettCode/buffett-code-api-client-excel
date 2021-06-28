@@ -11,7 +11,7 @@ namespace BuffettCodeAddinRibbon
             InitializeComponent();
             textAPIKey.Text = setting.ApiKey;
             checkDebugMode.Checked = setting.DebugMode;
-            checkUseOndemandEndpoint.Checked = setting.UseOndemandEndpoint;
+            checkIsOndemandEndpointEnabled.Checked = setting.IsOndemandEndpointEnabled;
             var maxDegreeOfParallelism = setting.MaxDegreeOfParallelism;
             if (maxDegreeOfParallelism == 0)
             {
@@ -59,7 +59,7 @@ namespace BuffettCodeAddinRibbon
             return checkDebugMode.Checked;
         }
 
-        public bool IsUseOndemandEndpoint() => checkUseOndemandEndpoint.Checked;
+        public bool IsOndemandEndpointEnabled() => checkIsOndemandEndpointEnabled.Checked;
 
         private void ButtonOK_Click(object sender, EventArgs e)
         {

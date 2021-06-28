@@ -4,12 +4,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace BuffettCodeIO.Resolver.Tests
 {
     [TestClass()]
-    public class WebResourceAPIResolverTests
+    public class V2WebResourceDataTypeResolver
     {
         [TestMethod]
         public void TestResolve()
         {
-            var resolver = WebResourceAPIResolver.GetInstance();
+            var resolver = Resolver.V2WebResourceDataTypeResolver.GetInstance();
 
             var quarter = resolver.Resolve("net_sales");
             Assert.AreEqual(quarter, DataTypeConfig.Quarter);
