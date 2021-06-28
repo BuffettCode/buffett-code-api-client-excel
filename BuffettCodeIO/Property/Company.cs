@@ -7,19 +7,19 @@ namespace BuffettCodeIO.Property
     {
         private readonly string ticker;
         private readonly PeriodRange<FiscalQuarterPeriod> fixedTierRange;
-        private readonly PeriodRange<FiscalQuarterPeriod> ondemandTireRange;
+        private readonly PeriodRange<FiscalQuarterPeriod> ondemandTierRange;
         private readonly PropertyDictionary properties;
         private readonly PropertyDescriptionDictionary descriptions;
 
         private Company(string ticker,
             PeriodRange<FiscalQuarterPeriod> fixedTireRange,
-            PeriodRange<FiscalQuarterPeriod> ondemandtireRange,
+            PeriodRange<FiscalQuarterPeriod> ondemandTireRange,
             PropertyDictionary properties,
             PropertyDescriptionDictionary descriptions)
         {
             this.ticker = ticker;
             this.fixedTierRange = fixedTireRange;
-            this.ondemandTireRange = ondemandtireRange;
+            this.ondemandTierRange = ondemandTireRange;
             this.properties = properties;
             this.descriptions = descriptions;
         }
@@ -29,18 +29,18 @@ namespace BuffettCodeIO.Property
         public static Company Create(
             string ticker,
             PeriodRange<FiscalQuarterPeriod> flatTierRange,
-            PeriodRange<FiscalQuarterPeriod> ondemandtireRange,
+            PeriodRange<FiscalQuarterPeriod> ondemandTireRange,
             PropertyDictionary properties,
             PropertyDescriptionDictionary descriptions)
         {
             JpTickerValidator.Validate(ticker);
-            return new Company(ticker, flatTierRange, ondemandtireRange, properties, descriptions);
+            return new Company(ticker, flatTierRange, ondemandTireRange, properties, descriptions);
         }
 
         public string Ticker => ticker;
 
         public PeriodRange<FiscalQuarterPeriod> FlatTierRange => fixedTierRange;
-        public PeriodRange<FiscalQuarterPeriod> OndemandTireRange => ondemandTireRange;
+        public PeriodRange<FiscalQuarterPeriod> OndemandTierRange => ondemandTierRange;
     }
 
 }

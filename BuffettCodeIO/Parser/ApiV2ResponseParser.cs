@@ -11,13 +11,13 @@ namespace BuffettCodeIO.Parser
 {
     public class ApiV2ResponseParser : IApiResponseParser
     {
-        private static IList<JToken> FindColumnDescriptions(JObject json) => json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => t.Path.Equals(PropertyNames.ColumnDescription)).ToList();
+        private static IEnumerable<JToken> FindColumnDescriptions(JObject json) => json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => t.Path.Equals(PropertyNames.ColumnDescription)).ToList();
 
         private static IEnumerable<JToken> FindDataBody(JObject json) => json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => !t.Path.Equals(PropertyNames.ColumnDescription));
 
         public static Quarter ParseQuarter(JObject json)
         {
-            IList<JToken> columnDescriptions = FindColumnDescriptions(json);
+            IList<JToken> columnDescriptions = FindColumnDescriptions(json).ToList();
             IList<JToken> data = FindDataBody(json).ToList();
 
             var ticker = data.First().Path;
@@ -29,7 +29,7 @@ namespace BuffettCodeIO.Parser
 
         public static IList<Quarter> ParseQuarterRange(JObject json)
         {
-            IList<JToken> columnDescriptions = FindColumnDescriptions(json);
+            IList<JToken> columnDescriptions = FindColumnDescriptions(json).ToList();
             JToken data = FindDataBody(json).First();
             var descriptions = ColumnDescriptionParser.Parse(columnDescriptions);
 
@@ -40,32 +40,32 @@ namespace BuffettCodeIO.Parser
 
         public static Indicator ParseIndicator(JObject json)
         {
-            IList<JToken> columnDescriptions = FindColumnDescriptions(json);
+            IList<JToken> columnDescriptions = FindColumnDescriptions(json).ToList();
             IList<JToken> data = FindDataBody(json).ToList();
 
             var ticker = data.First().Path;
-            var properteis = ParseProperties(data.Children().Children().First());
+            var properties = ParseProperties(data.Children().Children().First());
             var descriptions = ColumnDescriptionParser.Parse(columnDescriptions);
 
             return Indicator.Create(
                 ticker,
-                properteis,
+                properties,
                 descriptions
             );
         }
 
         public static Company ParseCompany(JObject json)
         {
-            IList<JToken> columnDescriptions = FindColumnDescriptions(json);
+            IList<JToken> columnDescriptions = FindColumnDescriptions(json).ToList();
             IList<JToken> data = FindDataBody(json).ToList();
 
             var ticker = data.First().Path;
-            var properteis = ParseProperties(data.Children().Children().First());
+            var properties = ParseProperties(data.Children().Children().First());
             var descriptions = ColumnDescriptionParser.Parse(columnDescriptions);
 
             return CreateCompany(
                 ticker,
-                properteis,
+                properties,
                 descriptions
             );
         }

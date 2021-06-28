@@ -71,10 +71,10 @@ namespace BuffettCodeIO.Parser.Tests
             Assert.AreEqual(company.GetDescription("url").Unit, "");
             Assert.AreEqual(company.GetValue("url"), @"http://corporate.kakaku.com/");
             Assert.AreEqual(company.GetValue("accounting_standard"), "IFRS");
-            Assert.AreEqual((uint)2001, company.OndemandTireRange.From.Year);
-            Assert.AreEqual((uint)4, company.OndemandTireRange.From.Quarter);
-            Assert.AreEqual((uint)2020, company.OndemandTireRange.To.Year);
-            Assert.AreEqual((uint)4, company.OndemandTireRange.To.Quarter);
+            Assert.AreEqual((uint)2001, company.OndemandTierRange.From.Year);
+            Assert.AreEqual((uint)4, company.OndemandTierRange.From.Quarter);
+            Assert.AreEqual((uint)2020, company.OndemandTierRange.To.Year);
+            Assert.AreEqual((uint)4, company.OndemandTierRange.To.Quarter);
             Assert.AreEqual((uint)2016, company.FlatTierRange.From.Year);
             Assert.AreEqual((uint)1, company.FlatTierRange.From.Quarter);
         }

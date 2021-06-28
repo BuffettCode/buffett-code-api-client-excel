@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace BuffettCodeIO.Parser
 {
     // API Response JSON key names
@@ -16,5 +17,7 @@ namespace BuffettCodeIO.Parser
         public static readonly string OldestFiscalQuarter = "oldest_fiscal_quarter";
         public static readonly string LatestFiscalYear = "latest_fiscal_year";
         public static readonly string LatestFiscalQuarter = "latest_fiscal_quarter";
+
+        public static readonly HashSet<string> IgnoredPropertyNames = new HashSet<string> { FixedTierRange };
     }
 }
