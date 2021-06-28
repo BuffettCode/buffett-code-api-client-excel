@@ -127,6 +127,8 @@ namespace BuffettCodeIO.Parser
                     return ParseQuarter(json);
                 case DataTypeConfig.Indicator:
                     return ParseIndicator(json);
+                case DataTypeConfig.Company:
+                    return ParseCompany(json);
                 default:
                     throw new NotSupportedDataTypeException($"Parse {dataType} is not supported at V2");
             }

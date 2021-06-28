@@ -1,9 +1,10 @@
 using BuffettCodeCommon.Period;
 using BuffettCodeCommon.Validator;
+using System.Collections.Generic;
 
 namespace BuffettCodeIO.Property
 {
-    public class Company
+    public class Company : IApiResource
     {
         private readonly string ticker;
         private readonly PeriodRange<FiscalQuarterPeriod> fixedTierRange;
@@ -36,6 +37,8 @@ namespace BuffettCodeIO.Property
             JpTickerValidator.Validate(ticker);
             return new Company(ticker, flatTierRange, ondemandTireRange, properties, descriptions);
         }
+
+        public ICollection<string> GetPropertyNames() => properties.Names;
 
         public string Ticker => ticker;
 
