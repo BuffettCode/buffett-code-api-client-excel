@@ -2,7 +2,7 @@ using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
 namespace BuffettCodeIO.Parser
 {
-    class ApiResponseParserFactory
+    public class ApiResponseParserFactory
     {
         public static IApiResponseParser Create(BuffettCodeApiVersion version)
         {
@@ -11,7 +11,7 @@ namespace BuffettCodeIO.Parser
                 case BuffettCodeApiVersion.Version2:
                     return new ApiV2ResponseParser();
                 default:
-                    throw new ApiResponseParserException($"api version={version} is not supported.");
+                    throw new NotSupportedDataTypeException($"api version={version} is not supported.");
             }
 
         }

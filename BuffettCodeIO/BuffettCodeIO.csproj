@@ -75,6 +75,7 @@
     <Compile Include="Parser\ValueNormalizer.cs" />
     <Compile Include="Parser\ColumnDescriptionParser.cs" />
     <Compile Include="Parser\IApiResponseParser.cs" />
+    <Compile Include="Property\EmptyResource.cs" />
     <Compile Include="Property\Company.cs" />
     <Compile Include="Property\PropertyDescriptionDictionary.cs" />
     <Compile Include="Property\PropertyDictionary.cs" />

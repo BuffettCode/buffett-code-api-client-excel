@@ -1,5 +1,8 @@
 using BuffettCodeAPIClient;
+using BuffettCodeCommon.Config;
+using BuffettCodeIO.Property;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json.Linq;
 using System.IO;
 
 namespace BuffettCodeIO.Parser.Tests
@@ -7,13 +10,14 @@ namespace BuffettCodeIO.Parser.Tests
     [TestClass()]
     public class ApiV2ResponseParserTests
     {
+        private static ApiV2ResponseParser parser = new ApiV2ResponseParser();
 
         [TestMethod()]
         [DeploymentItem(@"TestData\ApiV2Quarter.json", @"TestData")]
         public void ParseQuarterTest()
         {
             var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData\ApiV2Quarter.json"));
-            var quarter = ApiV2ResponseParser.ParseQuarter(json);
+            var quarter = (Quarter)parser.Parse(DataTypeConfig.Quarter, json);
             Assert.AreEqual(quarter.Ticker, "2371");
             Assert.AreEqual(quarter.GetDescription("ceo_name").Label, "代表者名");
             Assert.AreEqual(quarter.GetDescription("employee_num").Unit, "人");
@@ -26,10 +30,10 @@ namespace BuffettCodeIO.Parser.Tests
         public void ParseQuarterRangeTest()
         {
             var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData\ApiV2QuarterRange.json"));
-            var quarters = ApiV2ResponseParser.ParseQuarterRange(json);
+            var quarters = parser.ParseRange(DataTypeConfig.Quarter, json);
             Assert.AreEqual(2, quarters.Count);
-            var quarter1 = quarters[0];
-            var quarter2 = quarters[1];
+            var quarter1 = (Quarter)quarters[0];
+            var quarter2 = (Quarter)quarters[1];
 
             Assert.AreEqual(quarter1.Ticker, "2371");
             Assert.AreEqual(quarter1.GetDescription("ceo_name").Label, "代表者名");
@@ -52,7 +56,7 @@ namespace BuffettCodeIO.Parser.Tests
         public void ParseIndicatorTest()
         {
             var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData/ApiV2Indicator.json"));
-            var indicator = ApiV2ResponseParser.ParseIndicator(json);
+            var indicator = (Indicator)parser.Parse(DataTypeConfig.Indicator, json);
             Assert.AreEqual(indicator.Ticker, "2371");
             Assert.AreEqual(indicator.GetDescription("eps_actual").Label, "EPS（実績）");
             Assert.AreEqual(indicator.GetDescription("pbr").Unit, "倍");
@@ -65,7 +69,7 @@ namespace BuffettCodeIO.Parser.Tests
         public void ParseCompanyTest()
         {
             var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData/ApiV2Company.json"));
-            var company = ApiV2ResponseParser.ParseCompany(json);
+            var company = (Company)parser.Parse(DataTypeConfig.Company, json);
             Assert.AreEqual(company.Ticker, "2371");
             Assert.AreEqual(company.GetDescription("tosyo_33category").Label, "東証33業種");
             Assert.AreEqual(company.GetDescription("url").Unit, "");
@@ -79,7 +83,11 @@ namespace BuffettCodeIO.Parser.Tests
             Assert.AreEqual((uint)1, company.FlatTierRange.From.Quarter);
         }
 
-
-
+        [TestMethod()]
+        public void ParseEmpty()
+        {
+            var json = new JObject();
+            Assert.AreEqual(parser.Parse(DataTypeConfig.Quarter, json), EmptyResource.GetInstance());
+        }
     }
 }

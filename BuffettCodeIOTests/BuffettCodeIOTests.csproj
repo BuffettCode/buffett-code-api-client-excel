@@ -66,6 +66,7 @@
     <Compile Include="Formatter\FormatterFactoryTests.cs" />
     <Compile Include="Formatter\NumericFormatterTests.cs" />
     <Compile Include="Formatter\RatioFormatterTests.cs" />
+    <Compile Include="Parser\ApiResponseParserFactoryTests.cs" />
     <Compile Include="Parser\ApiV2ResponseParserTests.cs" />
     <Compile Include="Parser\ColumnDescriptionParserTests.cs" />
     <Compile Include="Parser\FixedTierRangeParserTests.cs" />
