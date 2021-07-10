@@ -76,15 +76,15 @@ namespace BuffettCodeCommon.Tests
         public void UseOndemandEndpointTest()
         {
             // check default value
-            Assert.IsFalse(configForTest.UseOndemandEndpoint);
+            Assert.IsFalse(configForTest.IsOndemandEndpointEnabled);
 
             // false => true
-            configForTest.UseOndemandEndpoint = true;
-            Assert.IsTrue(configForTest.UseOndemandEndpoint);
+            configForTest.IsOndemandEndpointEnabled = true;
+            Assert.IsTrue(configForTest.IsOndemandEndpointEnabled);
 
             // true => false
-            configForTest.UseOndemandEndpoint = false;
-            Assert.IsFalse(configForTest.UseOndemandEndpoint);
+            configForTest.IsOndemandEndpointEnabled = false;
+            Assert.IsFalse(configForTest.IsOndemandEndpointEnabled);
         }
 
         [TestMethod()]

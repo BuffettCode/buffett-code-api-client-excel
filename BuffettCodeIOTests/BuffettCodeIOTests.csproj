@@ -62,6 +62,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="ApiTaskHelperTests.cs" />
     <Compile Include="Formatter\CurrencyFormatterTests.cs" />
     <Compile Include="Formatter\FormatterFactoryTests.cs" />
     <Compile Include="Formatter\NumericFormatterTests.cs" />
@@ -78,8 +79,10 @@
     <Compile Include="Property\PropertyDescriptionDictionaryTests.cs" />
     <Compile Include="Property\PropertyDescriptionTests.cs" />
     <Compile Include="Property\QuarterTests.cs" />
-    <Compile Include="Resolver\ConstAPIResolverTests.cs" />
-    <Compile Include="Resolver\WebResourceAPIResolverTests.cs" />
+    <Compile Include="Resolver\PeriodSupportedTierResolverTests.cs" />
+    <Compile Include="Resolver\SupportedTierDictionaryTests.cs" />
+    <Compile Include="Resolver\V2ConstDataTypeResolverTest.cs" />
+    <Compile Include="Resolver\V2WebResourceDataTypeResolverTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

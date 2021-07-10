@@ -12,7 +12,7 @@ namespace BuffettCodeCommon.Registry
 
         public static readonly string NameApiKey = "ApiKey";
         public static readonly string NameMaxDegreeOfParallelism = "MaxDegreeOfParallelism";
-        public static readonly string NameUseOndemandEndpoint = "UseOndemandEndpoint";
+        public static readonly string NameIsOndemandEndpointEnabled = "IsOndemandEndpointEnabled";
         public static readonly string NameClearCache = "ClearCache";
 
         public static readonly string NameDebugMode = "DebugMode";
@@ -28,7 +28,7 @@ namespace BuffettCodeCommon.Registry
         {
             NameApiKey,
             NameMaxDegreeOfParallelism,
-            NameUseOndemandEndpoint,
+            NameIsOndemandEndpointEnabled,
             NameClearCache,
             NameDebugMode,
         };

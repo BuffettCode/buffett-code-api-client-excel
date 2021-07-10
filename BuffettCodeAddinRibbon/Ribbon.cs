@@ -24,7 +24,7 @@ namespace BuffettCodeAddinRibbon
             {
                 try
                 {
-                    var newSettings = AddinSettings.Create(form.GetAPIKey(), form.IsUseOndemandEndpoint(), form.GetMaxDegreeOfParallelism(), form.IsDebugMode());
+                    var newSettings = AddinSettings.Create(form.GetAPIKey(), form.IsOndemandEndpointEnabled(), form.GetMaxDegreeOfParallelism(), form.IsDebugMode());
                     newSettings.SaveToConfiguration(config);
                 }
                 catch (AddinConfigurationException)

@@ -47,7 +47,7 @@ namespace BuffettCodeCommon
         /// <summary>
         /// デフォルトでは Ondemand Endpoint は利用不可
         /// </summary>
-        private static readonly bool UseOndemandEndpointDefault = false;
+        private static readonly bool IsOndemandEndpointEnabledDefault = false;
 
         /// <summary>
         /// デフォルトでは DebugMode は false
@@ -92,10 +92,10 @@ namespace BuffettCodeCommon
         /// <summary>
         /// Ondemand Endpoint の利用可否
         /// </summary>
-        public bool UseOndemandEndpoint
+        public bool IsOndemandEndpointEnabled
         {
-            get => IsTrue(BuffettCodeRegistryConfig.NameUseOndemandEndpoint, UseOndemandEndpointDefault);
-            set => registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameUseOndemandEndpoint, value);
+            get => IsTrue(BuffettCodeRegistryConfig.NameIsOndemandEndpointEnabled, IsOndemandEndpointEnabledDefault);
+            set => registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameIsOndemandEndpointEnabled, value);
         }
 
 

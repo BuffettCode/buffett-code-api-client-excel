@@ -6,7 +6,7 @@ namespace BuffettCodeIO.Resolver
     /// <summary>
     /// ハードコードされた定数を用いるAPIリゾルバ
     /// </summary>
-    public class ConstAPIResolver : IAPIResolver
+    public class V2ConstDataTypeResolver : IDataTypeResolver
     {
         /// <summary>
         /// インディケータの項目名
@@ -90,9 +90,9 @@ namespace BuffettCodeIO.Resolver
             "cash_monthly_sales_ratio",
             "accrual" };
 
-        private static readonly ConstAPIResolver _instance = new ConstAPIResolver();
+        private static readonly V2ConstDataTypeResolver _instance = new V2ConstDataTypeResolver();
 
-        public static ConstAPIResolver GetInstance()
+        public static V2ConstDataTypeResolver GetInstance()
         {
             return _instance;
         }

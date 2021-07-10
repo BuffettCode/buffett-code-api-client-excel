@@ -10,8 +10,8 @@ namespace BuffettCodeExcelFunctions
     public class ApiResourceFetcher
     {
         private static readonly Configuration config = Configuration.GetInstance();
-        private static readonly IAPIResolver resolver = APIResolverFactory.Create();
-        private static readonly BuffettCodeApiTaskProcessor processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.MaxDegreeOfParallelism
+        private static readonly IDataTypeResolver resolver = V2DataTypeResolverFactory.Create();
+        private static readonly BuffettCodeApiTaskProcessor processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.MaxDegreeOfParallelism, config.IsOndemandEndpointEnabled
             );
 
         public static IApiResource FetchForLegacy
@@ -31,7 +31,7 @@ namespace BuffettCodeExcelFunctions
                     throw new NotSupportedDataTypeException();
             }
         }
-        public static IApiResource Fetch(DataTypeConfig dataType, string ticker, IPeriod period) => processor.UpdateIfNeeded(config.ApiKey, config.MaxDegreeOfParallelism).GetApiResource(dataType, ticker, period);
+        public static IApiResource Fetch(DataTypeConfig dataType, string ticker, IPeriod period) => processor.UpdateIfNeeded(config.ApiKey, config.MaxDegreeOfParallelism, config.IsOndemandEndpointEnabled).GetApiResource(dataType, ticker, period);
 
     }
 }

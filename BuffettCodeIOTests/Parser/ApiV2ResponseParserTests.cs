@@ -10,7 +10,7 @@ namespace BuffettCodeIO.Parser.Tests
     [TestClass()]
     public class ApiV2ResponseParserTests
     {
-        private static ApiV2ResponseParser parser = new ApiV2ResponseParser();
+        private static readonly ApiV2ResponseParser parser = new ApiV2ResponseParser();
 
         [TestMethod()]
         [DeploymentItem(@"TestData\ApiV2Quarter.json", @"TestData")]
@@ -75,12 +75,14 @@ namespace BuffettCodeIO.Parser.Tests
             Assert.AreEqual(company.GetDescription("url").Unit, "");
             Assert.AreEqual(company.GetValue("url"), @"http://corporate.kakaku.com/");
             Assert.AreEqual(company.GetValue("accounting_standard"), "IFRS");
-            Assert.AreEqual((uint)2001, company.OndemandTierRange.From.Year);
-            Assert.AreEqual((uint)4, company.OndemandTierRange.From.Quarter);
-            Assert.AreEqual((uint)2020, company.OndemandTierRange.To.Year);
-            Assert.AreEqual((uint)4, company.OndemandTierRange.To.Quarter);
-            Assert.AreEqual((uint)2016, company.FlatTierRange.From.Year);
-            Assert.AreEqual((uint)1, company.FlatTierRange.From.Quarter);
+            var supportedQuarterRange = company.SupportedQuarterRanges;
+            Assert.AreEqual((uint)2001, supportedQuarterRange.OndemandTierRange.From.Year);
+            Assert.AreEqual((uint)4, supportedQuarterRange.OndemandTierRange.From.Quarter);
+            Assert.AreEqual((uint)2020, supportedQuarterRange.OndemandTierRange.To.Year);
+            Assert.AreEqual((uint)4, supportedQuarterRange.OndemandTierRange.To.Quarter);
+            Assert.AreEqual((uint)2016, supportedQuarterRange.FixedTierRange
+                .From.Year);
+            Assert.AreEqual((uint)1, supportedQuarterRange.FixedTierRange.From.Quarter);
         }
 
         [TestMethod()]

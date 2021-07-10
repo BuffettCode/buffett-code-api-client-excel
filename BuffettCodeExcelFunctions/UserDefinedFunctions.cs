@@ -138,6 +138,10 @@ namespace BuffettCodeExcelFunctions
             {
                 message = "APIレスポンスのパースに失敗しました";
             }
+            else if (bce is NotSupportedTierException)
+            {
+                message = "取得可能な範囲を超えています";
+            }
             else
             {
                 message = "未定義のエラー";

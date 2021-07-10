@@ -99,6 +99,11 @@ namespace BuffettCodeAddinRibbon
                 MessageBox.Show("APIのレスポンスのパースに失敗しました。", "CSV出力", MessageBoxButtons.OK);
                 return;
             }
+            catch (NotSupportedTierException)
+            {
+                MessageBox.Show("取得可能な範囲を超えています", "CSV出力", MessageBoxButtons.OK);
+                return;
+            }
             catch (Exception)
             {
                 MessageBox.Show("データの取得中にエラーが発生しました。", "CSV出力", MessageBoxButtons.OK);
@@ -215,7 +220,7 @@ namespace BuffettCodeAddinRibbon
         private IList<Quarter> GetSortedQuarters(CsvDownloadParameters parameters)
         {
             var config = Configuration.GetInstance();
-            var processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.MaxDegreeOfParallelism);
+            var processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.MaxDegreeOfParallelism, config.IsOndemandEndpointEnabled);
 
             var quarters = PeriodRange<FiscalQuarterPeriod>.Slice(parameters.Range, 12)
                 .SelectMany

@@ -23,11 +23,11 @@ namespace BuffettCodeAPIClient.Tests
         [TestMethod()]
         public void GetDailyTest()
         {
-            // test api key can get ticker=xx01 data
+            // test api key can get toyota data
             var day = DayPeriod.Create(2021, 2, 1);
-            Assert.IsNotNull(client.GetDaily("6501", day, false, true, false).Result);
+            Assert.IsNotNull(client.GetDaily("7203", day, false, true, false).Result);
 
-            // test api key can get ticker=xx02
+            // test api key can get not toyota
             Assert.ThrowsExceptionAsync<InvalidAPIKeyException>
                 (() => client.GetDaily("6502", day, true, true, false));
         }
