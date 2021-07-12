@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?define RibbonVstoFilePath = "[#fil930E938B07A3581BA803FFB568FC605A]"?>
+<?define ExcelAddinRibbonKey = "SOFTWARE\Microsoft\Office\Excel\Addins\!(loc.CompanyName).Ribbon"?>
+<?define ExcelFunctionsKey = "SOFTWARE\!(loc.CompanyName).Functions"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+        <ComponentGroup Id="ModRegistriesForAddinRibbon">
+            <!-- ref https://docs.microsoft.com/en-us/visualstudio/vsto/registry-entries-for-vsto-add-ins?view=vs-2019 -->
+            <Component Id="WriteRegistriesForVsto" Guid="5b218378-0019-4dfd-848e-489f10172376" Directory="AddinFolder">
+                <RegistryKey Root="HKCU" Key="$(var.ExcelAddinRibbonKey)" ForceDeleteOnUninstall="yes">
+                    <RegistryValue Name="Description" Value="BuffettCodeExcelAddinRibbon" Type="string" Action="write" />
+                    <RegistryValue Name="FriendlyName" Value="BuffettCodeExcelAddinRibbon" Type="string" Action="write" />
+                    <RegistryValue Name="LoadBehavior" Value="3" Type="integer" Action="write" />
+                    <RegistryValue Name="Manifest" Value="file:///$(var.RibbonVstoFilePath)|vstolocal" Type="string" Action="write" />
+                </RegistryKey>
+            </Component>
+        </ComponentGroup>
+	</Fragment>
+</Wix>
