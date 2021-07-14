@@ -9,10 +9,10 @@
              Manufacturer="!(loc.ProductManufacturer)"
              UpgradeCode="$(var.ProductUpgradeCode)">
 
-        <Package InstallerVersion="200"
+        <Package InstallerVersion="450"
                  Compressed="yes"
-                 InstallPrivileges="elevated"
-                 InstallScope="perMachine"
+                 InstallPrivileges="limited"
+                 InstallScope="perUser"
                  Manufacturer="!(loc.ProductManufacturer)"
                  Description="!(loc.ProductDescription)"
                  Comments="!(loc.ProductCopyright)"/>

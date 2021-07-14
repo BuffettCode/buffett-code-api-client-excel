@@ -39,6 +39,8 @@ jobs:
       run: MSBuild BuffettCode.sln /p:Configuration=Release /p:ManifestKeyFile="$env:CODE_SIGNING_CERTIFICATE" /p:ManifestCertificateThumbprint=${{ secrets.MANIFEST_CERTIFICATE_THUMBPRINT }}
     - name: Run VSTest using Test API Token
       run: .\scripts\run_all_tests.ps1
+    - name: Sign the built installer using signing certificate
+      run ./scripts/sign_installer_for_release.ps1 "$env:CODE_SIGNING_CERTIFICATE_LOCAL" "$env:CERTIFICATE_PASSWORD" ".\BuffettCodeInstaller\AAACertificateServices.crt"
     - if: ${{ github.ref == 'refs/heads/master' }}
       name: Beta Release
       env:
