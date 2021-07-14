@@ -11,8 +11,9 @@
 
         <Package InstallerVersion="450"
                  Compressed="yes"
-                 InstallPrivileges="limited"
-                 InstallScope="perUser"
+                 Platform="x64"
+                 InstallPrivileges="elevated"
+                 InstallScope="perMachine"
                  Manufacturer="!(loc.ProductManufacturer)"
                  Description="!(loc.ProductDescription)"
                  Comments="!(loc.ProductCopyright)"/>
@@ -39,7 +40,7 @@
 
         <!-- Windows Installer set TARGETDIR to the local hard drive with the most free space.  The top-level Directory must be Id="TARGETDIR" Name="SourceDir" -->
         <Directory Id="TARGETDIR" Name="SourceDir">
-            <Directory Id="ProgramFilesFolder">
+            <Directory Id="ProgramFiles64Folder">
                 <Directory Id="COMPANYDIR" Name="!(loc.ProductManufacturer)">
                     <Directory Id="AddinFolder" Name="!(loc.ProductNameNoSpace)">
                     </Directory>
