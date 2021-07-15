@@ -12,7 +12,7 @@
                 <RemoveRegistryKey Root="HKCU" Key="[AddinConfigurationKey]" Action="removeOnInstall" />
             </Component>
             <!-- setup ribbon -->
-            <Component Id="SetAddinRibbonSetupRegistry" Guid="6C761D06-FF04-4FAA-A072-A02E5B5B724D" Directory="AddinFolder" KeyPath="yes">
+            <Component Id="SetAddinRibbonSetupRegistry" Guid="6C761D06-FF04-4FAA-A072-A02E5B5B724D" Directory="AddinFolder" >
                 <RegistryKey Root="HKCU" Key="[AddinRibonRegistryKey]" Action="createAndRemoveOnUninstall">
                     <RegistryValue Name="Description" Value="BuffettCode" Type="string" Action="write" />
                     <RegistryValue Name="FriendlyName" Value="BuffettCode" Type="string" Action="write" />

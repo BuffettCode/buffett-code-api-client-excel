@@ -18,6 +18,7 @@
     <SuppressIces>ICE57</SuppressIces>
     <SuppressAllWarnings>True</SuppressAllWarnings>
     <Pedantic>False</Pedantic>
+    <CompilerAdditionalOptions>-arch x64</CompilerAdditionalOptions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -27,6 +28,7 @@
     <DefineConstants>MSIProductVersion=$(MSIProductVersion)</DefineConstants>
     <Cultures>ja-JP</Cultures>
     <SuppressIces>ICE57</SuppressIces>
+    <CompilerAdditionalOptions>-arch x64</CompilerAdditionalOptions>
   </PropertyGroup>
   <!-- ref: https://stackoverflow.com/questions/36756311/include-all-files-in-bin-folder-in-wix-installer-->
   <!-- set Define the Harvestpath for Heat -->
@@ -42,6 +44,9 @@
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
     <Cultures>ja-JP</Cultures>
+  </PropertyGroup>
+  <PropertyGroup>
+    <InstallerPlatform>x64</InstallerPlatform>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ExcelFunctions.wxs" />
