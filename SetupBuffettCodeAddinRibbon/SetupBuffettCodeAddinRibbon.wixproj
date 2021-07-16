@@ -55,6 +55,7 @@
     <DefineConstants>RibbonHarvestPath=..\BuffettCodeAddinRibbon\bin\$(Configuration)\</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ModRegistriesForAddinRibbon.wxs" />
     <Compile Include="HeatGeneratedAddinRibbon.wxs" />
     <Compile Include="Product.wxs" />
   </ItemGroup>
@@ -67,6 +68,9 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProductProperties.wxl" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?define FileIdRibbonVsto = "fil930E938B07A3581BA803FFB568FC605A"?>
+<?define UserConfigurationKey = "SOFTWARE\BuffettCode\ExcelAddin"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+        <ComponentGroup Id="ModRegistriesForAddinRibbon">
+            <!-- ref https://docs.microsoft.com/en-us/visualstudio/vsto/deploying-an-office-solution-by-using-windows-installer?view=vs-2019#ConfigureRegistry -->
+            <Component Id="WriteRegistriesForVsto" Guid="5b218378-0019-4dfd-848e-489f10172376" Directory="AddinFolder">
+                <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Office\Excel\Addins\!(loc.CompanyName).ExcelAddIn">
+                    <RegistryValue Name="Description" Value="BuffettCode" Type="string" Action="write" />
+                    <RegistryValue Name="FriendlyName" Value="BuffettCode" Type="string" Action="write" />
+                    <RegistryValue Name="LoadBehavior" Value="3" Type="integer" Action="write" />
+                    <RegistryValue Name="Manifest" Value="$(var.FileIdRibbonVsto)" Type="string" Action="write" />
+                </RegistryKey>
+            </Component>
+            <Component Id="DeleteUserSettingsInRegistry" Guid="2227c217-ee2e-4164-93c7-377d5554b50a" Directory="TARGETDIR">
+                <RemoveRegistryKey Id='PerUserConfigurationCleanup' Root="HKCU" Action="removeOnInstall" Key="$(var.UserConfigurationKey)" />  
+            </Component>
+        </ComponentGroup>
+	</Fragment>
+</Wix>
