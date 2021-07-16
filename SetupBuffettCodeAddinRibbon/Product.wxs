@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?define ProductVersion = "1.0.1.0"?>
+<?define ProductName = "BuffettCodeExcelAddinRibbon"?>
+<?define ProductUpgradeCode = "71768962-ae5a-47d9-a122-879e183253fb"?>
+<?define ProductLanguageJp = "1033"?>
+<?define ProductCompanyName = "BuffettCode"?>
+<?define FileIdRibbonVsto = "fil930E938B07A3581BA803FFB568FC605A"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="$(var.ProductName)" Language="$(var.ProductLanguageJp)" Version="1.0.0.0" Manufacturer="$(var.ProductCompanyName)" UpgradeCode="$(var.ProductUpgradeCode)">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+        <Upgrade Id="$(var.ProductUpgradeCode)">
+            <UpgradeVersion Minimum="1.0.0.0"
+                      IncludeMinimum="yes"
+                      OnlyDetect="no"
+                      Maximum="$(var.ProductVersion)"
+                      IncludeMaximum="no"
+                      Property="PREVIOUSFOUND" />
+        </Upgrade>
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+        <Feature Id="SetupBuffettCodeAddinRibbonFeature" Title="SetupBuffettCodeAddinRibbon" Level="1">
+			<ComponentGroupRef Id="HeatGeneratedAddinRibbon" />
+            <ComponentGroupRef Id="WriteRegistrsForAddinRibbon" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFiles64Folder">
+                    <Directory Id="COMPANYDIR" Name="$(var.ProductCompanyName)">
+                        <Directory Id="AddinFolder" Name="$(var.ProductName)" >
+                    </Directory>
+                </Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+
+    <!-- ref https://docs.microsoft.com/en-us/visualstudio/vsto/deploying-an-office-solution-by-using-windows-installer?view=vs-2019#ConfigureRegistry -->
+    <Fragment>
+        <ComponentGroup Id="WriteRegistrsForAddinRibbon">
+            <Component Id="WriteRegistrsForVsto" Guid="5b218378-0019-4dfd-848e-489f10172376" Directory="AddinFolder">
+                <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Office\Excel\Addins\$(var.ProductCompanyName).ExcelAddIn">
+                    <RegistryValue Name="Description" Value="BuffettCode" Type="string" Action="write" />
+                    <RegistryValue Name="FriendlyName" Value="BuffettCode" Type="string" Action="write" />
+                    <RegistryValue Name="LoadBehavior" Value="3" Type="integer" Action="write" />
+                    <RegistryValue Name="Manifest" Value="$(var.FileIdRibbonVsto)" Type="string" Action="write" />
+                </RegistryKey>
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+
+</Wix>
