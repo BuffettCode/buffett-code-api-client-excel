@@ -18,10 +18,11 @@
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate />
 
-        <Feature Id="SetupBuffettCodeExcelAddin" Title="SetupBuffettCodeExcelAddin" Level="1">
-			<ComponentGroupRef Id="HeatGeneratedAddinRibbon" />
+        <Feature Id="SetupBuffettCodeAddinRibbonFeature" Title="SetupBuffettCodeAddinRibbon" Level="1">
+            <ComponentGroupRef Id="HeatGeneratedAddinRibbon" />
             <ComponentGroupRef Id="ModRegistriesForAddinRibbon" />
-		</Feature>
+            <ComponentGroupRef Id="CleanupOnUninstall" />
+        </Feature>
 	</Product>
 
 	<Fragment>

@@ -55,6 +55,7 @@
     <DefineConstants>RibbonHarvestPath=..\BuffettCodeAddinRibbon\bin\$(Configuration)\</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CleanupOnUninstall.wxs" />
     <Compile Include="ModRegistriesForAddinRibbon.wxs" />
     <Compile Include="HeatGeneratedAddinRibbon.wxs" />
     <Compile Include="Product.wxs" />
