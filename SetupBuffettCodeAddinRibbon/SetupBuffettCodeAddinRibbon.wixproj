@@ -56,7 +56,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CleanupOnUninstall.wxs" />
-    <Compile Include="ModRegistriesForAddinRibbon.wxs" />
+    <Compile Include="ModRegistriesForAddin.wxs" />
     <Compile Include="HeatGeneratedAddinRibbon.wxs" />
     <Compile Include="Product.wxs" />
   </ItemGroup>
