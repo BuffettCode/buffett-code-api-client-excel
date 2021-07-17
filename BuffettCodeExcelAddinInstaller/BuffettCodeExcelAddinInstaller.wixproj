@@ -30,7 +30,7 @@
     </WixExtension>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SetupBuffettCodeAddinRibbon\SetupAddinRibbon.wixproj">
+    <ProjectReference Include="..\SetupAddinRibbon\SetupAddinRibbon.wixproj">
       <Name>SetupAddinRibbon</Name>
       <Project>{a614b68f-d437-45f6-ae35-1308ddc392ee}</Project>
       <Private>True</Private>
