@@ -3,6 +3,7 @@
 	<Fragment>
         <ComponentGroup Id="CleanupOnUninstall">
             <Component Id="RemoveFilesOnUninstall" Guid="620450e4-fffc-4a6b-9673-13c78b463f07" Directory="AddinFolder" >
+                <RemoveFile Id="RemoveAddinRibbonFiles" Name="*.*" On="both" />
                 <RemoveFolder Id="AddinFolderRemove" Directory="AddinFolder" On="uninstall" />
                 <RemoveFolder Id="RemoveCompanyAppData" Directory="COMPANYAPPDATADIR" On="uninstall" />
             </Component>
