@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Bundle Name="BuffettCodeExcelAddinInstaller" Version="1.0.1.0" Manufacturer="BuffettCode" UpgradeCode="a0e1d600-fecf-40de-a2ee-28397711c829">
-		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+<?define InstallerVersion = "1.0.1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+      xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+	<Bundle Name="!(loc.InstallerName)" Version="$(var.InstallerVersion)" Manufacturer="Buffett Code Inc" UpgradeCode="a0e1d600-fecf-40de-a2ee-28397711c829" Copyright="!(loc.Copyright)" Compressed="yes" IconSourceFile="Resources\Icon.ico">
+        <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
+            <bal:WixStandardBootstrapperApplication
+              LogoFile="Resources\Icon.ico"
+              LicenseFile="Resources\License.rtf"
+              />
+        </BootstrapperApplicationRef>
 
 		<Chain>
             <PackageGroupRef Id="BuffettCodeExcelAddonInstallers" />

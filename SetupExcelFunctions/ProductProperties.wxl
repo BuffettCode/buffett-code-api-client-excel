@@ -5,7 +5,7 @@
     <String Id="ProductNameNoSpace">BuffettCodeExcelFunctions</String>
     <String Id="ProductDescription">Installer for BuffettCode ExcelFunctions Add-In</String>
     <String Id="ProductManufacturer">BuffettCode</String>
-    <String Id="ProductCopyright">(c) 2021 BuffettCode, Inc</String>
+    <String Id="ProductCopyright">(c) 2021 Buffett Code Inc.</String>
     <String Id="ProductUninstallDescription">Uninstall !(loc.ProductName)</String>
     <String Id="AppName">!(loc.ProductName)</String>
 </WixLocalization>

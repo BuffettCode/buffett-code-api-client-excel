@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="ja-JP" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+    <String Id="InstallerName">バフェットコード Excelアドイン</String>
+    <String Id="Copyright">Copyright (C) 2021 Buffett Code Inc. All rights reserved</String>
+</WixLocalization>

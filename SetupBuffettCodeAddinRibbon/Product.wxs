@@ -18,6 +18,11 @@
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate />
 
+        <!-- The property below will disable the repair button. -->
+        <!--<Property Id="ARPNOREPAIR" Value="yes" />-->
+        <Property Id="PromptToCloseProcesses" Value="EXCEL" />
+        <Property Id="PromptToCloseDisplayNames" Value="Microsoft Excel" />
+
         <Feature Id="SetupBuffettCodeAddinRibbonFeature" Title="SetupBuffettCodeAddinRibbon" Level="1">
             <ComponentGroupRef Id="HeatGeneratedAddinRibbon" />
             <ComponentGroupRef Id="ModRegistriesForAddinRibbon" />
