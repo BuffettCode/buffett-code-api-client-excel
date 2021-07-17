@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Bundle Name="BuffettCodeExcelAddinInstaller" Version="1.0.1.0" Manufacturer="BuffettCode" UpgradeCode="a0e1d600-fecf-40de-a2ee-28397711c829">
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+
+		<Chain>
+            <PackageGroupRef Id="BuffettCodeExcelAddonInstallers" />
+		</Chain>
+	</Bundle>
+
+    <Fragment>
+        <PackageGroup Id="BuffettCodeExcelAddonInstallers">
+            <MsiPackage Id="SetupAddinRibbon" Cache="no" Compressed="no" DisplayInternalUI="yes" Vital="yes" SourceFile="$(var.SetupBuffettCodeAddinRibbon.TargetDir)$(var.SetupBuffettCodeAddinRibbon.TargetName).msi" />
+            <MsiPackage Id="SetupExcelFunctions" Cache="no" Compressed="no" DisplayInternalUI="yes" Vital="yes" SourceFile="$(var.SetupExcelFunctions.TargetDir)$(var.SetupExcelFunctions.TargetName).msi" />
+        </PackageGroup>
+    </Fragment>
+</Wix>
