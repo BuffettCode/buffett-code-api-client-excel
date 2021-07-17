@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="AddinFolder">
+            <Component Id="cmp75FCF96E3E8ED6C44E78A9DEB8022A1E" Guid="*">
+                <File Id="filA25DE92A0F3A6DE0A94283148D48CCA4" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeAPIClient.dll" />
+            </Component>
+            <Component Id="cmpB5F384839307819AEEA9D5C26D3FB84C" Guid="*">
+                <File Id="fil98F19189B46D4BF5BB64FF7E4E0B9F0A" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeAPIClient.dll.config" />
+            </Component>
+            <Component Id="cmp77418D49E65F2CC1C2A219313C61BD26" Guid="*">
+                <File Id="filF960396187A92EF4136FBAEE70B6C876" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeAPIClient.pdb" />
+            </Component>
+            <Component Id="cmp40CD031D69A9188CBCCF48170920C3DD" Guid="*">
+                <File Id="fil27A7DB152F862DC063F72EA35F4C3D0D" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeCommon.dll" />
+            </Component>
+            <Component Id="cmpE7824E08602BBB9BFD528B220CDADE1B" Guid="*">
+                <File Id="filC04574BC3125BE070426E0183F0DDCBC" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeCommon.pdb" />
+            </Component>
+            <Component Id="cmpF561DDE91DEAC22A16B34B49B545EE2C" Guid="*">
+                <File Id="filDC62FBEE78E3AE756412555218487307" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeExcelFunctions-AddIn-packed.xll" />
+            </Component>
+            <Component Id="cmp47ECCB884D03811A08B842607A7DC491" Guid="*">
+                <File Id="fil40B0B3BB975442019183FA66B01D90AD" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeExcelFunctions-AddIn-packed.xll.config" />
+            </Component>
+            <Component Id="cmp6062028E14159F3DADDDDEB98F0EC9EE" Guid="*">
+                <File Id="filBD545CA48D7CD45EB7912E469808C42D" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeExcelFunctions-AddIn.dna" />
+            </Component>
+            <Component Id="cmpD4D7A74A4A36130F4D5741FA18F8982A" Guid="*">
+                <File Id="filE9035145D7D6B6CD79A4BA550BEBEDCB" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeExcelFunctions-AddIn.xll" />
+            </Component>
+            <Component Id="cmp3DD67CC82A5AD049F5225047B8A28EE7" Guid="*">
+                <File Id="filA75887B09C803BC2CC5D383509A28D85" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeExcelFunctions-AddIn.xll.config" />
+            </Component>
+            <Component Id="cmpD4F5D26981DC3B1A13E2C67A9D22D0AD" Guid="*">
+                <File Id="filF419CAF83D33FBBFA533B60CB7BC5AFA" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeExcelFunctions-AddIn64-packed.xll" />
+            </Component>
+            <Component Id="cmpACD8A90FCD9611B85BECD0932255F852" Guid="*">
+                <File Id="fil09EF7EC84F1FBC56CB83105BBEDCE39A" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeExcelFunctions-AddIn64-packed.xll.config" />
+            </Component>
+            <Component Id="cmpBB8C3E3557908780C07D1E42F53C626F" Guid="*">
+                <File Id="fil4F10CA3848377653149C393E0B04D679" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeExcelFunctions-AddIn64.dna" />
+            </Component>
+            <Component Id="cmpCFF01A8FB193EB20D82F2762D5A1E372" Guid="*">
+                <File Id="filC19F3700B759223D10108259ACAE38AA" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeExcelFunctions-AddIn64.xll" />
+            </Component>
+            <Component Id="cmpA821A18C008E86108C95CDDE106D3911" Guid="*">
+                <File Id="fil5DE69B488A0505F07DF011C31A8D5538" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeExcelFunctions-AddIn64.xll.config" />
+            </Component>
+            <Component Id="cmpF6A57EBC8A455017780859C09D4DDC0A" Guid="*">
+                <File Id="fil00A0C9714961EA5CB4391D4DCD6E50A6" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeExcelFunctions.dll" />
+            </Component>
+            <Component Id="cmpD778F4C0D820843DDEE9A27C97B08E4B" Guid="*">
+                <File Id="filD26B3D970E45D30D903CC1E392A51801" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeExcelFunctions.dll.config" />
+            </Component>
+            <Component Id="cmpD91A8218F000087D3A2A2548EDE35BC1" Guid="*">
+                <File Id="fil8A5D91EA37B057427C7016BB5A1BCB73" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeExcelFunctions.pdb" />
+            </Component>
+            <Component Id="cmpBCBF84C98F8CD2DD6819DE7ED2654380" Guid="*">
+                <File Id="filC84245AD97E739E9CB5158E4670803B1" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeIO.dll" />
+            </Component>
+            <Component Id="cmpD0C7E0D3867E36DF8F77868C149AF573" Guid="*">
+                <File Id="fil6DEB3A4B857382D984D147E05888B21D" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeIO.dll.config" />
+            </Component>
+            <Component Id="cmpC05EDF9A62E4F89F4E75833F06949EFC" Guid="*">
+                <File Id="filFFADEB729CD74515E27129CDBA3FFD73" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\BuffettCodeIO.pdb" />
+            </Component>
+            <Component Id="cmp6616CB17E4922802E5C84B9C16935052" Guid="*">
+                <File Id="fil9BBA16653E5D3B491B96426D91CF8249" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\Newtonsoft.Json.dll" />
+            </Component>
+            <Component Id="cmp196F1D763CBB036DA160606D8D0E27DA" Guid="*">
+                <File Id="fil83D9BCFD839F35A59CAF8AB3AB656AE9" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\Newtonsoft.Json.xml" />
+            </Component>
+            <Component Id="cmp676B532506E78F84084C12B1FAE054E3" Guid="*">
+                <File Id="fil9B24D665A20C2F5F03044136BBBE054F" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\System.ValueTuple.dll" />
+            </Component>
+            <Component Id="cmp693DF999232B83CFADE3AF4AFB0A0D94" Guid="*">
+                <File Id="filC5FB10930FE6D0DD10B7EE7A9EB41C00" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\System.ValueTuple.xml" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="HeatGeneratedExcelFunctions">
+            <ComponentRef Id="cmp75FCF96E3E8ED6C44E78A9DEB8022A1E" />
+            <ComponentRef Id="cmpB5F384839307819AEEA9D5C26D3FB84C" />
+            <ComponentRef Id="cmp77418D49E65F2CC1C2A219313C61BD26" />
+            <ComponentRef Id="cmp40CD031D69A9188CBCCF48170920C3DD" />
+            <ComponentRef Id="cmpE7824E08602BBB9BFD528B220CDADE1B" />
+            <ComponentRef Id="cmpF561DDE91DEAC22A16B34B49B545EE2C" />
+            <ComponentRef Id="cmp47ECCB884D03811A08B842607A7DC491" />
+            <ComponentRef Id="cmp6062028E14159F3DADDDDEB98F0EC9EE" />
+            <ComponentRef Id="cmpD4D7A74A4A36130F4D5741FA18F8982A" />
+            <ComponentRef Id="cmp3DD67CC82A5AD049F5225047B8A28EE7" />
+            <ComponentRef Id="cmpD4F5D26981DC3B1A13E2C67A9D22D0AD" />
+            <ComponentRef Id="cmpACD8A90FCD9611B85BECD0932255F852" />
+            <ComponentRef Id="cmpBB8C3E3557908780C07D1E42F53C626F" />
+            <ComponentRef Id="cmpCFF01A8FB193EB20D82F2762D5A1E372" />
+            <ComponentRef Id="cmpA821A18C008E86108C95CDDE106D3911" />
+            <ComponentRef Id="cmpF6A57EBC8A455017780859C09D4DDC0A" />
+            <ComponentRef Id="cmpD778F4C0D820843DDEE9A27C97B08E4B" />
+            <ComponentRef Id="cmpD91A8218F000087D3A2A2548EDE35BC1" />
+            <ComponentRef Id="cmpBCBF84C98F8CD2DD6819DE7ED2654380" />
+            <ComponentRef Id="cmpD0C7E0D3867E36DF8F77868C149AF573" />
+            <ComponentRef Id="cmpC05EDF9A62E4F89F4E75833F06949EFC" />
+            <ComponentRef Id="cmp6616CB17E4922802E5C84B9C16935052" />
+            <ComponentRef Id="cmp196F1D763CBB036DA160606D8D0E27DA" />
+            <ComponentRef Id="cmp676B532506E78F84084C12B1FAE054E3" />
+            <ComponentRef Id="cmp693DF999232B83CFADE3AF4AFB0A0D94" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>
