@@ -294,7 +294,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>BuffettCodeTest.pfx</ManifestKeyFile>
+    <ManifestKeyFile>..\Certificates\BuffettCodeTest.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>9843c635bcd976868ffcb98ecc2877408cd5ff61</ManifestCertificateThumbprint>

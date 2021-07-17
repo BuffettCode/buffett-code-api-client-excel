@@ -1,5 +1,4 @@
-Param([string] $S3Bucket, $SubFolder)
-$LocalInstaller = ".\BuffettCodeInstaller\bin\Release\ja-JP\BuffettCodeInstaller.msi"
+Param([string] $InstallerPath, $S3Bucket, $SubFolder)
 $Folder = "buffett-code-excel-addin/$SubFolder"
 echo "upload an installer: $LocalInstaller to s3"
-aws s3 cp "$LocalInstaller" "s3://$S3Bucket/$Folder/BuffettCodeExcelAddinInstaller.msi" --quiet 
+aws s3 cp "$InstallerPath" "s3://$S3Bucket/$Folder/BuffettCodeExcelAddinInstaller.exe" --quiet 
