@@ -1,4 +1,17 @@
-Param([string] $InstallerPath, $S3Bucket, $SubFolder)
-$Folder = "buffett-code-excel-addin/$SubFolder"
-echo "upload an installer: $InstallerPath to s3"
-aws s3 cp "$InstallerPath" "s3://$S3Bucket/$Folder/BuffettCodeExcelAddinInstaller.exe" --quiet 
+Param([string] $InstallerFolderPath, $S3Bucket, $SubFolder)
+$InstallerArchiveName = "BuffettCodeExcelAddinInstaller.zip"
+$S3Uri = "s3://buffett-code-excel-addin/$SubFolder/$InstallerArchiveName"
+$InstallerArchiveFullPath = "$InstallerFolderPath\$InstallerArchiveName"
+
+
+$Compress = @{
+  Path = "$InstallerFolderPath\BuffettCodeExcelAddinInstaller.exe", "$InstallerFolderPath\*.msi", "$InstallerFolderPath\*.cab"
+  CompressionLevel = "Fastest"
+  DestinationPath = "$InstallerArchiveFullPath"
+}
+
+Compress-Archive @Compress
+
+Write-Output "upload an archive: $InstallerArchiveFullPath to $S3Uri"
+
+aws s3 cp $InstallerArchiveFullPath $S3Uri --quiet 
