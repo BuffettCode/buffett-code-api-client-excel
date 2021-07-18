@@ -1,6 +1,6 @@
 Param([string] $InstallerFolderPath, $S3Bucket, $SubFolder)
 $InstallerArchiveName = "BuffettCodeExcelAddinInstaller.zip"
-$S3Uri = "s3://buffett-code-excel-addin/$SubFolder/$InstallerArchiveName"
+$S3Uri = "s3://$S3Bucket/buffett-code-excel-addin/$SubFolder/$InstallerArchiveName"
 $InstallerArchiveFullPath = "$InstallerFolderPath\$InstallerArchiveName"
 
 
