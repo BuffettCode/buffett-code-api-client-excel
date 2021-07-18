@@ -43,7 +43,7 @@ jobs:
     - name: Run VSTest using Test API Token
       run: .\scripts\run_all_tests.ps1
     - name: Sign the built installer using signing certificate
-       run: ./scripts/sign_installer_for_release.ps1 "$env:CODE_SIGNING_CERTIFICATE_LOCAL" "$env:CERTIFICATE_PASSWORD" .\Certificates\AAACertificateServices.crt "{{ env.INSTALLER_FOLDER }}\{{ env.INSTALLER_EXE_NAME }}"
+      run: ./scripts/sign_installer_for_release.ps1 "$env:CODE_SIGNING_CERTIFICATE_LOCAL" "$env:CERTIFICATE_PASSWORD" .\Certificates\AAACertificateServices.crt "{{ env.INSTALLER_FOLDER }}\{{ env.INSTALLER_EXE_NAME }}"
     - if: ${{ github.ref == 'refs/heads/master' }}
       name: Beta Release
       run: .\scripts\upload_new_installer.ps1 "$env:INSTALLER_FOLDER" "$env:S3_BUCKET" "beta/latest"
