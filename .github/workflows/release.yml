@@ -13,7 +13,14 @@ jobs:
   build_and_release:
     runs-on: windows-latest
     env:
-        CODE_SIGNING_CERTIFICATE: 'BuffettCode.pfx'
+      CODE_SIGNING_CERTIFICATE: 'BuffettCode.pfx'
+      CODE_SIGNING_CERTIFICATE_S3_URI: ${{ secrets.S3_CODE_SIGNING_PFX_URI }}
+      CODE_SIGNING_CERTIFICATE_LOCAL: .\Certificates\${{ env.CODE_SIGNING_CERTIFICATE }}
+      CERTIFICATE_PASSWORD: ${{ secrets.CODE_SIGNING_PFX_PASS }}
+      INSTALLER_FOLDER: .\BuffettCodeExcelAddinInstaller\bin\Release
+      INSTALLER_EXE_NAME: BuffettCodeExcelAddinInstaller.exe
+      S3_BUCKET: ${{ secrets.S3_INSTALLER_BUCKET }}
+      GIT_TAG: ${{ github.ref }}
     steps:
     - uses: actions/checkout@v1
     - name: Setup MSBuild.exe
@@ -27,28 +34,19 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-northeast-1
     - name: Setup code signing certificate
-      env:
-        CODE_SIGNING_CERTIFICATE_S3_URI: ${{ secrets.S3_CODE_SIGNING_PFX_URI }}
-        CODE_SIGNING_CERTIFICATE_LOCAL: .\BuffettCode\${{ env.CODE_SIGNING_CERTIFICATE }}
-        CERTIFICATE_PASSWORD: ${{ secrets.CODE_SIGNING_PFX_PASS }}
       run: 
-        .\scripts\setup_code_signing_certificate.ps1 "$env:CODE_SIGNING_CERTIFICATE_S3_URI" "$env:CODE_SIGNING_CERTIFICATE_LOCAL" "$env:CERTIFICATE_PASSWORD" .\BuffettCodeExcelAddinInstaller\bin\Release\BuffettCodeExcelAddinInstaller.exe
+        .\scripts\setup_code_signing_certificate.ps1 "$env:CODE_SIGNING_CERTIFICATE_S3_URI" "$env:CODE_SIGNING_CERTIFICATE_LOCAL" "$env:CERTIFICATE_PASSWORD" "{{ env.INSTALLER_FOLDER }}\{{ $env.INSTALLER_EXE_NAME }}"
     - name: Install dependencies
       run: .\scripts\install_dependencies.ps1
     - name: Run MSBuild using code signing certificate
       run: MSBuild BuffettCode.sln /p:Configuration=Release /p:ManifestKeyFile="$env:CODE_SIGNING_CERTIFICATE" /p:ManifestCertificateThumbprint=${{ secrets.MANIFEST_CERTIFICATE_THUMBPRINT }}
     - name: Run VSTest using Test API Token
       run: .\scripts\run_all_tests.ps1
-    - name: Sign the built installer using test signing certificate
-      run: ./scripts/sign_installer_for_release.ps1 "$env:CODE_SIGNING_CERTIFICATE_LOCAL" "$env:CERTIFICATE_PASSWORD" .\Certificates\AAACertificateServices.crt .\BuffettCodeExcelAddinInstaller\bin\Release\BuffettCodeExcelAddinInstaller.exe
+    - name: Sign the built installer using signing certificate
+       run: ./scripts/sign_installer_for_release.ps1 "$env:CODE_SIGNING_CERTIFICATE_LOCAL" "$env:CERTIFICATE_PASSWORD" .\Certificates\AAACertificateServices.crt "{{ env.INSTALLER_FOLDER }}\{{ env.INSTALLER_EXE_NAME }}"
     - if: ${{ github.ref == 'refs/heads/master' }}
       name: Beta Release
-      env:
-        S3_BUCKET: ${{ secrets.S3_INSTALLER_BUCKET }}
-      run: .\scripts\upload_new_installer.ps1 .\BuffettCodeExcelAddinInstaller\bin\Release "$env:S3_BUCKET" "beta/latest"
+      run: .\scripts\upload_new_installer.ps1 "$env:INSTALLER_FOLDER" "$env:S3_BUCKET" "beta/latest"
     - if: ${{ startsWith(github.ref, 'refs/tags/') }}
       name: Release By tags
-      env:
-        S3_BUCKET: ${{ secrets.S3_INSTALLER_BUCKET }}
-        GIT_TAG: ${{ github.ref }}
-      run: .\scripts\upload_new_installer.ps1 .\BuffettCodeExcelAddinInstaller\bin\Release "$env:S3_BUCKET" "$env:GIT_TAG".Replace('refs/tags', 'release')
+      run: .\scripts\upload_new_installer.ps1 "$env:INSTALLER_FOLDER" "$env:S3_BUCKET" "$env:GIT_TAG".Replace('refs/tags', 'release')
