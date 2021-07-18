@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+	<String Id="CompanyName">BuffettCode</String>
+	<String Id="ProductName">BuffettCodeExcelAddinRibbon</String>
+	<String Id="Language">1033</String>
+</WixLocalization>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?define ProductVersion = "1.0.1.0"?>
+<?define ProductUpgradeCode = "71768962-ae5a-47d9-a122-879e183253fb"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="!(loc.ProductName)" Language="!(loc.Language)" Version="$(var.ProductVersion)" Manufacturer="!(loc.CompanyName)" UpgradeCode="$(var.ProductUpgradeCode)">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+        <Upgrade Id="$(var.ProductUpgradeCode)">
+            <UpgradeVersion Minimum="1.0.0.0"
+                      IncludeMinimum="yes"
+                      OnlyDetect="no"
+                      Maximum="$(var.ProductVersion)"
+                      IncludeMaximum="no"
+                      Property="PREVIOUSFOUND" />
+        </Upgrade>
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+        <!-- The property below will disable the repair button. -->
+        <!--<Property Id="ARPNOREPAIR" Value="yes" />-->
+        <Property Id="PromptToCloseProcesses" Value="EXCEL" />
+        <Property Id="PromptToCloseDisplayNames" Value="Microsoft Excel" />
+
+        <Feature Id="SetupBuffettCodeAddinRibbonFeature" Title="SetupBuffettCodeAddinRibbon" Level="1">
+            <ComponentGroupRef Id="HeatGeneratedAddinRibbon" />
+            <ComponentGroupRef Id="ModRegistriesForAddinRibbon" />
+            <ComponentGroupRef Id="CleanupOnUninstall" />
+        </Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFiles64Folder">
+                    <Directory Id="COMPANYDIR" Name="!(loc.CompanyName)">
+                        <Directory Id="AddinFolder" Name="!(loc.ProductName)" >
+                    </Directory>
+                </Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+</Wix>

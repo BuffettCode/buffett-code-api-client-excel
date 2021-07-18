@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+        <ComponentGroup Id="CleanupOnUninstall">
+            <Component Id="RemoveFilesOnUninstall" Guid="9a75ca81-dba2-4a35-aad9-3af8533b1052" Directory="AddinFolder" >
+                <RemoveFile Id="RemoveAddinRibbonFiles" Name="*.*" On="both" />
+                <RemoveFolder Id="AddinFolderRemove" Directory="AddinFolder" On="uninstall" />
+            </Component>
+        </ComponentGroup>
+	</Fragment>
+</Wix>

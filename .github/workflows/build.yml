@@ -30,8 +30,10 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-northeast-1
+    - name: Sign the built installer using test signing certificate
+      run: ./scripts/sign_installer_for_build.ps1 .\Certificates\BuffettCodeTest.pfx .\BuffettCodeExcelAddinInstaller\bin\Release\BuffettCodeExcelAddinInstaller.exe
     - name: Upload new Installer to s3
       env:
         S3_BUCKET: ${{ secrets.S3_INSTALLER_BUCKET }}
         GIT_BRANCH: ${{ github.ref }}
-      run: .\scripts\upload_new_installer.ps1 "$env:S3_BUCKET" "$env:GIT_BRANCH".Replace('refs/heads', 'build/branches')
+      run: .\scripts\upload_new_installer.ps1 .\BuffettCodeExcelAddinInstaller\bin\Release "$env:S3_BUCKET" "$env:GIT_BRANCH".Replace('refs/heads', 'build/branches')

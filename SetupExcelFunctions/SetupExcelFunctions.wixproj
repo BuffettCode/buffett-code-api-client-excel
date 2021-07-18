@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" InitialTargets="EnsureWixToolsetInstalled" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProductVersion>3.10</ProductVersion>
+    <ProjectGuid>73353cf1-8f85-42eb-9df9-01e4c5d7eb11</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>SetupExcelFunctions</OutputName>
+    <OutputType>Package</OutputType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug</DefineConstants>
+    <CompilerAdditionalOptions>-arch x64</CompilerAdditionalOptions>
+    <SuppressValidation>True</SuppressValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <CompilerAdditionalOptions>-arch x64</CompilerAdditionalOptions>
+  </PropertyGroup>
+  <!-- ref: https://stackoverflow.com/questions/36756311/include-all-files-in-bin-folder-in-wix-installer-->
+  <!-- set Define the Harvestpath for Heat -->
+  <PropertyGroup>
+    <DefineConstants>FunctionsHarvestPath=..\BuffettCodeExcelFunctions\bin\$(Configuration)\</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="CleanupOnUninstall.wxs" />
+    <Compile Include="HeatGeneratedExcelFunctions.wxs" />
+    <Compile Include="Product.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BuffettCodeExcelFunctions\BuffettCodeExcelFunctions.csproj">
+      <Name>BuffettCodeExcelFunctions</Name>
+      <Project>{5de695f0-1e03-4337-b8ce-c99eb350f6d7}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\InstallerCA\InstallerCA.csproj">
+      <Name>InstallerCA</Name>
+      <Project>{f135d7b8-747c-4c4f-a9fc-1f3a25fbd403}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProductProperties.wxl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />
+  <Target Name="EnsureWixToolsetInstalled" Condition=" '$(WixTargetsImported)' != 'true' ">
+    <Error Text="The WiX Toolset v3.11 (or newer) build tools must be installed to build this project. To download the WiX Toolset, see http://wixtoolset.org/releases/" />
+  </Target>
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets. -->
+  <Target Name="BeforeBuild">
+    <HeatDirectory Directory="..\BuffettCodeExcelFunctions\bin\$(Configuration)\" PreprocessorVariable="var.FunctionsHarvestPath" OutputFile="HeatGeneratedExcelFunctions.wxs" ComponentGroupName="HeatGeneratedExcelFunctions" DirectoryRefId="AddinFolder" ToolPath="$(WixToolPath)" AutogenerateGuids="true" SuppressFragments="true" SuppressRegistry="true" SuppressRootDirectory="true" />
+  </Target>
+  <!--
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>

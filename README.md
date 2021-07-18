@@ -61,8 +61,8 @@ GitHub extension for Visual Studio
 
 #### デジタル署名の登録
 
-バフェットコードのExcelアドインの一部（`BuffettCodeAddinRibbon`）はVSTO(Visual Studio Tools for Office)を利用しており、ClickOnceのマニフェストにデジタル署名が必要です。`BuffettCode` プロジェクトにデジタル署名の設定がされている必要があります。リポジトリにコミットされたテスト証明書([BuffettCodeTest.pfx](./BuffettCodeAddinRibbon/BuffettCodeTest.pfx))を使う場合は以下のように設定します。
-
+バフェットコードのExcelアドインの一部（`BuffettCodeAddinRibbon`）はVSTO(Visual Studio Tools for Office)を利用しており、ClickOnceのマニフェストにデジタル署名が必要です。`BuffettCode` プロジェクトにデジタル署名の設定がされている必要があります。リポジトリにコミットされたテスト証明書([BuffettCodeTest.pfx](./Certificates/BuffettCodeTest.pfx))を使う場合は以下のように設定します。
+なお、ルート証明書は[Sectigo](https://sectigo.com/knowledge-base/detail/AAA-Certificate-Services-Root-2028/kA03l00000117cL)から取得、[Certificates/AAACertificateServices.crt](./Certificates/AAACertificateServices.crt)に設置済みです。
 
 * ソリューションエクスプローラから `BuffettCode` プロジェクトのプロパティを開く
 * Signingタブで `Sign the ClickOnce manifests` のチェックを付ける

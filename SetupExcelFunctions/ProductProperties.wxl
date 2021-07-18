@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+    <String Id="LANG">1033</String>
+    <String Id="ProductName">BuffettCodeExcelFunctions</String>
+    <String Id="ProductNameNoSpace">BuffettCodeExcelFunctions</String>
+    <String Id="ProductDescription">Installer for BuffettCode ExcelFunctions Add-In</String>
+    <String Id="ProductManufacturer">BuffettCode</String>
+    <String Id="ProductCopyright">(c) 2021 Buffett Code Inc.</String>
+    <String Id="ProductUninstallDescription">Uninstall !(loc.ProductName)</String>
+    <String Id="AppName">!(loc.ProductName)</String>
+</WixLocalization>
