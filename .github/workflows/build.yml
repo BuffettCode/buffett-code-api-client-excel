@@ -36,4 +36,4 @@ jobs:
       env:
         S3_BUCKET: ${{ secrets.S3_INSTALLER_BUCKET }}
         GIT_BRANCH: ${{ github.ref }}
-      run: .\scripts\upload_new_installer.ps1 .\BuffettCodeExcelAddinInstaller\bin\Release\BuffettCodeExcelAddinInstaller.exe "$env:S3_BUCKET" "$env:GIT_BRANCH".Replace('refs/heads', 'build/branches')
+      run: .\scripts\upload_new_installer.ps1 .\BuffettCodeExcelAddinInstaller\bin\Release "$env:S3_BUCKET" "$env:GIT_BRANCH".Replace('refs/heads', 'build/branches')
