@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?define InstallerVersion = "1.0.1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+      xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+	<Bundle Name="!(loc.InstallerName)" Version="$(var.InstallerVersion)" Manufacturer="Buffett Code Inc" UpgradeCode="a0e1d600-fecf-40de-a2ee-28397711c829" Copyright="!(loc.Copyright)" Compressed="yes" IconSourceFile="Resources\Icon.ico">
+        <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
+            <bal:WixStandardBootstrapperApplication
+              LogoFile="Resources\Icon.ico"
+              LicenseFile="Resources\License.rtf"
+              />
+        </BootstrapperApplicationRef>
+
+		<Chain>
+            <PackageGroupRef Id="BuffettCodeExcelAddonInstallers" />
+		</Chain>
+	</Bundle>
+
+    <Fragment>
+        <PackageGroup Id="BuffettCodeExcelAddonInstallers">
+            <MsiPackage Id="SetupAddinRibbon" Cache="no" Compressed="no" DisplayInternalUI="yes" Vital="yes" SourceFile="$(var.SetupAddinRibbon.TargetDir)$(var.SetupAddinRibbon.TargetName).msi" />
+            <MsiPackage Id="SetupExcelFunctions" Cache="no" Compressed="no" DisplayInternalUI="yes" Vital="yes" SourceFile="$(var.SetupExcelFunctions.TargetDir)$(var.SetupExcelFunctions.TargetName).msi" />
+        </PackageGroup>
+    </Fragment>
+</Wix>
