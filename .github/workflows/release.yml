@@ -15,7 +15,7 @@ jobs:
     env:
       CODE_SIGNING_CERTIFICATE: 'BuffettCode.pfx'
       CODE_SIGNING_CERTIFICATE_S3_URI: ${{ secrets.S3_CODE_SIGNING_PFX_URI }}
-      CODE_SIGNING_CERTIFICATE_LOCAL: .\Certificates\${{ env.CODE_SIGNING_CERTIFICATE }}
+      CODE_SIGNING_CERTIFICATE_LOCAL: .\Certificates\BuffettCode.pfx
       CERTIFICATE_PASSWORD: ${{ secrets.CODE_SIGNING_PFX_PASS }}
       INSTALLER_FOLDER: .\BuffettCodeExcelAddinInstaller\bin\Release
       INSTALLER_EXE_NAME: BuffettCodeExcelAddinInstaller.exe
