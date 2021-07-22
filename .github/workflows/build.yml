@@ -15,7 +15,7 @@ jobs:
     env:
       S3_BUCKET: ${{ secrets.S3_INSTALLER_BUCKET }}
       GIT_BRANCH: ${{ github.ref }}
-      INSTALLER_FOLDER: .\BuffettCodeExcelAddinInstaller\bin\Release
+      INSTALLER_FOLDER: .\BuffettCodeExcelAddin32Installer\bin\Release
     steps:
     - uses: actions/checkout@v1
     - name: Setup MSBuild.exe
@@ -35,6 +35,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-northeast-1
     - name: Sign the built installer using test signing certificate
-      run: ./scripts/sign_installer_for_build.ps1 .\Certificates\BuffettCodeTest.pfx "${{ env.INSTALLER_FOLDER }}\BuffettCodeExcelAddinInstaller.exe"
+      run: ./scripts/sign_installer_for_build.ps1 .\Certificates\BuffettCodeTest.pfx "${{ env.INSTALLER_FOLDER }}\BuffettCodeExcelAddin32Installer.exe"
     - name: Upload new Installer to s3
       run: .\scripts\upload_new_installer.ps1 "$env:INSTALLER_FOLDER" "$env:S3_BUCKET" "$env:GIT_BRANCH".Replace('refs/heads', 'build/branches')

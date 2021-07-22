@@ -5,7 +5,7 @@ $InstallerArchiveFullPath = "$InstallerFolderPath\$InstallerArchiveName"
 
 
 $Compress = @{
-  Path = "$InstallerFolderPath\BuffettCodeExcelAddinInstaller.exe", "$InstallerFolderPath\*.msi", "$InstallerFolderPath\*.cab"
+  Path = "$InstallerFolderPath\*.exe", "$InstallerFolderPath\*.msi", "$InstallerFolderPath\*.cab"
   CompressionLevel = "Fastest"
   DestinationPath = "$InstallerArchiveFullPath"
 }

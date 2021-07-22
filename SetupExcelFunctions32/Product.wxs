@@ -33,7 +33,7 @@
 
         <!-- Windows Installer set TARGETDIR to the local hard drive with the most free space.  The top-level Directory must be Id="TARGETDIR" Name="SourceDir" -->
         <Directory Id="TARGETDIR" Name="SourceDir">
-            <Directory Id="ProgramFiles64Folder">
+            <Directory Id="ProgramFilesFolder">
                 <Directory Id="COMPANYDIR" Name="!(loc.ProductManufacturer)">
                     <Directory Id="AddinFolder" Name="!(loc.ProductNameNoSpace)">
                     </Directory>

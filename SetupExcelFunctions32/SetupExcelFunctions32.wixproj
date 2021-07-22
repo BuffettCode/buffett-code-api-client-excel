@@ -2,24 +2,21 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" InitialTargets="EnsureWixToolsetInstalled" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>3.10</ProductVersion>
-    <ProjectGuid>73353cf1-8f85-42eb-9df9-01e4c5d7eb11</ProjectGuid>
+    <ProjectGuid>9d5aff0e-0ea3-4318-8be4-941fc1daf261</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>SetupExcelFunctions</OutputName>
+    <OutputName>SetupExcelFunctions32</OutputName>
     <OutputType>Package</OutputType>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <DefineConstants>Debug</DefineConstants>
-    <CompilerAdditionalOptions>-arch x64</CompilerAdditionalOptions>
-    <SuppressValidation>True</SuppressValidation>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <CompilerAdditionalOptions>-arch x64</CompilerAdditionalOptions>
   </PropertyGroup>
   <!-- ref: https://stackoverflow.com/questions/36756311/include-all-files-in-bin-folder-in-wix-installer-->
   <!-- set Define the Harvestpath for Heat -->
@@ -50,13 +47,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ProductProperties.wxl" />
-  </ItemGroup>
-  <ItemGroup>
     <WixExtension Include="WixNetFxExtension">
       <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
       <Name>WixNetFxExtension</Name>
     </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProductProperties.wxl" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />
@@ -65,7 +62,8 @@
   </Target>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
-	Other similar extension points exist, see Wix.targets. -->
+	Other similar extension points exist, see Wix.targets.
+  -->
   <Target Name="BeforeBuild">
     <HeatDirectory Directory="..\BuffettCodeExcelFunctions\bin\$(Configuration)\" PreprocessorVariable="var.FunctionsHarvestPath" OutputFile="HeatGeneratedExcelFunctions.wxs" ComponentGroupName="HeatGeneratedExcelFunctions" DirectoryRefId="AddinFolder" ToolPath="$(WixToolPath)" AutogenerateGuids="true" SuppressFragments="true" SuppressRegistry="true" SuppressRootDirectory="true" />
   </Target>

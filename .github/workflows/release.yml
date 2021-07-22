@@ -17,8 +17,8 @@ jobs:
       CODE_SIGNING_CERTIFICATE_S3_URI: ${{ secrets.S3_CODE_SIGNING_PFX_URI }}
       CODE_SIGNING_CERTIFICATE_LOCAL: .\Certificates\BuffettCode.pfx
       CERTIFICATE_PASSWORD: ${{ secrets.CODE_SIGNING_PFX_PASS }}
-      INSTALLER_FOLDER: .\BuffettCodeExcelAddinInstaller\bin\Release
-      INSTALLER_EXE_NAME: BuffettCodeExcelAddinInstaller.exe
+      INSTALLER_FOLDER: .\BuffettCodeExcelAddin32Installer\bin\Release
+      INSTALLER_EXE_NAME: BuffettCodeExcelAddin32Installer.exe
       S3_BUCKET: ${{ secrets.S3_INSTALLER_BUCKET }}
       GIT_TAG: ${{ github.ref }}
     steps:

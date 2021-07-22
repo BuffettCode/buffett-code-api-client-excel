@@ -2,27 +2,22 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" InitialTargets="EnsureWixToolsetInstalled" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>3.10</ProductVersion>
-    <ProjectGuid>a0e1d600-fecf-40de-a2ee-28397711c829</ProjectGuid>
+    <ProjectGuid>4d7eb0f3-e548-42ef-a99e-6c059800c654</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>BuffettCodeExcelAddinInstaller</OutputName>
+    <OutputName>BuffettCodeExcelAddin32Installer</OutputName>
     <OutputType>Bundle</OutputType>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <DefineConstants>Debug</DefineConstants>
-    <CompilerAdditionalOptions>-arch x64</CompilerAdditionalOptions>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <CompilerAdditionalOptions>-arch x64</CompilerAdditionalOptions>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Bundle.wxs" />
-  </ItemGroup>
   <ItemGroup>
     <WixExtension Include="WixBalExtension">
       <HintPath>$(WixExtDir)\WixBalExtension.dll</HintPath>
@@ -30,17 +25,17 @@
     </WixExtension>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SetupAddinRibbon\SetupAddinRibbon.wixproj">
-      <Name>SetupAddinRibbon</Name>
-      <Project>{a614b68f-d437-45f6-ae35-1308ddc392ee}</Project>
+    <ProjectReference Include="..\SetupAddinRibbon32\SetupAddinRibbon32.wixproj">
+      <Name>SetupAddinRibbon32</Name>
+      <Project>{e1016c59-0448-4bfa-b89d-bb3c960f1f16}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
-    <ProjectReference Include="..\SetupExcelFunctions\SetupExcelFunctions.wixproj">
-      <Name>SetupExcelFunctions</Name>
-      <Project>{73353cf1-8f85-42eb-9df9-01e4c5d7eb11}</Project>
+    <ProjectReference Include="..\SetupExcelFunctions32\SetupExcelFunctions32.wixproj">
+      <Name>SetupExcelFunctions32</Name>
+      <Project>{9d5aff0e-0ea3-4318-8be4-941fc1daf261}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
@@ -60,6 +55,9 @@
     <Content Include="Resources\License.rtf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bundle.wxs" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />

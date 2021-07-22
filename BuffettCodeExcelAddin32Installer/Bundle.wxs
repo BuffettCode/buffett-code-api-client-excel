@@ -17,8 +17,8 @@
 
     <Fragment>
         <PackageGroup Id="BuffettCodeExcelAddonInstallers">
-            <MsiPackage Id="SetupAddinRibbon" Cache="no" Compressed="no" DisplayInternalUI="yes" Vital="yes" SourceFile="$(var.SetupAddinRibbon.TargetDir)$(var.SetupAddinRibbon.TargetName).msi" />
-            <MsiPackage Id="SetupExcelFunctions" Cache="no" Compressed="no" DisplayInternalUI="yes" Vital="yes" SourceFile="$(var.SetupExcelFunctions.TargetDir)$(var.SetupExcelFunctions.TargetName).msi" />
+            <MsiPackage Id="SetupAddinRibbon" Cache="no" Compressed="no" DisplayInternalUI="yes" Vital="yes" SourceFile="$(var.SetupAddinRibbon32.TargetDir)$(var.SetupAddinRibbon32.TargetName).msi" />
+            <MsiPackage Id="SetupExcelFunctions" Cache="no" Compressed="no" DisplayInternalUI="yes" Vital="yes" SourceFile="$(var.SetupExcelFunctions32.TargetDir)$(var.SetupExcelFunctions32.TargetName).msi" />
         </PackageGroup>
     </Fragment>
 </Wix>
