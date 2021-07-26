@@ -1,4 +1,5 @@
 using BuffettCodeAddinRibbon.Settings;
+using BuffettCodeCommon.Config;
 using System;
 using System.Windows.Forms;
 
@@ -84,6 +85,31 @@ namespace BuffettCodeAddinRibbon
 
         }
 
+        private void textAPIKey_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void ondemandModeDescDesc_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void apiSpecialNotes_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // mark as visited
+            apiSpecialNotesLink.LinkVisited = true;
+            // open link using a default browser
+            System.Diagnostics.Process.Start(ApiRelatedUrlConfig.API_SPECIAL_NOTES);
+
+        }
+
+        private void ondemandUsageEntryLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // mark as visited
+            ondemandUsageEntryLink.LinkVisited = true;
+            // open link using a default browser
+            System.Diagnostics.Process.Start(ApiRelatedUrlConfig.ONDEMAND_API_USAGE_ENTRY);
+        }
     }
 }
