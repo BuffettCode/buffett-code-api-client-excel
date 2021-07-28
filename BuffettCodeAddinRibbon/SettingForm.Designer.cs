@@ -28,10 +28,14 @@ namespace BuffettCodeAddinRibbon
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingForm));
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.tabConrtoll = new System.Windows.Forms.TabControl();
             this.tabAPI = new System.Windows.Forms.TabPage();
+            this.apiSpecialNotesLink = new System.Windows.Forms.LinkLabel();
+            this.ondemandModeDesc = new System.Windows.Forms.TextBox();
+            this.checkIsOndemandEndpointEnabled = new System.Windows.Forms.CheckBox();
             this.labelAPIKey = new System.Windows.Forms.Label();
             this.textAPIKey = new System.Windows.Forms.TextBox();
             this.tabDeveloper = new System.Windows.Forms.TabPage();
@@ -39,7 +43,7 @@ namespace BuffettCodeAddinRibbon
             this.labelMaxDegreeOfParallelism = new System.Windows.Forms.Label();
             this.checkParallelism = new System.Windows.Forms.CheckBox();
             this.checkDebugMode = new System.Windows.Forms.CheckBox();
-            this.checkIsOndemandEndpointEnabled = new System.Windows.Forms.CheckBox();
+            this.ondemandUsageEntryLink = new System.Windows.Forms.LinkLabel();
             this.tabConrtoll.SuspendLayout();
             this.tabAPI.SuspendLayout();
             this.tabDeveloper.SuspendLayout();
@@ -77,7 +81,9 @@ namespace BuffettCodeAddinRibbon
             // 
             // tabAPI
             // 
-            this.tabAPI.Controls.Add(checkIsOndemandEndpointEnabled);
+            this.tabAPI.Controls.Add(this.apiSpecialNotesLink);
+            this.tabAPI.Controls.Add(this.ondemandModeDesc);
+            this.tabAPI.Controls.Add(this.checkIsOndemandEndpointEnabled);
             this.tabAPI.Controls.Add(this.labelAPIKey);
             this.tabAPI.Controls.Add(this.textAPIKey);
             this.tabAPI.Location = new System.Drawing.Point(4, 28);
@@ -89,11 +95,49 @@ namespace BuffettCodeAddinRibbon
             this.tabAPI.UseVisualStyleBackColor = true;
             this.tabAPI.Click += new System.EventHandler(this.TabAPI_Click);
             // 
-            // labelApiKey
+            // apiSpecialNotesLink
+            // 
+            this.apiSpecialNotesLink.AccessibleName = "apiSpecialNotesLink";
+            this.apiSpecialNotesLink.AutoSize = true;
+            this.apiSpecialNotesLink.BackColor = System.Drawing.SystemColors.Window;
+            this.apiSpecialNotesLink.Location = new System.Drawing.Point(62, 333);
+            this.apiSpecialNotesLink.Name = "apiSpecialNotesLink";
+            this.apiSpecialNotesLink.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.apiSpecialNotesLink.Size = new System.Drawing.Size(348, 18);
+            this.apiSpecialNotesLink.TabIndex = 7;
+            this.apiSpecialNotesLink.TabStop = true;
+            this.apiSpecialNotesLink.Text = "バフェットコード WEB API機能に関する特記事項";
+            this.apiSpecialNotesLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.apiSpecialNotes_LinkClicked);
+            // 
+            // ondemandModeDesc
+            // 
+            this.ondemandModeDesc.BackColor = System.Drawing.SystemColors.Window;
+            this.ondemandModeDesc.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ondemandModeDesc.Font = new System.Drawing.Font("MS UI Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.ondemandModeDesc.Location = new System.Drawing.Point(42, 148);
+            this.ondemandModeDesc.Multiline = true;
+            this.ondemandModeDesc.Name = "ondemandModeDesc";
+            this.ondemandModeDesc.ReadOnly = true;
+            this.ondemandModeDesc.Size = new System.Drawing.Size(507, 235);
+            this.ondemandModeDesc.TabIndex = 6;
+            this.ondemandModeDesc.Text = resources.GetString("ondemandModeDesc.Text");
+            this.ondemandModeDesc.TextChanged += new System.EventHandler(this.ondemandModeDescDesc_TextChanged);
+            // 
+            // checkIsOndemandEndpointEnabled
+            // 
+            this.checkIsOndemandEndpointEnabled.AutoSize = true;
+            this.checkIsOndemandEndpointEnabled.Location = new System.Drawing.Point(34, 120);
+            this.checkIsOndemandEndpointEnabled.Name = "checkIsOndemandEndpointEnabled";
+            this.checkIsOndemandEndpointEnabled.Size = new System.Drawing.Size(279, 22);
+            this.checkIsOndemandEndpointEnabled.TabIndex = 5;
+            this.checkIsOndemandEndpointEnabled.Text = "従量課金エンドポイントを利用する";
+            this.checkIsOndemandEndpointEnabled.UseVisualStyleBackColor = true;
+            // 
+            // labelAPIKey
             // 
             this.labelAPIKey.AutoSize = true;
             this.labelAPIKey.Location = new System.Drawing.Point(31, 36);
-            this.labelAPIKey.Name = "labelApiKey";
+            this.labelAPIKey.Name = "labelAPIKey";
             this.labelAPIKey.Size = new System.Drawing.Size(64, 18);
             this.labelAPIKey.TabIndex = 3;
             this.labelAPIKey.Text = "APIキー";
@@ -104,6 +148,7 @@ namespace BuffettCodeAddinRibbon
             this.textAPIKey.Name = "textAPIKey";
             this.textAPIKey.Size = new System.Drawing.Size(518, 25);
             this.textAPIKey.TabIndex = 2;
+            this.textAPIKey.TextChanged += new System.EventHandler(this.textAPIKey_TextChanged);
             // 
             // tabDeveloper
             // 
@@ -141,7 +186,7 @@ namespace BuffettCodeAddinRibbon
             this.checkParallelism.AutoSize = true;
             this.checkParallelism.Location = new System.Drawing.Point(30, 39);
             this.checkParallelism.Name = "checkParallelism";
-            this.checkParallelism.Size = new System.Drawing.Size(507, 22);
+            this.checkParallelism.Size = new System.Drawing.Size(234, 22);
             this.checkParallelism.TabIndex = 7;
             this.checkParallelism.Text = "APIの実行ペースを制限する";
             this.checkParallelism.UseVisualStyleBackColor = true;
@@ -157,25 +202,28 @@ namespace BuffettCodeAddinRibbon
             this.checkDebugMode.Text = "デバッグモードを有効にする";
             this.checkDebugMode.UseVisualStyleBackColor = true;
             // 
-            // useOndemandCheckBox
+            // ondemandUsageEntryLink
             // 
-            this.checkIsOndemandEndpointEnabled.AutoSize = true;
-            this.checkIsOndemandEndpointEnabled.Location = new System.Drawing.Point(34, 120);
-            this.checkIsOndemandEndpointEnabled.Name = "useOndemandCheckBox";
-            this.checkIsOndemandEndpointEnabled.Size = new System.Drawing.Size(211, 22);
-            this.checkIsOndemandEndpointEnabled.TabIndex = 5;
-            this.checkIsOndemandEndpointEnabled.Text = "従量課金エンドポイントを利用する";
-            this.checkIsOndemandEndpointEnabled.UseVisualStyleBackColor = true;
-
+            this.ondemandUsageEntryLink.AccessibleName = "ondemandUsageEntryLink";
+            this.ondemandUsageEntryLink.AutoSize = true;
+            this.ondemandUsageEntryLink.BackColor = System.Drawing.SystemColors.Window;
+            this.ondemandUsageEntryLink.Location = new System.Drawing.Point(97, 412);
+            this.ondemandUsageEntryLink.Name = "ondemandUsageEntryLink";
+            this.ondemandUsageEntryLink.Size = new System.Drawing.Size(369, 18);
+            this.ondemandUsageEntryLink.TabIndex = 7;
+            this.ondemandUsageEntryLink.TabStop = true;
+            this.ondemandUsageEntryLink.Text = "Web API従量課金エンドポイントのご利用にあたって";
+            this.ondemandUsageEntryLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ondemandUsageEntryLink_LinkClicked);
             // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(655, 542);
-            this.Controls.Add(this.tabConrtoll);
+            this.ClientSize = new System.Drawing.Size(652, 542);
+            this.Controls.Add(this.ondemandUsageEntryLink);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
+            this.Controls.Add(this.tabConrtoll);
             this.Location = new System.Drawing.Point(100, 100);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -188,6 +236,7 @@ namespace BuffettCodeAddinRibbon
             this.tabDeveloper.ResumeLayout(false);
             this.tabDeveloper.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -204,6 +253,9 @@ namespace BuffettCodeAddinRibbon
         private System.Windows.Forms.CheckBox checkParallelism;
         private System.Windows.Forms.CheckBox checkDebugMode;
         private System.Windows.Forms.CheckBox checkIsOndemandEndpointEnabled;
+        private System.Windows.Forms.TextBox ondemandModeDesc;
+        private System.Windows.Forms.LinkLabel apiSpecialNotesLink;
+        private System.Windows.Forms.LinkLabel ondemandUsageEntryLink;
     }
 
 }
