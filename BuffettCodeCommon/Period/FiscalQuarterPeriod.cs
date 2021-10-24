@@ -24,15 +24,10 @@ namespace BuffettCodeCommon.Period
             return new FiscalQuarterPeriod(fiscalYear, fiscalQuarter);
         }
 
-        public static FiscalQuarterPeriod Create(string fiscalYear, string fiscalQuarter)
-        {
-            var fy = uint.Parse(fiscalYear);
-            var fq = uint.Parse(fiscalQuarter);
-            FiscalYearValidator.Validate(fy);
-            FiscalQuarterValidator.Validate(fq);
-            return new FiscalQuarterPeriod(fy, fq);
-        }
+        public static FiscalQuarterPeriod Create(string fiscalYear, string fiscalQuarter) => new FiscalQuarterPeriod(uint.Parse(fiscalYear), uint.Parse(fiscalQuarter));
+        public static FiscalQuarterPeriod Create(float fiscalYear, float fiscalQuarter) => new FiscalQuarterPeriod((uint)fiscalYear, (uint)fiscalQuarter);
 
+        public static FiscalQuarterPeriod Create(int fiscalYear, int fiscalQuarter) => new FiscalQuarterPeriod((uint)fiscalYear, (uint)fiscalQuarter);
 
         public static FiscalQuarterPeriod Parse(string fyFqString)
         {

@@ -86,6 +86,26 @@ namespace BuffettCodeIO.Parser.Tests
         }
 
         [TestMethod()]
+        [DeploymentItem(@"TestData\ApiV2Company2.json", @"TestData")]
+        public void ParseCompany2Test()
+        {
+            var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData/ApiV2Company2.json"));
+            var company = (Company)parser.Parse(DataTypeConfig.Company, json);
+            Assert.AreEqual(company.Ticker, "2801");
+            Assert.AreEqual(company.GetDescription("tosyo_33category").Label, "東証33業種");
+            Assert.AreEqual(company.GetDescription("url").Unit, "");
+            Assert.AreEqual(company.GetValue("url"), @"http://www.kikkoman.co.jp/");
+            Assert.AreEqual(company.GetValue("accounting_standard"), "日本");
+            var supportedQuarterRange = company.SupportedQuarterRanges;
+            Assert.AreEqual((uint)2004, supportedQuarterRange.OndemandTierRange.From.Year);
+            Assert.AreEqual((uint)1, supportedQuarterRange.OndemandTierRange.From.Quarter);
+            Assert.AreEqual((uint)2021, supportedQuarterRange.OndemandTierRange.To.Year);
+            Assert.AreEqual((uint)1, supportedQuarterRange.OndemandTierRange.To.Quarter);
+            Assert.AreEqual((uint)2016, supportedQuarterRange.FixedTierRange
+                .From.Year);
+            Assert.AreEqual((uint)3, supportedQuarterRange.FixedTierRange.From.Quarter);
+        }
+        [TestMethod()]
         public void ParseEmpty()
         {
             var json = new JObject();
