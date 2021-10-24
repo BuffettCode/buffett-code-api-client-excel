@@ -13,7 +13,7 @@ namespace BuffettCodeIO.Parser
         {
             try
             {
-                var properties = jProperties.ToDictionary(p => p.Name, p => uint.Parse(p.Value.ToString()));
+                var properties = jProperties.ToDictionary(p => p.Name, p => p.Value.ToString());
                 var from = FiscalQuarterPeriod.Create(properties[PropertyNames.OldestFiscalYear], properties[PropertyNames.OldestFiscalQuarter]);
                 var to = FiscalQuarterPeriod.Create(properties[PropertyNames.LatestFiscalYear], properties[PropertyNames.LatestFiscalQuarter]);
                 return PeriodRange<FiscalQuarterPeriod>.Create(from, to);

@@ -108,6 +108,14 @@ dotnet-format
 - 開発用の設定: `HKEY_CURRENT_USER\SOFTWARE\BuffettCode\ExcelAddinDev`
 - UnitTestで利用: `HKEY_CURRENT_USER\SOFTWARE\BuffettCode\ExcelAddinDevTest`
 
+## Release
+バフェットコードの開発チームがリリースのハンドリングをしています。
+リリース時は下記のファイルの `ProductVersion` を適切に設定してください。 
+- [BuffettCodeExcelAddin32Installer/Bundle.wxs](./BuffettCodeExcelAddin32Installer/Bundle.wxs)
+- [SetupAddinRibbon32/Product.wxs](./SetupAddinRibbon32/Product.wxs)
+- [SetupExcelFunctions32/Product.wxs](./SetupExcelFunctions32/Product.wxs)
+
+GitHubに release tag を作成することで、[GithubAction (release)](./.github/workflows/release.yml)がトリガーされ、Installerが更新されます。
 
 ## ライセンス
 

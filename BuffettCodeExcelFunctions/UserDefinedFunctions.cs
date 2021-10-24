@@ -136,17 +136,17 @@ namespace BuffettCodeExcelFunctions
             }
             else if (bce is ApiResponseParserException)
             {
-                message = "APIレスポンスのパースに失敗しました";
+                message = $"APIレスポンスのパースに失敗しました::{bce.Message}";
             }
             else if (bce is NotSupportedTierException)
             {
-                message = "取得可能な範囲を超えています";
+                message = $"取得可能な範囲を超えています::{bce.Message}";
             }
             else
             {
-                message = "未定義のエラー";
+                message = $"未定義のエラー::{bce.Message}";
             }
-            return "<<" + message + ">>";
+            return $"<<{message}>>";
         }
 
         private static Exception GetBuffettCodeException(Exception e)
