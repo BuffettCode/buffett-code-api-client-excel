@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiTaskHelper.cs" />
+    <Compile Include="Parser\ApiV3ResponseParser.cs" />
     <Compile Include="Property\SupportedPeriodRange.cs" />
     <Compile Include="Resolver\SupportedTierDictionary.cs" />
     <Compile Include="Resolver\PeriodSupportedTierResolver.cs" />
