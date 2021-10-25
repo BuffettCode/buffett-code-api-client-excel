@@ -1,3 +1,4 @@
+using BuffettCodeCommon.Period;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
@@ -36,5 +37,15 @@ namespace BuffettCodeIO.Property.Tests
             Assert.AreEqual("label", indicator.GetDescription("key").Label);
             Assert.AreEqual("unit", indicator.GetDescription("key").Unit);
         }
+
+        [TestMethod()]
+        public void GetPeriodTest()
+        {
+            var indicator = CreateIndicator(properties, descriptions);
+            Assert.AreEqual(Snapshot.GetInstance(), indicator.GetPeriod());
+        }
+
+
+
     }
 }

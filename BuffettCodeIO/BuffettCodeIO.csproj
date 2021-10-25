@@ -67,6 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiTaskHelper.cs" />
+    <Compile Include="Property\CsvOutput.cs" />
+    <Compile Include="Property\CsvOutputRow.cs" />
     <Compile Include="Property\SupportedPeriodRange.cs" />
     <Compile Include="Resolver\SupportedTierDictionary.cs" />
     <Compile Include="Resolver\PeriodSupportedTierResolver.cs" />

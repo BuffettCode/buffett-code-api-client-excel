@@ -74,6 +74,8 @@
     <Compile Include="Parser\PropertiesParserTests.cs" />
     <Compile Include="Parser\ValueNormalizerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Property\CsvOutputRowTests.cs" />
+    <Compile Include="Property\CsvOutputTests.cs" />
     <Compile Include="Property\IndicatorTests.cs" />
     <Compile Include="Property\PropertyDictionaryTests.cs" />
     <Compile Include="Property\PropertyDescriptionDictionaryTests.cs" />

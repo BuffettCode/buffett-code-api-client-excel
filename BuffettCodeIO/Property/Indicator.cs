@@ -1,3 +1,4 @@
+using BuffettCodeCommon.Period;
 using BuffettCodeCommon.Validator;
 using System.Collections.Generic;
 
@@ -32,5 +33,6 @@ namespace BuffettCodeIO.Property
 
         public ICollection<string> GetPropertyNames() => properties.Names;
 
+        public IPeriod GetPeriod() => Snapshot.GetInstance();
     }
 }

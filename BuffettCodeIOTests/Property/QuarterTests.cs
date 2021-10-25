@@ -97,7 +97,7 @@ namespace BuffettCodeIO.Property.Tests
         }
 
         [TestMethod()]
-        public void SortByPeriod()
+        public void SortByPeriodTest()
         {
 
             var a = CreateQuarter(ticker, FiscalQuarterPeriod.Create(2021, 3), null, null);
@@ -109,6 +109,13 @@ namespace BuffettCodeIO.Property.Tests
             Assert.AreEqual(FiscalQuarterPeriod.Create(2018, 1), sorted[0].Period);
             Assert.AreEqual(FiscalQuarterPeriod.Create(2021, 3), sorted[1].Period);
             Assert.AreEqual(FiscalQuarterPeriod.Create(2021, 4), sorted[2].Period);
+        }
+
+        [TestMethod()]
+        public void GetPeriodTest()
+        {
+            var quarter = CreateQuarter(ticker, FiscalQuarterPeriod.Create(2021, 3), null, null); ;
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2021, 3), quarter.GetPeriod());
         }
     }
 
