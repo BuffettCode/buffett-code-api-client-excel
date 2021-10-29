@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace BuffettCodeIO.TabluarOutput.Tests
+namespace BuffettCodeIO.TabularOutput.Tests
 {
     [TestClass()]
     public class CsvFileTabularWriterTests
@@ -35,7 +35,7 @@ namespace BuffettCodeIO.TabluarOutput.Tests
         public void WriteQuarterTest()
         {
             var quarter = CreateQuarter(ticker, period, properties, descriptions);
-            var csvOutput = new Tabular<Quarter>().Add(quarter);
+            var tabular = new Tabular<Quarter>().Add(quarter);
             var fileName = "CsvFileWriterWriteQuarterTest.csv";
             var fileInfo = new FileInfo(fileName);
 
@@ -44,7 +44,7 @@ namespace BuffettCodeIO.TabluarOutput.Tests
 
             using (var writer = new CsvFileTabularWriter<Quarter>(fileInfo.Create(), Encoding.UTF8))
             {
-                writer.Write(csvOutput);
+                writer.Write(tabular);
             }
             // after writing records, check size
             fileInfo.Refresh();

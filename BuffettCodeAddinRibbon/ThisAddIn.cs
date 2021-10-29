@@ -1,4 +1,4 @@
-﻿namespace BuffettCodeAddinRibbon
+namespace BuffettCodeAddinRibbon
 {
     public partial class ThisAddIn
     {

@@ -1,8 +1,7 @@
 using BuffettCodeIO.Property;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
-namespace BuffettCodeIO.TabluarOutput.Tests
+namespace BuffettCodeIO.TabularOutput.Tests
 {
     [TestClass()]
     public class TabularRowTests

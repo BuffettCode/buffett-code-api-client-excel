@@ -2,7 +2,7 @@ using BuffettCodeIO.Property;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BuffettCodeIO.TabluarOutput
+namespace BuffettCodeIO.TabularOutput
 
 {
     public class Tabular<T> where T : IApiResource

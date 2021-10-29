@@ -31,7 +31,7 @@ namespace BuffettCodeExcelFunctions
                     throw new NotSupportedDataTypeException();
             }
         }
-        public static IApiResource Fetch(DataTypeConfig dataType, string ticker, IPeriod period) => processor.UpdateIfNeeded(config.ApiKey, config.MaxDegreeOfParallelism, config.IsOndemandEndpointEnabled).GetApiResource(dataType, ticker, period);
+        public static IApiResource Fetch(DataTypeConfig dataType, string ticker, IPeriod period, bool isConfigureAwait = true, bool useCache = true) => processor.UpdateIfNeeded(config.ApiKey, config.MaxDegreeOfParallelism, config.IsOndemandEndpointEnabled).GetApiResource(dataType, ticker, period, isConfigureAwait, useCache);
 
     }
 }

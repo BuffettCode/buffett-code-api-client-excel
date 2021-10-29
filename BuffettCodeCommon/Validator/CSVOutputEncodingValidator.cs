@@ -8,7 +8,7 @@ namespace BuffettCodeCommon.Validator
     {
         public static void Validate(Encoding encoding)
         {
-            if (!CSVOutputEncoding.SupportedEncodings.Contains(encoding))
+            if (!TabularOutputEncoding.SupportedEncodings.Contains(encoding))
             {
                 throw new ValidationError($"encoding={encoding} is not supported.");
             }

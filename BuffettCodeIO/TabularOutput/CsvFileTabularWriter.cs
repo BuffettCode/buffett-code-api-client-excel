@@ -1,15 +1,14 @@
 using BuffettCodeIO.Property;
 using CsvHelper;
-using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 
 
-namespace BuffettCodeIO.TabluarOutput
+namespace BuffettCodeIO.TabularOutput
 {
-    public class CsvFileTabularWriter<T> : ITabularWriter<T>, IDisposable where T : IApiResource
+    public class CsvFileTabularWriter<T> : ITabularWriter<T> where T : IApiResource
     {
         private readonly CsvWriter writer;
 

@@ -7,13 +7,11 @@ namespace BuffettCodeAPIClient
     public class ApiClientCoreWithCache
     {
         private readonly ApiClientCore apiClientCore;
-        private readonly MemoryCache cache;
         private readonly ApiRequestCacheHelper cacheHelper;
 
         private ApiClientCoreWithCache(string apiKey, Uri baseUri, MemoryCache cache)
         {
             this.apiClientCore = new ApiClientCore(apiKey, baseUri);
-            this.cache = cache;
             this.cacheHelper = new ApiRequestCacheHelper(cache, baseUri);
         }
 

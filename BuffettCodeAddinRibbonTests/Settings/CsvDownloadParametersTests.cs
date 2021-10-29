@@ -15,8 +15,8 @@ namespace BuffettCodeAddinRibbon.Settings.Tests
         [TestMethod()]
         public void IsCreateNewFileTest()
         {
-            var newFileOutput = CsvFileOutputSettings.Create(CSVOutputEncoding.UTF8, CSVOutputDestination.NewFile);
-            var newSheetOutput = CsvFileOutputSettings.Create(CSVOutputEncoding.SJIS, CSVOutputDestination.NewSheet);
+            var newFileOutput = CsvDownloadOutputSettings.Create(TabularOutputEncoding.UTF8, TabularOutputDestination.NewCsvFile);
+            var newSheetOutput = CsvDownloadOutputSettings.Create(TabularOutputEncoding.SJIS, TabularOutputDestination.NewWorksheet);
             Assert.IsTrue(CsvDownloadParameters.Create(ticker, from, to, newFileOutput).IsCreateNewFile());
             Assert.IsFalse(CsvDownloadParameters.Create(ticker, from, to, newSheetOutput).IsCreateNewFile());
         }
@@ -24,8 +24,8 @@ namespace BuffettCodeAddinRibbon.Settings.Tests
         [TestMethod()]
         public void IsUTF8EncodingTest()
         {
-            var utf8Output = CsvFileOutputSettings.Create(CSVOutputEncoding.UTF8, CSVOutputDestination.NewFile);
-            var sjisOutput = CsvFileOutputSettings.Create(CSVOutputEncoding.SJIS, CSVOutputDestination.NewSheet);
+            var utf8Output = CsvDownloadOutputSettings.Create(TabularOutputEncoding.UTF8, TabularOutputDestination.NewCsvFile);
+            var sjisOutput = CsvDownloadOutputSettings.Create(TabularOutputEncoding.SJIS, TabularOutputDestination.NewWorksheet);
             Assert.IsTrue(CsvDownloadParameters.Create(ticker, from, to, utf8Output).IsUTF8Encoding());
             Assert.IsFalse(CsvDownloadParameters.Create(ticker, from, to, sjisOutput).IsUTF8Encoding());
         }
@@ -33,7 +33,7 @@ namespace BuffettCodeAddinRibbon.Settings.Tests
         [TestMethod()]
         public void CreateTest()
         {
-            var outputParams = CsvFileOutputSettings.Create(CSVOutputEncoding.UTF8, CSVOutputDestination.NewFile);
+            var outputParams = CsvDownloadOutputSettings.Create(TabularOutputEncoding.UTF8, TabularOutputDestination.NewCsvFile);
 
             var parameters = CsvDownloadParameters.Create(ticker, from, to,
                 outputParams);

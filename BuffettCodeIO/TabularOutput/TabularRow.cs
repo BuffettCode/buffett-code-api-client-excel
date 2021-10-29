@@ -1,8 +1,7 @@
 using BuffettCodeIO.Property;
-using System;
 using System.Collections.Generic;
 
-namespace BuffettCodeIO.TabluarOutput
+namespace BuffettCodeIO.TabularOutput
 {
     public class TabularRow
     {
