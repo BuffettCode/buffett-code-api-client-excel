@@ -1,7 +1,8 @@
+using BuffettCodeIO.Property;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BuffettCodeIO.Property
+namespace BuffettCodeIO.CsvOutput
 {
     public class CsvOutput<T> where T : IApiResource
     {
@@ -14,6 +15,7 @@ namespace BuffettCodeIO.Property
         {
             // append header column using period
             header.Add(apiResource.GetPeriod().ToString());
+            var selector = new FormattedValueSelector(apiResource);
             // setup keys and values if empty
             if (keys.Count == 0)
             {
@@ -24,10 +26,11 @@ namespace BuffettCodeIO.Property
                 });
             }
 
-            // add each values to the row
-            keys.ForEach(p => rowDict[p].Add(apiResource.GetValue(p)));
+            // add each formatted values to the row
+            keys.ForEach(p => rowDict[p].Add(selector.Select(p)));
             return this;
         }
+
 
         public IEnumerable<CsvOutputRow> ToRows()
         {
@@ -37,6 +40,5 @@ namespace BuffettCodeIO.Property
             keys.ForEach(key => rows.Add(rowDict[key]));
             return rows;
         }
-
     }
 }

@@ -67,8 +67,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiTaskHelper.cs" />
-    <Compile Include="Property\CsvOutput.cs" />
-    <Compile Include="Property\CsvOutputRow.cs" />
+    <Compile Include="CsvOutput\CsvOutputFormatter.cs" />
+    <Compile Include="CsvOutput\FormattedValueSelector.cs" />
+    <Compile Include="CsvOutput\CsvOutputFileWriter.cs" />
+    <Compile Include="CsvOutput\CsvOutput.cs" />
+    <Compile Include="CsvOutput\CsvOutputRow.cs" />
+    <Compile Include="CsvOutput\ICsvOutputWriter.cs" />
     <Compile Include="Property\SupportedPeriodRange.cs" />
     <Compile Include="Resolver\SupportedTierDictionary.cs" />
     <Compile Include="Resolver\PeriodSupportedTierResolver.cs" />
@@ -117,5 +121,6 @@
       <Name>BuffettCodeCommon</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

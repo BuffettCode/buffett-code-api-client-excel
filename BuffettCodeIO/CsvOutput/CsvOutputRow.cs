@@ -1,7 +1,8 @@
+using BuffettCodeIO.Property;
 using System;
 using System.Collections.Generic;
 
-namespace BuffettCodeIO.Property
+namespace BuffettCodeIO.CsvOutput
 {
     public class CsvOutputRow
     {

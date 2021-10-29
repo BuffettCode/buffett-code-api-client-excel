@@ -1,7 +1,8 @@
+using BuffettCodeIO.Property;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace BuffettCodeIO.Property.Tests
+namespace BuffettCodeIO.CsvOutput.Tests
 {
     [TestClass()]
     public class CsvOutputRowTests

@@ -1,18 +1,18 @@
 using BuffettCodeCommon.Period;
+using BuffettCodeIO.Property;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace BuffettCodeIO.Property.Tests
+namespace BuffettCodeIO.CsvOutput.Tests
 {
     [TestClass()]
-    public class CsvOutputTests
+    public class FormattedValueSelectorTests
     {
         private static readonly string ticker = "1234";
         private static readonly string key = "test_key";
-        private static readonly string value = "test_value";
+        private static readonly string value = "100000000000";
         private static readonly string label = "ラベル";
-        private static readonly string unit = "test_unit";
+        private static readonly string unit = "百万円";
 
         private static readonly FiscalQuarterPeriod period = FiscalQuarterPeriod.Create(2021, 3);
         private static readonly IDictionary<string, string> properties = new Dictionary<string, string> { { key, value } };
@@ -26,28 +26,17 @@ namespace BuffettCodeIO.Property.Tests
                 properties is null ? PropertyDictionary.Empty() : new PropertyDictionary(properties),
                 descriptions is null ? PropertyDescriptionDictionary.Empty() : new PropertyDescriptionDictionary(descriptions)
             );
-
         }
+
 
         [TestMethod()]
-        public void QuarterTest()
+        public void SelectQuarterTest()
         {
             var quarter = CreateQuarter(ticker, period, properties, descriptions);
-            var csvOutput = new CsvOutput<Quarter>();
-            var rows = csvOutput.Add(quarter).ToRows().ToArray();
-            var header = rows[0];
-            var firstDataRow = rows[1];
-            Assert.AreEqual("キー", header.Key);
-            Assert.AreEqual("項目名", header.Name);
-            Assert.AreEqual("単位", header.Unit);
-            Assert.AreEqual(1, header.Values.Count);
-            Assert.AreEqual(period.ToString(), header.Values[0]);
-
-            Assert.AreEqual(key, firstDataRow.Key);
-            Assert.AreEqual(label, firstDataRow.Name);
-            Assert.AreEqual(unit, firstDataRow.Unit);
-            Assert.AreEqual(1, firstDataRow.Values.Count);
-            Assert.AreEqual(value, firstDataRow.Values[0]);
+            var selector = new FormattedValueSelector(quarter);
+            Assert.AreEqual("100,000", selector.Select(key));
         }
+
+
     }
 }
