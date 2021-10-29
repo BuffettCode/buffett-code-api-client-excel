@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 
 
-namespace BuffettCodeIO.CsvOutput
+namespace BuffettCodeIO.TabluarOutput
 {
-    public class CsvOutputFileWriter<T> : ICsvOutputWriter<T>, IDisposable where T : IApiResource
+    public class CsvFileTabularWriter<T> : ITabularWriter<T>, IDisposable where T : IApiResource
     {
         private readonly CsvWriter writer;
 
-        public CsvOutputFileWriter(Stream stream, Encoding encoding)
+        public CsvFileTabularWriter(Stream stream, Encoding encoding)
         {
             writer = new CsvWriter(new StreamWriter(stream, encoding), CultureInfo.InvariantCulture);
         }
@@ -23,13 +23,13 @@ namespace BuffettCodeIO.CsvOutput
             writer.Dispose();
         }
 
-        public void Write(CsvOutput<T> output)
+        public void Write(Tabular<T> output)
         {
             output.ToRows().ToList().ForEach(r => WriteRow(r));
             writer.Flush();
         }
 
-        private void WriteRow(CsvOutputRow row)
+        private void WriteRow(TabularRow row)
         {
             // write meta cols
             writer.WriteField(row.Key);

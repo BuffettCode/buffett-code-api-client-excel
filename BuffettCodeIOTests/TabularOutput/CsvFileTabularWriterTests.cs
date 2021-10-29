@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace BuffettCodeIO.CsvOutput.Tests
+namespace BuffettCodeIO.TabluarOutput.Tests
 {
     [TestClass()]
-    public class CsvOutputFileWriterTests
+    public class CsvFileTabularWriterTests
     {
         private static readonly string ticker = "1234";
         private static readonly string key = "test_key";
@@ -35,14 +35,14 @@ namespace BuffettCodeIO.CsvOutput.Tests
         public void WriteQuarterTest()
         {
             var quarter = CreateQuarter(ticker, period, properties, descriptions);
-            var csvOutput = new CsvOutput<Quarter>().Add(quarter);
-            var fileName = "CsvOutputFileWriterWriteQuarterTest.csv";
+            var csvOutput = new Tabular<Quarter>().Add(quarter);
+            var fileName = "CsvFileWriterWriteQuarterTest.csv";
             var fileInfo = new FileInfo(fileName);
 
             // at first, the file is not created
             Assert.IsFalse(fileInfo.Exists);
 
-            using (var writer = new CsvOutputFileWriter<Quarter>(fileInfo.Create(), Encoding.UTF8))
+            using (var writer = new CsvFileTabularWriter<Quarter>(fileInfo.Create(), Encoding.UTF8))
             {
                 writer.Write(csvOutput);
             }

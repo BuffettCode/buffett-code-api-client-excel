@@ -2,16 +2,17 @@ using BuffettCodeIO.Property;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BuffettCodeIO.CsvOutput
+namespace BuffettCodeIO.TabluarOutput
+
 {
-    public class CsvOutput<T> where T : IApiResource
+    public class Tabular<T> where T : IApiResource
     {
-        private readonly CsvOutputRow header = CsvOutputRow.Create("キー", "項目名", "単位");
-        private readonly IDictionary<string, CsvOutputRow> rowDict = new Dictionary<string, CsvOutputRow>();
+        private readonly TabularRow header = TabularRow.Create("キー", "項目名", "単位");
+        private readonly IDictionary<string, TabularRow> rowDict = new Dictionary<string, TabularRow>();
         private readonly List<string> keys = new List<string>();
 
 
-        public CsvOutput<T> Add(T apiResource)
+        public Tabular<T> Add(T apiResource)
         {
             // append header column using period
             header.Add(apiResource.GetPeriod().ToString());
@@ -22,7 +23,7 @@ namespace BuffettCodeIO.CsvOutput
                 apiResource.GetPropertyNames().ToList().ForEach(p =>
                 {
                     keys.Add(p);
-                    rowDict.Add(p, CsvOutputRow.Create(apiResource.GetDescription(p)));
+                    rowDict.Add(p, TabularRow.Create(apiResource.GetDescription(p)));
                 });
             }
 
@@ -32,10 +33,10 @@ namespace BuffettCodeIO.CsvOutput
         }
 
 
-        public IEnumerable<CsvOutputRow> ToRows()
+        public IEnumerable<TabularRow> ToRows()
         {
             // 1st row is header
-            IList<CsvOutputRow> rows = new List<CsvOutputRow> { header };
+            IList<TabularRow> rows = new List<TabularRow> { header };
             // append rows by keys
             keys.ForEach(key => rows.Add(rowDict[key]));
             return rows;

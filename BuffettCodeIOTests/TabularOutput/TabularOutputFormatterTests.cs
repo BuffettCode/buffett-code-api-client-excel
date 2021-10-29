@@ -4,10 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BuffettCodeIO.CsvOutput.Tests
+namespace BuffettCodeIO.TabluarOutput.Tests
 {
     [TestClass()]
-    public class CsvOutputFormatterTests
+    public class TabluarFormatterTests
     {
         private static readonly string ticker = "1234";
         private static readonly string key = "test_key";
@@ -38,7 +38,7 @@ namespace BuffettCodeIO.CsvOutput.Tests
         {
             var quarter1 = CreateQuarter(ticker, period2021Q3, properties, descriptions);
             var quarter2 = CreateQuarter(ticker, period2021Q4, properties, descriptions);
-            var csvOutput = CsvOutputFormatter<Quarter>.Format(new List<Quarter> { quarter1, quarter2 });
+            var csvOutput = TabularFormatter<Quarter>.Format(new List<Quarter> { quarter1, quarter2 });
             var rows = csvOutput.ToRows().ToArray();
             Assert.AreEqual(2, rows.Length);
 

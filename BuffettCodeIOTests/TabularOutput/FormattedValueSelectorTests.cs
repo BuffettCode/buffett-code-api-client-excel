@@ -3,7 +3,7 @@ using BuffettCodeIO.Property;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
-namespace BuffettCodeIO.CsvOutput.Tests
+namespace BuffettCodeIO.TabluarOutput.Tests
 {
     [TestClass()]
     public class FormattedValueSelectorTests

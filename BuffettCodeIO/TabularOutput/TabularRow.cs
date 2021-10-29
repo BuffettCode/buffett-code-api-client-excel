@@ -2,16 +2,16 @@ using BuffettCodeIO.Property;
 using System;
 using System.Collections.Generic;
 
-namespace BuffettCodeIO.CsvOutput
+namespace BuffettCodeIO.TabluarOutput
 {
-    public class CsvOutputRow
+    public class TabularRow
     {
         private readonly string key;
         private readonly string name;
         private readonly string unit;
         private readonly IList<string> values = new List<string>();
 
-        private CsvOutputRow(string key, string name, string unit)
+        private TabularRow(string key, string name, string unit)
         {
             this.key = key;
             this.name = name;
@@ -24,12 +24,12 @@ namespace BuffettCodeIO.CsvOutput
 
         public string Unit => unit;
 
-        public static CsvOutputRow Create(string key, string name, string unit) => new CsvOutputRow(key, name, unit);
+        public static TabularRow Create(string key, string name, string unit) => new TabularRow(key, name, unit);
 
-        public static CsvOutputRow Create(PropertyDescription desc) => new CsvOutputRow(desc.Name, desc.Label, desc.Unit);
+        public static TabularRow Create(PropertyDescription desc) => new TabularRow(desc.Name, desc.Label, desc.Unit);
 
 
-        public CsvOutputRow Add(string value)
+        public TabularRow Add(string value)
         {
             if (value.Contains(","))
             {

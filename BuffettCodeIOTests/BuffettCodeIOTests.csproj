@@ -63,11 +63,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ApiTaskHelperTests.cs" />
-    <Compile Include="CsvOutput\CsvOutputFileWriterTests.cs" />
-    <Compile Include="CsvOutput\CsvOutputFormatterTests.cs" />
-    <Compile Include="CsvOutput\CsvOutputRowTests.cs" />
-    <Compile Include="CsvOutput\CsvOutputTests.cs" />
-    <Compile Include="CsvOutput\FormattedValueSelectorTests.cs" />
+    <Compile Include="TabularOutput\CsvFileTabularWriterTests.cs" />
+    <Compile Include="TabularOutput\TabularOutputFormatterTests.cs" />
+    <Compile Include="TabularOutput\TabularRowTests.cs" />
+    <Compile Include="TabularOutput\TabularTests.cs" />
+    <Compile Include="TabularOutput\FormattedValueSelectorTests.cs" />
     <Compile Include="Formatter\CurrencyFormatterTests.cs" />
     <Compile Include="Formatter\FormatterFactoryTests.cs" />
     <Compile Include="Formatter\NumericFormatterTests.cs" />

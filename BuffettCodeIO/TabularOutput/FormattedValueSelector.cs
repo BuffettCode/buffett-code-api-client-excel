@@ -1,7 +1,7 @@
 using BuffettCodeIO.Formatter;
 using BuffettCodeIO.Property;
 
-namespace BuffettCodeIO.CsvOutput
+namespace BuffettCodeIO.TabluarOutput
 {
     public class FormattedValueSelector
     {

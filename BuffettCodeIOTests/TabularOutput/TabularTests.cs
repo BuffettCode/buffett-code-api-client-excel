@@ -4,10 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BuffettCodeIO.CsvOutput.Tests
+namespace BuffettCodeIO.TabluarOutput.Tests
 {
     [TestClass()]
-    public class CsvOutputTests
+    public class TabularTests
     {
         private static readonly string ticker = "1234";
         private static readonly string key = "test_key";
@@ -33,7 +33,7 @@ namespace BuffettCodeIO.CsvOutput.Tests
         public void QuarterTest()
         {
             var quarter = CreateQuarter(ticker, period, properties, descriptions);
-            var csvOutput = new CsvOutput<Quarter>();
+            var csvOutput = new Tabular<Quarter>();
             var rows = csvOutput.Add(quarter).ToRows().ToArray();
             var header = rows[0];
             var firstDataRow = rows[1];

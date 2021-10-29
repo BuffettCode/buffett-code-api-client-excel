@@ -2,10 +2,10 @@ using BuffettCodeIO.Property;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace BuffettCodeIO.CsvOutput.Tests
+namespace BuffettCodeIO.TabluarOutput.Tests
 {
     [TestClass()]
-    public class CsvOutputRowTests
+    public class TabularRowTests
     {
         private static readonly string key = "test_key";
         private static readonly string name = "名前";
@@ -14,7 +14,7 @@ namespace BuffettCodeIO.CsvOutput.Tests
         [TestMethod()]
         public void CreateTest()
         {
-            var row = CsvOutputRow.Create(key, name, unit);
+            var row = TabularRow.Create(key, name, unit);
             Assert.AreEqual(key, row.Key);
             Assert.AreEqual(name, row.Name);
             Assert.AreEqual(unit, row.Unit);
@@ -24,7 +24,7 @@ namespace BuffettCodeIO.CsvOutput.Tests
         public void CreateTest1()
         {
             var desc = new PropertyDescription(key, name, unit);
-            var row = CsvOutputRow.Create(desc);
+            var row = TabularRow.Create(desc);
             Assert.AreEqual(key, row.Key);
             Assert.AreEqual(name, row.Name);
             Assert.AreEqual(unit, row.Unit);
@@ -34,7 +34,7 @@ namespace BuffettCodeIO.CsvOutput.Tests
         public void AddTest()
         {
             // add succeeded
-            var row = CsvOutputRow.Create(key, name, unit);
+            var row = TabularRow.Create(key, name, unit);
             var value = "dummy";
             Assert.AreEqual(0, row.Values.Count);
             row.Add(value);
