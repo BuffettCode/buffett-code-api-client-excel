@@ -1,3 +1,4 @@
+using BuffettCodeCommon.Period;
 using System.Collections.Generic;
 namespace BuffettCodeIO.Property
 {
@@ -17,5 +18,6 @@ namespace BuffettCodeIO.Property
 
         public static EmptyResource GetInstance() => singleton;
 
+        public IPeriod GetPeriod() => Snapshot.GetInstance();
     }
 }

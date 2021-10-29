@@ -1,3 +1,4 @@
+using BuffettCodeCommon.Period;
 using System.Collections.Generic;
 namespace BuffettCodeIO.Property
 {
@@ -8,5 +9,9 @@ namespace BuffettCodeIO.Property
         PropertyDescription GetDescription(string propertyName);
 
         ICollection<string> GetPropertyNames();
+
+        IPeriod GetPeriod();
+
     }
+
 }
