@@ -40,9 +40,6 @@ namespace BuffettCodeIO.TabluarOutput.Tests
             row.Add(value);
             Assert.AreEqual(1, row.Values.Count);
             Assert.AreEqual(value, row.Values[0]);
-
-            // value must not contain "," 
-            Assert.ThrowsException<ArgumentException>(() => row.Add("dummy, dummy"));
         }
     }
 }

@@ -31,10 +31,6 @@ namespace BuffettCodeIO.TabluarOutput
 
         public TabularRow Add(string value)
         {
-            if (value.Contains(","))
-            {
-                throw new ArgumentException($"value={value} contains ','");
-            }
             values.Add(value);
             return this;
         }
