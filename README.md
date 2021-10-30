@@ -36,11 +36,12 @@ Office/SharePoint development
 ClickOnce Publishing
 Git for windows
 GitHub extension for Visual Studio
+Visual Studio Tools for Office (VSTO)
 ```
 
-#### .NET Framework 3.5の有効化 (Windows Serverのみ)
+#### .NET Framework 3.5の有効化
 
-* Windows Serverでは.NET Framework 3.5をServer Managerから有効化する必要がある
+* Windowsでは「Windows の機能の有効化または無効化」 (Turn Windows features on or off) から、Windows ServerではServer Managerから、.NET Framework 3.5を有効化する必要がある
 * (WiX Toolsetが.NET Framework 3.5に依存するため必要)
 
 #### Wix Toolset 3.1.1 インストール
@@ -64,7 +65,7 @@ GitHub extension for Visual Studio
 バフェットコードのExcelアドインの一部（`BuffettCodeAddinRibbon`）はVSTO(Visual Studio Tools for Office)を利用しており、ClickOnceのマニフェストにデジタル署名が必要です。`BuffettCode` プロジェクトにデジタル署名の設定がされている必要があります。リポジトリにコミットされたテスト証明書([BuffettCodeTest.pfx](./Certificates/BuffettCodeTest.pfx))を使う場合は以下のように設定します。
 なお、ルート証明書は[Sectigo](https://sectigo.com/knowledge-base/detail/AAA-Certificate-Services-Root-2028/kA03l00000117cL)から取得、[Certificates/AAACertificateServices.crt](./Certificates/AAACertificateServices.crt)に設置済みです。
 
-* ソリューションエクスプローラから `BuffettCode` プロジェクトのプロパティを開く
+* ソリューションエクスプローラから `BuffettCodeAddinRibbon` のプロパティを開く
 * Signingタブで `Sign the ClickOnce manifests` のチェックを付ける
 * "Select from File..." より "BuffettCodeTest.pfx" を選択する
 
@@ -79,15 +80,22 @@ Update-Package -reinstall
 * メニューから Build -> Rebuild Solution を実行
 
 ### Excelとつないで開発する
-Visual StudioとExcelを使って、実際にアドオンをExcelから動かしながら開発することができます。
+Visual StudioとExcelを使って、実際にアドインをExcelから動かしながら開発することができます。
 
-1. Debug モードでビルドを行う
-2. Debugしたいパッケージを選択し、Debugを開始する
-    - UDF(BCODE関数)は `BuffettCodeExcelFunctions`
-    - 「エクセルアドインのリボン（tokenの設定やCSVダウンロード）」は`BuffettCodeAddinRibbon`
-3. Excelが立ち上がるので、新規のBookを作成して動かしてみてください
+#### Ribbon (tokenの設定やCSVダウンロード) の動作確認
 
-作成された新規のBookは開発中のアドオンをインストール済みの状態で作成されます。
+1. `BuffettCodeAddinRibbon` を選択し、 Start Debugging を選択する
+2. Excelが立ち上がるので、新規のBookを作成して動作確認を行う
+
+新規のBookは開発中のアドインをインストール済みの状態で作成されます。
+
+#### UDF (BCODE関数) の動作確認
+
+1. ソリューションエクスプローラから `BuffettCodeExcelFunctions` を右クリックする
+2. 右クリックメニューの Debug -> Start New Instance を選択する
+3. Excelが立ち上がるので、新規のBookを作成して動作確認を行う
+
+こちらも、新規のBookは開発中のUDFをインストール済みの状態で作成されます。
 
 ### Code Format
 `dotnet-format` が `.editorconfig` を参照して CI で lint をしています。
