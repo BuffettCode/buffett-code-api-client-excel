@@ -14,10 +14,16 @@ namespace BuffettCodeExcelFunctions
         private static readonly BuffettCodeApiTaskProcessor processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.MaxDegreeOfParallelism, config.IsOndemandEndpointEnabled
             );
 
+        private static bool IsQuarterCall(string parameter1, string parameter2)
+        {
+            return !string.IsNullOrWhiteSpace(parameter1) && !string.IsNullOrWhiteSpace(parameter2);
+        }
+
         public static IApiResource FetchForLegacy
             (string ticker, string parameter1, string parameter2, string propertyName)
         {
-            var dataType = resolver.Resolve(propertyName);
+            var dataType = IsQuarterCall(parameter1, parameter2) ? DataTypeConfig.Quarter : DataTypeConfig.Indicator;
+
             // update processor at first
             switch (dataType)
             {
