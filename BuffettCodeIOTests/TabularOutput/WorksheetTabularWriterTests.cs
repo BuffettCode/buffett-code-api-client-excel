@@ -1,13 +1,14 @@
 using BuffettCodeCommon.Period;
 using BuffettCodeIO.Property;
+using Microsoft.Office.Interop.Excel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Linq;
+
 
 namespace BuffettCodeIO.TabularOutput.Tests
 {
     [TestClass()]
-    public class TabularTests
+    public class WorksheetTabularWriterTests
     {
         private static readonly string ticker = "1234";
         private static readonly string key = "test_key";
@@ -29,25 +30,31 @@ namespace BuffettCodeIO.TabularOutput.Tests
             );
         }
 
-        [TestMethod()]
-        public void QuarterTest()
+        string GetSheetCellValve(Worksheet worksheet, uint colNom, uint rowNum) => (string)(worksheet.Cells[colNom, rowNum] as Range).Value;
+
+
+        // If you want test worksheet, comment in
+        // On GitHub Actions, we can't use Windows Office now
+        // [TestMethod()]
+        public void WorksheetTabularWriterTest()
         {
             var quarter = CreateQuarter(ticker, period, properties, descriptions);
-            var csvOutput = new Tabular<Quarter>();
-            var rows = csvOutput.Add(quarter).ToRows().ToArray();
-            var header = rows[0];
-            var firstDataRow = rows[1];
-            Assert.AreEqual("キー", header.Key);
-            Assert.AreEqual("項目名", header.Name);
-            Assert.AreEqual("単位", header.Unit);
-            Assert.AreEqual(1, header.Values.Count);
-            Assert.AreEqual(period.ToString(), header.Values[0]);
-
-            Assert.AreEqual(key, firstDataRow.Key);
-            Assert.AreEqual(label, firstDataRow.Name);
-            Assert.AreEqual(unit, firstDataRow.Unit);
-            Assert.AreEqual(1, firstDataRow.Values.Count);
-            Assert.AreEqual(value, firstDataRow.Values[0]);
+            var tabular = new Tabular<Quarter>().Add(quarter);
+            var excel = new Application();
+            excel.SheetsInNewWorkbook = 1;
+            excel.Visible = true;
+            Workbook workbook = excel.Workbooks.Add();
+            Worksheet worksheet = workbook.Worksheets.Add();
+            using (var writer = new WorksheetTabularWriter<Quarter>(worksheet))
+            {
+                writer.Write(tabular);
+            }
+            Assert.AreEqual("キー", GetSheetCellValve(worksheet, 1, 1));
+            Assert.AreEqual("項目名", GetSheetCellValve(worksheet, 1, 2));
+            Assert.AreEqual("単位", GetSheetCellValve(worksheet, 1, 3));
+            worksheet.Delete();
+            workbook.Close(0);
+            excel.Quit();
         }
     }
 }

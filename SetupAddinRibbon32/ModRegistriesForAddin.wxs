@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?define RibbonVstoFilePath = "[#fil930E938B07A3581BA803FFB568FC605A]"?>
+<?define RibbonVstoFilePath = "[!fil930E938B07A3581BA803FFB568FC605A]"?>
 <?define ExcelAddinRibbonKey = "SOFTWARE\Microsoft\Office\Excel\Addins\!(loc.CompanyName).Ribbon"?>
 <?define ExcelFunctionsKey = "SOFTWARE\!(loc.CompanyName).Functions"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">

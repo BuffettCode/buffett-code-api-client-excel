@@ -1,10 +1,10 @@
 using BuffettCodeIO.Property;
+using System;
 
-namespace BuffettCodeIO.TabluarOutput
+namespace BuffettCodeIO.TabularOutput
 {
-    interface ITabularWriter<T> where T : IApiResource
+    public interface ITabularWriter<T> : IDisposable where T : IApiResource
     {
-
         void Write(Tabular<T> tabular);
     }
 }

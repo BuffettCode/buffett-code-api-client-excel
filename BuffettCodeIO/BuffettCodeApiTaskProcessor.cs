@@ -53,14 +53,14 @@ namespace BuffettCodeIO
             return this;
         }
 
-        public IApiResource GetApiResource(DataTypeConfig dataType, string ticker, IPeriod period)
+        public IApiResource GetApiResource(DataTypeConfig dataType, string ticker, IPeriod period, bool isConfigureAwait = true, bool useCache = true)
         {
             var useOndemand = taskHelper.ShouldUseOndemandEndpoint(dataType, ticker, period, isOndemandEndpointEnabled);
-            var json = processor.Process(client.Get(dataType, ticker, period, useOndemand, true, true));
+            var json = processor.Process(client.Get(dataType, ticker, period, useOndemand, isConfigureAwait, useCache));
             return parser.Parse(dataType, json);
         }
 
-        public IList<IApiResource> GetApiResources(DataTypeConfig dataType, string ticker, IComparablePeriod from, IComparablePeriod to)
+        public IList<IApiResource> GetApiResources(DataTypeConfig dataType, string ticker, IComparablePeriod from, IComparablePeriod to, bool isConfigureAwait = true, bool useCache = true)
         {
             if (from.CompareTo(to) > 0)
             {
@@ -71,13 +71,13 @@ namespace BuffettCodeIO
             // use fixed tier from all range
             if (endOfOndemandPeriod is null)
             {
-                var json = processor.Process(client.GetRange(dataType, ticker, from, to, false, true, true));
+                var json = processor.Process(client.GetRange(dataType, ticker, from, to, false, isConfigureAwait, useCache));
                 return parser.ParseRange(dataType, json);
             }
             else
             {
-                var ondemandTierJson = processor.Process(client.GetRange(dataType, ticker, from, endOfOndemandPeriod, true, true, true));
-                var fixedTierJson = processor.Process(client.GetRange(dataType, ticker, endOfOndemandPeriod.Next(), to, false, true, true));
+                var ondemandTierJson = processor.Process(client.GetRange(dataType, ticker, from, endOfOndemandPeriod, true, isConfigureAwait, useCache));
+                var fixedTierJson = processor.Process(client.GetRange(dataType, ticker, endOfOndemandPeriod.Next(), to, false, isConfigureAwait, useCache));
 
                 var ondemandResources = parser.ParseRange(dataType, ondemandTierJson);
                 var fixedTierResource = parser.ParseRange(dataType, fixedTierJson);

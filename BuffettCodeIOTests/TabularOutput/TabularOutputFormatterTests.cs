@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BuffettCodeIO.TabluarOutput.Tests
+namespace BuffettCodeIO.TabularOutput.Tests
 {
     [TestClass()]
     public class TabluarFormatterTests

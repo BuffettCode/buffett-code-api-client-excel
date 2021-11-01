@@ -56,6 +56,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="CsvDownload\ApiResourceGetterTests.cs" />
+    <Compile Include="CsvDownload\TabularWriterBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\CsvDownloadDefaultParametersHandlerTests.cs" />
     <Compile Include="Settings\CsvDownloadParametersTests.cs" />
@@ -72,6 +74,10 @@
     <ProjectReference Include="..\BuffettCodeCommon\BuffettCodeCommon.csproj">
       <Project>{8552cfd4-39c4-47d9-a0fa-be33b952465a}</Project>
       <Name>BuffettCodeCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BuffettCodeIO\BuffettCodeIO.csproj">
+      <Project>{44a5bfab-acd6-492f-b0c6-29e0ea07a90a}</Project>
+      <Name>BuffettCodeIO</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

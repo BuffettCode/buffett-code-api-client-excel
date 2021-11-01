@@ -2,7 +2,7 @@ using BuffettCodeIO.Property;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BuffettCodeIO.TabluarOutput
+namespace BuffettCodeIO.TabularOutput
 
 {
     public static class TabularFormatter<T> where T : IApiResource

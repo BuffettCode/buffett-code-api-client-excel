@@ -18,12 +18,12 @@ namespace BuffettCodeAddinRibbon.Settings
             return CsvDownloadParameters.Create(ticker, from, to, outputSettings);
         }
 
-        private static CsvFileOutputSettings LoadOutputSettings()
+        private static CsvDownloadOutputSettings LoadOutputSettings()
         {
             Encoding encoding = Properties.Settings.Default.CSVUTF8 ?
-                 CSVOutputEncoding.UTF8 : CSVOutputEncoding.SJIS;
-            CSVOutputDestination destination = Properties.Settings.Default.CSVIsFile ? CSVOutputDestination.NewFile : CSVOutputDestination.NewSheet;
-            return CsvFileOutputSettings.Create(encoding, destination);
+                 TabularOutputEncoding.UTF8 : TabularOutputEncoding.SJIS;
+            TabularOutputDestination destination = Properties.Settings.Default.CSVIsFile ? TabularOutputDestination.NewCsvFile : TabularOutputDestination.NewWorksheet;
+            return CsvDownloadOutputSettings.Create(encoding, destination);
         }
 
         public static void Save(CsvDownloadParameters settings)

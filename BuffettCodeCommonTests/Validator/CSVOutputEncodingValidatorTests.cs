@@ -11,8 +11,8 @@ namespace BuffettCodeCommon.Validator.Tests
         public void ValidateTest()
         {
             // valid
-            CSVOutputEncodingValidator.Validate(CSVOutputEncoding.UTF8);
-            CSVOutputEncodingValidator.Validate(CSVOutputEncoding.SJIS);
+            CSVOutputEncodingValidator.Validate(TabularOutputEncoding.UTF8);
+            CSVOutputEncodingValidator.Validate(TabularOutputEncoding.SJIS);
             // invalid
             Assert.ThrowsException<ValidationError>(() => CSVOutputEncodingValidator.Validate(Encoding.UTF7));
         }

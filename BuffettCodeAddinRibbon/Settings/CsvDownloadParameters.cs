@@ -7,14 +7,14 @@ namespace BuffettCodeAddinRibbon.Settings
     public class CsvDownloadParameters
     {
 
-        private CsvDownloadParameters(string ticker, PeriodRange<FiscalQuarterPeriod> range, CsvFileOutputSettings outputSettings)
+        private CsvDownloadParameters(string ticker, PeriodRange<FiscalQuarterPeriod> range, CsvDownloadOutputSettings outputSettings)
         {
             Ticker = ticker;
             Range = range;
             OutputSettings = outputSettings;
         }
 
-        public static CsvDownloadParameters Create(string ticker, FiscalQuarterPeriod from, FiscalQuarterPeriod to, CsvFileOutputSettings outputSettings)
+        public static CsvDownloadParameters Create(string ticker, FiscalQuarterPeriod from, FiscalQuarterPeriod to, CsvDownloadOutputSettings outputSettings)
         {
             JpTickerValidator.Validate(ticker);
             var range = PeriodRange<FiscalQuarterPeriod>.Create(from, to);
@@ -23,9 +23,9 @@ namespace BuffettCodeAddinRibbon.Settings
         public string Ticker { get; set; }
         public PeriodRange<FiscalQuarterPeriod> Range { get; set; }
 
-        public CsvFileOutputSettings OutputSettings { get; set; }
-        public bool IsCreateNewFile() => OutputSettings.Destination is CSVOutputDestination.NewFile;
+        public CsvDownloadOutputSettings OutputSettings { get; set; }
+        public bool IsCreateNewFile() => OutputSettings.Destination is TabularOutputDestination.NewCsvFile;
 
-        public bool IsUTF8Encoding() => OutputSettings.Encoding.Equals(CSVOutputEncoding.UTF8);
+        public bool IsUTF8Encoding() => OutputSettings.Encoding.Equals(TabularOutputEncoding.UTF8);
     }
 }

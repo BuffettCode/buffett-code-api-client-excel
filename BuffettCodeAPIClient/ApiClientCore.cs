@@ -16,10 +16,12 @@ namespace BuffettCodeAPIClient
         public string ApiKey { set; get; }
         private readonly Uri baseUri;
         private static readonly long TimeoutMilliseconds = 5000;
+        private readonly HttpClient httpClient;
         public ApiClientCore(string apiKey, Uri baseUri)
         {
             this.ApiKey = apiKey;
             this.baseUri = baseUri;
+            this.httpClient = NewHttpClient();
         }
 
         private HttpClient NewHttpClient()
@@ -42,9 +44,8 @@ namespace BuffettCodeAPIClient
         public async Task<string> Get(ApiGetRequest request, bool isConfigureAwait)
         {
             var path = BuildGetPath(request);
-            using (var client = NewHttpClient())
+            using (var response = await httpClient.GetAsync(path).ConfigureAwait(isConfigureAwait))
             {
-                var response = await client.GetAsync(path).ConfigureAwait(isConfigureAwait);
                 if (!response.IsSuccessStatusCode)
                 {
                     switch ((int)response.StatusCode)
@@ -57,6 +58,7 @@ namespace BuffettCodeAPIClient
                             throw new BuffettCodeApiClientException();
                     }
                 }
+                // to do : waiting too long to read as str in csv download
                 return await response.Content.ReadAsStringAsync().ConfigureAwait(isConfigureAwait);
             }
         }
