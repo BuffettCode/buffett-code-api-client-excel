@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?define InstallerVersion = "1.0.1.1"?>
+<?define InstallerVersion = "1.0.1.2"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
       xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
 	<Bundle Name="!(loc.InstallerName)" Version="$(var.InstallerVersion)" Manufacturer="Buffett Code Inc" UpgradeCode="a0e1d600-fecf-40de-a2ee-28397711c829" Copyright="!(loc.Copyright)" Compressed="yes" IconSourceFile="Resources\Icon.ico">
