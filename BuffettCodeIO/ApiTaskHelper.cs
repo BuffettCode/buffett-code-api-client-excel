@@ -38,8 +38,16 @@ namespace BuffettCodeIO
         }
 
         public bool ShouldUseOndemandEndpoint(DataTypeConfig dataType, string ticker, IPeriod period, bool IsOndemandEndpointEnabled)
-       =>
-            FindAvailableTier(dataType, ticker, period, IsOndemandEndpointEnabled).Equals(SupportedTier.OndemandTier);
+        {
+            if (dataType == DataTypeConfig.Indicator)
+            {
+                return false;
+            }
+            else
+            {
+                return FindAvailableTier(dataType, ticker, period, IsOndemandEndpointEnabled).Equals(SupportedTier.OndemandTier);
+            }
+        }
 
         public IComparablePeriod FindEndOfOndemandPeriod(DataTypeConfig dataType, string ticker, PeriodRange<IComparablePeriod> periodRange, bool IsOndemandEndpointEnabled)
         {
