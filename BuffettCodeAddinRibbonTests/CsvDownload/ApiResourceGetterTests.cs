@@ -38,7 +38,7 @@ namespace BuffettCodeAddinRibbon.CsvDownload.Tests
             var to = FiscalQuarterPeriod.Create(2020, 2);
             var outputSettings = CsvDownloadOutputSettings.Create(TabularOutputEncoding.SJIS, TabularOutputDestination.NewWorksheet);
             var parameters = CsvDownloadParameters.Create(ticker, from, to, outputSettings);
-            var quarters = ApiResourceGetter.Create(Configuration.GetInstance()).GetQuarters(parameters).ToArray();
+            var quarters = ApiResourceGetter.Create(Configuration.GetInstance()).GetQuarters(parameters).Result.ToArray();
             var quarter2020Q1 = quarters[0];
             var quarter2020Q2 = quarters[1];
             Assert.AreEqual(2, quarters.Length);

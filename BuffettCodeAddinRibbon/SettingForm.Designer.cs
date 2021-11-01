@@ -107,7 +107,7 @@ namespace BuffettCodeAddinRibbon
             this.apiSpecialNotesLink.TabIndex = 7;
             this.apiSpecialNotesLink.TabStop = true;
             this.apiSpecialNotesLink.Text = "バフェットコード WEB API機能に関する特記事項";
-            this.apiSpecialNotesLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.apiSpecialNotes_LinkClicked);
+            this.apiSpecialNotesLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ApiSpecialNotes_LinkClicked);
             // 
             // ondemandModeDesc
             // 
@@ -121,7 +121,7 @@ namespace BuffettCodeAddinRibbon
             this.ondemandModeDesc.Size = new System.Drawing.Size(507, 235);
             this.ondemandModeDesc.TabIndex = 6;
             this.ondemandModeDesc.Text = resources.GetString("ondemandModeDesc.Text");
-            this.ondemandModeDesc.TextChanged += new System.EventHandler(this.ondemandModeDescDesc_TextChanged);
+            this.ondemandModeDesc.TextChanged += new System.EventHandler(this.OndemandModeDescDesc_TextChanged);
             // 
             // checkIsOndemandEndpointEnabled
             // 
@@ -148,7 +148,7 @@ namespace BuffettCodeAddinRibbon
             this.textAPIKey.Name = "textAPIKey";
             this.textAPIKey.Size = new System.Drawing.Size(518, 25);
             this.textAPIKey.TabIndex = 2;
-            this.textAPIKey.TextChanged += new System.EventHandler(this.textAPIKey_TextChanged);
+            this.textAPIKey.TextChanged += new System.EventHandler(this.TextAPIKey_TextChanged);
             // 
             // tabDeveloper
             // 
@@ -213,7 +213,7 @@ namespace BuffettCodeAddinRibbon
             this.ondemandUsageEntryLink.TabIndex = 7;
             this.ondemandUsageEntryLink.TabStop = true;
             this.ondemandUsageEntryLink.Text = "Web API従量課金エンドポイントのご利用にあたって";
-            this.ondemandUsageEntryLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ondemandUsageEntryLink_LinkClicked);
+            this.ondemandUsageEntryLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.OndemandUsageEntryLink_LinkClicked);
             // 
             // SettingForm
             // 

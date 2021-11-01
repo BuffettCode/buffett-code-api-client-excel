@@ -31,15 +31,18 @@ namespace BuffettCodeAPIClient
         }
 
         public string GetApiKey() => this.apiClientCore.ApiKey;
+
         public async Task<string> Get(ApiGetRequest request, bool isConfigureAwait, bool useCache)
         {
             if (useCache && cacheHelper.HasCache(request))
             {
                 return (string)cacheHelper.Get(request);
             }
-            var response = await apiClientCore.Get(request, isConfigureAwait);
-            cacheHelper.Set(request, response);
-            return response;
+            else
+            {
+                return apiClientCore.Get(request, isConfigureAwait).Result;
+            }
         }
+
     }
 }

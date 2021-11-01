@@ -85,17 +85,17 @@ namespace BuffettCodeAddinRibbon
 
         }
 
-        private void textAPIKey_TextChanged(object sender, EventArgs e)
+        private void TextAPIKey_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void ondemandModeDescDesc_TextChanged(object sender, EventArgs e)
+        private void OndemandModeDescDesc_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void apiSpecialNotes_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void ApiSpecialNotes_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // mark as visited
             apiSpecialNotesLink.LinkVisited = true;
@@ -104,7 +104,7 @@ namespace BuffettCodeAddinRibbon
 
         }
 
-        private void ondemandUsageEntryLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void OndemandUsageEntryLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // mark as visited
             ondemandUsageEntryLink.LinkVisited = true;

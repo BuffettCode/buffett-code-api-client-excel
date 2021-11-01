@@ -28,8 +28,8 @@ namespace BuffettCodeAPIClient
         public async Task<JObject> GetQuarter(string ticker, FiscalQuarterPeriod period, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
         {
             var request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, period, useOndemand);
-            var response = await apiClientCore.Get(request, isConfigureAwait, useCache);
-            return ApiGetResponseBodyParser.Parse(response);
+            var response = apiClientCore.Get(request, isConfigureAwait, useCache);
+            return ApiGetResponseBodyParser.Parse(response.Result);
         }
 
         public async Task<JObject> GetIndicator(string ticker, bool isConfigureAwait = true, bool useCache = true)
@@ -49,8 +49,8 @@ namespace BuffettCodeAPIClient
         public async Task<JObject> GetCompany(string ticker, bool isConfigureAwait = true, bool useCache = true)
         {
             var request = BuffettCodeApiV2RequestCreator.CreateGetCompanyRequest(ticker);
-            var response = await apiClientCore.Get(request, isConfigureAwait, useCache);
-            return ApiGetResponseBodyParser.Parse(response);
+            var response = apiClientCore.Get(request, isConfigureAwait, useCache);
+            return ApiGetResponseBodyParser.Parse(response.Result);
         }
 
         public void UpdateApiKey(string apiKey) => apiClientCore.UpdateApiKey(apiKey);

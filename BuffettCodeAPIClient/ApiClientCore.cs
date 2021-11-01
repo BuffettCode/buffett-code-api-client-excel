@@ -11,7 +11,7 @@ namespace BuffettCodeAPIClient
     /// BuffettCode API と Http でやり取りする Client のコアクラス
     /// </summary>
 
-    public class ApiClientCore
+    public class ApiClientCore : IDisposable
     {
         public string ApiKey { set; get; }
         private readonly Uri baseUri;
@@ -58,10 +58,17 @@ namespace BuffettCodeAPIClient
                             throw new BuffettCodeApiClientException();
                     }
                 }
-                // to do : waiting too long to read as str in csv download
-                return await response.Content.ReadAsStringAsync().ConfigureAwait(isConfigureAwait);
+                var content = response.Content.ReadAsStringAsync().Result;
+                return content;
             }
         }
+
+        public void Dispose()
+        {
+            httpClient.Dispose();
+        }
     }
+
+
 
 }

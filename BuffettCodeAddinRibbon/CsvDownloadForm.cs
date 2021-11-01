@@ -20,6 +20,7 @@ namespace BuffettCodeAddinRibbon
         private static readonly int upperLimitYear = DateTime.Today.Year;
 
         private readonly TabularWriterBuilder<Quarter> quarterTabularWriterBuilder = new TabularWriterBuilder<Quarter>();
+        private readonly ApiResourceGetter apiResourceGetter = ApiResourceGetter.Create();
 
         public CsvDownloadForm()
         {
@@ -60,7 +61,7 @@ namespace BuffettCodeAddinRibbon
             Execute();
         }
 
-        private void Execute()
+        private async void Execute()
         {
             if (!ValidateControls())
             {
@@ -69,7 +70,8 @@ namespace BuffettCodeAddinRibbon
             try
             {
                 var parameters = CreateParametersFromFormValues();
-                var quarters = ApiResourceGetter.Create().GetQuarters(parameters).ToList();
+                var resources = await apiResourceGetter.GetQuarters(parameters);
+                var quarters = resources.ToList();
                 if (quarters.Count == 0)
                 {
                     MessageBox.Show("条件に当てはまる財務データがありませんでした。", "CSV出力", MessageBoxButtons.OK);
@@ -81,6 +83,7 @@ namespace BuffettCodeAddinRibbon
                     writer.Write(tabular);
                     MessageBox.Show("財務データの取得が完了しました", "CSV出力", MessageBoxButtons.OK);
                 }
+                DialogResult = DialogResult.OK;
             }
             catch (TestAPIConstraintException)
             {
@@ -110,7 +113,6 @@ namespace BuffettCodeAddinRibbon
             {
                 MessageBox.Show("データの取得中にエラーが発生しました。", "CSV出力", MessageBoxButtons.OK);
             }
-            DialogResult = DialogResult.OK;
             Close();
         }
 

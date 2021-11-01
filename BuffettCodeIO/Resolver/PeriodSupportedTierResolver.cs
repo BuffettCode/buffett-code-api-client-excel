@@ -23,28 +23,28 @@ namespace BuffettCodeIO.Resolver
 
         public static PeriodSupportedTierResolver Create(IBuffettCodeApiClient apiClient, IApiResponseParser parser) => new PeriodSupportedTierResolver(apiClient, parser, new SupportedTierDictionary());
 
-        public SupportedTier Resolve(DataTypeConfig dataType, string ticker, IPeriod period)
+        public SupportedTier Resolve(DataTypeConfig dataType, string ticker, IPeriod period, bool isConfigureAwait, bool useCache)
         {
             switch (dataType)
             {
                 case DataTypeConfig.Quarter:
-                    return ResolveQuarter(ticker, period as FiscalQuarterPeriod);
+                    return ResolveQuarter(ticker, period as FiscalQuarterPeriod, isConfigureAwait, useCache);
                 default:
                     throw new NotSupportedDataTypeException($"dataType={dataType} is not supported.");
             }
         }
 
-        private Company GetCompany(string ticker)
+        private Company GetCompany(string ticker, bool isConfigureAwait, bool useCache)
         {
-            var json = apiClient.Get(DataTypeConfig.Company, ticker, Snapshot.GetInstance(), false, true, true).Result;
+            var json = apiClient.Get(DataTypeConfig.Company, ticker, Snapshot.GetInstance(), false, isConfigureAwait, useCache).Result;
             return parser.Parse(DataTypeConfig.Company, json) as Company;
         }
 
-        public SupportedTier ResolveQuarter(string ticker, FiscalQuarterPeriod period)
+        private SupportedTier ResolveQuarter(string ticker, FiscalQuarterPeriod period, bool isConfigureAwait, bool useCache)
         {
             if (!supportedTierDict.Has(ticker, DataTypeConfig.Quarter))
             {
-                var company = GetCompany(ticker);
+                var company = GetCompany(ticker, isConfigureAwait, useCache);
                 supportedTierDict.Add(company);
             }
             return supportedTierDict.Get(ticker, period);

@@ -55,7 +55,7 @@ namespace BuffettCodeIO
 
         public IApiResource GetApiResource(DataTypeConfig dataType, string ticker, IPeriod period, bool isConfigureAwait = true, bool useCache = true)
         {
-            var useOndemand = taskHelper.ShouldUseOndemandEndpoint(dataType, ticker, period, isOndemandEndpointEnabled);
+            var useOndemand = taskHelper.ShouldUseOndemandEndpoint(dataType, ticker, period, isOndemandEndpointEnabled, isConfigureAwait, useCache);
             var json = processor.Process(client.Get(dataType, ticker, period, useOndemand, isConfigureAwait, useCache));
             return parser.Parse(dataType, json);
         }
@@ -66,7 +66,7 @@ namespace BuffettCodeIO
             {
                 throw new ArgumentException($"from={from} is more than to={to}");
             }
-            var endOfOndemandPeriod = taskHelper.FindEndOfOndemandPeriod(dataType, ticker, PeriodRange<IComparablePeriod>.Create(from, to), isOndemandEndpointEnabled);
+            var endOfOndemandPeriod = taskHelper.FindEndOfOndemandPeriod(dataType, ticker, PeriodRange<IComparablePeriod>.Create(from, to), isOndemandEndpointEnabled, isConfigureAwait, useCache);
 
             // use fixed tier from all range
             if (endOfOndemandPeriod is null)

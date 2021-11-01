@@ -35,22 +35,22 @@ namespace BuffettCodeIO.Tests
             var helper = new ApiTaskHelper(tierResolver);
 
             // enable ondemand endpoint
-            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, fixedOldest, true));
-            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, fixedOldest.Next() as FiscalQuarterPeriod, true));
-            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, fixedLatest, true));
-            Assert.AreEqual(SupportedTier.OndemandTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandOldest, true));
-            Assert.AreEqual(SupportedTier.OndemandTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandOldest.Next() as FiscalQuarterPeriod, true));
-            Assert.AreEqual(SupportedTier.OndemandTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandLatest, true));
-            Assert.ThrowsException<NotSupportedTierException>(() => helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandLatest.Next() as FiscalQuarterPeriod, true));
+            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, fixedOldest, true, true, true));
+            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, fixedOldest.Next() as FiscalQuarterPeriod, true, true, true));
+            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, fixedLatest, true, true, true));
+            Assert.AreEqual(SupportedTier.OndemandTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandOldest, true, true, true));
+            Assert.AreEqual(SupportedTier.OndemandTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandOldest.Next() as FiscalQuarterPeriod, true, true, true));
+            Assert.AreEqual(SupportedTier.OndemandTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandLatest, true, true, true));
+            Assert.ThrowsException<NotSupportedTierException>(() => helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandLatest.Next() as FiscalQuarterPeriod, true, true, true));
 
             // disabled ondemand endpoint
-            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, fixedOldest, false));
-            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, fixedOldest.Next() as FiscalQuarterPeriod, false));
-            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, fixedLatest, false));
-            Assert.ThrowsException<NotSupportedTierException>(() => helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandOldest, false));
-            Assert.ThrowsException<NotSupportedTierException>(() => helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandOldest.Next() as FiscalQuarterPeriod, false));
-            Assert.ThrowsException<NotSupportedTierException>(() => helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandLatest, false));
-            Assert.ThrowsException<NotSupportedTierException>(() => helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandLatest.Next() as FiscalQuarterPeriod, false));
+            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, fixedOldest, false, true, true));
+            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, fixedOldest.Next() as FiscalQuarterPeriod, false, true, true));
+            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, fixedLatest, false, true, true));
+            Assert.ThrowsException<NotSupportedTierException>(() => helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandOldest, false, true, true));
+            Assert.ThrowsException<NotSupportedTierException>(() => helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandOldest.Next() as FiscalQuarterPeriod, false, true, true));
+            Assert.ThrowsException<NotSupportedTierException>(() => helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandLatest, false, true, true));
+            Assert.ThrowsException<NotSupportedTierException>(() => helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandLatest.Next() as FiscalQuarterPeriod, false, true, true));
         }
 
         [TestMethod()]
@@ -60,22 +60,22 @@ namespace BuffettCodeIO.Tests
             var helper = new ApiTaskHelper(tierResolver);
 
             // enable ondemand endpoint
-            Assert.IsFalse(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, fixedOldest, true));
-            Assert.IsFalse(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, fixedOldest.Next() as FiscalQuarterPeriod, true));
-            Assert.IsFalse(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, fixedLatest, true));
-            Assert.IsTrue(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandOldest, true));
-            Assert.IsTrue(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandOldest.Next() as FiscalQuarterPeriod, true));
-            Assert.IsTrue(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandLatest, true));
-            Assert.ThrowsException<NotSupportedTierException>(() => helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandLatest.Next() as FiscalQuarterPeriod, true));
+            Assert.IsFalse(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, fixedOldest, true, true, true));
+            Assert.IsFalse(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, fixedOldest.Next() as FiscalQuarterPeriod, true, true, true));
+            Assert.IsFalse(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, fixedLatest, true, true, true));
+            Assert.IsTrue(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandOldest, true, true, true));
+            Assert.IsTrue(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandOldest.Next() as FiscalQuarterPeriod, true, true, true));
+            Assert.IsTrue(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandLatest, true, true, true));
+            Assert.ThrowsException<NotSupportedTierException>(() => helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandLatest.Next() as FiscalQuarterPeriod, true, true, true));
 
             // disabled ondemand endpoint
-            Assert.IsFalse(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, fixedOldest, false));
-            Assert.IsFalse(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, fixedOldest.Next() as FiscalQuarterPeriod, false));
-            Assert.IsFalse(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, fixedLatest, false));
-            Assert.ThrowsException<NotSupportedTierException>(() => helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandOldest, false));
-            Assert.ThrowsException<NotSupportedTierException>(() => helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandOldest.Next() as FiscalQuarterPeriod, false));
-            Assert.ThrowsException<NotSupportedTierException>(() => helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandLatest, false));
-            Assert.ThrowsException<NotSupportedTierException>(() => helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandLatest.Next() as FiscalQuarterPeriod, false));
+            Assert.IsFalse(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, fixedOldest, false, true, true));
+            Assert.IsFalse(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, fixedOldest.Next() as FiscalQuarterPeriod, false, true, true));
+            Assert.IsFalse(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, fixedLatest, false, true, true));
+            Assert.ThrowsException<NotSupportedTierException>(() => helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandOldest, false, true, true));
+            Assert.ThrowsException<NotSupportedTierException>(() => helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandOldest.Next() as FiscalQuarterPeriod, false, true, true));
+            Assert.ThrowsException<NotSupportedTierException>(() => helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandLatest, false, true, true));
+            Assert.ThrowsException<NotSupportedTierException>(() => helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandLatest.Next() as FiscalQuarterPeriod, false, true, true));
         }
 
         [TestMethod()]
@@ -86,14 +86,14 @@ namespace BuffettCodeIO.Tests
 
             // for fixed tier range, return null
             var tierRange = PeriodRange<IComparablePeriod>.Create(fixedOldest, fixedLatest);
-            Assert.IsNull(helper.FindEndOfOndemandPeriod(DataTypeConfig.Quarter, ticker, tierRange, true) as FiscalQuarterPeriod);
-            Assert.IsNull(helper.FindEndOfOndemandPeriod(DataTypeConfig.Quarter, ticker, tierRange, false) as FiscalQuarterPeriod);
+            Assert.IsNull(helper.FindEndOfOndemandPeriod(DataTypeConfig.Quarter, ticker, tierRange, true, true, true) as FiscalQuarterPeriod);
+            Assert.IsNull(helper.FindEndOfOndemandPeriod(DataTypeConfig.Quarter, ticker, tierRange, false, true, true) as FiscalQuarterPeriod);
 
             // for ondemand range
             tierRange
                  = PeriodRange<IComparablePeriod>.Create(ondemandOldest, fixedLatest);
-            Assert.AreEqual(FiscalQuarterPeriod.Create(2016, 1), helper.FindEndOfOndemandPeriod(DataTypeConfig.Quarter, ticker, tierRange, true) as FiscalQuarterPeriod);
-            Assert.ThrowsException<NotSupportedTierException>(() => helper.FindEndOfOndemandPeriod(DataTypeConfig.Quarter, ticker, tierRange, false));
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2016, 1), helper.FindEndOfOndemandPeriod(DataTypeConfig.Quarter, ticker, tierRange, true, true, true) as FiscalQuarterPeriod);
+            Assert.ThrowsException<NotSupportedTierException>(() => helper.FindEndOfOndemandPeriod(DataTypeConfig.Quarter, ticker, tierRange, false, true, true));
         }
     }
 }
