@@ -1,6 +1,5 @@
 using System;
 using System.Runtime.Caching;
-using System.Threading.Tasks;
 
 namespace BuffettCodeAPIClient
 {
@@ -32,7 +31,7 @@ namespace BuffettCodeAPIClient
 
         public string GetApiKey() => this.apiClientCore.ApiKey;
 
-        public async Task<string> Get(ApiGetRequest request, bool isConfigureAwait, bool useCache)
+        public string Get(ApiGetRequest request, bool isConfigureAwait, bool useCache)
         {
             if (useCache && cacheHelper.HasCache(request))
             {

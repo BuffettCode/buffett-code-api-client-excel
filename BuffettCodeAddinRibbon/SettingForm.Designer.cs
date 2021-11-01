@@ -190,7 +190,6 @@ namespace BuffettCodeAddinRibbon
             this.checkParallelism.TabIndex = 7;
             this.checkParallelism.Text = "APIの実行ペースを制限する";
             this.checkParallelism.UseVisualStyleBackColor = true;
-            this.checkParallelism.CheckedChanged += new System.EventHandler(this.CheckParallelism_CheckedChanged);
             // 
             // checkDebugMode
             // 

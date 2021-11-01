@@ -7,12 +7,10 @@ namespace BuffettCodeAddinRibbon.Settings
     {
         private readonly string apiKey;
         private readonly bool enabledOndemandEndpoint;
-        private readonly uint maxDegreeOfParallelism;
         private readonly bool debugMode;
 
         public string ApiKey => apiKey;
         public bool IsOndemandEndpointEnabled => enabledOndemandEndpoint;
-        public uint MaxDegreeOfParallelism => maxDegreeOfParallelism;
         public bool DebugMode => debugMode;
 
         private AddinSettings(string apiKey, bool useOndemandEndpoint, bool debugMode)

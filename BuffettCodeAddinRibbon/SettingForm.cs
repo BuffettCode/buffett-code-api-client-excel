@@ -13,19 +13,6 @@ namespace BuffettCodeAddinRibbon
             textAPIKey.Text = setting.ApiKey;
             checkDebugMode.Checked = setting.DebugMode;
             checkIsOndemandEndpointEnabled.Checked = setting.IsOndemandEndpointEnabled;
-            var maxDegreeOfParallelism = setting.MaxDegreeOfParallelism;
-            if (maxDegreeOfParallelism == 0)
-            {
-                checkParallelism.Checked = false;
-                textParallelism.Text = "";
-                textParallelism.Enabled = false;
-            }
-            else
-            {
-                checkParallelism.Checked = true;
-                textParallelism.Text = maxDegreeOfParallelism.ToString();
-                textParallelism.Enabled = true;
-            }
         }
 
         private void SettingForm_Load(object sender, EventArgs e)
@@ -73,13 +60,6 @@ namespace BuffettCodeAddinRibbon
             DialogResult = DialogResult.Cancel;
             Close();
         }
-
-        private void CheckParallelism_CheckedChanged(object sender, EventArgs e)
-        {
-            textParallelism.Enabled = checkParallelism.Checked;
-        }
-
-
         private void TabAPI_Click(object sender, EventArgs e)
         {
 

@@ -31,7 +31,7 @@ namespace BuffettCodeAPIClient
             var request = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(ticker, day, useOndemand);
             JpTickerValidator.Validate(ticker);
             var response = apiClientCore.Get(request, isConfigureAwait, useCache);
-            return ApiGetResponseBodyParser.Parse(response.Result);
+            return ApiGetResponseBodyParser.Parse(response);
         }
 
         public void UpdateApiKey(string apiKey) => apiClientCore.UpdateApiKey(apiKey);
