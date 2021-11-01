@@ -25,23 +25,6 @@ namespace BuffettCodeAddinRibbon
             return textAPIKey.Text;
         }
 
-        public uint GetMaxDegreeOfParallelism()
-        {
-            if (!checkParallelism.Checked)
-            {
-                return 0;
-            }
-            else if (string.IsNullOrWhiteSpace(textParallelism.Text))
-            {
-                return 0;
-            }
-            else if (uint.TryParse(textParallelism.Text, out uint i))
-            {
-                return i;
-            }
-            return 0;
-        }
-
         public bool IsDebugMode()
         {
             return checkDebugMode.Checked;
@@ -90,6 +73,11 @@ namespace BuffettCodeAddinRibbon
             ondemandUsageEntryLink.LinkVisited = true;
             // open link using a default browser
             System.Diagnostics.Process.Start(ApiRelatedUrlConfig.ONDEMAND_API_USAGE_ENTRY);
+        }
+
+        private void CheckDebugMode_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

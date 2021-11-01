@@ -20,7 +20,7 @@ namespace BuffettCodeAddinRibbon.Settings
             this.debugMode = debugMode;
         }
 
-        public static AddinSettings Create(string apiKey, bool useOndemandEndpoint, uint maxDegreeOfParallelism, bool debugMode)
+        public static AddinSettings Create(string apiKey, bool useOndemandEndpoint, bool debugMode)
         {
             ApiKeyValidator.Validate(apiKey);
             return new AddinSettings(apiKey, useOndemandEndpoint, debugMode);

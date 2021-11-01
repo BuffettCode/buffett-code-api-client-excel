@@ -39,9 +39,6 @@ namespace BuffettCodeAddinRibbon
             this.labelAPIKey = new System.Windows.Forms.Label();
             this.textAPIKey = new System.Windows.Forms.TextBox();
             this.tabDeveloper = new System.Windows.Forms.TabPage();
-            this.textParallelism = new System.Windows.Forms.TextBox();
-            this.labelMaxDegreeOfParallelism = new System.Windows.Forms.Label();
-            this.checkParallelism = new System.Windows.Forms.CheckBox();
             this.checkDebugMode = new System.Windows.Forms.CheckBox();
             this.ondemandUsageEntryLink = new System.Windows.Forms.LinkLabel();
             this.tabConrtoll.SuspendLayout();
@@ -152,9 +149,6 @@ namespace BuffettCodeAddinRibbon
             // 
             // tabDeveloper
             // 
-            this.tabDeveloper.Controls.Add(this.textParallelism);
-            this.tabDeveloper.Controls.Add(this.labelMaxDegreeOfParallelism);
-            this.tabDeveloper.Controls.Add(this.checkParallelism);
             this.tabDeveloper.Controls.Add(this.checkDebugMode);
             this.tabDeveloper.Location = new System.Drawing.Point(4, 28);
             this.tabDeveloper.Name = "tabDeveloper";
@@ -164,42 +158,16 @@ namespace BuffettCodeAddinRibbon
             this.tabDeveloper.Text = "開発者向けオプション";
             this.tabDeveloper.UseVisualStyleBackColor = true;
             // 
-            // textParallelism
-            // 
-            this.textParallelism.Location = new System.Drawing.Point(276, 68);
-            this.textParallelism.Name = "textParallelism";
-            this.textParallelism.Size = new System.Drawing.Size(100, 25);
-            this.textParallelism.TabIndex = 9;
-            this.textParallelism.Text = "1";
-            // 
-            // labelMaxDegreeOfParallelism
-            // 
-            this.labelMaxDegreeOfParallelism.AutoSize = true;
-            this.labelMaxDegreeOfParallelism.Location = new System.Drawing.Point(110, 71);
-            this.labelMaxDegreeOfParallelism.Name = "labelMaxDegreeOfParallelism";
-            this.labelMaxDegreeOfParallelism.Size = new System.Drawing.Size(134, 18);
-            this.labelMaxDegreeOfParallelism.TabIndex = 8;
-            this.labelMaxDegreeOfParallelism.Text = "最大同時実行数";
-            // 
-            // checkParallelism
-            // 
-            this.checkParallelism.AutoSize = true;
-            this.checkParallelism.Location = new System.Drawing.Point(30, 39);
-            this.checkParallelism.Name = "checkParallelism";
-            this.checkParallelism.Size = new System.Drawing.Size(234, 22);
-            this.checkParallelism.TabIndex = 7;
-            this.checkParallelism.Text = "APIの実行ペースを制限する";
-            this.checkParallelism.UseVisualStyleBackColor = true;
-            // 
             // checkDebugMode
             // 
             this.checkDebugMode.AutoSize = true;
-            this.checkDebugMode.Location = new System.Drawing.Point(30, 111);
+            this.checkDebugMode.Location = new System.Drawing.Point(15, 15);
             this.checkDebugMode.Name = "checkDebugMode";
             this.checkDebugMode.Size = new System.Drawing.Size(223, 22);
             this.checkDebugMode.TabIndex = 6;
             this.checkDebugMode.Text = "デバッグモードを有効にする";
             this.checkDebugMode.UseVisualStyleBackColor = true;
+            this.checkDebugMode.CheckedChanged += new System.EventHandler(this.CheckDebugMode_CheckedChanged);
             // 
             // ondemandUsageEntryLink
             // 
@@ -247,9 +215,6 @@ namespace BuffettCodeAddinRibbon
         private System.Windows.Forms.Label labelAPIKey;
         private System.Windows.Forms.TextBox textAPIKey;
         private System.Windows.Forms.TabPage tabDeveloper;
-        private System.Windows.Forms.TextBox textParallelism;
-        private System.Windows.Forms.Label labelMaxDegreeOfParallelism;
-        private System.Windows.Forms.CheckBox checkParallelism;
         private System.Windows.Forms.CheckBox checkDebugMode;
         private System.Windows.Forms.CheckBox checkIsOndemandEndpointEnabled;
         private System.Windows.Forms.TextBox ondemandModeDesc;
