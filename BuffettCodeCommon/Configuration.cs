@@ -39,12 +39,6 @@ namespace BuffettCodeCommon
         private static readonly string ApiKeyDefault = BuffettCodeApiKeyConfig.TestApiKey;
 
         /// <summary>
-        /// 最大同時実行数のデフォルト値
-        /// </summary>
-        private static readonly uint MaxDegreeOfParallelismDefault = 8;
-
-
-        /// <summary>
         /// デフォルトでは Ondemand Endpoint は利用不可
         /// </summary>
         private static readonly bool IsOndemandEndpointEnabledDefault = false;
@@ -77,15 +71,6 @@ namespace BuffettCodeCommon
 
         }
 
-        /// <summary>
-        /// APIコールの最大同時実行数
-        /// </summary>
-        public uint MaxDegreeOfParallelism
-        {
-            get => uint.Parse(registryAccessor.GetRegistryValue(BuffettCodeRegistryConfig.NameMaxDegreeOfParallelism, MaxDegreeOfParallelismDefault).ToString());
-            set => registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameMaxDegreeOfParallelism, value);
-        }
-
         // Registryには"True" "False" の文字列で書き込まれる
         private bool IsTrue(string name, bool defaultValue) => registryAccessor.GetRegistryValue(name, defaultValue).ToString().Equals(true.ToString());
 
@@ -97,7 +82,6 @@ namespace BuffettCodeCommon
             get => IsTrue(BuffettCodeRegistryConfig.NameIsOndemandEndpointEnabled, IsOndemandEndpointEnabledDefault);
             set => registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameIsOndemandEndpointEnabled, value);
         }
-
 
         /// <summary>
         /// デバッグモード

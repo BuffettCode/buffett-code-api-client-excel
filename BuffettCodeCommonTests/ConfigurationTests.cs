@@ -61,18 +61,6 @@ namespace BuffettCodeCommon.Tests
 
 
         [TestMethod()]
-        public void MaxDegreeOfParallelismTest()
-        {
-            // check default value
-            Assert.AreEqual((uint)8, configForTest.MaxDegreeOfParallelism);
-
-            // set and get
-            var maxDegreeOfParallelism = (uint)randomizer.Next(100);
-            configForTest.MaxDegreeOfParallelism = maxDegreeOfParallelism;
-            Assert.AreEqual(maxDegreeOfParallelism, configForTest.MaxDegreeOfParallelism);
-        }
-
-        [TestMethod()]
         public void UseOndemandEndpointTest()
         {
             // check default value

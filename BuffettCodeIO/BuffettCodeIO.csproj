@@ -98,8 +98,6 @@
     <Compile Include="Formatter\NumericFormatter.cs" />
     <Compile Include="Formatter\IPropertyFormatter.cs" />
     <Compile Include="Formatter\PropertyFormatterFactory.cs" />
-    <Compile Include="Processor\ITaskProcessor.cs" />
-    <Compile Include="Processor\SemaphoreTaskProcessor.cs" />
     <Compile Include="Resolver\V2DataTypeResolverFactory.cs" />
     <Compile Include="Resolver\IDataTypeResolver.cs" />
     <Compile Include="Resolver\V2WebResourceDataTypeResolver.cs" />

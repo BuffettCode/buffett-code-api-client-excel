@@ -1,12 +1,11 @@
-using System.Collections.Generic;
-using System.Linq;
+using BuffettCodeAddinRibbon.Settings;
 using BuffettCodeCommon;
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Period;
 using BuffettCodeIO;
 using BuffettCodeIO.Property;
-using BuffettCodeAddinRibbon.Settings;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BuffettCodeAddinRibbon.CsvDownload
 {
@@ -21,7 +20,7 @@ namespace BuffettCodeAddinRibbon.CsvDownload
 
         public static ApiResourceGetter Create(Configuration config)
         {
-            var processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.MaxDegreeOfParallelism, config.IsOndemandEndpointEnabled);
+            var processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.IsOndemandEndpointEnabled);
             return new ApiResourceGetter(processor);
         }
 

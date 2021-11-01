@@ -29,7 +29,7 @@ namespace BuffettCodeAPIClient.Tests
             Assert.IsNotNull(client.GetQuarter("6501", period, false, true, false));
 
             // test api key can get ticker=xx02
-            Assert.ThrowsExceptionAsync<InvalidAPIKeyException>(() => client.GetQuarter("6502", period, false, true, false));
+            Assert.ThrowsException<InvalidAPIKeyException>(() => client.GetQuarter("6502", period, false, true, false));
         }
 
         [TestMethod()]
@@ -39,7 +39,7 @@ namespace BuffettCodeAPIClient.Tests
             Assert.IsNotNull(client.GetIndicator("6501", true));
 
             // test api key can get ticker=xx02
-            Assert.ThrowsExceptionAsync<InvalidAPIKeyException>(() => client.GetIndicator("6502", true, false));
+            Assert.ThrowsException<InvalidAPIKeyException>(() => client.GetIndicator("6502", true, false));
         }
 
         [TestMethod()]
@@ -52,7 +52,7 @@ namespace BuffettCodeAPIClient.Tests
             Assert.IsNotNull(client.GetQuarterRange("6501", from, to, false, false));
 
             // test api key can get ticker=xx02
-            Assert.ThrowsExceptionAsync<InvalidAPIKeyException>(() => client.GetQuarterRange("6502", from, to, true, false));
+            Assert.ThrowsException<InvalidAPIKeyException>(() => client.GetQuarterRange("6502", from, to, true, false));
         }
 
         [TestMethod()]
@@ -62,7 +62,7 @@ namespace BuffettCodeAPIClient.Tests
             Assert.IsNotNull(client.GetCompany("6501", true, false));
 
             // test api key can get ticker=xx02
-            Assert.ThrowsExceptionAsync<InvalidAPIKeyException>(() => client.GetCompany("6502", true, false));
+            Assert.ThrowsException<InvalidAPIKeyException>(() => client.GetCompany("6502", true, false));
         }
 
 

@@ -36,7 +36,7 @@ namespace BuffettCodeIO.Resolver
 
         private Company GetCompany(string ticker, bool isConfigureAwait, bool useCache)
         {
-            var json = apiClient.Get(DataTypeConfig.Company, ticker, Snapshot.GetInstance(), false, isConfigureAwait, useCache).Result;
+            var json = apiClient.Get(DataTypeConfig.Company, ticker, Snapshot.GetInstance(), false, isConfigureAwait, useCache);
             return parser.Parse(DataTypeConfig.Company, json) as Company;
         }
 

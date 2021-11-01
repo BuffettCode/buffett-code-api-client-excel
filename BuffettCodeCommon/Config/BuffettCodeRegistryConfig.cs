@@ -11,7 +11,7 @@ namespace BuffettCodeCommon.Registry
             = @"Software\BuffettCode\ExcelAddinTest";
 
         public static readonly string NameApiKey = "ApiKey";
-        public static readonly string NameMaxDegreeOfParallelism = "MaxDegreeOfParallelism";
+
         public static readonly string NameIsOndemandEndpointEnabled = "IsOndemandEndpointEnabled";
         public static readonly string NameClearCache = "ClearCache";
 
@@ -27,7 +27,6 @@ namespace BuffettCodeCommon.Registry
         public static readonly ISet<string> SupportedValueNames = new HashSet<string>
         {
             NameApiKey,
-            NameMaxDegreeOfParallelism,
             NameIsOndemandEndpointEnabled,
             NameClearCache,
             NameDebugMode,

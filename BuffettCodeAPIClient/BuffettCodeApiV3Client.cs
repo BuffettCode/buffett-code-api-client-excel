@@ -5,7 +5,6 @@ using BuffettCodeCommon.Period;
 using BuffettCodeCommon.Validator;
 using Newtonsoft.Json.Linq;
 using System.Runtime.Caching;
-using System.Threading.Tasks;
 
 
 namespace BuffettCodeAPIClient
@@ -27,12 +26,12 @@ namespace BuffettCodeAPIClient
 
         }
 
-        public async Task<JObject> GetDaily(string ticker, DayPeriod day, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
+        public JObject GetDaily(string ticker, DayPeriod day, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
         {
             var request = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(ticker, day, useOndemand);
             JpTickerValidator.Validate(ticker);
-            var response = await apiClientCore.Get(request, isConfigureAwait, useCache);
-            return ApiGetResponseBodyParser.Parse(response);
+            var response = apiClientCore.Get(request, isConfigureAwait, useCache);
+            return ApiGetResponseBodyParser.Parse(response.Result);
         }
 
         public void UpdateApiKey(string apiKey) => apiClientCore.UpdateApiKey(apiKey);
@@ -45,7 +44,7 @@ namespace BuffettCodeAPIClient
             return instance;
         }
 
-        public Task<JObject> Get(DataTypeConfig dataType, string ticker, IPeriod period, bool useOndemand, bool isConfigureAwait, bool useCache)
+        public JObject Get(DataTypeConfig dataType, string ticker, IPeriod period, bool useOndemand, bool isConfigureAwait, bool useCache)
         {
             switch (dataType)
             {
@@ -56,7 +55,7 @@ namespace BuffettCodeAPIClient
             }
         }
 
-        public Task<JObject> GetRange(DataTypeConfig dataType, string ticker, IPeriod from, IPeriod to, bool useOndemand, bool isConfigureAwait, bool useCache)
+        public JObject GetRange(DataTypeConfig dataType, string ticker, IPeriod from, IPeriod to, bool useOndemand, bool isConfigureAwait, bool useCache)
         {
             switch (dataType)
             {

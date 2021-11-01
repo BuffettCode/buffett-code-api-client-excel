@@ -28,7 +28,7 @@ namespace BuffettCodeAPIClient.Tests
             Assert.IsNotNull(client.GetDaily("6501", day, false, true, false));
 
             // test api key can get not 01
-            Assert.ThrowsExceptionAsync<InvalidAPIKeyException>
+            Assert.ThrowsException<InvalidAPIKeyException>
                 (() => client.GetDaily("6502", day, true, true, false));
         }
     }
