@@ -37,10 +37,17 @@ namespace BuffettCodeIO
                     throw new NotSupportedTierException($"unknown tier:{tier} for {dataType}, {ticker},{period}");
             }
         }
-
         public bool ShouldUseOndemandEndpoint(DataTypeConfig dataType, string ticker, IPeriod period, bool IsOndemandEndpointEnabled, bool isConfigureAwait, bool useCache)
-       =>
-            FindAvailableTier(dataType, ticker, period, IsOndemandEndpointEnabled, isConfigureAwait, useCache).Equals(SupportedTier.OndemandTier);
+        {
+            if (dataType == DataTypeConfig.Indicator)
+            {
+                return false;
+            }
+            else
+            {
+                return FindAvailableTier(dataType, ticker, period, IsOndemandEndpointEnabled, isConfigureAwait, useCache).Equals(SupportedTier.OndemandTier);
+            }
+        }
 
         public IComparablePeriod FindEndOfOndemandPeriod(DataTypeConfig dataType, string ticker, PeriodRange<IComparablePeriod> periodRange, bool IsOndemandEndpointEnabled, bool isConfigureAwait, bool useCache)
         {

@@ -76,6 +76,10 @@ namespace BuffettCodeIO.Tests
             Assert.ThrowsException<NotSupportedTierException>(() => helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandOldest.Next() as FiscalQuarterPeriod, false, true, true));
             Assert.ThrowsException<NotSupportedTierException>(() => helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandLatest, false, true, true));
             Assert.ThrowsException<NotSupportedTierException>(() => helper.ShouldUseOndemandEndpoint(DataTypeConfig.Quarter, ticker, ondemandLatest.Next() as FiscalQuarterPeriod, false, true, true));
+
+            // indicator endpoint
+            Assert.IsFalse(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Indicator, ticker, null, false, true, true));
+            Assert.IsFalse(helper.ShouldUseOndemandEndpoint(DataTypeConfig.Indicator, ticker, null, true, true, true));
         }
 
         [TestMethod()]

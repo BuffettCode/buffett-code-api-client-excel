@@ -142,6 +142,10 @@ namespace BuffettCodeExcelFunctions
             {
                 message = $"取得可能な範囲を超えています::{bce.Message}";
             }
+            else if (bce is BuffettCodeApiClientException)
+            {
+                message = "APIの呼び出しでエラーが発生しました";
+            }
             else
             {
                 message = $"未定義のエラー::{bce.Message}";
