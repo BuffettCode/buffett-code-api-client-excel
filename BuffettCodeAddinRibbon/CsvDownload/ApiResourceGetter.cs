@@ -30,7 +30,7 @@ namespace BuffettCodeAddinRibbon.CsvDownload
             return Create(Configuration.GetInstance());
         }
 
-        public async Task<IEnumerable<Quarter>> GetQuarters(CsvDownloadParameters parameters)
+        public IEnumerable<Quarter> GetQuarters(CsvDownloadParameters parameters)
         {
 
             // set isConfigureAwait for performance

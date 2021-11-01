@@ -61,7 +61,7 @@ namespace BuffettCodeAddinRibbon
             Execute();
         }
 
-        private async void Execute()
+        private void Execute()
         {
             if (!ValidateControls())
             {
@@ -70,7 +70,7 @@ namespace BuffettCodeAddinRibbon
             try
             {
                 var parameters = CreateParametersFromFormValues();
-                var resources = await apiResourceGetter.GetQuarters(parameters);
+                var resources = apiResourceGetter.GetQuarters(parameters);
                 var quarters = resources.ToList();
                 if (quarters.Count == 0)
                 {
