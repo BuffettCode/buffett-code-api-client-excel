@@ -11,7 +11,7 @@ namespace BuffettCodeExcelFunctions
     {
         private static readonly Configuration config = Configuration.GetInstance();
         private static readonly IDataTypeResolver resolver = V2DataTypeResolverFactory.Create();
-        private static readonly BuffettCodeApiTaskProcessor processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.MaxDegreeOfParallelism, config.IsOndemandEndpointEnabled
+        private static readonly BuffettCodeApiTaskProcessor processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.IsOndemandEndpointEnabled
             );
 
         private static bool IsQuarterCall(string parameter1, string parameter2)
@@ -37,7 +37,7 @@ namespace BuffettCodeExcelFunctions
                     throw new NotSupportedDataTypeException();
             }
         }
-        public static IApiResource Fetch(DataTypeConfig dataType, string ticker, IPeriod period, bool isConfigureAwait = true, bool useCache = true) => processor.UpdateIfNeeded(config.ApiKey, config.MaxDegreeOfParallelism, config.IsOndemandEndpointEnabled).GetApiResource(dataType, ticker, period, isConfigureAwait, useCache);
+        public static IApiResource Fetch(DataTypeConfig dataType, string ticker, IPeriod period, bool isConfigureAwait = true, bool useCache = true) => processor.UpdateIfNeeded(config.ApiKey, config.IsOndemandEndpointEnabled).GetApiResource(dataType, ticker, period, isConfigureAwait, useCache);
 
     }
 }

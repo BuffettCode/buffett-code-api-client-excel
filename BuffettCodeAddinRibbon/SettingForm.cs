@@ -13,19 +13,6 @@ namespace BuffettCodeAddinRibbon
             textAPIKey.Text = setting.ApiKey;
             checkDebugMode.Checked = setting.DebugMode;
             checkIsOndemandEndpointEnabled.Checked = setting.IsOndemandEndpointEnabled;
-            var maxDegreeOfParallelism = setting.MaxDegreeOfParallelism;
-            if (maxDegreeOfParallelism == 0)
-            {
-                checkParallelism.Checked = false;
-                textParallelism.Text = "";
-                textParallelism.Enabled = false;
-            }
-            else
-            {
-                checkParallelism.Checked = true;
-                textParallelism.Text = maxDegreeOfParallelism.ToString();
-                textParallelism.Enabled = true;
-            }
         }
 
         private void SettingForm_Load(object sender, EventArgs e)
@@ -36,23 +23,6 @@ namespace BuffettCodeAddinRibbon
         public string GetAPIKey()
         {
             return textAPIKey.Text;
-        }
-
-        public uint GetMaxDegreeOfParallelism()
-        {
-            if (!checkParallelism.Checked)
-            {
-                return 0;
-            }
-            else if (string.IsNullOrWhiteSpace(textParallelism.Text))
-            {
-                return 0;
-            }
-            else if (uint.TryParse(textParallelism.Text, out uint i))
-            {
-                return i;
-            }
-            return 0;
         }
 
         public bool IsDebugMode()
@@ -73,29 +43,22 @@ namespace BuffettCodeAddinRibbon
             DialogResult = DialogResult.Cancel;
             Close();
         }
-
-        private void CheckParallelism_CheckedChanged(object sender, EventArgs e)
-        {
-            textParallelism.Enabled = checkParallelism.Checked;
-        }
-
-
         private void TabAPI_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void textAPIKey_TextChanged(object sender, EventArgs e)
+        private void TextAPIKey_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void ondemandModeDescDesc_TextChanged(object sender, EventArgs e)
+        private void OndemandModeDescDesc_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void apiSpecialNotes_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void ApiSpecialNotes_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // mark as visited
             apiSpecialNotesLink.LinkVisited = true;
@@ -104,12 +67,17 @@ namespace BuffettCodeAddinRibbon
 
         }
 
-        private void ondemandUsageEntryLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void OndemandUsageEntryLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // mark as visited
             ondemandUsageEntryLink.LinkVisited = true;
             // open link using a default browser
             System.Diagnostics.Process.Start(ApiRelatedUrlConfig.ONDEMAND_API_USAGE_ENTRY);
+        }
+
+        private void CheckDebugMode_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

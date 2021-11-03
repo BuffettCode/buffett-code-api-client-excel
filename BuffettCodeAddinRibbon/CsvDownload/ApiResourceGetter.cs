@@ -1,11 +1,11 @@
-using System.Collections.Generic;
-using System.Linq;
+using BuffettCodeAddinRibbon.Settings;
 using BuffettCodeCommon;
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Period;
 using BuffettCodeIO;
 using BuffettCodeIO.Property;
-using BuffettCodeAddinRibbon.Settings;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BuffettCodeAddinRibbon.CsvDownload
 {
@@ -20,7 +20,7 @@ namespace BuffettCodeAddinRibbon.CsvDownload
 
         public static ApiResourceGetter Create(Configuration config)
         {
-            var processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.MaxDegreeOfParallelism, config.IsOndemandEndpointEnabled);
+            var processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.IsOndemandEndpointEnabled);
             return new ApiResourceGetter(processor);
         }
 
@@ -31,9 +31,12 @@ namespace BuffettCodeAddinRibbon.CsvDownload
 
         public IEnumerable<Quarter> GetQuarters(CsvDownloadParameters parameters)
         {
+
+            // set isConfigureAwait for performance
+            // https://devblogs.microsoft.com/dotnet/configureawait-faq/#why-would-i-want-to-use-configureawaitfalse
             var quarters = PeriodRange<FiscalQuarterPeriod>.Slice(parameters.Range, 12)
                             .SelectMany
-                            (r => processor.GetApiResources(DataTypeConfig.Quarter, parameters.Ticker, r.From, r.To, true, true)
+                            (r => processor.GetApiResources(DataTypeConfig.Quarter, parameters.Ticker, r.From, r.To, false, true)
                             ).Cast<Quarter>();
             return quarters.Distinct().OrderBy(q => q.Period);
         }

@@ -5,7 +5,6 @@ using BuffettCodeCommon.Period;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Runtime.Caching;
-using System.Threading.Tasks;
 
 namespace BuffettCodeAPIClient
 {
@@ -25,31 +24,31 @@ namespace BuffettCodeAPIClient
             );
         }
 
-        public async Task<JObject> GetQuarter(string ticker, FiscalQuarterPeriod period, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
+        public JObject GetQuarter(string ticker, FiscalQuarterPeriod period, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
         {
             var request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, period, useOndemand);
-            var response = await apiClientCore.Get(request, isConfigureAwait, useCache);
+            var response = apiClientCore.Get(request, isConfigureAwait, useCache);
             return ApiGetResponseBodyParser.Parse(response);
         }
 
-        public async Task<JObject> GetIndicator(string ticker, bool isConfigureAwait = true, bool useCache = true)
+        public JObject GetIndicator(string ticker, bool isConfigureAwait = true, bool useCache = true)
         {
             var request = BuffettCodeApiV2RequestCreator.CreateGetIndicatorRequest
                 (ticker);
-            var response = await apiClientCore.Get(request, isConfigureAwait, useCache);
+            var response = apiClientCore.Get(request, isConfigureAwait, useCache);
             return ApiGetResponseBodyParser.Parse(response);
         }
 
-        public async Task<JObject> GetQuarterRange(string ticker, FiscalQuarterPeriod from, FiscalQuarterPeriod to, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
+        public JObject GetQuarterRange(string ticker, FiscalQuarterPeriod from, FiscalQuarterPeriod to, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
         {
             var request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRangeRequest(ticker, from, to);
-            var response = await apiClientCore.Get(request, isConfigureAwait, useCache);
+            var response = apiClientCore.Get(request, isConfigureAwait, useCache);
             return ApiGetResponseBodyParser.Parse(response);
         }
-        public async Task<JObject> GetCompany(string ticker, bool isConfigureAwait = true, bool useCache = true)
+        public JObject GetCompany(string ticker, bool isConfigureAwait = true, bool useCache = true)
         {
             var request = BuffettCodeApiV2RequestCreator.CreateGetCompanyRequest(ticker);
-            var response = await apiClientCore.Get(request, isConfigureAwait, useCache);
+            var response = apiClientCore.Get(request, isConfigureAwait, useCache);
             return ApiGetResponseBodyParser.Parse(response);
         }
 
@@ -64,7 +63,7 @@ namespace BuffettCodeAPIClient
         }
 
 
-        public Task<JObject> Get(DataTypeConfig dataType, string ticker, IPeriod period, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
+        public JObject Get(DataTypeConfig dataType, string ticker, IPeriod period, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
         {
             switch (dataType)
             {
@@ -79,7 +78,7 @@ namespace BuffettCodeAPIClient
             }
         }
 
-        public Task<JObject> GetRange(DataTypeConfig dataType, string ticker, IPeriod from, IPeriod to, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
+        public JObject GetRange(DataTypeConfig dataType, string ticker, IPeriod from, IPeriod to, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
         {
             switch (dataType)
             {

@@ -14,9 +14,10 @@ namespace BuffettCodeIO
             this.tierResolver = tierResolver;
         }
 
-        public SupportedTier FindAvailableTier(DataTypeConfig dataType, string ticker, IPeriod period, bool IsOndemandEndpointEnabled)
+        public SupportedTier FindAvailableTier(DataTypeConfig dataType, string ticker, IPeriod period, bool IsOndemandEndpointEnabled, bool isConfigureAwait, bool useCache)
         {
-            var tier = tierResolver.Resolve(dataType, ticker, period);
+            var tier = tierResolver.Resolve(dataType, ticker, period,
+                isConfigureAwait, useCache);
             switch (tier)
             {
                 case SupportedTier.None:
@@ -36,8 +37,7 @@ namespace BuffettCodeIO
                     throw new NotSupportedTierException($"unknown tier:{tier} for {dataType}, {ticker},{period}");
             }
         }
-
-        public bool ShouldUseOndemandEndpoint(DataTypeConfig dataType, string ticker, IPeriod period, bool IsOndemandEndpointEnabled)
+        public bool ShouldUseOndemandEndpoint(DataTypeConfig dataType, string ticker, IPeriod period, bool IsOndemandEndpointEnabled, bool isConfigureAwait, bool useCache)
         {
             if (dataType == DataTypeConfig.Indicator)
             {
@@ -45,14 +45,14 @@ namespace BuffettCodeIO
             }
             else
             {
-                return FindAvailableTier(dataType, ticker, period, IsOndemandEndpointEnabled).Equals(SupportedTier.OndemandTier);
+                return FindAvailableTier(dataType, ticker, period, IsOndemandEndpointEnabled, isConfigureAwait, useCache).Equals(SupportedTier.OndemandTier);
             }
         }
 
-        public IComparablePeriod FindEndOfOndemandPeriod(DataTypeConfig dataType, string ticker, PeriodRange<IComparablePeriod> periodRange, bool IsOndemandEndpointEnabled)
+        public IComparablePeriod FindEndOfOndemandPeriod(DataTypeConfig dataType, string ticker, PeriodRange<IComparablePeriod> periodRange, bool IsOndemandEndpointEnabled, bool isConfigureAwait, bool useCache)
         {
-            var fromTier = FindAvailableTier(dataType, ticker, periodRange.From, IsOndemandEndpointEnabled);
-            var toTier = FindAvailableTier(dataType, ticker, periodRange.To, IsOndemandEndpointEnabled);
+            var fromTier = FindAvailableTier(dataType, ticker, periodRange.From, IsOndemandEndpointEnabled, isConfigureAwait, useCache);
+            var toTier = FindAvailableTier(dataType, ticker, periodRange.To, IsOndemandEndpointEnabled, isConfigureAwait, useCache);
 
             if (fromTier.Equals(SupportedTier.FixedTier))
             {
@@ -69,7 +69,7 @@ namespace BuffettCodeIO
                 var period = periodRange.From.Next();
                 while (period.CompareTo(periodRange.To) < 0)
                 {
-                    var tier = FindAvailableTier(dataType, ticker, period.Next(), IsOndemandEndpointEnabled);
+                    var tier = FindAvailableTier(dataType, ticker, period.Next(), IsOndemandEndpointEnabled, isConfigureAwait, useCache);
                     if (tier.Equals(SupportedTier.FixedTier))
                     {
                         break;

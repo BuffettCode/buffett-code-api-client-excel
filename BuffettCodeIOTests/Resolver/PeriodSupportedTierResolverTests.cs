@@ -19,35 +19,20 @@ namespace BuffettCodeIO.Resolver.Tests
         private static readonly Company company = Company.Create(ticker, fixedTierRange, ondemandTierRange, PropertyDictionary.Empty(), PropertyDescriptionDictionary.Empty());
 
         [TestMethod()]
-        public void ResolveTest()
-        {
-            var supportedDict = new SupportedTierDictionary();
-            supportedDict.Add(company);
-            var resolver = new PeriodSupportedTierResolver(null, null, supportedDict);
-
-            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, fixedOldest));
-            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, fixedOldest.Next() as FiscalQuarterPeriod));
-            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, fixedLatest));
-            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, ondemandOldest));
-            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, ondemandOldest.Next() as FiscalQuarterPeriod));
-            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, ondemandLatest));
-            Assert.AreEqual(SupportedTier.None, resolver.Resolve(DataTypeConfig.Quarter, ticker, ondemandLatest.Next() as FiscalQuarterPeriod));
-        }
-
-        [TestMethod()]
         public void ResolveQuarterTest()
         {
             var supportedDict = new SupportedTierDictionary();
             supportedDict.Add(company);
             var resolver = new PeriodSupportedTierResolver(null, null, supportedDict);
 
-            Assert.AreEqual(SupportedTier.FixedTier, resolver.ResolveQuarter(ticker, fixedOldest));
-            Assert.AreEqual(SupportedTier.FixedTier, resolver.ResolveQuarter(ticker, fixedOldest.Next() as FiscalQuarterPeriod));
-            Assert.AreEqual(SupportedTier.FixedTier, resolver.ResolveQuarter(ticker, fixedLatest));
-            Assert.AreEqual(SupportedTier.OndemandTier, resolver.ResolveQuarter(ticker, ondemandOldest));
-            Assert.AreEqual(SupportedTier.OndemandTier, resolver.ResolveQuarter(ticker, ondemandOldest.Next() as FiscalQuarterPeriod));
-            Assert.AreEqual(SupportedTier.OndemandTier, resolver.ResolveQuarter(ticker, ondemandLatest));
-            Assert.AreEqual(SupportedTier.None, resolver.ResolveQuarter(ticker, ondemandLatest.Next() as FiscalQuarterPeriod));
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, fixedOldest, false, false));
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, fixedOldest.Next() as FiscalQuarterPeriod, false, false));
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, fixedLatest, false, false));
+            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, ondemandOldest, false, false));
+            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, ondemandOldest.Next() as FiscalQuarterPeriod, false, false));
+            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, ondemandLatest, false, false));
+            Assert.AreEqual(SupportedTier.None, resolver.Resolve(DataTypeConfig.Quarter, ticker, ondemandLatest.Next() as FiscalQuarterPeriod, false, false));
         }
+
     }
 }

@@ -1,14 +1,9 @@
-using BuffettCodeAddinRibbon.CsvDownload;
 using BuffettCodeAddinRibbon.Settings;
 using BuffettCodeCommon;
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Period;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace BuffettCodeAddinRibbon.CsvDownload.Tests
