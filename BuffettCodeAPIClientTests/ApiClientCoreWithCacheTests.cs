@@ -22,9 +22,9 @@ namespace BuffettCodeAPIClient.Tests
         }
 
         public string GetApiKey() => this.apiKey;
-        public IApiClientCore SetApiKey(string apikey)
+        public IApiClientCore SetApiKey(string apiKey)
         {
-            apiKey = apikey;
+            this.apiKey = apiKey;
             return this;
         }
     }
@@ -32,9 +32,9 @@ namespace BuffettCodeAPIClient.Tests
     class ErrorMockApiClientCore : IApiClientCore
     {
         private string apiKey;
-        public ErrorMockApiClientCore(string apikey)
+        public ErrorMockApiClientCore(string apiKey)
         {
-            this.apiKey = apikey;
+            this.apiKey = apiKey;
         }
 
 

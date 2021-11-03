@@ -6,7 +6,7 @@ namespace BuffettCodeAPIClient
     {
         Task<string> Get(ApiGetRequest request, bool isConfigureAwait);
 
-        IApiClientCore SetApiKey(string apikey);
+        IApiClientCore SetApiKey(string apiKey);
         string GetApiKey();
 
     }

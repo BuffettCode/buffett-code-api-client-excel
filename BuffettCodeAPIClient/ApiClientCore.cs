@@ -68,9 +68,9 @@ namespace BuffettCodeAPIClient
             httpClient.Dispose();
         }
 
-        public IApiClientCore SetApiKey(string apikey)
+        public IApiClientCore SetApiKey(string apiKey)
         {
-            apiKey = apikey;
+            this.apiKey = apiKey;
             return this;
         }
 
