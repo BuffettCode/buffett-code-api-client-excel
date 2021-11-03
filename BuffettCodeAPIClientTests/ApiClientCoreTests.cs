@@ -32,5 +32,17 @@ namespace BuffettCodeAPIClient.Tests
             Assert.AreEqual(1, xApiKeyHeaders.Count);
             Assert.AreEqual(apiKey, xApiKeyHeaders[0]);
         }
+
+        [TestMethod()]
+        public void SetGetApiKeyTest()
+        {
+            var initKey = "init_api_key";
+            var newKey = "new_api_key";
+            var baseUri = new Uri(@"https://example.com");
+            var clientCore
+                = new ApiClientCore(initKey, baseUri);
+            Assert.AreEqual(initKey, clientCore.GetApiKey());
+            Assert.AreEqual(newKey, clientCore.SetApiKey(newKey).GetApiKey());
+        }
     }
 }

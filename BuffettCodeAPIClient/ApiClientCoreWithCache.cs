@@ -5,31 +5,32 @@ namespace BuffettCodeAPIClient
 {
     public class ApiClientCoreWithCache
     {
-        private readonly ApiClientCore apiClientCore;
+        private readonly IApiClientCore apiClientCore;
         private readonly ApiRequestCacheHelper cacheHelper;
 
-        private ApiClientCoreWithCache(string apiKey, Uri baseUri, MemoryCache cache)
+        private ApiClientCoreWithCache(IApiClientCore apiClientCore
+            , ApiRequestCacheHelper cacheHelper)
         {
-            this.apiClientCore = new ApiClientCore(apiKey, baseUri);
-            this.cacheHelper = new ApiRequestCacheHelper(cache, baseUri);
+            this.apiClientCore = apiClientCore;
+            this.cacheHelper = cacheHelper;
         }
 
         public static ApiClientCoreWithCache Create(string apiKey, string baseUrl, MemoryCache cache)
         {
-            return new ApiClientCoreWithCache(apiKey, new Uri(baseUrl), cache);
+            var baseUri = new Uri(baseUrl);
+            var apiClientCore = new ApiClientCore(apiKey, baseUri);
+            var cacheHelper = new ApiRequestCacheHelper(cache, baseUri);
+            return new ApiClientCoreWithCache(apiClientCore, cacheHelper);
         }
 
-        public static ApiClientCoreWithCache Create(string apiKey, Uri baseUrl, MemoryCache cache)
+        public static ApiClientCoreWithCache Create(IApiClientCore apiClientCore, ApiRequestCacheHelper cacheHelper)
         {
-            return new ApiClientCoreWithCache(apiKey, baseUrl, cache);
+            return new ApiClientCoreWithCache(apiClientCore, cacheHelper);
         }
 
-        public void UpdateApiKey(string apikey)
-        {
-            this.apiClientCore.ApiKey = apikey;
-        }
+        public void UpdateApiKey(string apiKey) => this.apiClientCore.SetApiKey(apiKey);
 
-        public string GetApiKey() => this.apiClientCore.ApiKey;
+        public string GetApiKey() => this.apiClientCore.GetApiKey();
 
         public string Get(ApiGetRequest request, bool isConfigureAwait, bool useCache)
         {

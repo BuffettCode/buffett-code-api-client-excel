@@ -11,15 +11,15 @@ namespace BuffettCodeAPIClient
     /// BuffettCode API と Http でやり取りする Client のコアクラス
     /// </summary>
 
-    public class ApiClientCore : IDisposable
+    public class ApiClientCore : IDisposable, IApiClientCore
     {
-        public string ApiKey { set; get; }
+        private string apiKey;
         private readonly Uri baseUri;
         private static readonly long TimeoutMilliseconds = 5000;
         private readonly HttpClient httpClient;
         public ApiClientCore(string apiKey, Uri baseUri)
         {
-            this.ApiKey = apiKey;
+            this.apiKey = apiKey;
             this.baseUri = baseUri;
             this.httpClient = NewHttpClient();
         }
@@ -32,11 +32,11 @@ namespace BuffettCodeAPIClient
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
-            httpClient.DefaultRequestHeaders.Add("x-api-key", ApiKey);
+            httpClient.DefaultRequestHeaders.Add("x-api-key", apiKey);
             return httpClient;
         }
 
-        public static string BuildGetPath(ApiGetRequest request)
+        private static string BuildGetPath(ApiGetRequest request)
         {
             return $"{request.EndPoint}?{new FormUrlEncodedContent(request.Parameters).ReadAsStringAsync().Result}";
         }
@@ -67,8 +67,14 @@ namespace BuffettCodeAPIClient
         {
             httpClient.Dispose();
         }
+
+        public IApiClientCore SetApiKey(string apikey)
+        {
+            apiKey = apikey;
+            return this;
+        }
+
+        public string GetApiKey() => this.apiKey;
     }
-
-
 
 }

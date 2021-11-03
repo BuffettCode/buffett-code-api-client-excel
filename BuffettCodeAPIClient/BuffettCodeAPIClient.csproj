@@ -64,6 +64,7 @@
     <Compile Include="ApiClientInstanceGetter.cs" />
     <Compile Include="ApiGetResponseValidator.cs" />
     <Compile Include="IBuffettCodeApiClient.cs" />
+    <Compile Include="IApiClientCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
