@@ -1,27 +1,19 @@
-using BuffettCodeCommon;
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
 using BuffettCodeCommon.Period;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Runtime.Caching;
 
 namespace BuffettCodeAPIClient
 {
     public class BuffettCodeApiV2Client : IBuffettCodeApiClient
     {
         private readonly ApiClientCoreWithCache apiClientCore;
-        private static readonly BuffettCodeApiV2Client instance = new BuffettCodeApiV2Client();
-        private readonly MemoryCache cache = BuffettCodeAddinCache.GetInstance();
 
 
-        private BuffettCodeApiV2Client()
+        public BuffettCodeApiV2Client(ApiClientCoreWithCache apiClientCore)
         {
-            apiClientCore = ApiClientCoreWithCache.Create(
-                BuffettCodeApiKeyConfig.TestApiKey,
-                BuffettCodeApiV2Config.BASE_URL,
-                cache
-            );
+            this.apiClientCore = apiClientCore;
         }
 
         public JObject GetQuarter(string ticker, FiscalQuarterPeriod period, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
@@ -55,13 +47,6 @@ namespace BuffettCodeAPIClient
         public void UpdateApiKey(string apiKey) => apiClientCore.UpdateApiKey(apiKey);
 
         public string GetApiKey() => apiClientCore.GetApiKey();
-
-        public static BuffettCodeApiV2Client GetInstance(string apiKey)
-        {
-            instance.UpdateApiKey(apiKey);
-            return instance;
-        }
-
 
         public JObject Get(DataTypeConfig dataType, string ticker, IPeriod period, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
         {
