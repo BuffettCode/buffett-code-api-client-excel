@@ -20,7 +20,7 @@ namespace BuffettCodeIO
 
         public BuffettCodeApiTaskProcessor(BuffettCodeApiVersion version, string apiKey, bool useOndemandEndpoint)
         {
-            client = ApiClientInstanceGetter.Get(version, apiKey);
+            client = ApiClientFactory.Create(version, apiKey);
             parser = ApiResponseParserFactory.Create(version);
             var tierResolver = PeriodSupportedTierResolver.Create(client, parser);
             taskHelper = new ApiTaskHelper(tierResolver);

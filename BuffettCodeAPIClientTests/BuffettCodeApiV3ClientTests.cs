@@ -1,29 +1,18 @@
-using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Period;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BuffettCodeAPIClient.Tests
 {
-    /// <summary>
-    /// Defines the <see cref="BuffettCodeApiV3ClientTests" />.
-    /// </summary>
     [TestClass()]
     public class BuffettCodeApiV3ClientTests
     {
-        /// <summary>
-        /// Defines the client.
-        /// </summary>
-        private readonly BuffettCodeApiV3Client client = BuffettCodeApiV3Client.GetInstance
-            (BuffettCodeApiKeyConfig.TestApiKey);
+        private readonly ApiClientCoreWithCache mockApiCore = ApiClientTestHelper.CreateMockApiClientCoreWithCache("dummy");
 
-        /// <summary>
-        /// The GetDailyTest.
-        /// </summary>
         [TestMethod()]
         public void GetDailyTest()
         {
-            // test api key can get 01 data
             var day = DayPeriod.Create(2021, 2, 1);
+            var client = new BuffettCodeApiV3Client(mockApiCore);
             Assert.IsNotNull(client.GetDaily("6501", day, false, true, false));
         }
     }

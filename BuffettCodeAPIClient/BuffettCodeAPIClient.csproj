@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiClientCore.cs" />
+    <Compile Include="ApiClientFactory.cs" />
     <Compile Include="BuffettCodeApiV3RequestCreator.cs" />
     <Compile Include="BuffettCodeApiV3Client.cs" />
     <Compile Include="BuffettCodeApiV2Client.cs" />
@@ -61,7 +62,6 @@
     <Compile Include="CacheKeyCreator.cs" />
     <Compile Include="ApiRequestCacheHelper.cs" />
     <Compile Include="ApiClientCoreWithCache.cs" />
-    <Compile Include="ApiClientInstanceGetter.cs" />
     <Compile Include="ApiGetResponseValidator.cs" />
     <Compile Include="IBuffettCodeApiClient.cs" />
     <Compile Include="IApiClientCore.cs" />

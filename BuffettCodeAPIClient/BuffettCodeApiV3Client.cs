@@ -1,10 +1,8 @@
-using BuffettCodeCommon;
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
 using BuffettCodeCommon.Period;
 using BuffettCodeCommon.Validator;
 using Newtonsoft.Json.Linq;
-using System.Runtime.Caching;
 
 
 namespace BuffettCodeAPIClient
@@ -12,18 +10,9 @@ namespace BuffettCodeAPIClient
     public class BuffettCodeApiV3Client : IBuffettCodeApiClient
     {
         private readonly ApiClientCoreWithCache apiClientCore;
-        private static readonly BuffettCodeApiV3Client instance = new BuffettCodeApiV3Client();
-        private readonly MemoryCache cache = BuffettCodeAddinCache.GetInstance();
-
-        private BuffettCodeApiV3Client()
+        public BuffettCodeApiV3Client(ApiClientCoreWithCache apiClientCore)
         {
-            apiClientCore = ApiClientCoreWithCache.Create(
-                BuffettCodeApiKeyConfig.TestApiKey,
-                BuffettCodeApiV3Config.BASE_URL,
-                cache
-            );
-
-
+            this.apiClientCore = apiClientCore;
         }
 
         public JObject GetDaily(string ticker, DayPeriod day, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
@@ -37,12 +26,6 @@ namespace BuffettCodeAPIClient
         public void UpdateApiKey(string apiKey) => apiClientCore.UpdateApiKey(apiKey);
 
         public string GetApiKey() => apiClientCore.GetApiKey();
-
-        public static BuffettCodeApiV3Client GetInstance(string apiKey)
-        {
-            instance.UpdateApiKey(apiKey);
-            return instance;
-        }
 
         public JObject Get(DataTypeConfig dataType, string ticker, IPeriod period, bool useOndemand, bool isConfigureAwait, bool useCache)
         {
