@@ -8,14 +8,6 @@ namespace BuffettCodeExcelFunctions
     using ExcelDna.Integration;
     using System;
 
-    /// <summary>
-    /// Excelのユーザー定義関数(UDF)
-    /// </summary>
-    /// <remarks>
-    /// バフェットコードのExcelアドインがユーザに提供する関数の実装。
-    /// メインとなるBCODE関数と、デバッグおよびサポートのために作られたいくつかの隠し関数を含みます。
-    /// それぞれの関数のリファレンスはバフェットコードのWebサイトを参照のこと。
-    /// </remarks>
     public class UserDefinedFunctions
     {
         private static readonly Configuration config = Configuration.GetInstance();
@@ -37,32 +29,6 @@ namespace BuffettCodeExcelFunctions
             {
                 var apiResouce = ApiResourceFetcher.FetchForLegacy(ticker, parameter1, parameter2, propertyName);
                 return PropertySelector.SelectFormattedValue(propertyName, apiResouce, isRawValue, isPostfixUnit);
-            }
-            catch (Exception e)
-            {
-                return ToErrorMessage(e, propertyName);
-            }
-        }
-
-        [ExcelFunction(IsHidden = true, Description = "Get property name in Japanese", Name = "BCODE_LABEL")]
-        public static string BCodeLabel(string propertyName)
-        {
-            try
-            {
-                return FetchQuarterPropertyDefititon(propertyName).Label;
-            }
-            catch (Exception e)
-            {
-                return ToErrorMessage(e, propertyName);
-            }
-        }
-
-        [ExcelFunction(IsHidden = true, Description = "Get unit name in Japanese", Name = "BCODE_UNIT")]
-        public static string BCodeUnit(string propertyName)
-        {
-            try
-            {
-                return FetchQuarterPropertyDefititon(propertyName).Unit;
             }
             catch (Exception e)
             {
