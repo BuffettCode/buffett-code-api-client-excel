@@ -23,6 +23,20 @@ namespace BuffettCodeAPIClient
             return ApiGetResponseBodyParser.Parse(response);
         }
 
+        public JObject GetQuarter(string ticker, FiscalQuarterPeriod period, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
+        {
+            var request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(ticker, period, useOndemand);
+            var response = apiClientCore.Get(request, isConfigureAwait, useCache);
+            return ApiGetResponseBodyParser.Parse(response);
+        }
+
+        public JObject GetQuarterRange(string ticker, FiscalQuarterPeriod from, FiscalQuarterPeriod to, bool isConfigureAwait = true, bool useCache = true)
+        {
+            var request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRangeRequest(ticker, from, to);
+            var response = apiClientCore.Get(request, isConfigureAwait, useCache);
+            return ApiGetResponseBodyParser.Parse(response);
+        }
+
         public void UpdateApiKey(string apiKey) => apiClientCore.UpdateApiKey(apiKey);
 
         public string GetApiKey() => apiClientCore.GetApiKey();
@@ -33,6 +47,10 @@ namespace BuffettCodeAPIClient
             {
                 case DataTypeConfig.Daily:
                     return GetDaily(ticker, (DayPeriod)period, useOndemand, isConfigureAwait, useCache);
+                case DataTypeConfig.Quarter:
+                    return GetQuarter(ticker, (FiscalQuarterPeriod)period, useOndemand, isConfigureAwait, useCache);
+                case DataTypeConfig.Company:
+                    return GetCompany(ticker, isConfigureAwait, useCache);
                 default:
                     throw new NotSupportedDataTypeException($"Get {dataType} is not supported at V3");
             }
@@ -42,9 +60,19 @@ namespace BuffettCodeAPIClient
         {
             switch (dataType)
             {
+                case DataTypeConfig.Quarter:
+                    return GetQuarterRange(ticker, (FiscalQuarterPeriod)from, (FiscalQuarterPeriod)to, isConfigureAwait, useCache);
                 default:
                     throw new NotSupportedDataTypeException($"Get {dataType} is not supported at V3");
             }
         }
+        public JObject GetCompany(string ticker, bool isConfigureAwait = true, bool useCache = true)
+        {
+            var request = BuffettCodeApiV3RequestCreator.CreateGetCompanyRequest(ticker);
+            var response = apiClientCore.Get(request, isConfigureAwait, useCache);
+            return ApiGetResponseBodyParser.Parse(response);
+        }
+
+
     }
 }
