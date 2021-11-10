@@ -23,5 +23,45 @@ namespace BuffettCodeAPIClient
 
             return new ApiGetRequest(endpoint, paramaters);
         }
+
+        public static ApiGetRequest CreateGetQuarterRequest(string ticker, FiscalQuarterPeriod period, bool useOndemand)
+        {
+            JpTickerValidator.Validate(ticker);
+            var paramaters = new Dictionary<string, string>()
+            {
+                {"ticker", ticker },
+                {"fy", period.Year.ToString() },
+                {"fq", period.Quarter.ToString() },
+            };
+
+            var endpoint = useOndemand ?
+                BuffettCodeApiV3Config.ENDPOINT_ONDEMAND_QUARTER : BuffettCodeApiV3Config.ENDPOINT_QUARTER;
+
+            return new ApiGetRequest(endpoint, paramaters);
+        }
+
+
+        public static ApiGetRequest CreateGetQuarterRangeRequest(string ticker, FiscalQuarterPeriod from, FiscalQuarterPeriod to)
+        {
+            JpTickerValidator.Validate(ticker);
+            var paramaters = new Dictionary<string, string>()
+            {
+                {"ticker", ticker },
+                {"from", from.ToString() },
+                {"to", to.ToString() },
+            };
+            return new ApiGetRequest(BuffettCodeApiV3Config.ENDPOINT_BULK_QUARTER, paramaters);
+        }
+        public static ApiGetRequest CreateGetCompanyRequest(string ticker)
+        {
+            JpTickerValidator.Validate(ticker);
+            var paramaters = new Dictionary<string, string>()
+            {
+                {"ticker", ticker},
+            };
+
+            return new ApiGetRequest(BuffettCodeApiV3Config.ENDPOINT_COMPANY, paramaters);
+        }
+
     }
 }

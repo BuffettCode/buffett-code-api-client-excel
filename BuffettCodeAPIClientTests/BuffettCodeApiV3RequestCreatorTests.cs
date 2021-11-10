@@ -28,5 +28,69 @@ namespace BuffettCodeAPIClient.Tests
             // validation error
             Assert.ThrowsException<ValidationError>(() => BuffettCodeApiV3RequestCreator.CreateGetDailyRequest("aa", day, false));
         }
+
+        [TestMethod()]
+        public void CreateGetQuarterRequestTest()
+        {
+            var ticker = "6591";
+            uint fiscalYear = 2019;
+            uint fiscalQuarter = 3;
+            var period = FiscalQuarterPeriod.Create(fiscalYear, fiscalQuarter);
+
+            // use ondemand
+            var request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(ticker, period, true);
+            Assert.AreEqual(request.EndPoint, BuffettCodeApiV3Config.ENDPOINT_ONDEMAND_QUARTER);
+            Assert.AreEqual(ticker, request.Parameters["ticker"]);
+            Assert.AreEqual(fiscalYear.ToString(), request.Parameters["fy"]);
+            Assert.AreEqual(fiscalQuarter.ToString(), request.Parameters["fq"]);
+
+            // not use ondemand
+            request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(ticker, period, false);
+            Assert.AreEqual(request.EndPoint, BuffettCodeApiV3Config.ENDPOINT_QUARTER);
+            Assert.AreEqual(ticker, request.Parameters["ticker"]);
+            Assert.AreEqual(fiscalYear.ToString(), request.Parameters["fy"]);
+            Assert.AreEqual(fiscalQuarter.ToString(), request.Parameters["fq"]);
+
+            // validation Errors
+            Assert.ThrowsException<ValidationError>(
+                () =>
+                BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest("aaa", period, false)
+                );
+
+        }
+
+        [TestMethod()]
+        public void CreateGetQuarterRangeRequestTest()
+        {
+            // ok case
+            var ticker = "6501";
+            var fromStr = "2020Q1";
+            var toStr = "2022Q4";
+
+            var from = FiscalQuarterPeriod.Parse(fromStr);
+            var to = FiscalQuarterPeriod.Parse(toStr);
+
+            var request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRangeRequest(ticker, from, to);
+            Assert.AreEqual(request.EndPoint, BuffettCodeApiV3Config.ENDPOINT_BULK_QUARTER);
+            Assert.AreEqual(ticker, request.Parameters["ticker"]);
+            Assert.AreEqual(fromStr, request.Parameters["from"]);
+            Assert.AreEqual(toStr, request.Parameters["to"]);
+
+            // validation errors
+            Assert.ThrowsException<ValidationError>(() => BuffettCodeApiV3RequestCreator.CreateGetQuarterRangeRequest("aaa", from, to));
+        }
+
+        [TestMethod()]
+        public void CreateGetCompanyRequestTest()
+        {
+            // ok case
+            var ticker = "1234";
+            var request = BuffettCodeApiV3RequestCreator.CreateGetCompanyRequest(ticker);
+            Assert.AreEqual(request.EndPoint, BuffettCodeApiV3Config.ENDPOINT_COMPANY);
+            Assert.AreEqual(ticker, request.Parameters["ticker"]);
+
+            // validation errors
+            Assert.ThrowsException<ValidationError>(() => BuffettCodeApiV3RequestCreator.CreateGetCompanyRequest("aaa"));
+        }
     }
 }

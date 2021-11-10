@@ -25,6 +25,11 @@ namespace BuffettCodeCommon.Config
         public static readonly string BASE_URL = "https://api.buffett-code.com/api/v3/";
         public static readonly string ENDPOINT_DAILY = "daily";
         public static readonly string ENDPOINT_ONDEMAND_DAILY = "ondemand/daily";
+        public static readonly string ENDPOINT_BULK_DAILY = "bulk/daily";
+        public static readonly string ENDPOINT_QUARTER = "quarter";
+        public static readonly string ENDPOINT_ONDEMAND_QUARTER = "ondemand/quarter";
+        public static readonly string ENDPOINT_BULK_QUARTER = "bulk/quarter";
+        public static readonly string ENDPOINT_COMPANY = "company";
     }
 
 
