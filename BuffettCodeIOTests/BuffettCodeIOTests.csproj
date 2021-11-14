@@ -67,6 +67,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ApiTaskHelperTests.cs" />
+    <Compile Include="Parser\ApiV3ResponseParserTests.cs" />
+    <Compile Include="Property\DailyTests.cs" />
     <Compile Include="TabularOutput\CsvFileTabularWriterTests.cs" />
     <Compile Include="TabularOutput\TabularOutputFormatterTests.cs" />
     <Compile Include="TabularOutput\TabularRowTests.cs" />
@@ -140,6 +142,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="TestData\ApiV2Company2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestData\ApiV3Company.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestData\ApiV3Quarter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestData\ApiV3Daily.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestData\ApiV3BulkQuarter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

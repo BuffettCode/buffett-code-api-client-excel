@@ -133,14 +133,15 @@ namespace BuffettCodeIO.Parser
             var data = FindDataBody(json);
             if (data.Count() == 0)
             {
-                return new List<IApiResource> { EmptyResource.GetInstance() };
+                // return Empty 
+                return new List<IApiResource>().ToList();
             }
             switch (dataType)
             {
                 case DataTypeConfig.Quarter:
                     return ParseQuarterRange(columnDescriptions, data).Cast<IApiResource>().ToList();
                 default:
-                    throw new NotSupportedDataTypeException($"ParseRange {dataType} is not supported at V3");
+                    throw new NotSupportedDataTypeException($"ParseRange {dataType} is not supported at V2");
             }
         }
     }

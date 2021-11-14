@@ -1,5 +1,4 @@
 using BuffettCodeCommon.Config;
-using BuffettCodeCommon.Exception;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BuffettCodeIO.Parser.Tests
@@ -11,7 +10,7 @@ namespace BuffettCodeIO.Parser.Tests
         public void CreateTest()
         {
             Assert.IsInstanceOfType(ApiResponseParserFactory.Create(BuffettCodeApiVersion.Version2), typeof(ApiV2ResponseParser));
-            Assert.ThrowsException<NotSupportedDataTypeException>(() => ApiResponseParserFactory.Create(BuffettCodeApiVersion.Version3));
+            Assert.IsInstanceOfType(ApiResponseParserFactory.Create(BuffettCodeApiVersion.Version3), typeof(ApiV3ResponseParser));
         }
     }
 }

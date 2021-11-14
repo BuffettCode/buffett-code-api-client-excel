@@ -36,6 +36,7 @@ namespace BuffettCodeIO.Property
             return new Company(ticker, flatTierRange, ondemandTireRange, properties, descriptions);
         }
 
+
         public ICollection<string> GetPropertyNames() => properties.Names;
 
         public IPeriod GetPeriod() => Snapshot.GetInstance();
