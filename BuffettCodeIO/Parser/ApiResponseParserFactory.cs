@@ -10,6 +10,8 @@ namespace BuffettCodeIO.Parser
             {
                 case BuffettCodeApiVersion.Version2:
                     return new ApiV2ResponseParser();
+                case BuffettCodeApiVersion.Version3:
+                    return new ApiV3ResponseParser();
                 default:
                     throw new NotSupportedDataTypeException($"api version={version} is not supported.");
             }
