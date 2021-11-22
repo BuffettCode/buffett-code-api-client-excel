@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace BuffettCodeCommon.Period
 {
-    public class DayPeriod : IComparablePeriod
+    public class DayPeriod : IComparablePeriod, IDailyPeriod
     {
         private static readonly string dateFormat = "yyyy-MM-dd";
         private readonly DateTime value;

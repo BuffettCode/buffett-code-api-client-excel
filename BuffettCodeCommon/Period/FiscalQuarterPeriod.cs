@@ -3,7 +3,7 @@ using System;
 
 namespace BuffettCodeCommon.Period
 {
-    public class FiscalQuarterPeriod : IComparablePeriod
+    public class FiscalQuarterPeriod : IComparablePeriod, IQuarterlyPeriod
     {
         private readonly uint year;
         private readonly uint quarter;

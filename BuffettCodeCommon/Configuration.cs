@@ -5,13 +5,6 @@ using BuffettCodeCommon.Validator;
 
 namespace BuffettCodeCommon
 {
-    /// <summary>
-    /// Excelアドイン設定
-    /// </summary>
-    /// <remarks>
-    /// バフェットコードのExcelアドインでは設定をレジストリで管理します。
-    /// レジストリへの入出力をこのクラスで行います。
-    /// </remarks>
     public class Configuration
     {
         private readonly BuffettCodeRegistryAccessor registryAccessor;
@@ -94,6 +87,5 @@ namespace BuffettCodeCommon
 
         public string KeyName => registryAccessor.KeyName;
 
-        public BuffettCodeApiVersion ApiVersion => BuffettCodeApiVersion.Version2;
     }
 }

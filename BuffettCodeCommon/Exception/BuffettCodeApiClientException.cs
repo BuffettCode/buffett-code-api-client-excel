@@ -2,7 +2,12 @@ namespace BuffettCodeCommon.Exception
 {
     public class BuffettCodeApiClientException : BaseBuffettCodeException
     {
+        public BuffettCodeApiClientException() : base() { }
+
+        public BuffettCodeApiClientException(string message) : base(message) { }
+
     }
+
 
     public class InvalidAPIKeyException : BuffettCodeApiClientException
     {

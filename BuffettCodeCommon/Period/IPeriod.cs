@@ -10,4 +10,7 @@ namespace BuffettCodeCommon.Period
     {
         IComparablePeriod Next();
     }
+
+    public interface IQuarterlyPeriod: IPeriod { }
+    public interface IDailyPeriod: IPeriod { }
 }
