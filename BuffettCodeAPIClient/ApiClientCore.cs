@@ -51,11 +51,13 @@ namespace BuffettCodeAPIClient
                     switch ((int)response.StatusCode)
                     {
                         case (int)HttpStatusCode.Forbidden:
-                            throw new InvalidAPIKeyException();
+                            throw new InvalidAPIKeyException($"request={request}");
+                        case (int)HttpStatusCode.NotFound:
+                            throw new ResourceNotFoundException($"request={request}");
                         case 429: // Quota Error
-                            throw new QuotaException();
+                            throw new QuotaException($"request={request}");
                         default:
-                            throw new BuffettCodeApiClientException();
+                            throw new BuffettCodeApiClientException($"request={request}");
                     }
                 }
                 var content = response.Content.ReadAsStringAsync().Result;

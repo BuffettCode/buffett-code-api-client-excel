@@ -14,5 +14,7 @@ namespace BuffettCodeAPIClient
             Parameters = parameters;
 
         }
+
+        public override string ToString() => $"EndPoint::{EndPoint}, Parameters::{string.Join(", ", Parameters)}";
     }
 }

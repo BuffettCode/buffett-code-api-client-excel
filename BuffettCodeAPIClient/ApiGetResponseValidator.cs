@@ -12,7 +12,7 @@ namespace BuffettCodeAPIClient
             var message = json.Children().Where(t => t is JToken).Cast<JToken>().Where(t => t.Path.Equals("message")).ToArray();
             if (message.Count() > 0 && message.First().ToString().Contains(ApiErrorMessageConfig.TEST_API_CONSTRAINT))
             {
-                throw new TestAPIConstraintException();
+                throw new TestAPIConstraintException(message.First().ToString());
             }
         }
 

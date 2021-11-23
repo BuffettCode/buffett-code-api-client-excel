@@ -71,18 +71,12 @@ namespace BuffettCodeExcelFunctions
                 return e.ToString();
             }
 
-            // 例外によってはBuffettCodeExceptionがInnerExceptionに入ってくるので、
-            // 再帰的にスキャンして取り出している
-            Exception bce = GetBuffettCodeException(e);
+            BaseBuffettCodeException bce = BuffettCodeExceptionFinder.Find(e);
 
             string message;
             if (bce is PropertyNotFoundException)
             {
                 message = "指定された項目が見つかりません:" + propertyName;
-            }
-            else if (bce is AggregationNotFoundException)
-            {
-                message = "指定されたデータを取得できませんでした";
             }
             else if (bce is QuotaException)
             {
@@ -108,29 +102,20 @@ namespace BuffettCodeExcelFunctions
             {
                 message = $"取得可能な範囲を超えています::{bce.Message}";
             }
+            else if (bce is ResourceNotFoundException)
+            {
+                message = $"存在しないデータにアクセスしようとしています。::{bce.Message}";
+            }
             else if (bce is BuffettCodeApiClientException)
             {
                 message = "APIの呼び出しでエラーが発生しました";
             }
             else
             {
-                message = $"未定義のエラー::{bce.Message}";
+                message = $"未定義のエラー::{e.Message}";
             }
             return $"<<{message}>>";
         }
 
-        private static Exception GetBuffettCodeException(Exception e)
-        {
-            Exception cursor = e;
-            do
-            {
-                if (cursor is BaseBuffettCodeException)
-                {
-                    break;
-                }
-                cursor = cursor.InnerException;
-            } while (cursor != null);
-            return cursor;
-        }
     }
 }

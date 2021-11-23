@@ -59,6 +59,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="BuffettCodeExceptionFinderTests.cs" />
     <Compile Include="ConfigurationTests.cs" />
     <Compile Include="Period\ComparablePeriodUtilTests.cs" />
     <Compile Include="Period\DayPeriodTests.cs" />
