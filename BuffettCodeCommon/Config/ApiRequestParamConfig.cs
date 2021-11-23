@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace BuffettCodeCommon.Config
 {
     public static class ApiRequestParamConfig
@@ -16,7 +10,7 @@ namespace BuffettCodeCommon.Config
         public static readonly string KeyFrom = "from";
         public static readonly string KeyTo = "to";
         public static readonly string KeyDate = "date";
-  
+
 
         public static readonly string ValueLy = "LY";
         public static readonly string ValueLq = "LQ";

@@ -3,14 +3,14 @@ namespace BuffettCodeExcelFunctions
     using BuffettCodeCommon;
     using BuffettCodeCommon.Config;
     using BuffettCodeCommon.Exception;
-    using BuffettCodeCommon.Period;
-    using BuffettCodeIO.Property;
     using ExcelDna.Integration;
     using System;
 
     public class UserDefinedFunctions
     {
         private static readonly Configuration config = Configuration.GetInstance();
+        private static readonly BuffettCodeApiVersion version = BuffettCodeApiVersion.Version2;
+
 
         /// <summary>
         /// Excelのユーザー定義関数BCODE。銘柄コードを指定して財務数値や指標を取得します
@@ -27,7 +27,7 @@ namespace BuffettCodeExcelFunctions
         {
             try
             {
-                var apiResouce = ApiResourceFetcher.FetchForLegacy(ticker, parameter1, parameter2, propertyName);
+                var apiResouce = ApiResourceFetcher.FetchForLegacy(ticker, parameter1, parameter2, propertyName, true, true);
                 return PropertySelector.SelectFormattedValue(propertyName, apiResouce, isRawValue, isPostfixUnit);
             }
             catch (Exception e)
@@ -36,9 +36,9 @@ namespace BuffettCodeExcelFunctions
             }
         }
 
+
         [ExcelFunction(IsHidden = true, Description = "[DEBUG] Print Api Key in a Registry", Name = "BCODE_API_KEY")]
         public static string PrintApiKeyInRegistry() => config.ApiKey;
-
 
         [ExcelFunction(IsHidden = true, Description = "[DEBUG] Check function call (from Excel to XLL)", Name = "BCODE_PING")]
         public static string PrintRandomInteger()
@@ -52,13 +52,6 @@ namespace BuffettCodeExcelFunctions
             {
                 return ToErrorMessage(e);
             }
-        }
-
-        private static PropertyDescription FetchQuarterPropertyDefititon(string propertyName)
-        {
-            // column_descriptionをAPIから取得させるため、適当なパラメタを渡している
-            var apiResouce = ApiResourceFetcher.Fetch(DataTypeConfig.Quarter, "1301", FiscalQuarterPeriod.Create(2019, 4));
-            return PropertySelector.SelectDescription(propertyName, apiResouce);
         }
 
         private static string ToErrorMessage(Exception e, string propertyName = "")

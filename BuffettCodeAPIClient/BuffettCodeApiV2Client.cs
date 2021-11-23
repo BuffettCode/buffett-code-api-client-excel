@@ -16,7 +16,7 @@ namespace BuffettCodeAPIClient
             this.apiClientCore = apiClientCore;
         }
 
-        public JObject GetQuarter(string ticker, FiscalQuarterPeriod period, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
+        public JObject GetQuarter(string ticker, IQuarterlyPeriod period, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
         {
             var request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, period, useOndemand);
             var response = apiClientCore.Get(request, isConfigureAwait, useCache);
@@ -53,7 +53,7 @@ namespace BuffettCodeAPIClient
             switch (dataType)
             {
                 case DataTypeConfig.Quarter:
-                    return GetQuarter(ticker, (FiscalQuarterPeriod)period, useOndemand, isConfigureAwait, useCache);
+                    return GetQuarter(ticker, (IQuarterlyPeriod)period, useOndemand, isConfigureAwait, useCache);
                 case DataTypeConfig.Indicator:
                     return GetIndicator(ticker, isConfigureAwait, useCache);
                 case DataTypeConfig.Company:

@@ -25,6 +25,14 @@ namespace BuffettCodeAPIClient.Tests
             Assert.AreEqual(ticker, request.Parameters["ticker"]);
             Assert.AreEqual("2021-01-01", request.Parameters["date"]);
 
+            // latest case
+            request = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(ticker, LatestDayPeriod.GetInstance(), false);
+            Assert.AreEqual(BuffettCodeApiV3Config.ENDPOINT_DAILY, request.EndPoint);
+            Assert.AreEqual(ticker, request.Parameters["ticker"]);
+            Assert.AreEqual("latest", request.Parameters["date"]);
+
+
+
             // validation error
             Assert.ThrowsException<ValidationError>(() => BuffettCodeApiV3RequestCreator.CreateGetDailyRequest("aa", day, false));
         }
@@ -50,6 +58,13 @@ namespace BuffettCodeAPIClient.Tests
             Assert.AreEqual(ticker, request.Parameters["ticker"]);
             Assert.AreEqual(fiscalYear.ToString(), request.Parameters["fy"]);
             Assert.AreEqual(fiscalQuarter.ToString(), request.Parameters["fq"]);
+
+            // latest case
+            request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(ticker, LatestFiscalQuarterPeriod.GetInstance(), false);
+            Assert.AreEqual(request.EndPoint, BuffettCodeApiV2Config.ENDPOINT_QUARTER);
+            Assert.AreEqual(ticker, request.Parameters["ticker"]);
+            Assert.AreEqual("LY", request.Parameters["fy"]);
+            Assert.AreEqual("LQ", request.Parameters["fq"]);
 
             // validation Errors
             Assert.ThrowsException<ValidationError>(

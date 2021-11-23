@@ -1,4 +1,3 @@
-using System;
 namespace BuffettCodeCommon.Exception
 {
     using System;
@@ -6,6 +5,6 @@ namespace BuffettCodeCommon.Exception
     {
         public NonSupportedApiVersionException() { }
         public NonSupportedApiVersionException(string message) : base(message) { }
-        public NonSupportedApiVersionException(string message, Exception inner) : base(message, inner){}
+        public NonSupportedApiVersionException(string message, Exception inner) : base(message, inner) { }
     }
 }

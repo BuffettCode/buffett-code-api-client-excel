@@ -72,6 +72,8 @@
     <Compile Include="ApiTaskHelper.cs" />
     <Compile Include="Parser\ApiV3ResponseParser.cs" />
     <Compile Include="Property\Daily.cs" />
+    <Compile Include="Resolver\ApiV3LegacyDataTypeResolver.cs" />
+    <Compile Include="Resolver\LegacyDataTypeResolver.cs" />
     <Compile Include="TabularOutput\WorksheetTabularWriter.cs" />
     <Compile Include="TabularOutput\TabularFormatter.cs" />
     <Compile Include="TabularOutput\FormattedValueSelector.cs" />
@@ -95,14 +97,12 @@
     <Compile Include="Property\Company.cs" />
     <Compile Include="Property\PropertyDescriptionDictionary.cs" />
     <Compile Include="Property\PropertyDictionary.cs" />
-    <Compile Include="Resolver\V2ConstDataTypeResolver.cs" />
     <Compile Include="BuffettCodeApiTaskProcessor.cs" />
     <Compile Include="Formatter\NumericFormatter.cs" />
     <Compile Include="Formatter\IPropertyFormatter.cs" />
     <Compile Include="Formatter\PropertyFormatterFactory.cs" />
-    <Compile Include="Resolver\V2DataTypeResolverFactory.cs" />
-    <Compile Include="Resolver\IDataTypeResolver.cs" />
-    <Compile Include="Resolver\V2WebResourceDataTypeResolver.cs" />
+    <Compile Include="Resolver\ILegacyDataTypeResolver.cs" />
+    <Compile Include="Resolver\ApiV2LegacyDataTypeResolver.cs" />
     <Compile Include="Formatter\InactionFormatter.cs" />
     <Compile Include="Property\Indicator.cs" />
     <Compile Include="Formatter\RatioFormatter.cs" />

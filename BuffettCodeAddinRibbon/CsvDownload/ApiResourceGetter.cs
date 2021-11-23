@@ -20,7 +20,7 @@ namespace BuffettCodeAddinRibbon.CsvDownload
 
         public static ApiResourceGetter Create(Configuration config)
         {
-            var processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.IsOndemandEndpointEnabled);
+            var processor = new BuffettCodeApiTaskProcessor(BuffettCodeApiVersion.Version2, config.ApiKey, config.IsOndemandEndpointEnabled);
             return new ApiResourceGetter(processor);
         }
 

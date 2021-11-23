@@ -28,7 +28,8 @@ namespace BuffettCodeIO.Resolver
             switch (dataType)
             {
                 case DataTypeConfig.Quarter:
-                    return ResolveQuarter(ticker, period as FiscalQuarterPeriod, isConfigureAwait, useCache);
+
+                    return ResolveQuarter(ticker, period as IQuarterlyPeriod, isConfigureAwait, useCache);
                 default:
                     throw new NotSupportedDataTypeException($"dataType={dataType} is not supported.");
             }
@@ -40,14 +41,27 @@ namespace BuffettCodeIO.Resolver
             return parser.Parse(DataTypeConfig.Company, json) as Company;
         }
 
-        private SupportedTier ResolveQuarter(string ticker, FiscalQuarterPeriod period, bool isConfigureAwait, bool useCache)
+        private SupportedTier ResolveQuarter(string ticker, IQuarterlyPeriod period, bool isConfigureAwait, bool useCache)
         {
-            if (!supportedTierDict.Has(ticker, DataTypeConfig.Quarter))
+            // 最新値は常に FixedTier
+            if (period is LatestFiscalQuarterPeriod)
             {
-                var company = GetCompany(ticker, isConfigureAwait, useCache);
-                supportedTierDict.Add(company);
+                return SupportedTier.FixedTier;
             }
-            return supportedTierDict.Get(ticker, period);
+            else if (period is FiscalQuarterPeriod fqp)
+            {
+                if (!supportedTierDict.Has(ticker, DataTypeConfig.Quarter))
+                {
+                    var company = GetCompany(ticker, isConfigureAwait, useCache);
+                    supportedTierDict.Add(company);
+                }
+                return supportedTierDict.Get(ticker, fqp);
+            }
+            else
+            {
+                throw new NotSupportedTierException($"period={period} is not supported for Quarter");
+            }
+
         }
     }
 }
