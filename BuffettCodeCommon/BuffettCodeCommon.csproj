@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuffettCodeAddinCache.cs" />
+    <Compile Include="BuffettCodeExceptionFinder.cs" />
     <Compile Include="Config\SupportedTier.cs" />
     <Compile Include="Config\TabularOutputConfig.cs" />
     <Compile Include="Config\DataTypeConfig.cs" />
@@ -55,7 +56,6 @@
     <Compile Include="Config\BuffettCodeApiConfig.cs" />
     <Compile Include="Exception\BuffettCodeApiClientException.cs" />
     <Compile Include="Configuration.cs" />
-    <Compile Include="Exception\AggregationNotFoundException.cs" />
     <Compile Include="Exception\BaseBuffettCodeException.cs" />
     <Compile Include="Exception\ApiResponseParserException.cs" />
     <Compile Include="Exception\NotSupportedCSVOutputDestinationException.cs" />

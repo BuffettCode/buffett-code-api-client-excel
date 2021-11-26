@@ -74,9 +74,24 @@ namespace BuffettCodeAddinRibbon.CsvDownload
             }
         }
 
+        private string OutputWorksheetName => $"{parameters.Ticker}_{parameters.Range.From}_{parameters.Range.To}";
+
         private WorksheetTabularWriter<T> BuildWorksheetTabularWriter(Worksheet worksheet)
         {
-            worksheet.Name = $"{parameters.Ticker}_{parameters.Range.From}_{parameters.Range.To}";
+            // delete old output without prompt
+            // ref: https://social.msdn.microsoft.com/Forums/vstudio/en-US/26714e15-b7a1-4e24-afb9-32ffdb45e131/delete-worksheet-in-vsto-c-without-prompting-the-user?forum=vsto
+            Sheets sheets = Globals.ThisAddIn.Application.Worksheets;
+            foreach (Worksheet s in sheets)
+            {
+                if (s.Name.Equals(OutputWorksheetName))
+                {
+                    Globals.ThisAddIn.Application.DisplayAlerts = false;
+                    s.Delete();
+                    Globals.ThisAddIn.Application.DisplayAlerts = true;
+                    break;
+                }
+            }
+            worksheet.Name = OutputWorksheetName;
             return new WorksheetTabularWriter<T>(worksheet);
         }
 
