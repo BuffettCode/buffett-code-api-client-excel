@@ -1,5 +1,6 @@
 using BuffettCodeAPIClient;
 using BuffettCodeCommon.Config;
+using BuffettCodeCommon.Period;
 using BuffettCodeIO.Property;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
@@ -64,8 +65,18 @@ namespace BuffettCodeIO.Parser.Tests
         {
             var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData\ApiV3BulkQuarter.json"));
             var quarters = parser.ParseRange(DataTypeConfig.Quarter, json);
-            Assert.AreEqual(1, quarters.Count);
-            Assert.AreEqual(((Quarter)quarters[0]).Ticker, "6501");
+            Assert.AreEqual(4, quarters.Count);
+            // check ticker, fy, fq
+            Assert.AreEqual("6501", ((Quarter)quarters[0]).Ticker);
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2020, 1), quarters[0].GetPeriod());
+            Assert.AreEqual("6501", ((Quarter)quarters[1]).Ticker);
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2020, 2), quarters[1].GetPeriod());
+            Assert.AreEqual("6501", ((Quarter)quarters[2]).Ticker);
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2020, 3), quarters[2].GetPeriod());
+            Assert.AreEqual("6501", ((Quarter)quarters[3]).Ticker);
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2020, 4), quarters[3].GetPeriod());
+
+            // check value
             Assert.AreEqual(quarters[0].GetDescription("ceo_name").Label, "代表者名");
             Assert.AreEqual(quarters[0].GetDescription("employee_num").Unit, "人");
             Assert.AreEqual(quarters[0].GetValue("company_name"), "株式会社日立製作所");

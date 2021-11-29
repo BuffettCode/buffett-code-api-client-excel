@@ -116,7 +116,7 @@ namespace BuffettCodeIO.Parser
                 switch (dataType)
                 {
                     case DataTypeConfig.Quarter:
-                        return data.Children().Children().First().Select(d => ParseQuarter(ParseProperties(d), descriptions)).Cast<IApiResource>().ToList();
+                        return data.Children().Children().Children().Select(d => ParseQuarter(ParseProperties(d), descriptions)).Cast<IApiResource>().ToList();
                     default:
                         throw new NotSupportedDataTypeException($"Parse {dataType} is not supported at V3");
                 }
