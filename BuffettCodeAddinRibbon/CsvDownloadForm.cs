@@ -1,6 +1,7 @@
 
 using BuffettCodeAddinRibbon.CsvDownload;
 using BuffettCodeAddinRibbon.Settings;
+using BuffettCodeCommon;
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
 using BuffettCodeCommon.Period;
@@ -85,33 +86,31 @@ namespace BuffettCodeAddinRibbon
                 }
                 DialogResult = DialogResult.OK;
             }
-            catch (TestAPIConstraintException)
-            {
-                MessageBox.Show("テスト用のAPIキーでは末尾が01の銘柄コードのみ使用できます。", "CSV出力", MessageBoxButtons.OK);
-            }
-            catch (QuotaException)
-            {
-                MessageBox.Show("APIの実行回数が上限に達しました。", "CSV出力", MessageBoxButtons.OK);
-            }
-            catch (InvalidAPIKeyException)
-            {
-                MessageBox.Show("APIキーが有効ではありません。", "CSV出力", MessageBoxButtons.OK);
-            }
-            catch (ApiResponseParserException)
-            {
-                MessageBox.Show("APIのレスポンスのパースに失敗しました。", "CSV出力", MessageBoxButtons.OK);
-            }
-            catch (NotSupportedTierException)
-            {
-                MessageBox.Show("取得可能な範囲を超えています", "CSV出力", MessageBoxButtons.OK);
-            }
+            // user cancel
             catch (OperationCanceledException)
             {
                 MessageBox.Show("CSV出力がキャンセルされました", "CSV出力", MessageBoxButtons.OK);
             }
-            catch (Exception)
+            // known errors
+            catch (BaseBuffettCodeException bce)
             {
-                MessageBox.Show("データの取得中にエラーが発生しました。", "CSV出力", MessageBoxButtons.OK);
+                var message = CsvDownloadExceptionHandler.ToMessageBoxString(bce);
+                MessageBox.Show(message, "CSV出力", MessageBoxButtons.OK);
+            }
+            // unknown errors
+            catch (Exception e)
+            {
+                var bce = BuffettCodeExceptionFinder.Find(e);
+                if (bce is null)
+                {
+                    MessageBox.Show($"予期せぬエラーが発生しました。\n{e}", "CSV出力", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    var message = CsvDownloadExceptionHandler.ToMessageBoxString(bce);
+                    MessageBox.Show(message, "CSV出力", MessageBoxButtons.OK);
+
+                }
             }
             Close();
         }
