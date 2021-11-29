@@ -10,7 +10,7 @@ namespace BuffettCodeExcelFunctions
 {
     public static class ApiResourceFetcher
     {
-        private static readonly BuffettCodeApiVersion verion = BuffettCodeApiVersion.Version2;
+        private static readonly BuffettCodeApiVersion verion = BuffettCodeApiVersion.Version3;
         private static readonly Configuration config = Configuration.GetInstance();
         private readonly static BuffettCodeApiTaskProcessor processor = new BuffettCodeApiTaskProcessor(verion, config.ApiKey, config.IsOndemandEndpointEnabled
             );

@@ -9,8 +9,6 @@ namespace BuffettCodeExcelFunctions
     public class UserDefinedFunctions
     {
         private static readonly Configuration config = Configuration.GetInstance();
-        private static readonly BuffettCodeApiVersion version = BuffettCodeApiVersion.Version2;
-
 
         /// <summary>
         /// Excelのユーザー定義関数BCODE。銘柄コードを指定して財務数値や指標を取得します

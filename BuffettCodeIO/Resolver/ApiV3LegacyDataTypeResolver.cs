@@ -10,7 +10,7 @@ namespace BuffettCodeIO.Resolver
 {
     class ApiV3LegacyDataTypeResolver : ILegacyDataTypeResolver
     {
-        private static readonly Dictionary<string, DataTypeConfig> mappingTable;
+        private readonly Dictionary<string, DataTypeConfig> mappingTable = new Dictionary<string, DataTypeConfig>();
         private static readonly ApiV3LegacyDataTypeResolver instance = new ApiV3LegacyDataTypeResolver();
 
         private ApiV3LegacyDataTypeResolver()
@@ -30,12 +30,16 @@ namespace BuffettCodeIO.Resolver
                 );
 
             // quarter を優先で map を作る
-            var propertyDataTypeDict = new Dictionary<string, DataTypeConfig>();
+            foreach (string name in quarter.GetPropertyNames())
+            {
+                mappingTable[name] = DataTypeConfig.Quarter;
 
-            quarter.GetPropertyNames().Select(name =>
-               propertyDataTypeDict[name] = DataTypeConfig.Quarter
-            );
-            daily.GetPropertyNames().Where(name => propertyDataTypeDict.ContainsKey(name)).Select(name => propertyDataTypeDict[name] = DataTypeConfig.Daily);
+            }
+
+            foreach (string name in daily.GetPropertyNames().Where(name => !mappingTable.ContainsKey(name)))
+            {
+                mappingTable[name] = DataTypeConfig.Daily;
+            }
         }
 
         public static ApiV3LegacyDataTypeResolver GetInstance()

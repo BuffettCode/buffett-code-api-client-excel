@@ -10,19 +10,30 @@ namespace BuffettCodeIO.Resolver.Tests
     public class SupportedTierDictionaryTests
     {
         private static readonly string ticker = "1234";
-        private static readonly FiscalQuarterPeriod ondemandOldest = FiscalQuarterPeriod.Create(2010, 1);
-        private static readonly FiscalQuarterPeriod ondemandLatest = FiscalQuarterPeriod.Create(2021, 4);
-        private static readonly PeriodRange<FiscalQuarterPeriod> ondemandTierRange = PeriodRange<FiscalQuarterPeriod>.Create(ondemandOldest, ondemandLatest);
-        private static readonly FiscalQuarterPeriod fixedOldest = FiscalQuarterPeriod.Create(2016, 2);
-        private static readonly FiscalQuarterPeriod fixedLatest = FiscalQuarterPeriod.Create(2021, 3);
-        private static readonly PeriodRange<FiscalQuarterPeriod> fixedTierRange = PeriodRange<FiscalQuarterPeriod>.Create(fixedOldest, fixedLatest);
+        private static readonly FiscalQuarterPeriod ondemandOldestQuarter = FiscalQuarterPeriod.Create(2010, 1);
+        private static readonly FiscalQuarterPeriod ondemandLatestQuarter = FiscalQuarterPeriod.Create(2021, 4);
 
+        private static readonly DayPeriod ondemandOldestDay = DayPeriod.Create(2010, 1, 1);
+        private static readonly DayPeriod ondemandLatestDay = DayPeriod.Create(2021, 1, 1);
+
+        private static readonly PeriodRange<FiscalQuarterPeriod> ondemandTierQuarterRange = PeriodRange<FiscalQuarterPeriod>.Create(ondemandOldestQuarter, ondemandLatestQuarter);
+
+        private static readonly PeriodRange<DayPeriod> ondemandTierDayRange = PeriodRange<DayPeriod>.Create(ondemandOldestDay, ondemandLatestDay);
+
+        private static readonly FiscalQuarterPeriod fixedOldestQuarter = FiscalQuarterPeriod.Create(2016, 2);
+        private static readonly FiscalQuarterPeriod fixedLatestQuarter = FiscalQuarterPeriod.Create(2021, 3);
+        private static readonly DayPeriod fixedTierOldestDay = DayPeriod.Create(2016, 1, 1);
+        private static readonly DayPeriod fixedTierLatestDay = DayPeriod.Create(2021, 1, 1);
+
+        private static readonly PeriodRange<FiscalQuarterPeriod> fixedTierQuarterRange = PeriodRange<FiscalQuarterPeriod>.Create(fixedOldestQuarter, fixedLatestQuarter);
+        private static readonly PeriodRange<DayPeriod> fixedTierDayRange = PeriodRange<DayPeriod>.Create(fixedTierOldestDay, fixedTierLatestDay);
+ 
 
         [TestMethod()]
         public void AddAndHasTest()
         {
             var dict = new SupportedTierDictionary();
-            var company = Company.Create(ticker, fixedTierRange, ondemandTierRange, PropertyDictionary.Empty(), PropertyDescriptionDictionary.Empty());
+            var company = Company.Create(ticker, fixedTierQuarterRange, ondemandTierQuarterRange, fixedTierDayRange, ondemandTierDayRange, PropertyDictionary.Empty(), PropertyDescriptionDictionary.Empty());
 
             // at first, not contained
             Assert.IsFalse(dict.Has(ticker, DataTypeConfig.Quarter));
@@ -36,18 +47,18 @@ namespace BuffettCodeIO.Resolver.Tests
         {
             var dict = new SupportedTierDictionary();
             // throw Key NotFound 
-            Assert.ThrowsException<KeyNotFoundException>(() => dict.Get(ticker, fixedLatest));
+            Assert.ThrowsException<KeyNotFoundException>(() => dict.Get(ticker, fixedLatestQuarter));
 
-            var company = Company.Create(ticker, fixedTierRange, ondemandTierRange, PropertyDictionary.Empty(), PropertyDescriptionDictionary.Empty());
+            var company = Company.Create(ticker, fixedTierQuarterRange, ondemandTierQuarterRange, fixedTierDayRange, ondemandTierDayRange,PropertyDictionary.Empty(), PropertyDescriptionDictionary.Empty());
             dict.Add(company);
 
-            Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, fixedOldest));
-            Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, fixedOldest.Next() as FiscalQuarterPeriod));
-            Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, fixedLatest));
-            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, ondemandOldest));
-            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, ondemandOldest.Next() as FiscalQuarterPeriod));
-            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, ondemandLatest));
-            Assert.AreEqual(SupportedTier.None, dict.Get(ticker, ondemandLatest.Next() as FiscalQuarterPeriod));
+            Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, fixedOldestQuarter));
+            Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, fixedOldestQuarter.Next() as FiscalQuarterPeriod));
+            Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, fixedLatestQuarter));
+            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, ondemandOldestQuarter));
+            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, ondemandOldestQuarter.Next() as FiscalQuarterPeriod));
+            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, ondemandLatestQuarter));
+            Assert.AreEqual(SupportedTier.None, dict.Get(ticker, ondemandLatestQuarter.Next() as FiscalQuarterPeriod));
         }
     }
 }

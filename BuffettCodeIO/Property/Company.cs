@@ -8,17 +8,22 @@ namespace BuffettCodeIO.Property
     {
         private readonly string ticker;
         private readonly SupportedTierRange<FiscalQuarterPeriod> supportedQuarterRanges;
+
+        private readonly SupportedTierRange<DayPeriod> supportedDayRanges;
         private readonly PropertyDictionary properties;
         private readonly PropertyDescriptionDictionary descriptions;
 
         private Company(string ticker,
-            PeriodRange<FiscalQuarterPeriod> fixedTireRange,
-            PeriodRange<FiscalQuarterPeriod> ondemandTireRange,
+            PeriodRange<FiscalQuarterPeriod> fixedTierQuarterRange,
+            PeriodRange<FiscalQuarterPeriod> ondemandTierQuarterRange,
+            PeriodRange<DayPeriod> fixedTierDayRange,
+            PeriodRange<DayPeriod> ondemandTierDayRange,
             PropertyDictionary properties,
             PropertyDescriptionDictionary descriptions)
         {
             this.ticker = ticker;
-            this.supportedQuarterRanges = new SupportedTierRange<FiscalQuarterPeriod>(fixedTireRange, ondemandTireRange);
+            this.supportedQuarterRanges = new SupportedTierRange<FiscalQuarterPeriod>(fixedTierQuarterRange, ondemandTierQuarterRange);
+            this.supportedDayRanges = new SupportedTierRange<DayPeriod>(fixedTierDayRange, ondemandTierDayRange);
             this.properties = properties;
             this.descriptions = descriptions;
         }
@@ -27,13 +32,15 @@ namespace BuffettCodeIO.Property
 
         public static Company Create(
             string ticker,
-            PeriodRange<FiscalQuarterPeriod> flatTierRange,
-            PeriodRange<FiscalQuarterPeriod> ondemandTireRange,
+            PeriodRange<FiscalQuarterPeriod> fixedTierQuarterRange,
+            PeriodRange<FiscalQuarterPeriod> ondemandQuarterTierRange,
+            PeriodRange<DayPeriod> fixedTierDayRange,
+            PeriodRange<DayPeriod> ondemandTierDayRange,
             PropertyDictionary properties,
             PropertyDescriptionDictionary descriptions)
         {
             JpTickerValidator.Validate(ticker);
-            return new Company(ticker, flatTierRange, ondemandTireRange, properties, descriptions);
+            return new Company(ticker, fixedTierQuarterRange, ondemandQuarterTierRange, fixedTierDayRange, ondemandTierDayRange, properties, descriptions);
         }
 
 
@@ -43,6 +50,8 @@ namespace BuffettCodeIO.Property
         public string Ticker => ticker;
 
         public SupportedTierRange<FiscalQuarterPeriod> SupportedQuarterRanges => supportedQuarterRanges;
+
+        public SupportedTierRange<DayPeriod> SupportedDailyRanges => SupportedDailyRanges;
     }
 
 }
