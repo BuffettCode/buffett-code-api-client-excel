@@ -25,6 +25,7 @@ namespace BuffettCodeExcelFunctions
             var period = new PeriodBuilderForLegacy().SetDataType(dataType).SetParameters(parameter1, parameter2).Build();
             return GetApiResource(dataType, ticker, period, isConfigureAwait, useCache);
         }
+
         private static IApiResource GetApiResource(DataTypeConfig dataType, string ticker, IPeriod period, bool isConfigureAwait, bool useCache) => processor.UpdateIfNeeded(config.ApiKey, config.IsOndemandEndpointEnabled).GetApiResource(dataType, ticker, period, isConfigureAwait, useCache);
 
         public static IApiResource Fetch(string ticker, IPeriod period, bool isConfigureAwait, bool useCache)
