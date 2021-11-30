@@ -13,10 +13,10 @@ namespace BuffettCodeIO.Parser
         {
             try
             {
-                var properties = jProperties.ToDictionary(p => p.Name, p => p.Value);
+                var properties = jProperties.ToDictionary(p => p.Name, p => p.Value.ToString());
                 var oldestQuarter = FiscalQuarterPeriod.Create(properties[PropertyNames.OldestFiscalYear].ToString(), properties[PropertyNames.OldestFiscalQuarter].ToString());
-                var latestQuarter = FiscalQuarterPeriod.Create(properties[PropertyNames.LatestFiscalYear].ToString(), properties[PropertyNames.LatestFiscalQuarter].ToString());
-                var oldestDate = DayPeriod.Create((DateTime)properties[PropertyNames.OldestDate]);
+                var latestQuarter = FiscalQuarterPeriod.Create(properties[PropertyNames.LatestFiscalYear], properties[PropertyNames.LatestFiscalQuarter]);
+                var oldestDate = DayPeriod.Parse(properties[PropertyNames.OldestDate]);
                 // use today as "latestDay"
                 var latestDay = DayPeriod.Create(DateTime.Today);
 

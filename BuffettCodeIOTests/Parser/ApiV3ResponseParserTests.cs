@@ -38,10 +38,10 @@ namespace BuffettCodeIO.Parser.Tests
 
             var supportedDailyRanges = company.SupportedDailyRanges;
             var today = DayPeriod.Create(DateTime.Today);
-            Assert.AreEqual(DayPeriod.Create(2000, 4, 3), supportedDailyRanges.FixedTierRange.From);
+            Assert.AreEqual(DayPeriod.Create(2016, 11, 15), supportedDailyRanges.FixedTierRange.From);
             Assert.AreEqual(today, supportedDailyRanges.FixedTierRange.To);
 
-            Assert.AreEqual(DayPeriod.Create(2016, 11, 15), supportedDailyRanges.OndemandTierRange.From);
+            Assert.AreEqual(DayPeriod.Create(2000, 4, 3), supportedDailyRanges.OndemandTierRange.From);
             Assert.AreEqual(today, supportedDailyRanges.FixedTierRange.To);
         }
 

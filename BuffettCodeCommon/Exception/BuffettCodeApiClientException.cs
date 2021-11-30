@@ -49,7 +49,5 @@ namespace BuffettCodeCommon.Exception
         public ResourceNotFoundException(string message, Exception inner) : base(message, inner) { }
 
     }
-    public class UnsupportedTypeException : BuffettCodeApiClientException
-    {
-    }
+
 }

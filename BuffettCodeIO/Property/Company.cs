@@ -51,7 +51,7 @@ namespace BuffettCodeIO.Property
 
         public SupportedTierRange<FiscalQuarterPeriod> SupportedQuarterRanges => supportedQuarterRanges;
 
-        public SupportedTierRange<DayPeriod> SupportedDailyRanges => SupportedDailyRanges;
+        public SupportedTierRange<DayPeriod> SupportedDailyRanges => supportedDayRanges;
     }
 
 }

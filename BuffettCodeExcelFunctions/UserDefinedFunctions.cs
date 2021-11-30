@@ -1,7 +1,6 @@
 namespace BuffettCodeExcelFunctions
 {
     using BuffettCodeCommon;
-    using BuffettCodeCommon.Config;
     using BuffettCodeCommon.Exception;
     using ExcelDna.Integration;
     using System;

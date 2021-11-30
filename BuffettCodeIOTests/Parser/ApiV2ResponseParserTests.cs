@@ -120,7 +120,7 @@ namespace BuffettCodeIO.Parser.Tests
             var today = DayPeriod.Create(DateTime.Today);
             Assert.AreEqual(DayPeriod.Create(2000, 4, 3), supportedDailyRanges.OndemandTierRange.From);
             Assert.AreEqual(today, supportedDailyRanges.OndemandTierRange.To);
-            Assert.AreEqual(DayPeriod.Create(2016, 11, 30), supportedDailyRanges.FixedTierRange.From);
+            Assert.AreEqual(DayPeriod.Create(2016, 10, 24), supportedDailyRanges.FixedTierRange.From);
             Assert.AreEqual(today, supportedDailyRanges.FixedTierRange
                 .To);
         }

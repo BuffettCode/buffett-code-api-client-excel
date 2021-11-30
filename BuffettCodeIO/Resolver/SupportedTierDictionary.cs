@@ -8,35 +8,45 @@ namespace BuffettCodeIO.Resolver
 {
     public class SupportedTierDictionary
     {
-        private readonly Dictionary<string, SupportedTierRange<FiscalQuarterPeriod>> quarters = new Dictionary<string, SupportedTierRange<FiscalQuarterPeriod>>();
+        private readonly Dictionary<string, (SupportedTierRange<FiscalQuarterPeriod>, SupportedTierRange<DayPeriod>)> tickers = new Dictionary<string, (SupportedTierRange<FiscalQuarterPeriod>, SupportedTierRange<DayPeriod>)>();
 
-        public void Add(Company company) => quarters.Add(company.Ticker, company.SupportedQuarterRanges);
-        public bool Has(string ticker, DataTypeConfig dataType)
+
+        public void Add(Company company)
+       =>
+            tickers.Add(company.Ticker, (company.SupportedQuarterRanges, company.SupportedDailyRanges));
+
+        public bool Has(string ticker) => tickers.ContainsKey(ticker);
+
+        public SupportedTier Get(string ticker, IPeriod period)
         {
-            switch (dataType)
-            {
-                case DataTypeConfig.Quarter:
-                    return quarters.ContainsKey(ticker);
-                default:
-                    throw new NotSupportedDataTypeException($"dataType={dataType} is not supported.");
-            }
-
-        }
-
-        public SupportedTier Get(string ticker, FiscalQuarterPeriod period)
-        {
-            if (!Has(ticker, DataTypeConfig.Quarter))
+            if (!Has(ticker))
             {
                 throw new KeyNotFoundException($"ticker={ticker} is not contained.");
             }
-            else
+            // snapshot is always fixed tier
+            else if (period is Snapshot)
             {
-                var supportedTiers = quarters[ticker];
-                if (supportedTiers.FixedTierRange.Includes(period))
+                return SupportedTier.FixedTier;
+            }
+            // latest day is always fixed tier
+            else if (period is LatestDayPeriod)
+            {
+                return SupportedTier.FixedTier;
+            }
+            // latest fiscal quarter is always fixed tier
+            else if (period is LatestFiscalQuarterPeriod)
+            {
+                return SupportedTier.FixedTier;
+            }
+            // handle fiscal quarter
+            else if (period is FiscalQuarterPeriod fyFq)
+            {
+                var supportedTiers = tickers[ticker].Item1;
+                if (supportedTiers.FixedTierRange.Includes(fyFq))
                 {
                     return SupportedTier.FixedTier;
                 }
-                else if (supportedTiers.OndemandTierRange.Includes(period))
+                else if (supportedTiers.OndemandTierRange.Includes(fyFq))
                 {
                     return SupportedTier.OndemandTier;
                 }
@@ -45,7 +55,27 @@ namespace BuffettCodeIO.Resolver
                     return SupportedTier.None;
                 }
             }
-
+            // handle day
+            else if (period is DayPeriod day)
+            {
+                var supportedTiers = tickers[ticker].Item2;
+                if (supportedTiers.FixedTierRange.Includes(day))
+                {
+                    return SupportedTier.FixedTier;
+                }
+                else if (supportedTiers.OndemandTierRange.Includes(day))
+                {
+                    return SupportedTier.OndemandTier;
+                }
+                else
+                {
+                    return SupportedTier.None;
+                }
+            }
+            else
+            {
+                throw new NotSupportedTierException($"ticker={ticker}, period={period} is not supported.");
+            }
         }
 
     }

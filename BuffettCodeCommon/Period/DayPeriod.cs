@@ -1,13 +1,10 @@
 using System;
-using System.Globalization;
-using System.Text.RegularExpressions;
 
 namespace BuffettCodeCommon.Period
 {
     public class DayPeriod : IComparablePeriod, IDailyPeriod
     {
         private static readonly string dateFormat = "yyyy-MM-dd";
-        private static readonly string dateStrPattern = "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])";
         private readonly DateTime value;
         private DayPeriod(DateTime date)
         {
@@ -26,18 +23,7 @@ namespace BuffettCodeCommon.Period
             return new DayPeriod(date);
         }
 
-        public static DayPeriod Parse(string input)
-        {
-            var dateStr = FindDateStr(input);
-            var date = DateTime.ParseExact(dateStr,
-                                  dateFormat,
-                                  CultureInfo.InvariantCulture);
-            return new DayPeriod(date);
-        }
-
-        private static string FindDateStr(string input)
-            => Regex.Match(input, dateStrPattern).Value;
-
+        public static DayPeriod Parse(string input) => new DayPeriod(DateTime.Parse(input));
         public override int GetHashCode() => value.GetHashCode();
 
         public override bool Equals(object obj)
@@ -82,6 +68,9 @@ namespace BuffettCodeCommon.Period
 
         public IComparablePeriod Next() => Create(Value.AddDays(1));
 
+        public IComparablePeriod Prev() => Create(Value.AddDays(-1));
+
     }
+
 
 }

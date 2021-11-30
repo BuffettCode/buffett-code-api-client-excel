@@ -2,7 +2,6 @@ using BuffettCodeCommon.Period;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using System;
-using System;
 using System.Collections.Generic;
 
 namespace BuffettCodeIO.Parser.Tests

@@ -103,5 +103,12 @@ namespace BuffettCodeCommon.Period.Tests
             var day = DayPeriod.Create(2020, 12, 31);
             Assert.AreEqual(day.Next(), DayPeriod.Create(2021, 1, 1));
         }
+
+        [TestMethod()]
+        public void PrevTest()
+        {
+            var day = DayPeriod.Create(2021, 1, 1);
+            Assert.AreEqual(day.Prev(), DayPeriod.Create(2020, 12, 31));
+        }
     }
 }
