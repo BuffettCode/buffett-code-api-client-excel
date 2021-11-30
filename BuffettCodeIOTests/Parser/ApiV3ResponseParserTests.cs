@@ -3,6 +3,7 @@ using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Period;
 using BuffettCodeIO.Property;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
 
 
@@ -25,14 +26,23 @@ namespace BuffettCodeIO.Parser.Tests
             Assert.AreEqual(company.GetDescription("url").Unit, "");
             Assert.AreEqual(company.GetValue("url"), @"http://www.kikkoman.co.jp/");
             Assert.AreEqual(company.GetValue("accounting_standard"), "IFRS");
-            var supportedQuarterRange = company.SupportedQuarterRanges;
-            Assert.AreEqual((uint)2004, supportedQuarterRange.OndemandTierRange.From.Year);
-            Assert.AreEqual((uint)1, supportedQuarterRange.OndemandTierRange.From.Quarter);
-            Assert.AreEqual((uint)2021, supportedQuarterRange.OndemandTierRange.To.Year);
-            Assert.AreEqual((uint)2, supportedQuarterRange.OndemandTierRange.To.Quarter);
-            Assert.AreEqual((uint)2016, supportedQuarterRange.FixedTierRange
+            var supportedQuarterRanges = company.SupportedQuarterRanges;
+
+            Assert.AreEqual((uint)2004, supportedQuarterRanges.OndemandTierRange.From.Year);
+            Assert.AreEqual((uint)1, supportedQuarterRanges.OndemandTierRange.From.Quarter);
+            Assert.AreEqual((uint)2021, supportedQuarterRanges.OndemandTierRange.To.Year);
+            Assert.AreEqual((uint)2, supportedQuarterRanges.OndemandTierRange.To.Quarter);
+            Assert.AreEqual((uint)2016, supportedQuarterRanges.FixedTierRange
                 .From.Year);
-            Assert.AreEqual((uint)3, supportedQuarterRange.FixedTierRange.From.Quarter);
+            Assert.AreEqual((uint)3, supportedQuarterRanges.FixedTierRange.From.Quarter);
+
+            var supportedDailyRanges = company.SupportedDailyRanges;
+            var today = DayPeriod.Create(DateTime.Today);
+            Assert.AreEqual(DayPeriod.Create(2000, 4, 3), supportedDailyRanges.FixedTierRange.From);
+            Assert.AreEqual(today, supportedDailyRanges.FixedTierRange.To);
+
+            Assert.AreEqual(DayPeriod.Create(2016, 11, 15), supportedDailyRanges.OndemandTierRange.From);
+            Assert.AreEqual(today, supportedDailyRanges.FixedTierRange.To);
         }
 
         [TestMethod()]

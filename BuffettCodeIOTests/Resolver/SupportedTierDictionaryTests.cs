@@ -27,7 +27,7 @@ namespace BuffettCodeIO.Resolver.Tests
 
         private static readonly PeriodRange<FiscalQuarterPeriod> fixedTierQuarterRange = PeriodRange<FiscalQuarterPeriod>.Create(fixedOldestQuarter, fixedLatestQuarter);
         private static readonly PeriodRange<DayPeriod> fixedTierDayRange = PeriodRange<DayPeriod>.Create(fixedTierOldestDay, fixedTierLatestDay);
- 
+
 
         [TestMethod()]
         public void AddAndHasTest()
@@ -49,7 +49,7 @@ namespace BuffettCodeIO.Resolver.Tests
             // throw Key NotFound 
             Assert.ThrowsException<KeyNotFoundException>(() => dict.Get(ticker, fixedLatestQuarter));
 
-            var company = Company.Create(ticker, fixedTierQuarterRange, ondemandTierQuarterRange, fixedTierDayRange, ondemandTierDayRange,PropertyDictionary.Empty(), PropertyDescriptionDictionary.Empty());
+            var company = Company.Create(ticker, fixedTierQuarterRange, ondemandTierQuarterRange, fixedTierDayRange, ondemandTierDayRange, PropertyDictionary.Empty(), PropertyDescriptionDictionary.Empty());
             dict.Add(company);
 
             Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, fixedOldestQuarter));

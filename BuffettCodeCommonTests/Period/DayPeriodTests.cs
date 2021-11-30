@@ -10,12 +10,21 @@ namespace BuffettCodeCommon.Period.Tests
         [TestMethod()]
         public void CreateFromStringTest()
         {
+            // yyyy-MM-dd
             var dateString = "2012-01-02";
             var period = DayPeriod.Parse(dateString);
             Assert.AreEqual(2012, period.Value.Year);
             Assert.AreEqual(1, period.Value.Month);
             Assert.AreEqual(2, period.Value.Day);
             Assert.AreEqual(dateString, period.ToString());
+
+            // ISO 8601
+            var iso8601String = "2016-11-30T00:00:00.000Z";
+            var period2 = DayPeriod.Parse(iso8601String);
+            Assert.AreEqual(2016, period2.Value.Year);
+            Assert.AreEqual(11, period2.Value.Month);
+            Assert.AreEqual(30, period2.Value.Day);
+            Assert.AreEqual("2016-11-30", period2.ToString());
         }
 
         [TestMethod()]
