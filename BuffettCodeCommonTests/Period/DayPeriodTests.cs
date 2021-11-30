@@ -8,7 +8,7 @@ namespace BuffettCodeCommon.Period.Tests
     public class DayPeriodTests
     {
         [TestMethod()]
-        public void CreateFromStringTest()
+        public void ParseTest()
         {
             // yyyy-MM-dd
             var dateString = "2012-01-02";
