@@ -1,7 +1,6 @@
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Period;
 using BuffettCodeCommon.Validator;
-using System;
 using System.Collections.Generic;
 
 
@@ -9,27 +8,13 @@ namespace BuffettCodeAPIClient
 {
     public class BuffettCodeApiV3RequestCreator
     {
+        private static string QuarterEndpoint(bool useOndemand) => useOndemand ? BuffettCodeApiV2Config.ENDPOINT_ONDEMAND_QUARTER : BuffettCodeApiV2Config.ENDPOINT_QUARTER;
+
         public static ApiGetRequest CreateGetDailyRequest(string ticker, IDailyPeriod period, bool useOndemand)
         {
             JpTickerValidator.Validate(ticker);
-            var paramaters = new Dictionary<string, string>()
-            {
-                {ApiRequestParamConfig.KeyTicker, ticker },
-            };
-
-            if (period is DayPeriod day)
-            {
-                paramaters[ApiRequestParamConfig.KeyDate] = day.ToString();
-            }
-            else if (period is LatestDayPeriod)
-            {
-                paramaters[ApiRequestParamConfig.KeyDate] = ApiRequestParamConfig.ValueLatest;
-            }
-            else
-            {
-                throw new ArgumentException($"Unsupported period type={period.GetType()}");
-            }
-
+            var paramaters = period.ToV3Parameter();
+            paramaters.Add(ApiRequestParamConfig.KeyTicker, ticker);
             var endpoint = useOndemand ?
                 BuffettCodeApiV3Config.ENDPOINT_ONDEMAND_DAILY : BuffettCodeApiV3Config.ENDPOINT_DAILY;
 
@@ -39,26 +24,8 @@ namespace BuffettCodeAPIClient
         public static ApiGetRequest CreateGetQuarterRequest(string ticker, IQuarterlyPeriod period, bool useOndemand)
         {
             JpTickerValidator.Validate(ticker);
-            var paramaters = new Dictionary<string, string>()
-            {
-                {ApiRequestParamConfig.KeyTicker, ticker },
-            };
-
-            if (period is FiscalQuarterPeriod fq)
-            {
-                paramaters[ApiRequestParamConfig.KeyFy] = fq.Year.ToString();
-                paramaters[ApiRequestParamConfig.KeyFq] = fq.Quarter.ToString();
-            }
-            else if (period is LatestFiscalQuarterPeriod)
-            {
-                paramaters[ApiRequestParamConfig.KeyFy] = ApiRequestParamConfig.ValueLy;
-                paramaters[ApiRequestParamConfig.KeyFq] = ApiRequestParamConfig.ValueLq;
-            }
-            else
-            {
-                throw new ArgumentException($"Unsupported period type={period.GetType()}");
-            }
-
+            var paramaters = period.ToV3Parameter();
+            paramaters.Add(ApiRequestParamConfig.KeyTicker, ticker);
 
             var endpoint = useOndemand ?
                  BuffettCodeApiV3Config.ENDPOINT_ONDEMAND_QUARTER : BuffettCodeApiV3Config.ENDPOINT_QUARTER;

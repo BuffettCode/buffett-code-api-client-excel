@@ -64,6 +64,8 @@
     <Compile Include="Period\ComparablePeriodUtilTests.cs" />
     <Compile Include="Period\DayPeriodTests.cs" />
     <Compile Include="Period\FiscalQuarterPeriodTests.cs" />
+    <Compile Include="Period\LatestDayPeriodTests.cs" />
+    <Compile Include="Period\LatestFiscalQuarterPeriodTests.cs" />
     <Compile Include="Period\PeriodRangeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registry\BuffettCodeRegistryAccessorTests.cs" />

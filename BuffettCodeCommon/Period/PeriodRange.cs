@@ -1,3 +1,4 @@
+using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
 using System;
 using System.Collections.Generic;
@@ -84,7 +85,10 @@ namespace BuffettCodeCommon.Period
                 yield return Create(start, range.To);
             }
         }
-    }
 
+        private Dictionary<string, string> ToApiParameter() => new Dictionary<string, string>() { { ApiRequestParamConfig.KeyFrom, from
+        .ToString() }, { ApiRequestParamConfig.KeyTo, to.ToString() } };
+
+    }
 
 }

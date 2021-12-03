@@ -1,8 +1,8 @@
 using BuffettCodeAddinRibbon.Settings;
 using BuffettCodeCommon;
-using System;
 using BuffettCodeCommon.Exception;
 using Microsoft.Office.Tools.Ribbon;
+using System;
 using System.Windows.Forms;
 
 
@@ -35,7 +35,8 @@ namespace BuffettCodeAddinRibbon
                     {
                         MessageBox.Show("API KEYの値が間違っています", "設定", MessageBoxButtons.OK);
                     }
-                    else{
+                    else
+                    {
                         MessageBox.Show("設定が間違っています", "設定", MessageBoxButtons.OK);
                     }
                 }

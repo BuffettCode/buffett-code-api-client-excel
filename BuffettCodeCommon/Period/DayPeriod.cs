@@ -1,6 +1,7 @@
+using BuffettCodeCommon.Config;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
-
 
 namespace BuffettCodeCommon.Period
 {
@@ -25,10 +26,11 @@ namespace BuffettCodeCommon.Period
             return new DayPeriod(date);
         }
 
-        public static DayPeriod Parse(string input)  {
-                        var date = DateTime.ParseExact(input,
-                                  dateFormat,
-                                  CultureInfo.InvariantCulture);
+        public static DayPeriod Parse(string input)
+        {
+            var date = DateTime.ParseExact(input,
+                      dateFormat,
+                      CultureInfo.InvariantCulture);
             return new DayPeriod(date);
         }
 
@@ -77,6 +79,9 @@ namespace BuffettCodeCommon.Period
         public IComparablePeriod Next() => Create(Value.AddDays(1));
 
         public IComparablePeriod Prev() => Create(Value.AddDays(-1));
+
+        public Dictionary<string, string> ToV3Parameter()
+         => new Dictionary<string, string>() { { ApiRequestParamConfig.KeyDate, ToString() }, };
 
     }
 
