@@ -1,4 +1,6 @@
 using System;
+using System.Globalization;
+
 
 namespace BuffettCodeCommon.Period
 {
@@ -23,7 +25,13 @@ namespace BuffettCodeCommon.Period
             return new DayPeriod(date);
         }
 
-        public static DayPeriod Parse(string input) => new DayPeriod(DateTime.Parse(input));
+        public static DayPeriod Parse(string input)  {
+                        var date = DateTime.ParseExact(input,
+                                  dateFormat,
+                                  CultureInfo.InvariantCulture);
+            return new DayPeriod(date);
+        }
+
         public override int GetHashCode() => value.GetHashCode();
 
         public override bool Equals(object obj)
