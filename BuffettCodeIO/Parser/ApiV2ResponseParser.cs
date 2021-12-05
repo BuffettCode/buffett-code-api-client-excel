@@ -85,7 +85,8 @@ namespace BuffettCodeIO.Parser
             PropertyDescriptionDictionary descriptions)
         {
             var fixedTierRangeJson = JObject.Parse(properties.Get(PropertyNames.FixedTierRange));
-            var (fixedTierQuarterRange, fixedTierDayRange) = FixedTierRangeParser.Parse(fixedTierRangeJson.Properties());
+            var fixedTierRange = FixedTierRangeParser.Parse(fixedTierRangeJson.Properties());
+
             var oldestFy = uint.Parse(properties.Get(PropertyNames.OldestFiscalYear));
             var oldestFq = uint.Parse(properties.Get(PropertyNames.OldestFiscalQuarter));
 
@@ -94,6 +95,10 @@ namespace BuffettCodeIO.Parser
             var oldestDate = DayPeriod.Parse(properties.Get(PropertyNames.OldestDate));
             // use today as latest date
             var latestDate = DayPeriod.Create(DateTime.Today);
+
+            var fixedTierQuarterRange = PeriodRange<FiscalQuarterPeriod>.Create(fixedTierRange.OldestQuarter, fixedTierRange.LatestQuarter);
+
+            var fixedTierDayRange = PeriodRange<DayPeriod>.Create(fixedTierRange.OldestDate, fixedTierRange.LatestDate);
 
             var ondemandTierQuarterRange = PeriodRange<FiscalQuarterPeriod>.Create(
                 FiscalQuarterPeriod.Create(oldestFy, oldestFq),

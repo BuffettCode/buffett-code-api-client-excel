@@ -21,14 +21,13 @@ namespace BuffettCodeIO.Parser.Tests
             json.Add(new JProperty("latest_fiscal_year", 2020));
             json.Add(new JProperty("latest_fiscal_quarter", 4));
             json.Add(new JProperty("oldest_date", oldestDate));
-            var (quarterRange, dayRange) = FixedTierRangeParser.Parse(json);
-            Assert.AreEqual((uint)2016, quarterRange.From.Year);
-            Assert.AreEqual((uint)1, quarterRange.From.Quarter);
-            Assert.AreEqual((uint)2020, quarterRange.To.Year);
-            Assert.AreEqual((uint)4, quarterRange.To.Quarter);
-            Assert.AreEqual((uint)4, quarterRange.To.Quarter);
-            Assert.AreEqual(DayPeriod.Create(oldestDate), dayRange.From);
-            Assert.AreEqual(today, dayRange.To);
+            var fixedTierRange = FixedTierRangeParser.Parse(json);
+            Assert.AreEqual((uint)2016, fixedTierRange.OldestQuarter.Year);
+            Assert.AreEqual((uint)1, fixedTierRange.OldestQuarter.Quarter);
+            Assert.AreEqual((uint)2020, fixedTierRange.LatestQuarter.Year);
+            Assert.AreEqual((uint)4, fixedTierRange.LatestQuarter.Quarter);
+            Assert.AreEqual(DayPeriod.Create(oldestDate), fixedTierRange.OldestDate);
+            Assert.AreEqual(today, fixedTierRange.LatestDate);
         }
         [TestMethod()]
         public void ParseFloatCase()
@@ -40,13 +39,13 @@ namespace BuffettCodeIO.Parser.Tests
             json.Add(new JProperty("latest_fiscal_year", 2020.0));
             json.Add(new JProperty("latest_fiscal_quarter", 4.0));
             json.Add(new JProperty("oldest_date", oldestDate.ToString()));
-            var (quarterRange, dayRange) = FixedTierRangeParser.Parse(json);
-            Assert.AreEqual((uint)2016, quarterRange.From.Year);
-            Assert.AreEqual((uint)1, quarterRange.From.Quarter);
-            Assert.AreEqual((uint)2020, quarterRange.To.Year);
-            Assert.AreEqual((uint)4, quarterRange.To.Quarter);
-            Assert.AreEqual(DayPeriod.Create(oldestDate), dayRange.From);
-            Assert.AreEqual(today, dayRange.To);
+            var fixedTierRange = FixedTierRangeParser.Parse(json);
+            Assert.AreEqual((uint)2016, fixedTierRange.OldestQuarter.Year);
+            Assert.AreEqual((uint)1, fixedTierRange.OldestQuarter.Quarter);
+            Assert.AreEqual((uint)2020, fixedTierRange.LatestQuarter.Year);
+            Assert.AreEqual((uint)4, fixedTierRange.LatestQuarter.Quarter);
+            Assert.AreEqual(DayPeriod.Create(oldestDate), fixedTierRange.OldestDate);
+            Assert.AreEqual(today, fixedTierRange.LatestDate);
         }
 
         [TestMethod()]
@@ -58,13 +57,13 @@ namespace BuffettCodeIO.Parser.Tests
             json.Add(new JProperty("latest_fiscal_year", "2020"));
             json.Add(new JProperty("latest_fiscal_quarter", "4"));
             json.Add(new JProperty("oldest_date", "2016-11-30"));
-            var (quarterRange, dayRange) = FixedTierRangeParser.Parse(json);
-            Assert.AreEqual((uint)2016, quarterRange.From.Year);
-            Assert.AreEqual((uint)1, quarterRange.From.Quarter);
-            Assert.AreEqual((uint)2020, quarterRange.To.Year);
-            Assert.AreEqual((uint)4, quarterRange.To.Quarter);
-            Assert.AreEqual(DayPeriod.Create(2016, 11, 30), dayRange.From);
-            Assert.AreEqual(DayPeriod.Create(DateTime.Today), dayRange.To);
+            var fixedTierRange = FixedTierRangeParser.Parse(json);
+            Assert.AreEqual((uint)2016, fixedTierRange.OldestQuarter.Year);
+            Assert.AreEqual((uint)1, fixedTierRange.OldestQuarter.Quarter);
+            Assert.AreEqual((uint)2020, fixedTierRange.LatestQuarter.Year);
+            Assert.AreEqual((uint)4, fixedTierRange.LatestQuarter.Quarter);
+            Assert.AreEqual(DayPeriod.Create(2016, 11, 30), fixedTierRange.OldestDate);
+            Assert.AreEqual(today, fixedTierRange.LatestDate);
         }
 
     }

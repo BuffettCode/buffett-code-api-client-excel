@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="ApiTaskHelper.cs" />
     <Compile Include="Parser\ApiV3ResponseParser.cs" />
+    <Compile Include="Property\FixedTierRange.cs" />
     <Compile Include="Property\Daily.cs" />
     <Compile Include="Resolver\ApiV3LegacyDataTypeResolver.cs" />
     <Compile Include="Resolver\LegacyDataTypeResolver.cs" />
