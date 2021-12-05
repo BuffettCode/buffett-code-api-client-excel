@@ -34,9 +34,12 @@ namespace BuffettCodeIO.Tests
 
         private static PeriodSupportedTierResolver CreatTierResolver()
         {
-            var supportedDict = new SupportedTierDictionary();
-            supportedDict.Add(company);
-            return new PeriodSupportedTierResolver(null, null, supportedDict);
+            var quarterDict = new SupportedTierDictionary<FiscalQuarterPeriod>();
+            var dayDict = new SupportedTierDictionary<DayPeriod>();
+
+            quarterDict.Add(company.Ticker, company.SupportedQuarterRanges);
+            dayDict.Add(company.Ticker, company.SupportedDailyRanges);
+            return new PeriodSupportedTierResolver(null, null, quarterDict, dayDict);
         }
 
         [TestMethod()]

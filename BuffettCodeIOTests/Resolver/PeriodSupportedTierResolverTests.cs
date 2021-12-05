@@ -32,12 +32,14 @@ namespace BuffettCodeIO.Resolver.Tests
 
 
         [TestMethod()]
-        public void ResolveQuarterTest()
+        public void ResolveTest()
         {
-            var supportedDict = new SupportedTierDictionary();
-            supportedDict.Add(company);
-            var resolver = new PeriodSupportedTierResolver(null, null, supportedDict);
+            var quarterDict = new SupportedTierDictionary<FiscalQuarterPeriod>();
+            var dayDict = new SupportedTierDictionary<DayPeriod>();
 
+            quarterDict.Add(company.Ticker, company.SupportedQuarterRanges);
+            dayDict.Add(company.Ticker, company.SupportedDailyRanges);
+            var resolver = new PeriodSupportedTierResolver(null, null, quarterDict, dayDict);
 
             // snapshot
             Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, Snapshot.GetInstance(), false, false));

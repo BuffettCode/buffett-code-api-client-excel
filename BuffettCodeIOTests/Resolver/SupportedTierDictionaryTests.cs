@@ -32,54 +32,55 @@ namespace BuffettCodeIO.Resolver.Tests
         [TestMethod()]
         public void AddAndHasTest()
         {
-            var dict = new SupportedTierDictionary();
+            var dict = new SupportedTierDictionary<FiscalQuarterPeriod>();
             var company = Company.Create(ticker, fixedTierQuarterRange, ondemandTierQuarterRange, fixedTierDayRange, ondemandTierDayRange, PropertyDictionary.Empty(), PropertyDescriptionDictionary.Empty());
 
             // at first, not contained
             Assert.IsFalse(dict.Has(ticker));
-            dict.Add(company);
+            dict.Add(company.Ticker, company.SupportedQuarterRanges);
             // check added
             Assert.IsTrue(dict.Has(ticker));
         }
 
         [TestMethod()]
-        public void GetTest()
+        public void GetQuarterTest()
         {
-            var dict = new SupportedTierDictionary();
+            var company = Company.Create(ticker, fixedTierQuarterRange, ondemandTierQuarterRange, fixedTierDayRange, ondemandTierDayRange, PropertyDictionary.Empty(), PropertyDescriptionDictionary.Empty());
+
+            var dict = new SupportedTierDictionary<FiscalQuarterPeriod>();
             // throw Key NotFound 
             Assert.ThrowsException<KeyNotFoundException>(() => dict.Get(ticker, fixedLatestQuarter));
 
-            var company = Company.Create(ticker, fixedTierQuarterRange, ondemandTierQuarterRange, fixedTierDayRange, ondemandTierDayRange, PropertyDictionary.Empty(), PropertyDescriptionDictionary.Empty());
-            dict.Add(company);
-            // snapshot
-            Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, Snapshot.GetInstance()));
-
-            // latest quarter
-            Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, LatestFiscalQuarterPeriod.GetInstance()));
-
-            // latest day
-            Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, LatestDayPeriod.GetInstance()));
-
+            dict.Add(company.Ticker, company.SupportedQuarterRanges);
             // quarter 
             Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, fixedOldestQuarter));
-            Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, fixedOldestQuarter.Next()));
+            Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, (FiscalQuarterPeriod)fixedOldestQuarter.Next()));
             Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, fixedLatestQuarter));
             Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, ondemandOldestQuarter));
-            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, ondemandOldestQuarter.Next()));
+            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, (FiscalQuarterPeriod)ondemandOldestQuarter.Next()));
             Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, ondemandLatestQuarter));
-            Assert.AreEqual(SupportedTier.None, dict.Get(ticker, ondemandLatestQuarter.Next()));
+            Assert.AreEqual(SupportedTier.None, dict.Get(ticker, (FiscalQuarterPeriod)ondemandLatestQuarter.Next()));
+        }
+
+        public void GetDayTest()
+        {
+            var company = Company.Create(ticker, fixedTierQuarterRange, ondemandTierQuarterRange, fixedTierDayRange, ondemandTierDayRange, PropertyDictionary.Empty(), PropertyDescriptionDictionary.Empty());
+
+            var dict = new SupportedTierDictionary<DayPeriod>();
+            // throw Key NotFound 
+            Assert.ThrowsException<KeyNotFoundException>(() => dict.Get(ticker, fixedTierLatestDay));
 
             // day
             Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, ondemandLatestDay));
             Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, fixedTierLatestDay));
             Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, fixedTierOldestDay));
-            Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, fixedTierOldestDay.Next()));
-            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, fixedTierOldestDay.Prev()));
-            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, ondemandOldestDay));
-            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, ondemandOldestDay.Next()));
-            Assert.AreEqual(SupportedTier.None, dict.Get(ticker, ondemandOldestDay.Prev()));
-            Assert.AreEqual(SupportedTier.None, dict.Get(ticker, fixedTierLatestDay.Next()));
-            Assert.AreEqual(SupportedTier.None, dict.Get(ticker, ondemandLatestDay.Next()));
+            Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, (DayPeriod)fixedTierOldestDay.Next()));
+            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, (DayPeriod)fixedTierOldestDay.Prev()));
+            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, (DayPeriod)ondemandOldestDay));
+            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, (DayPeriod)ondemandOldestDay.Next()));
+            Assert.AreEqual(SupportedTier.None, dict.Get(ticker, (DayPeriod)ondemandOldestDay.Prev()));
+            Assert.AreEqual(SupportedTier.None, dict.Get(ticker, (DayPeriod)fixedTierLatestDay.Next()));
+            Assert.AreEqual(SupportedTier.None, dict.Get(ticker, (DayPeriod)ondemandLatestDay.Next()));
         }
     }
 }
