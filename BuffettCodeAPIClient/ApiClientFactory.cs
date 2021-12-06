@@ -1,7 +1,7 @@
 using BuffettCodeCommon;
 using BuffettCodeCommon.Config;
+using BuffettCodeCommon.Exception;
 using BuffettCodeCommon.Validator;
-using System;
 
 
 namespace BuffettCodeAPIClient
@@ -39,7 +39,7 @@ namespace BuffettCodeAPIClient
                 case BuffettCodeApiVersion.Version3:
                     return CreateV3(apiKey);
                 default:
-                    throw new ArgumentException($"unknown version is given: {version}");
+                    throw new NonSupportedApiVersionException($"unknown version is given: {version}");
             }
         }
 

@@ -8,8 +8,9 @@ namespace BuffettCodeCommon.Period.Tests
     public class DayPeriodTests
     {
         [TestMethod()]
-        public void CreateFromStringTest()
+        public void ParseTest()
         {
+            // yyyy-MM-dd
             var dateString = "2012-01-02";
             var period = DayPeriod.Parse(dateString);
             Assert.AreEqual(2012, period.Value.Year);
@@ -93,6 +94,20 @@ namespace BuffettCodeCommon.Period.Tests
         {
             var day = DayPeriod.Create(2020, 12, 31);
             Assert.AreEqual(day.Next(), DayPeriod.Create(2021, 1, 1));
+        }
+
+        [TestMethod()]
+        public void PrevTest()
+        {
+            var day = DayPeriod.Create(2021, 1, 1);
+            Assert.AreEqual(day.Prev(), DayPeriod.Create(2020, 12, 31));
+        }
+
+        [TestMethod()]
+        public void ToV3ParameterTest()
+        {
+            var parameter = DayPeriod.Create(2021, 1, 1).ToV3Parameter();
+            Assert.AreEqual("2021-01-01", parameter["date"]);
         }
     }
 }

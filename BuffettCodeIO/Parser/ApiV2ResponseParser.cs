@@ -86,21 +86,32 @@ namespace BuffettCodeIO.Parser
         {
             var fixedTierRangeJson = JObject.Parse(properties.Get(PropertyNames.FixedTierRange));
             var fixedTierRange = FixedTierRangeParser.Parse(fixedTierRangeJson.Properties());
+
             var oldestFy = uint.Parse(properties.Get(PropertyNames.OldestFiscalYear));
             var oldestFq = uint.Parse(properties.Get(PropertyNames.OldestFiscalQuarter));
 
             var latestFy = uint.Parse(properties.Get(PropertyNames.LatestFiscalYear));
             var latestFq = uint.Parse(properties.Get(PropertyNames.LatestFiscalQuarter));
+            var oldestDate = DayPeriod.Parse(properties.Get(PropertyNames.OldestDate));
+            // use today as latest date
+            var latestDate = DayPeriod.Create(DateTime.Today);
 
-            var ondemandPeriodRange = PeriodRange<FiscalQuarterPeriod>.Create(
+            var fixedTierQuarterRange = PeriodRange<FiscalQuarterPeriod>.Create(fixedTierRange.OldestQuarter, fixedTierRange.LatestQuarter);
+
+            var fixedTierDayRange = PeriodRange<DayPeriod>.Create(fixedTierRange.OldestDate, fixedTierRange.LatestDate);
+
+            var ondemandTierQuarterRange = PeriodRange<FiscalQuarterPeriod>.Create(
                 FiscalQuarterPeriod.Create(oldestFy, oldestFq),
                 FiscalQuarterPeriod.Create(latestFy, latestFq)
               );
+            var ondemandTierDayRange = PeriodRange<DayPeriod>.Create(oldestDate, latestDate);
 
             return Company.Create(
                 ticker,
-                fixedTierRange,
-                ondemandPeriodRange,
+                fixedTierQuarterRange,
+                ondemandTierQuarterRange,
+                fixedTierDayRange,
+                ondemandTierDayRange,
                 properties,
                 descriptions
             );

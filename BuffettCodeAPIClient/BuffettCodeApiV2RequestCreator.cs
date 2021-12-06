@@ -7,30 +7,24 @@ namespace BuffettCodeAPIClient
 {
     public class BuffettCodeApiV2RequestCreator
     {
-        public static ApiGetRequest CreateGetQuarterRequest(string ticker, FiscalQuarterPeriod period, bool useOndemand)
+        public static ApiGetRequest CreateGetQuarterRequest(string ticker, IQuarterlyPeriod period, bool useOndemand)
         {
             JpTickerValidator.Validate(ticker);
-            var paramaters = new Dictionary<string, string>()
-            {
-                {"ticker", ticker },
-                {"fy", period.Year.ToString() },
-                {"fq", period.Quarter.ToString() },
-            };
-
-            var endpoint = useOndemand ?
-                BuffettCodeApiV2Config.ENDPOINT_ONDEMAND_QUARTER : BuffettCodeApiV2Config.ENDPOINT_QUARTER;
-
+            var paramaters = period.ToV2Parameter();
+            paramaters.Add(ApiRequestParamConfig.KeyTicker, ticker);
+            var endpoint = useOndemand ? BuffettCodeApiV2Config.ENDPOINT_ONDEMAND_QUARTER : BuffettCodeApiV2Config.ENDPOINT_QUARTER;
             return new ApiGetRequest(endpoint, paramaters);
         }
+
 
         public static ApiGetRequest CreateGetQuarterRangeRequest(string ticker, FiscalQuarterPeriod from, FiscalQuarterPeriod to)
         {
             JpTickerValidator.Validate(ticker);
             var paramaters = new Dictionary<string, string>()
             {
-                {"tickers", ticker },
-                {"from", from.ToString() },
-                {"to", to.ToString() },
+                {ApiRequestParamConfig.KeyTickers, ticker },
+                {ApiRequestParamConfig.KeyFrom, from.ToString() },
+                {ApiRequestParamConfig.KeyTo, to.ToString() },
             };
             return new ApiGetRequest(BuffettCodeApiV2Config.ENDPOINT_QUARTER, paramaters);
         }
@@ -40,7 +34,7 @@ namespace BuffettCodeAPIClient
             JpTickerValidator.Validate(ticker);
             var paramaters = new Dictionary<string, string>()
             {
-                {"tickers", ticker },
+                {ApiRequestParamConfig.KeyTickers, ticker },
             };
 
             return new ApiGetRequest(BuffettCodeApiV2Config.ENDPOINT_INDICATOR, paramaters);
@@ -50,7 +44,7 @@ namespace BuffettCodeAPIClient
             JpTickerValidator.Validate(ticker);
             var paramaters = new Dictionary<string, string>()
             {
-                {"ticker", ticker},
+                {ApiRequestParamConfig.KeyTicker, ticker},
             };
 
             return new ApiGetRequest(BuffettCodeApiV2Config.ENDPOINT_COMPANY, paramaters);

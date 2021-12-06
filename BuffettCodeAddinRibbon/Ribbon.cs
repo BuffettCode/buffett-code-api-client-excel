@@ -2,6 +2,7 @@ using BuffettCodeAddinRibbon.Settings;
 using BuffettCodeCommon;
 using BuffettCodeCommon.Exception;
 using Microsoft.Office.Tools.Ribbon;
+using System;
 using System.Windows.Forms;
 
 
@@ -27,9 +28,17 @@ namespace BuffettCodeAddinRibbon
                     var newSettings = AddinSettings.Create(form.GetAPIKey(), form.IsOndemandEndpointEnabled(), form.IsDebugMode());
                     newSettings.SaveToConfiguration(config);
                 }
-                catch (AddinConfigurationException)
+                catch (Exception exp)
                 {
-                    MessageBox.Show("API KEYが間違っています", "設定", MessageBoxButtons.OK);
+                    var bce = BuffettCodeExceptionFinder.Find(exp);
+                    if (bce is ValidationError)
+                    {
+                        MessageBox.Show("API KEYの値が間違っています", "設定", MessageBoxButtons.OK);
+                    }
+                    else
+                    {
+                        MessageBox.Show("設定が間違っています", "設定", MessageBoxButtons.OK);
+                    }
                 }
             }
         }

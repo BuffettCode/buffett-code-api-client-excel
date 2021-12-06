@@ -33,6 +33,12 @@ namespace BuffettCodeAPIClient.Tests
             Assert.AreEqual(fiscalYear.ToString(), request.Parameters["fy"]);
             Assert.AreEqual(fiscalQuarter.ToString(), request.Parameters["fq"]);
 
+            // latest case
+            request = BuffettCodeApiV2RequestCreator.CreateGetQuarterRequest(ticker, LatestFiscalQuarterPeriod.GetInstance(), false);
+            Assert.AreEqual(request.EndPoint, BuffettCodeApiV2Config.ENDPOINT_QUARTER);
+            Assert.AreEqual(ticker, request.Parameters["ticker"]);
+            Assert.AreEqual("LY", request.Parameters["fy"]);
+            Assert.AreEqual("LQ", request.Parameters["fq"]);
 
             // validation Errors
             Assert.ThrowsException<ValidationError>(

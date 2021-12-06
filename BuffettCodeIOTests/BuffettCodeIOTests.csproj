@@ -92,8 +92,7 @@
     <Compile Include="Property\QuarterTests.cs" />
     <Compile Include="Resolver\PeriodSupportedTierResolverTests.cs" />
     <Compile Include="Resolver\SupportedTierDictionaryTests.cs" />
-    <Compile Include="Resolver\V2ConstDataTypeResolverTest.cs" />
-    <Compile Include="Resolver\V2WebResourceDataTypeResolverTest.cs" />
+    <Compile Include="Resolver\ApiV2LegacyDataTypeResolverTests.cs" />
     <Compile Include="TabularOutput\WorksheetTabularWriterTests.cs" />
   </ItemGroup>
   <ItemGroup>

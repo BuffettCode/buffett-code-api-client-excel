@@ -20,7 +20,7 @@ namespace BuffettCodeAddinRibbon.CsvDownload
 
         public static ApiResourceGetter Create(Configuration config)
         {
-            var processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.IsOndemandEndpointEnabled);
+            var processor = new BuffettCodeApiTaskProcessor(BuffettCodeApiVersion.Version3, config.ApiKey, config.IsOndemandEndpointEnabled);
             return new ApiResourceGetter(processor);
         }
 
@@ -34,7 +34,7 @@ namespace BuffettCodeAddinRibbon.CsvDownload
 
             // set isConfigureAwait for performance
             // https://devblogs.microsoft.com/dotnet/configureawait-faq/#why-would-i-want-to-use-configureawaitfalse
-            var quarters = PeriodRange<FiscalQuarterPeriod>.Slice(parameters.Range, 12)
+            var quarters = PeriodRange<FiscalQuarterPeriod>.Slice(parameters.Range, 4)
                             .SelectMany
                             (r => processor.GetApiResources(DataTypeConfig.Quarter, parameters.Ticker, r.From, r.To, false, true)
                             ).Cast<Quarter>();

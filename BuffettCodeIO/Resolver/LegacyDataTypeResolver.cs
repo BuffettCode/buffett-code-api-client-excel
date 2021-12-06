@@ -1,21 +1,21 @@
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
-namespace BuffettCodeIO.Parser
+
+namespace BuffettCodeIO.Resolver
 {
-    public class ApiResponseParserFactory
+    static public class LegacyDataTypeResolver
     {
-        public static IApiResponseParser Create(BuffettCodeApiVersion version)
+        public static ILegacyDataTypeResolver GetInstance(BuffettCodeApiVersion version)
         {
             switch (version)
             {
                 case BuffettCodeApiVersion.Version2:
-                    return new ApiV2ResponseParser();
+                    return ApiV2LegacyDataTypeResolver.GetInstance();
                 case BuffettCodeApiVersion.Version3:
-                    return new ApiV3ResponseParser();
+                    return ApiV3LegacyDataTypeResolver.GetInstance();
                 default:
                     throw new NonSupportedApiVersionException($"api version={version} is not supported.");
             }
-
         }
     }
 }

@@ -134,6 +134,7 @@ namespace BuffettCodeCommon.Period.Tests
             Assert.IsFalse(range.Includes(FiscalQuarterPeriod.Create(2020, 4)));
             Assert.IsFalse(range.Includes(FiscalQuarterPeriod.Create(2019, 4)));
         }
+
     }
 
 

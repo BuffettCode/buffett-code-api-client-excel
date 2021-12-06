@@ -1,42 +1,44 @@
 using BuffettCodeCommon.Config;
-using BuffettCodeCommon.Exception;
 using BuffettCodeCommon.Period;
+using BuffettCodeCommon.Validator;
 using BuffettCodeIO.Property;
 using System.Collections.Generic;
 
 namespace BuffettCodeIO.Resolver
 {
-    public class SupportedTierDictionary
+    public class SupportedTierDictionary<T> where T : IComparablePeriod
     {
-        private readonly Dictionary<string, SupportedTierRange<FiscalQuarterPeriod>> quarters = new Dictionary<string, SupportedTierRange<FiscalQuarterPeriod>>();
+        private readonly Dictionary<string, SupportedTierRange<T>> tickerTierDict
+            = new Dictionary<string, SupportedTierRange<T>>();
 
-        public void Add(Company company) => quarters.Add(company.Ticker, company.SupportedQuarterRanges);
-        public bool Has(string ticker, DataTypeConfig dataType)
+        public void Add(string ticker, SupportedTierRange<T> supportedTierRange)
         {
-            switch (dataType)
-            {
-                case DataTypeConfig.Quarter:
-                    return quarters.ContainsKey(ticker);
-                default:
-                    throw new NotSupportedDataTypeException($"dataType={dataType} is not supported.");
-            }
-
+            JpTickerValidator.Validate(ticker);
+            tickerTierDict.Add(ticker, supportedTierRange);
         }
 
-        public SupportedTier Get(string ticker, FiscalQuarterPeriod period)
+
+        public bool Has(string ticker)
         {
-            if (!Has(ticker, DataTypeConfig.Quarter))
+            JpTickerValidator.Validate(ticker);
+            return tickerTierDict.ContainsKey(ticker);
+        }
+
+        public SupportedTier Get(string ticker, T period)
+        {
+            JpTickerValidator.Validate(ticker);
+            if (!Has(ticker))
             {
                 throw new KeyNotFoundException($"ticker={ticker} is not contained.");
             }
             else
             {
-                var supportedTiers = quarters[ticker];
-                if (supportedTiers.FixedTierRange.Includes(period))
+                var supportedTier = tickerTierDict[ticker];
+                if (supportedTier.FixedTierRange.Includes(period))
                 {
                     return SupportedTier.FixedTier;
                 }
-                else if (supportedTiers.OndemandTierRange.Includes(period))
+                else if (supportedTier.OndemandTierRange.Includes(period))
                 {
                     return SupportedTier.OndemandTier;
                 }
@@ -45,7 +47,6 @@ namespace BuffettCodeIO.Resolver
                     return SupportedTier.None;
                 }
             }
-
         }
 
     }

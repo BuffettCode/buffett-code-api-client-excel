@@ -1,9 +1,11 @@
+using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Validator;
 using System;
+using System.Collections.Generic;
 
 namespace BuffettCodeCommon.Period
 {
-    public class FiscalQuarterPeriod : IComparablePeriod
+    public class FiscalQuarterPeriod : IComparablePeriod, IQuarterlyPeriod
     {
         private readonly uint year;
         private readonly uint quarter;
@@ -89,5 +91,11 @@ namespace BuffettCodeCommon.Period
         public IComparablePeriod Next() => (Quarter < 4) ? Create(Year, Quarter + 1) : Create(Year + 1, 1);
 
         public override string ToString() => $"{year}Q{quarter}";
+
+        private Dictionary<string, string> ToApiParameter() => new Dictionary<string, string>() { { ApiRequestParamConfig.KeyFy, year.ToString() }, { ApiRequestParamConfig.KeyFq, quarter.ToString() } };
+
+        public Dictionary<string, string> ToV3Parameter() => ToApiParameter();
+
+        public Dictionary<string, string> ToV2Parameter() => ToApiParameter();
     }
 }

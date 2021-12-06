@@ -1,5 +1,6 @@
 using BuffettCodeCommon.Exception;
 using BuffettCodeCommon.Period;
+using BuffettCodeIO.Property;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -9,14 +10,18 @@ namespace BuffettCodeIO.Parser
 {
     public class FixedTierRangeParser
     {
-        public static PeriodRange<FiscalQuarterPeriod> Parse(IEnumerable<JProperty> jProperties)
+
+
+        public static FixedTierRange Parse(IEnumerable<JProperty> jProperties)
         {
             try
             {
                 var properties = jProperties.ToDictionary(p => p.Name, p => p.Value.ToString());
-                var from = FiscalQuarterPeriod.Create(properties[PropertyNames.OldestFiscalYear], properties[PropertyNames.OldestFiscalQuarter]);
-                var to = FiscalQuarterPeriod.Create(properties[PropertyNames.LatestFiscalYear], properties[PropertyNames.LatestFiscalQuarter]);
-                return PeriodRange<FiscalQuarterPeriod>.Create(from, to);
+                var oldestQuarter = FiscalQuarterPeriod.Create(properties[PropertyNames.OldestFiscalYear].ToString(), properties[PropertyNames.OldestFiscalQuarter].ToString());
+                var latestQuarter = FiscalQuarterPeriod.Create(properties[PropertyNames.LatestFiscalYear], properties[PropertyNames.LatestFiscalQuarter]);
+                var oldestDate = DayPeriod.Create(DateTime.Parse(properties[PropertyNames.OldestDate]));
+
+                return new FixedTierRange(oldestQuarter, latestQuarter, oldestDate);
             }
             catch (Exception e)
             {

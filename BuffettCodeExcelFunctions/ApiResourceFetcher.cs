@@ -5,39 +5,43 @@ using BuffettCodeCommon.Period;
 using BuffettCodeIO;
 using BuffettCodeIO.Property;
 using BuffettCodeIO.Resolver;
+
 namespace BuffettCodeExcelFunctions
 {
-    public class ApiResourceFetcher
+    public static class ApiResourceFetcher
     {
+        private static readonly BuffettCodeApiVersion verion = BuffettCodeApiVersion.Version2;
         private static readonly Configuration config = Configuration.GetInstance();
-        private static readonly IDataTypeResolver resolver = V2DataTypeResolverFactory.Create();
-        private static readonly BuffettCodeApiTaskProcessor processor = new BuffettCodeApiTaskProcessor(config.ApiVersion, config.ApiKey, config.IsOndemandEndpointEnabled
+        private readonly static BuffettCodeApiTaskProcessor processor = new BuffettCodeApiTaskProcessor(verion, config.ApiKey, config.IsOndemandEndpointEnabled
             );
 
-        private static bool IsQuarterCall(string parameter1, string parameter2)
-        {
-            return !string.IsNullOrWhiteSpace(parameter1) && !string.IsNullOrWhiteSpace(parameter2);
-        }
+
+        private static readonly ILegacyDataTypeResolver resolver = LegacyDataTypeResolver.GetInstance(verion);
 
         public static IApiResource FetchForLegacy
-            (string ticker, string parameter1, string parameter2, string propertyName)
+            (string ticker, string parameter1, string parameter2, string propertyName, bool isConfigureAwait, bool useCache)
         {
-            var dataType = IsQuarterCall(parameter1, parameter2) ? DataTypeConfig.Quarter : DataTypeConfig.Indicator;
+            var dataType = resolver.Resolve(propertyName);
+            var period = new PeriodBuilderForLegacy().SetDataType(dataType).SetParameters(parameter1, parameter2).Build();
+            return GetApiResource(dataType, ticker, period, isConfigureAwait, useCache);
+        }
 
-            // update processor at first
+        private static IApiResource GetApiResource(DataTypeConfig dataType, string ticker, IPeriod period, bool isConfigureAwait, bool useCache) => processor.UpdateIfNeeded(config.ApiKey, config.IsOndemandEndpointEnabled).GetApiResource(dataType, ticker, period, isConfigureAwait, useCache);
+
+        public static IApiResource Fetch(string ticker, IPeriod period, bool isConfigureAwait, bool useCache)
+        {
+            // dataType
+            var dataType = DataTypeConfig.Quarter;
             switch (dataType)
             {
                 case DataTypeConfig.Quarter:
-                    var period = FiscalQuarterPeriod.Create(
-                        parameter1, parameter2);
-                    return Fetch(dataType, ticker, period);
+                    return GetApiResource(dataType, ticker, period, isConfigureAwait, useCache);
                 case DataTypeConfig.Indicator:
-                    return Fetch(dataType, ticker, Snapshot.GetInstance());
+                    return GetApiResource(dataType, ticker, Snapshot.GetInstance(), isConfigureAwait, useCache);
                 default:
                     throw new NotSupportedDataTypeException();
             }
         }
-        public static IApiResource Fetch(DataTypeConfig dataType, string ticker, IPeriod period, bool isConfigureAwait = true, bool useCache = true) => processor.UpdateIfNeeded(config.ApiKey, config.IsOndemandEndpointEnabled).GetApiResource(dataType, ticker, period, isConfigureAwait, useCache);
 
     }
 }

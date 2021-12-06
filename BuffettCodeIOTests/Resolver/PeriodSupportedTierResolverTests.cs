@@ -9,29 +9,68 @@ namespace BuffettCodeIO.Resolver.Tests
     public class PeriodSupportedTierResolverTests
     {
         private static readonly string ticker = "1234";
-        private static readonly FiscalQuarterPeriod ondemandOldest = FiscalQuarterPeriod.Create(2010, 1);
-        private static readonly FiscalQuarterPeriod ondemandLatest = FiscalQuarterPeriod.Create(2021, 4);
-        private static readonly PeriodRange<FiscalQuarterPeriod> ondemandTierRange = PeriodRange<FiscalQuarterPeriod>.Create(ondemandOldest, ondemandLatest);
-        private static readonly FiscalQuarterPeriod fixedOldest = FiscalQuarterPeriod.Create(2016, 2);
-        private static readonly FiscalQuarterPeriod fixedLatest = FiscalQuarterPeriod.Create(2021, 3);
-        private static readonly PeriodRange<FiscalQuarterPeriod> fixedTierRange = PeriodRange<FiscalQuarterPeriod>.Create(fixedOldest, fixedLatest);
+        private static readonly FiscalQuarterPeriod ondemandOldestQuarter = FiscalQuarterPeriod.Create(2010, 1);
+        private static readonly FiscalQuarterPeriod ondemandLatestQuarter = FiscalQuarterPeriod.Create(2021, 4);
 
-        private static readonly Company company = Company.Create(ticker, fixedTierRange, ondemandTierRange, PropertyDictionary.Empty(), PropertyDescriptionDictionary.Empty());
+        private static readonly DayPeriod ondemandOldestDay = DayPeriod.Create(2010, 1, 1);
+        private static readonly DayPeriod ondemandLatestDay = DayPeriod.Create(2021, 1, 1);
+
+        private static readonly PeriodRange<FiscalQuarterPeriod> ondemandTierQuarterRange = PeriodRange<FiscalQuarterPeriod>.Create(ondemandOldestQuarter, ondemandLatestQuarter);
+
+        private static readonly PeriodRange<DayPeriod> ondemandTierDayRange = PeriodRange<DayPeriod>.Create(ondemandOldestDay, ondemandLatestDay);
+
+        private static readonly FiscalQuarterPeriod fixedOldestQuarter = FiscalQuarterPeriod.Create(2016, 2);
+        private static readonly FiscalQuarterPeriod fixedLatestQuarter = FiscalQuarterPeriod.Create(2021, 3);
+        private static readonly DayPeriod fixedTierOldestDay = DayPeriod.Create(2016, 1, 1);
+        private static readonly DayPeriod fixedTierLatestDay = DayPeriod.Create(2021, 1, 1);
+
+        private static readonly PeriodRange<FiscalQuarterPeriod> fixedTierQuarterRange = PeriodRange<FiscalQuarterPeriod>.Create(fixedOldestQuarter, fixedLatestQuarter);
+        private static readonly PeriodRange<DayPeriod> fixedTierDayRange = PeriodRange<DayPeriod>.Create(fixedTierOldestDay, fixedTierLatestDay);
+
+
+        private static readonly Company company = Company.Create(ticker, fixedTierQuarterRange, ondemandTierQuarterRange, fixedTierDayRange, ondemandTierDayRange, PropertyDictionary.Empty(), PropertyDescriptionDictionary.Empty());
+
 
         [TestMethod()]
-        public void ResolveQuarterTest()
+        public void ResolveTest()
         {
-            var supportedDict = new SupportedTierDictionary();
-            supportedDict.Add(company);
-            var resolver = new PeriodSupportedTierResolver(null, null, supportedDict);
+            var quarterDict = new SupportedTierDictionary<FiscalQuarterPeriod>();
+            var dayDict = new SupportedTierDictionary<DayPeriod>();
 
-            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, fixedOldest, false, false));
-            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, fixedOldest.Next() as FiscalQuarterPeriod, false, false));
-            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, fixedLatest, false, false));
-            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, ondemandOldest, false, false));
-            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, ondemandOldest.Next() as FiscalQuarterPeriod, false, false));
-            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(DataTypeConfig.Quarter, ticker, ondemandLatest, false, false));
-            Assert.AreEqual(SupportedTier.None, resolver.Resolve(DataTypeConfig.Quarter, ticker, ondemandLatest.Next() as FiscalQuarterPeriod, false, false));
+            quarterDict.Add(company.Ticker, company.SupportedQuarterRanges);
+            dayDict.Add(company.Ticker, company.SupportedDailyRanges);
+            var resolver = new PeriodSupportedTierResolver(null, null, quarterDict, dayDict);
+
+            // snapshot
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, Snapshot.GetInstance(), false, false));
+
+            // latest quarter
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, LatestFiscalQuarterPeriod.GetInstance(), false, false));
+
+            // latest day
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, LatestDayPeriod.GetInstance(), false, false));
+
+
+            // quarter
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, fixedOldestQuarter, false, false));
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, fixedOldestQuarter.Next() as FiscalQuarterPeriod, false, false));
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, fixedLatestQuarter, false, false));
+            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(ticker, ondemandOldestQuarter, false, false));
+            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(ticker, ondemandOldestQuarter.Next() as FiscalQuarterPeriod, false, false));
+            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(ticker, ondemandLatestQuarter, false, false));
+            Assert.AreEqual(SupportedTier.None, resolver.Resolve(ticker, ondemandLatestQuarter.Next() as FiscalQuarterPeriod, false, false));
+
+            // day
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, ondemandLatestDay, false, false));
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, fixedTierLatestDay, false, false));
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, fixedTierOldestDay, false, false));
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, fixedTierOldestDay.Next(), false, false));
+            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(ticker, fixedTierOldestDay.Prev(), false, false));
+            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(ticker, ondemandOldestDay, false, false));
+            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(ticker, ondemandOldestDay.Next(), false, false));
+            Assert.AreEqual(SupportedTier.None, resolver.Resolve(ticker, ondemandOldestDay.Prev(), false, false));
+            Assert.AreEqual(SupportedTier.None, resolver.Resolve(ticker, fixedTierLatestDay.Next(), false, false));
+            Assert.AreEqual(SupportedTier.None, resolver.Resolve(ticker, ondemandLatestDay.Next(), false, false));
         }
 
     }

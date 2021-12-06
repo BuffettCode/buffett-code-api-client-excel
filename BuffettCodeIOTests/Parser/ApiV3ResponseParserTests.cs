@@ -1,7 +1,9 @@
 using BuffettCodeAPIClient;
 using BuffettCodeCommon.Config;
+using BuffettCodeCommon.Period;
 using BuffettCodeIO.Property;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
 
 
@@ -24,14 +26,23 @@ namespace BuffettCodeIO.Parser.Tests
             Assert.AreEqual(company.GetDescription("url").Unit, "");
             Assert.AreEqual(company.GetValue("url"), @"http://www.kikkoman.co.jp/");
             Assert.AreEqual(company.GetValue("accounting_standard"), "IFRS");
-            var supportedQuarterRange = company.SupportedQuarterRanges;
-            Assert.AreEqual((uint)2004, supportedQuarterRange.OndemandTierRange.From.Year);
-            Assert.AreEqual((uint)1, supportedQuarterRange.OndemandTierRange.From.Quarter);
-            Assert.AreEqual((uint)2021, supportedQuarterRange.OndemandTierRange.To.Year);
-            Assert.AreEqual((uint)2, supportedQuarterRange.OndemandTierRange.To.Quarter);
-            Assert.AreEqual((uint)2016, supportedQuarterRange.FixedTierRange
+            var supportedQuarterRanges = company.SupportedQuarterRanges;
+
+            Assert.AreEqual((uint)2004, supportedQuarterRanges.OndemandTierRange.From.Year);
+            Assert.AreEqual((uint)1, supportedQuarterRanges.OndemandTierRange.From.Quarter);
+            Assert.AreEqual((uint)2021, supportedQuarterRanges.OndemandTierRange.To.Year);
+            Assert.AreEqual((uint)2, supportedQuarterRanges.OndemandTierRange.To.Quarter);
+            Assert.AreEqual((uint)2016, supportedQuarterRanges.FixedTierRange
                 .From.Year);
-            Assert.AreEqual((uint)3, supportedQuarterRange.FixedTierRange.From.Quarter);
+            Assert.AreEqual((uint)3, supportedQuarterRanges.FixedTierRange.From.Quarter);
+
+            var supportedDailyRanges = company.SupportedDailyRanges;
+            var today = DayPeriod.Create(DateTime.Today);
+            Assert.AreEqual(DayPeriod.Create(2016, 11, 15), supportedDailyRanges.FixedTierRange.From);
+            Assert.AreEqual(today, supportedDailyRanges.FixedTierRange.To);
+
+            Assert.AreEqual(DayPeriod.Create(2000, 4, 3), supportedDailyRanges.OndemandTierRange.From);
+            Assert.AreEqual(today, supportedDailyRanges.FixedTierRange.To);
         }
 
         [TestMethod()]
@@ -64,8 +75,18 @@ namespace BuffettCodeIO.Parser.Tests
         {
             var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData\ApiV3BulkQuarter.json"));
             var quarters = parser.ParseRange(DataTypeConfig.Quarter, json);
-            Assert.AreEqual(1, quarters.Count);
-            Assert.AreEqual(((Quarter)quarters[0]).Ticker, "6501");
+            Assert.AreEqual(4, quarters.Count);
+            // check ticker, fy, fq
+            Assert.AreEqual("6501", ((Quarter)quarters[0]).Ticker);
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2020, 1), quarters[0].GetPeriod());
+            Assert.AreEqual("6501", ((Quarter)quarters[1]).Ticker);
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2020, 2), quarters[1].GetPeriod());
+            Assert.AreEqual("6501", ((Quarter)quarters[2]).Ticker);
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2020, 3), quarters[2].GetPeriod());
+            Assert.AreEqual("6501", ((Quarter)quarters[3]).Ticker);
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2020, 4), quarters[3].GetPeriod());
+
+            // check value
             Assert.AreEqual(quarters[0].GetDescription("ceo_name").Label, "代表者名");
             Assert.AreEqual(quarters[0].GetDescription("employee_num").Unit, "人");
             Assert.AreEqual(quarters[0].GetValue("company_name"), "株式会社日立製作所");

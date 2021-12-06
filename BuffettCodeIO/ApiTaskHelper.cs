@@ -16,7 +16,7 @@ namespace BuffettCodeIO
 
         public SupportedTier FindAvailableTier(DataTypeConfig dataType, string ticker, IPeriod period, bool IsOndemandEndpointEnabled, bool isConfigureAwait, bool useCache)
         {
-            var tier = tierResolver.Resolve(dataType, ticker, period,
+            var tier = tierResolver.Resolve(ticker, period,
                 isConfigureAwait, useCache);
             switch (tier)
             {
