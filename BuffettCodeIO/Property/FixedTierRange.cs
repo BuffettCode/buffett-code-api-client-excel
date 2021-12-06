@@ -1,17 +1,13 @@
 using BuffettCodeCommon.Period;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuffettCodeIO.Property
 {
     public class FixedTierRange
     {
-        private FiscalQuarterPeriod oldestQuarter;
-        private FiscalQuarterPeriod latestQuarter;
-        private DayPeriod oldestDate;
+        private readonly FiscalQuarterPeriod oldestQuarter;
+        private readonly FiscalQuarterPeriod latestQuarter;
+        private readonly DayPeriod oldestDate;
 
         public FixedTierRange(FiscalQuarterPeriod oldestQuarter, FiscalQuarterPeriod latestQuarter, DayPeriod oldestDate
             )

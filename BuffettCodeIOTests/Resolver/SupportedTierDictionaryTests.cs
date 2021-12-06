@@ -76,7 +76,7 @@ namespace BuffettCodeIO.Resolver.Tests
             Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, fixedTierOldestDay));
             Assert.AreEqual(SupportedTier.FixedTier, dict.Get(ticker, (DayPeriod)fixedTierOldestDay.Next()));
             Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, (DayPeriod)fixedTierOldestDay.Prev()));
-            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, (DayPeriod)ondemandOldestDay));
+            Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, ondemandOldestDay));
             Assert.AreEqual(SupportedTier.OndemandTier, dict.Get(ticker, (DayPeriod)ondemandOldestDay.Next()));
             Assert.AreEqual(SupportedTier.None, dict.Get(ticker, (DayPeriod)ondemandOldestDay.Prev()));
             Assert.AreEqual(SupportedTier.None, dict.Get(ticker, (DayPeriod)fixedTierLatestDay.Next()));
