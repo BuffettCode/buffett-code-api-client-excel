@@ -3,7 +3,6 @@ namespace BuffettCodeExcelFunctions
     using BuffettCodeCommon;
     using BuffettCodeCommon.Config;
     using BuffettCodeCommon.Exception;
-    using BuffettCodeCommon.Period;
     using ExcelDna.Integration;
     using System;
 
@@ -45,7 +44,7 @@ namespace BuffettCodeExcelFunctions
             try
             {
                 // legacy mode
-                if (IsLegacyMode(parameter2))
+                if (IsLegacyMode(parameter1))
                 {
                     var fyParameter = parameter1;
                     var fqParameter = parameter2;
