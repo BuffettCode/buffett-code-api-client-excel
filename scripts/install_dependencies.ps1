@@ -7,6 +7,7 @@ $Packages = (
     "InstallerCA",
     "BuffettCodeExcelFunctions",
     "BuffettCodeExcelFunctionsTest",
+    "BuffettCodeExcelFunctionsTests",
     "BuffettCodeAPIClient",
     "BuffettCodeAPIClientTests",
     "BuffettCodeCommon",
