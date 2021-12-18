@@ -44,7 +44,7 @@ namespace BuffettCodeExcelFunctions
             try
             {
                 // legacy mode
-                if (IsLegacyMode(parameter2))
+                if (IsLegacyMode(parameter1))
                 {
                     var fyParameter = parameter1;
                     var fqParameter = parameter2;
