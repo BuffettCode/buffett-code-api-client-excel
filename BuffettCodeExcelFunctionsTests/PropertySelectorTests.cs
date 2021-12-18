@@ -1,12 +1,7 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BuffettCodeExcelFunctions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BuffettCodeCommon.Period;
 using BuffettCodeIO.Property;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace BuffettCodeExcelFunctions.Tests
 {
@@ -15,7 +10,7 @@ namespace BuffettCodeExcelFunctions.Tests
     {
         private static readonly string ticker = "1234";
         private static readonly FiscalQuarterPeriod period = FiscalQuarterPeriod.Create(2021, 3);
-        private static readonly IDictionary<string, string> properties = new Dictionary<string, string> { { "ceo_name", "Mr. CEO" }, {"net_sales", "1000000000" } };
+        private static readonly IDictionary<string, string> properties = new Dictionary<string, string> { { "ceo_name", "Mr. CEO" }, { "net_sales", "1000000000" } };
         private static readonly IDictionary<string, PropertyDescription> descriptions = new Dictionary<string, PropertyDescription> { { "ceo_name", new PropertyDescription("ceo_name", "代表者名", "なし") }, { "net_sales", new PropertyDescription("net_sales", "売上", "円") } };
 
 

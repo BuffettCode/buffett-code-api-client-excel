@@ -1,12 +1,12 @@
+using BuffettCodeCommon.Config;
 using BuffettCodeIO.Formatter;
 using BuffettCodeIO.Property;
-using BuffettCodeCommon.Config;
 
 namespace BuffettCodeExcelFunctions
 {
     public class PropertySelector
     {
-        public static string SelectFormattedValue(string propertyName, IApiResource apiResource, bool isRawValue = false, bool isWithUnit = false, bool useDefaultUnit=false)
+        public static string SelectFormattedValue(string propertyName, IApiResource apiResource, bool isRawValue = false, bool isWithUnit = false, bool useDefaultUnit = false)
         {
             string rawValue = apiResource.GetValue(propertyName);
 
