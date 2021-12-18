@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BCodeFunctionErrorHandler.cs" />
+    <Compile Include="BCodeExecutor.cs" />
+    <Compile Include="BCodeLegacyExecutor.cs" />
+    <Compile Include="DataTypeResolver.cs" />
+    <Compile Include="PeriodResolver.cs" />
     <Compile Include="PeriodBuilderForLegacy.cs" />
     <Compile Include="PropertySelector.cs" />
     <Compile Include="ApiResourceFetcher.cs" />
