@@ -67,6 +67,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ApiTaskHelperTests.cs" />
+    <Compile Include="Formatter\MillionYenFormatterTests.cs" />
+    <Compile Include="Formatter\PropertyFormatterFactoryTests.cs" />
     <Compile Include="Parser\ApiV3ResponseParserTests.cs" />
     <Compile Include="Property\DailyTests.cs" />
     <Compile Include="TabularOutput\CsvFileTabularWriterTests.cs" />
@@ -74,8 +76,6 @@
     <Compile Include="TabularOutput\TabularRowTests.cs" />
     <Compile Include="TabularOutput\TabularTests.cs" />
     <Compile Include="TabularOutput\FormattedValueSelectorTests.cs" />
-    <Compile Include="Formatter\CurrencyFormatterTests.cs" />
-    <Compile Include="Formatter\FormatterFactoryTests.cs" />
     <Compile Include="Formatter\NumericFormatterTests.cs" />
     <Compile Include="Formatter\RatioFormatterTests.cs" />
     <Compile Include="Parser\ApiResponseParserFactoryTests.cs" />

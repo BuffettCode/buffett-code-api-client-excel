@@ -56,7 +56,7 @@ namespace BuffettCodeIO.Resolver
             //  handle day
             else if (period is DayPeriod day)
             {
-                if (!quarterDict.Has(ticker))
+                if (!dailyDict.Has(ticker))
                 {
                     var company = GetCompany(ticker, isConfigureAwait, useCache);
                     dailyDict.Add(company.Ticker, company.SupportedDailyRanges);

@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiTaskHelper.cs" />
+    <Compile Include="Formatter\MillionYenFormatter.cs" />
     <Compile Include="Parser\ApiV3ResponseParser.cs" />
     <Compile Include="Property\FixedTierRange.cs" />
     <Compile Include="Property\Daily.cs" />
@@ -85,7 +86,6 @@
     <Compile Include="Property\SupportedPeriodRange.cs" />
     <Compile Include="Resolver\SupportedTierDictionary.cs" />
     <Compile Include="Resolver\PeriodSupportedTierResolver.cs" />
-    <Compile Include="Formatter\CurrencyFormatter.cs" />
     <Compile Include="Parser\ApiV2ResponseParser.cs" />
     <Compile Include="Parser\ApiResponseParserFactory.cs" />
     <Compile Include="Parser\FixedTierRangeParser.cs" />
