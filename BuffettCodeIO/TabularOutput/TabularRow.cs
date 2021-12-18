@@ -25,7 +25,7 @@ namespace BuffettCodeIO.TabularOutput
 
         public static TabularRow Create(string key, string name, string unit) => new TabularRow(key, name, unit);
 
-        public static TabularRow Create(PropertyDescription desc) => new TabularRow(desc.Name, desc.Label, desc.Unit);
+        public static TabularRow Create(PropertyDescription desc) => new TabularRow(desc.Name, desc.JpName, desc.Unit);
 
 
         public TabularRow Add(string value)

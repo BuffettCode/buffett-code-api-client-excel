@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 namespace BuffettCodeCommon.Config
 {
     public static class DefaultUnitConfig
     {
-        public static string[] MillionYen = new string[]{
+        public static HashSet<string> MillionYenProperties = new HashSet<string> {
             "accounts_payable",
             "accounts_receivable",
             "accrual",

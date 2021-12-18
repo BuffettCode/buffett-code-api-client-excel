@@ -32,7 +32,7 @@ namespace BuffettCodeIO.Property.Tests
         {
             var daily = CreateDaily(ticker, period, properties, descriptions);
             Assert.AreEqual("name", daily.GetDescription("key").Name);
-            Assert.AreEqual("label", daily.GetDescription("key").Label);
+            Assert.AreEqual("label", daily.GetDescription("key").JpName);
             Assert.AreEqual("unit", daily.GetDescription("key").Unit);
         }
 

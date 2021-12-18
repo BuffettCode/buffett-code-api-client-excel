@@ -15,12 +15,12 @@ namespace BuffettCodeExcelFunctions
             fetcher = new ApiResourceFetcher(version);
         }
 
-        public string Execute(string ticker, string fyParameter, string fqParameter, string propertyName, bool isRawValue = false, bool isPostfixUnit = false)
+        public string Execute(string ticker, string fyParameter, string fqParameter, string propertyName, bool isRawValue = false, bool isWithUnit = false)
         {
             var dataType = resolver.Resolve(propertyName);
             var period = new PeriodBuilderForLegacy().SetDataType(dataType).SetParameters(fyParameter, fqParameter).Build();
             var apiResource = fetcher.Fetch(dataType, ticker, period, true, true);
-            return PropertySelector.SelectFormattedValue(propertyName, apiResource, isRawValue, isPostfixUnit);
+            return PropertySelector.SelectFormattedValue(propertyName, apiResource, isRawValue, isWithUnit);
         }
     }
 }

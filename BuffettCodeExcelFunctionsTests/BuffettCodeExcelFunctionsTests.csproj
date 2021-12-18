@@ -59,6 +59,7 @@
     <Compile Include="DataTypeResolverTests.cs" />
     <Compile Include="PeriodResolverTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertySelectorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

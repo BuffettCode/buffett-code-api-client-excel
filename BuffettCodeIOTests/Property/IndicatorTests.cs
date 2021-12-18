@@ -34,7 +34,7 @@ namespace BuffettCodeIO.Property.Tests
         {
             var indicator = CreateIndicator(properties, descriptions);
             Assert.AreEqual("name", indicator.GetDescription("key").Name);
-            Assert.AreEqual("label", indicator.GetDescription("key").Label);
+            Assert.AreEqual("label", indicator.GetDescription("key").JpName);
             Assert.AreEqual("unit", indicator.GetDescription("key").Unit);
         }
 

@@ -22,7 +22,7 @@ namespace BuffettCodeIO.Parser.Tests
             var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData/ApiV3Company.json"));
             var company = (Company)parser.Parse(DataTypeConfig.Company, json);
             Assert.AreEqual(company.Ticker, "2801");
-            Assert.AreEqual(company.GetDescription("tosyo_33category").Label, "東証33業種");
+            Assert.AreEqual(company.GetDescription("tosyo_33category").JpName, "東証33業種");
             Assert.AreEqual(company.GetDescription("url").Unit, "");
             Assert.AreEqual(company.GetValue("url"), @"http://www.kikkoman.co.jp/");
             Assert.AreEqual(company.GetValue("accounting_standard"), "IFRS");
@@ -52,7 +52,7 @@ namespace BuffettCodeIO.Parser.Tests
             var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData\ApiV3Quarter.json"));
             var quarter = (Quarter)parser.Parse(DataTypeConfig.Quarter, json);
             Assert.AreEqual(quarter.Ticker, "6501");
-            Assert.AreEqual(quarter.GetDescription("ceo_name").Label, "代表者名");
+            Assert.AreEqual(quarter.GetDescription("ceo_name").JpName, "代表者名");
             Assert.AreEqual(quarter.GetDescription("employee_num").Unit, "人");
             Assert.AreEqual(quarter.GetValue("company_name"), "株式会社日立製作所");
             Assert.AreEqual(quarter.GetValue("current_liabilities"), "4596930000000");
@@ -63,7 +63,7 @@ namespace BuffettCodeIO.Parser.Tests
         {
             var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData\ApiV3Daily.json"));
             var daily = (Daily)parser.Parse(DataTypeConfig.Daily, json);
-            Assert.AreEqual(daily.GetDescription("day").Label, "日付");
+            Assert.AreEqual(daily.GetDescription("day").JpName, "日付");
             Assert.AreEqual(daily.GetDescription("trading_volume").Unit, "株");
             Assert.AreEqual(daily.GetValue("market_capital"), "4464984517983");
             Assert.AreEqual(daily.GetValue("cash_market_capital_ratio"), "15.55");
@@ -87,7 +87,7 @@ namespace BuffettCodeIO.Parser.Tests
             Assert.AreEqual(FiscalQuarterPeriod.Create(2020, 4), quarters[3].GetPeriod());
 
             // check value
-            Assert.AreEqual(quarters[0].GetDescription("ceo_name").Label, "代表者名");
+            Assert.AreEqual(quarters[0].GetDescription("ceo_name").JpName, "代表者名");
             Assert.AreEqual(quarters[0].GetDescription("employee_num").Unit, "人");
             Assert.AreEqual(quarters[0].GetValue("company_name"), "株式会社日立製作所");
         }
