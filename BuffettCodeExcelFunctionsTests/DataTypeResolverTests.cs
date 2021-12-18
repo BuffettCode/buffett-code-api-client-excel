@@ -1,6 +1,6 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace BuffettCodeExcelFunctions.Tests
 {
     [TestClass()]

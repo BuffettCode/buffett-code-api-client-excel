@@ -1,5 +1,5 @@
-using BuffettCodeCommon.Period;
 using BuffettCodeCommon.Config;
+using BuffettCodeCommon.Period;
 using System.Text.RegularExpressions;
 
 namespace BuffettCodeExcelFunctions
