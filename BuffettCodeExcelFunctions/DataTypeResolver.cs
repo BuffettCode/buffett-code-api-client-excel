@@ -1,35 +1,35 @@
-using BuffettCodeCommon.Period;
 using BuffettCodeCommon.Config;
+using BuffettCodeCommon.Exception;
 using System.Text.RegularExpressions;
+
 
 namespace BuffettCodeExcelFunctions
 {
-    public class PeriodResolver
+    public class DataTypeResolver
     {
-        public static IPeriod Resolve(string periodParam)
+        public static DataTypeConfig Resolve(string periodParam)
         {
             // LYLQ
             if (periodParam.Equals("LYLQ"))
             {
-                return LatestFiscalQuarterPeriod.GetInstance();
+                return DataTypeConfig.Quarter;
             }
             else if (periodParam.Equals("latest"))
             {
-                return LatestDayPeriod.GetInstance();
+                return DataTypeConfig.Daily;
             }
             else if (Regex.IsMatch(periodParam, PeriodRegularExpressionConfig.FiscalQuarterPattern))
             {
-                return FiscalQuarterPeriod.Parse(periodParam);
+                return DataTypeConfig.Quarter;
             }
             else if (Regex.IsMatch(periodParam, PeriodRegularExpressionConfig.DayPattern))
             {
-                return DayPeriod.Parse(periodParam);
+                return DataTypeConfig.Daily;
             }
             else
             {
-                return null;
+                throw new ValidationError($"{periodParam} is not supported input format");
             }
         }
-
     }
 }
