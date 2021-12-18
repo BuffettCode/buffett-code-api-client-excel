@@ -20,7 +20,7 @@ namespace BuffettCodeExcelFunctions
             var dataType = resolver.Resolve(propertyName);
             var period = new PeriodBuilderForLegacy().SetDataType(dataType).SetParameters(fyParameter, fqParameter).Build();
             var apiResource = fetcher.Fetch(dataType, ticker, period, true, true);
-            return PropertySelector.SelectFormattedValue(propertyName, apiResource, isRawValue, isWithUnit);
+            return PropertySelector.SelectFormattedValue(propertyName, apiResource, isRawValue, isWithUnit, false);
         }
     }
 }

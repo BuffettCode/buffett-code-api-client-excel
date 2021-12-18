@@ -16,7 +16,7 @@ namespace BuffettCodeExcelFunctions
         {
             var apiResource = fetcher.Fetch(dataType, ticker, period, true, true);
             // todo use default unit config
-            return PropertySelector.SelectFormattedValue(propertyName, apiResource, isRawValue, isWithUnit);
+            return PropertySelector.SelectFormattedValue(propertyName, apiResource, isRawValue, isWithUnit, true);
         }
     }
 
