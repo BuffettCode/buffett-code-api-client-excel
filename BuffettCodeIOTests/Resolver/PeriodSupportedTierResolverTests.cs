@@ -10,7 +10,7 @@ namespace BuffettCodeIO.Resolver.Tests
     {
         private static readonly string ticker = "1234";
         private static readonly FiscalQuarterPeriod ondemandOldestQuarter = FiscalQuarterPeriod.Create(2010, 1);
-        private static readonly FiscalQuarterPeriod ondemandLatestQuarter = FiscalQuarterPeriod.Create(2021, 4);
+        private static readonly FiscalQuarterPeriod ondemandLatestQuarter = FiscalQuarterPeriod.Create(2021, 3);
 
         private static readonly DayPeriod ondemandOldestDay = DayPeriod.Create(2010, 1, 1);
         private static readonly DayPeriod ondemandLatestDay = DayPeriod.Create(2021, 1, 1);
@@ -44,8 +44,14 @@ namespace BuffettCodeIO.Resolver.Tests
             // snapshot
             Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, Snapshot.GetInstance(), false, false));
 
-            // latest quarter
-            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, LatestFiscalQuarterPeriod.GetInstance(), false, false));
+            // relative quarter periods
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, RelativeFiscalQuarterPeriod.CreateLatest(), false, false));
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, RelativeFiscalQuarterPeriod.Create(5, 1), false, false));
+            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(ticker, RelativeFiscalQuarterPeriod.Create(5, 2), false, false));
+            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(ticker, RelativeFiscalQuarterPeriod.Create(5, 3), false, false));
+            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(ticker, RelativeFiscalQuarterPeriod.Create(11, 2), false, false));
+            Assert.AreEqual(SupportedTier.None, resolver.Resolve(ticker, RelativeFiscalQuarterPeriod.Create(11, 3), false, false));
+            Assert.AreEqual(SupportedTier.None, resolver.Resolve(ticker, RelativeFiscalQuarterPeriod.Create(11, 4), false, false));
 
             // latest day
             Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, LatestDayPeriod.GetInstance(), false, false));
@@ -57,7 +63,7 @@ namespace BuffettCodeIO.Resolver.Tests
             Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, fixedLatestQuarter, false, false));
             Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(ticker, ondemandOldestQuarter, false, false));
             Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(ticker, ondemandOldestQuarter.Next() as FiscalQuarterPeriod, false, false));
-            Assert.AreEqual(SupportedTier.OndemandTier, resolver.Resolve(ticker, ondemandLatestQuarter, false, false));
+            Assert.AreEqual(SupportedTier.FixedTier, resolver.Resolve(ticker, ondemandLatestQuarter, false, false));
             Assert.AreEqual(SupportedTier.None, resolver.Resolve(ticker, ondemandLatestQuarter.Next() as FiscalQuarterPeriod, false, false));
 
             // day

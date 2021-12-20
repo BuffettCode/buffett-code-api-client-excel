@@ -1,7 +1,6 @@
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
 using BuffettCodeCommon.Period;
-using System.Text.RegularExpressions;
 
 namespace BuffettCodeExcelFunctions
 {
@@ -9,20 +8,19 @@ namespace BuffettCodeExcelFunctions
     {
         public static IPeriod Resolve(string periodParam)
         {
-            // LYLQ
-            if (periodParam.Equals("LYLQ"))
-            {
-                return LatestFiscalQuarterPeriod.GetInstance();
-            }
-            else if (periodParam.Equals("latest"))
+            if (periodParam.Equals("latest"))
             {
                 return LatestDayPeriod.GetInstance();
             }
-            else if (Regex.IsMatch(periodParam, PeriodRegularExpressionConfig.FiscalQuarterPattern))
+            else if (PeriodRegularExpressionConfig.FiscalQuarterRegex.IsMatch(periodParam))
             {
                 return FiscalQuarterPeriod.Parse(periodParam);
             }
-            else if (Regex.IsMatch(periodParam, PeriodRegularExpressionConfig.DayPattern))
+            else if (PeriodRegularExpressionConfig.RelativeFiscalQuarterRegex.IsMatch(periodParam))
+            {
+                return RelativeFiscalQuarterPeriod.Parse(periodParam);
+            }
+            else if (PeriodRegularExpressionConfig.DayRegex.IsMatch(periodParam))
             {
                 return DayPeriod.Parse(periodParam);
             }

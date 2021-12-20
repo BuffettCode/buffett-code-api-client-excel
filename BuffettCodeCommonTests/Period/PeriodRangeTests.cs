@@ -135,6 +135,22 @@ namespace BuffettCodeCommon.Period.Tests
             Assert.IsFalse(range.Includes(FiscalQuarterPeriod.Create(2019, 4)));
         }
 
+        [TestMethod()]
+        public void TotalGapTest()
+        {
+            // quarter
+            var fromFqp = FiscalQuarterPeriod.Create(2020, 1);
+            var toFqp = FiscalQuarterPeriod.Create(2021, 2);
+            Assert.AreEqual((uint)5, PeriodRange<FiscalQuarterPeriod>.Create(fromFqp, toFqp).TotalGap());
+
+
+            // day
+            var fromDay = DayPeriod.Create(2016, 1, 1);
+            var toDay = DayPeriod.Create(2016, 2, 1);
+            Assert.AreEqual((uint)31, PeriodRange<DayPeriod>.Create(fromDay, toDay).TotalGap());
+
+        }
+
     }
 
 

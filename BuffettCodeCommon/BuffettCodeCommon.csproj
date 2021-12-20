@@ -66,7 +66,7 @@
     <Compile Include="Exception\NotSupportedTierException.cs" />
     <Compile Include="Exception\NotSupportedDataTypeException.cs" />
     <Compile Include="Exception\PropertyNotFoundException.cs" />
-    <Compile Include="Period\LatestFiscalQuarterPeriod.cs" />
+    <Compile Include="Period\RelativeFiscalQuarterPeriod.cs" />
     <Compile Include="Period\LatestDayPeriod.cs" />
     <Compile Include="Period\ComparablePeriodUtil.cs" />
     <Compile Include="Period\PeriodRange.cs" />

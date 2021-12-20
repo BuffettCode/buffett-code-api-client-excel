@@ -22,7 +22,7 @@ namespace BuffettCodeIO.Resolver
             // 適当にAPI をたたいて description を取得する
             var quarter = parser.Parse(
                 DataTypeConfig.Quarter,
-                apiClient.Get(DataTypeConfig.Quarter, ApiRequestParamConfig.ValueRepresentativeJpTicker, LatestFiscalQuarterPeriod.GetInstance(), false, false, true)
+                apiClient.Get(DataTypeConfig.Quarter, ApiRequestParamConfig.ValueRepresentativeJpTicker, RelativeFiscalQuarterPeriod.CreateLatest(), false, false, true)
                 );
             var daily = parser.Parse(
                 DataTypeConfig.Daily,

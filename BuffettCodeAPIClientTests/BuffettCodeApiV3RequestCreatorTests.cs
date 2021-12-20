@@ -60,11 +60,18 @@ namespace BuffettCodeAPIClient.Tests
             Assert.AreEqual(fiscalQuarter.ToString(), request.Parameters["fq"]);
 
             // latest case
-            request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(ticker, LatestFiscalQuarterPeriod.GetInstance(), false);
+            request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(ticker, RelativeFiscalQuarterPeriod.CreateLatest(), false);
             Assert.AreEqual(request.EndPoint, BuffettCodeApiV2Config.ENDPOINT_QUARTER);
             Assert.AreEqual(ticker, request.Parameters["ticker"]);
             Assert.AreEqual("LY", request.Parameters["fy"]);
             Assert.AreEqual("LQ", request.Parameters["fq"]);
+
+            // relative case
+            request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(ticker, RelativeFiscalQuarterPeriod.Create(1, 2), false);
+            Assert.AreEqual(request.EndPoint, BuffettCodeApiV2Config.ENDPOINT_QUARTER);
+            Assert.AreEqual(ticker, request.Parameters["ticker"]);
+            Assert.AreEqual("LY-1", request.Parameters["fy"]);
+            Assert.AreEqual("LQ-2", request.Parameters["fq"]);
 
             // validation Errors
             Assert.ThrowsException<ValidationError>(

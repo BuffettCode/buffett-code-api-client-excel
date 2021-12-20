@@ -1,4 +1,5 @@
 using BuffettCodeCommon.Period;
+using System;
 
 namespace BuffettCodeIO.Property
 {
@@ -16,5 +17,10 @@ namespace BuffettCodeIO.Property
 
         public PeriodRange<T> FixedTierRange => fixedTierRange;
         public PeriodRange<T> OndemandTierRange => ondemandTierRange;
+
+        public uint FixedTierRengeLength() => (uint)Math.Abs(fixedTierRange.TotalGap());
+
+        public uint OndemandTierRengeLength() => (uint)Math.Abs(ondemandTierRange.TotalGap());
+
     }
 }

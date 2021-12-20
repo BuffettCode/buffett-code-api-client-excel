@@ -49,5 +49,30 @@ namespace BuffettCodeIO.Resolver
             }
         }
 
+        public uint FixedTierRengeLength(string ticker)
+        {
+            JpTickerValidator.Validate(ticker);
+            if (!Has(ticker))
+            {
+                throw new KeyNotFoundException($"ticker={ticker} is not contained.");
+            }
+            else
+            {
+                return tickerTierDict[ticker].FixedTierRengeLength();
+            }
+        }
+
+        public uint OndemandTierRengeLength(string ticker)
+        {
+            JpTickerValidator.Validate(ticker);
+            if (!Has(ticker))
+            {
+                throw new KeyNotFoundException($"ticker={ticker} is not contained.");
+            }
+            else
+            {
+                return tickerTierDict[ticker].OndemandTierRengeLength();
+            }
+        }
     }
 }

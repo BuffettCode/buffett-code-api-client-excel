@@ -32,7 +32,7 @@ namespace BuffettCodeExcelFunctions
                 case DataTypeConfig.Quarter:
                     if (string.IsNullOrWhiteSpace(parameter1) && string.IsNullOrWhiteSpace(parameter2))
                     {
-                        return LatestFiscalQuarterPeriod.GetInstance();
+                        return RelativeFiscalQuarterPeriod.CreateLatest();
                     }
                     else
                     {

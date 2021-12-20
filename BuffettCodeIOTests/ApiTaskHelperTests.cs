@@ -56,7 +56,7 @@ namespace BuffettCodeIO.Tests
             Assert.AreEqual(SupportedTier.OndemandTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandOldestQuarter, true, true, true));
             Assert.AreEqual(SupportedTier.OndemandTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandOldestQuarter.Next() as FiscalQuarterPeriod, true, true, true));
             Assert.AreEqual(SupportedTier.OndemandTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandLatestQuarter, true, true, true));
-            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, LatestFiscalQuarterPeriod.GetInstance(), true, true, true));
+            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, RelativeFiscalQuarterPeriod.CreateLatest(), true, true, true));
 
             Assert.ThrowsException<NotSupportedTierException>(() => helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandLatestQuarter.Next() as FiscalQuarterPeriod, true, true, true));
 
@@ -80,7 +80,7 @@ namespace BuffettCodeIO.Tests
             Assert.ThrowsException<NotSupportedTierException>(() => helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandOldestQuarter.Next() as FiscalQuarterPeriod, false, true, true));
             Assert.ThrowsException<NotSupportedTierException>(() => helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandLatestQuarter, false, true, true));
             Assert.ThrowsException<NotSupportedTierException>(() => helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, ondemandLatestQuarter.Next() as FiscalQuarterPeriod, false, true, true));
-            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, LatestFiscalQuarterPeriod.GetInstance(), false, true, true));
+            Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Quarter, ticker, RelativeFiscalQuarterPeriod.CreateLatest(), false, true, true));
 
             // daily
             Assert.AreEqual(SupportedTier.FixedTier, helper.FindAvailableTier(DataTypeConfig.Daily, ticker, fixedTierOldestDay, false, true, true));
