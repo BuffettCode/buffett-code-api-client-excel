@@ -14,7 +14,7 @@ namespace BuffettCodeIO.Property.Tests
         {
             var empty = PropertyDescription.Empty();
             Assert.AreEqual("", empty.Name);
-            Assert.AreEqual("", empty.Label);
+            Assert.AreEqual("", empty.JpName);
             Assert.AreEqual("", empty.Unit);
         }
 

@@ -12,11 +12,11 @@ namespace BuffettCodeExcelFunctions
             fetcher = new ApiResourceFetcher(version);
         }
 
-        public string Execute(string ticker, DataTypeConfig dataType, IPeriod period, string propertyName, bool isRawValue = false, bool isPostfixUnit = false)
+        public string Execute(string ticker, DataTypeConfig dataType, IPeriod period, string propertyName, bool isRawValue = false, bool isWithUnit = false)
         {
             var apiResource = fetcher.Fetch(dataType, ticker, period, true, true);
             // todo use default unit config
-            return PropertySelector.SelectFormattedValue(propertyName, apiResource, isRawValue, isPostfixUnit);
+            return PropertySelector.SelectFormattedValue(propertyName, apiResource, isRawValue, isWithUnit, true);
         }
     }
 

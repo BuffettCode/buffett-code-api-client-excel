@@ -20,7 +20,7 @@ namespace BuffettCodeIO.Property
         /// <summary>
         /// 日本語の名称
         /// </summary>
-        public string Label { get; set; }
+        public string JpName { get; set; }
 
         private string unit;
 
@@ -33,10 +33,10 @@ namespace BuffettCodeIO.Property
             set { unit = value; }
         }
 
-        public PropertyDescription(string name, string label, string unit)
+        public PropertyDescription(string name, string jpName, string unit)
         {
             Name = name;
-            Label = label;
+            JpName = jpName;
             Unit = unit;
         }
 
@@ -45,7 +45,7 @@ namespace BuffettCodeIO.Property
             return new PropertyDescription("", "", "");
         }
 
-        public override int GetHashCode() => (Name, Label, Unit).GetHashCode();
+        public override int GetHashCode() => (Name, JpName, Unit).GetHashCode();
 
         public override bool Equals(object obj)
         {
@@ -65,7 +65,7 @@ namespace BuffettCodeIO.Property
             {
                 var pd = (PropertyDescription)obj;
                 return this.Name.Equals(pd.Name)
-                    && this.Label.Equals(pd.Label)
+                    && this.JpName.Equals(pd.JpName)
                     && this.Unit.Equals(pd.Unit);
             }
         }

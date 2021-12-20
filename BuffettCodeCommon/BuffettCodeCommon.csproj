@@ -49,6 +49,7 @@
     <Compile Include="BuffettCodeAddinCache.cs" />
     <Compile Include="Config\ApiRequestParamConfig.cs" />
     <Compile Include="BuffettCodeExceptionFinder.cs" />
+    <Compile Include="Config\DefaultUnitConfig.cs" />
     <Compile Include="Config\PeriodRegularExpressionConfig.cs" />
     <Compile Include="Config\SupportedTier.cs" />
     <Compile Include="Config\TabularOutputConfig.cs" />

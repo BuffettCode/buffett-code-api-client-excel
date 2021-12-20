@@ -21,7 +21,7 @@ namespace BuffettCodeIO.Parser.Tests
             var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData\ApiV2Quarter.json"));
             var quarter = (Quarter)parser.Parse(DataTypeConfig.Quarter, json);
             Assert.AreEqual(quarter.Ticker, "2371");
-            Assert.AreEqual(quarter.GetDescription("ceo_name").Label, "代表者名");
+            Assert.AreEqual(quarter.GetDescription("ceo_name").JpName, "代表者名");
             Assert.AreEqual(quarter.GetDescription("employee_num").Unit, "人");
             Assert.AreEqual(quarter.GetValue("company_name"), "株式会社カカクコム");
             Assert.AreEqual(quarter.GetValue("current_liabilities"), "7132000000");
@@ -38,7 +38,7 @@ namespace BuffettCodeIO.Parser.Tests
             var quarter2 = (Quarter)quarters[1];
 
             Assert.AreEqual(quarter1.Ticker, "2371");
-            Assert.AreEqual(quarter1.GetDescription("ceo_name").Label, "代表者名");
+            Assert.AreEqual(quarter1.GetDescription("ceo_name").JpName, "代表者名");
             Assert.AreEqual(quarter1.GetDescription("employee_num").Unit, "人");
             Assert.AreEqual(quarter1.GetValue("company_name"), "株式会社カカクコム");
             Assert.AreEqual(quarter1.GetValue("fiscal_year"), "2018");
@@ -60,7 +60,7 @@ namespace BuffettCodeIO.Parser.Tests
             var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData/ApiV2Indicator.json"));
             var indicator = (Indicator)parser.Parse(DataTypeConfig.Indicator, json);
             Assert.AreEqual(indicator.Ticker, "2371");
-            Assert.AreEqual(indicator.GetDescription("eps_actual").Label, "EPS（実績）");
+            Assert.AreEqual(indicator.GetDescription("eps_actual").JpName, "EPS（実績）");
             Assert.AreEqual(indicator.GetDescription("pbr").Unit, "倍");
             Assert.AreEqual(indicator.GetValue("stockprice"), "3450");
             Assert.AreEqual(indicator.GetValue("num_of_shares"), "206003242");
@@ -73,7 +73,7 @@ namespace BuffettCodeIO.Parser.Tests
             var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData/ApiV2Company.json"));
             var company = (Company)parser.Parse(DataTypeConfig.Company, json);
             Assert.AreEqual(company.Ticker, "2371");
-            Assert.AreEqual(company.GetDescription("tosyo_33category").Label, "東証33業種");
+            Assert.AreEqual(company.GetDescription("tosyo_33category").JpName, "東証33業種");
             Assert.AreEqual(company.GetDescription("url").Unit, "");
             Assert.AreEqual(company.GetValue("url"), @"http://corporate.kakaku.com/");
             Assert.AreEqual(company.GetValue("accounting_standard"), "IFRS");
@@ -102,7 +102,7 @@ namespace BuffettCodeIO.Parser.Tests
             var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData/ApiV2Company2.json"));
             var company = (Company)parser.Parse(DataTypeConfig.Company, json);
             Assert.AreEqual(company.Ticker, "2801");
-            Assert.AreEqual(company.GetDescription("tosyo_33category").Label, "東証33業種");
+            Assert.AreEqual(company.GetDescription("tosyo_33category").JpName, "東証33業種");
             Assert.AreEqual(company.GetDescription("url").Unit, "");
             Assert.AreEqual(company.GetValue("url"), @"http://www.kikkoman.co.jp/");
             Assert.AreEqual(company.GetValue("accounting_standard"), "日本");

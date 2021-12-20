@@ -59,6 +59,7 @@
     <Compile Include="DataTypeResolverTests.cs" />
     <Compile Include="PeriodResolverTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertySelectorTests.cs" />
     <Compile Include="UserDefinedFunctionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +73,10 @@
     <ProjectReference Include="..\BuffettCodeExcelFunctions\BuffettCodeExcelFunctions.csproj">
       <Project>{5DE695F0-1E03-4337-B8CE-C99EB350F6D7}</Project>
       <Name>BuffettCodeExcelFunctions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BuffettCodeIO\BuffettCodeIO.csproj">
+      <Project>{44a5bfab-acd6-492f-b0c6-29e0ea07a90a}</Project>
+      <Name>BuffettCodeIO</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

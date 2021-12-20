@@ -50,8 +50,8 @@ namespace BuffettCodeExcelFunctions
                     var fqParameter = parameter2;
                     propertyName = parameter3;
                     var isRawValue = ParseBoolParameter(parameter4, false);
-                    var isPostfixUnit = ParseBoolParameter(parameter5, false);
-                    return bCodeLegacyExecutor.Execute(ticker, fyParameter, fqParameter, propertyName, isRawValue, isPostfixUnit);
+                    var isWithUnit = ParseBoolParameter(parameter5, false);
+                    return bCodeLegacyExecutor.Execute(ticker, fyParameter, fqParameter, propertyName, isRawValue, isWithUnit);
                 }
                 // current mode
                 else
@@ -60,8 +60,8 @@ namespace BuffettCodeExcelFunctions
                     var period = PeriodResolver.Resolve(parameter1);
                     var dataType = DataTypeResolver.Resolve(parameter1);
                     var isRawValue = ParseBoolParameter(parameter3, false);
-                    var isPostfixUnit = ParseBoolParameter(parameter4, false);
-                    return bCodeExecutor.Execute(ticker, dataType, period, propertyName, isRawValue, isPostfixUnit);
+                    var isWithUnit = ParseBoolParameter(parameter4, false);
+                    return bCodeExecutor.Execute(ticker, dataType, period, propertyName, isRawValue, isWithUnit);
                 }
             }
             catch (Exception e)

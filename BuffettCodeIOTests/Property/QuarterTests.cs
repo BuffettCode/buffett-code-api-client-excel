@@ -52,7 +52,7 @@ namespace BuffettCodeIO.Property.Tests
         {
             var quarter = CreateQuarter(ticker, period, properties, descriptions);
             Assert.AreEqual("name", quarter.GetDescription("key").Name);
-            Assert.AreEqual("label", quarter.GetDescription("key").Label);
+            Assert.AreEqual("label", quarter.GetDescription("key").JpName);
             Assert.AreEqual("unit", quarter.GetDescription("key").Unit);
         }
 

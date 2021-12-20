@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace BuffettCodeIO.Formatter.Tests
 {
     [TestClass()]
-    public class FormatterFactoryTests
+    public class PropertyFormatterFactoryTests
     {
         [TestMethod]
         public void TestCreate()
@@ -13,9 +13,9 @@ namespace BuffettCodeIO.Formatter.Tests
 
             // 通貨
             formatter = CreateFormatter("dividend", "配当金", "円");
-            Assert.IsTrue(formatter is CurrencyFormatter);
+            Assert.IsTrue(formatter is NumericFormatter);
             formatter = CreateFormatter("assets", "総資産", "百万円");
-            Assert.IsTrue(formatter is CurrencyFormatter);
+            Assert.IsTrue(formatter is MillionYenFormatter);
 
             // 数値
             formatter = CreateFormatter("issued_share_num", "発行済株式総数", "株");
@@ -47,7 +47,6 @@ namespace BuffettCodeIO.Formatter.Tests
             PropertyDescription description = new PropertyDescription(name, label, unit);
             return PropertyFormatterFactory.Create(description);
         }
-
 
     }
 }
