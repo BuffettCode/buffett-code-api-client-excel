@@ -38,20 +38,14 @@ namespace BuffettCodeIO.Resolver
             {
                 return SupportedTier.FixedTier;
             }
-            // latest fiscal quarter is always fixed tier
-            else if (period is LatestFiscalQuarterPeriod)
-            {
-                return SupportedTier.FixedTier;
-            }
             // handle fiscal quarter
-            else if (period is FiscalQuarterPeriod fyFq)
+            else if (period is FiscalQuarterPeriod fqp)
             {
-                if (!quarterDict.Has(ticker))
-                {
-                    var company = GetCompany(ticker, isConfigureAwait, useCache);
-                    quarterDict.Add(company.Ticker, company.SupportedQuarterRanges);
-                }
-                return quarterDict.Get(ticker, fyFq);
+                return ResolveQuarterPeriod(ticker, fqp, isConfigureAwait, useCache);
+            }
+            else if (period is RelativeFiscalQuarterPeriod rfqp)
+            {
+                return ResolveQuarterPeriod(ticker, rfqp, isConfigureAwait, useCache);
             }
             //  handle day
             else if (period is DayPeriod day)
@@ -68,6 +62,38 @@ namespace BuffettCodeIO.Resolver
                 throw new NotSupportedTierException($"period={period} is not supported");
             }
 
+        }
+
+        private SupportedTier ResolveQuarterPeriod(string ticker, RelativeFiscalQuarterPeriod period, bool isConfigureAwait, bool useCache)
+        {
+            if (!quarterDict.Has(ticker))
+            {
+                var company = GetCompany(ticker, isConfigureAwait, useCache);
+                quarterDict.Add(company.Ticker, company.SupportedQuarterRanges);
+            }
+
+            if (period.TotalPrevQuarters <= quarterDict.FixedTierRengeLength(ticker))
+            {
+                return SupportedTier.FixedTier;
+            }
+            else if (period.TotalPrevQuarters <= quarterDict.OndemandTierRengeLength(ticker))
+            {
+                return SupportedTier.OndemandTier;
+            }
+            else
+            {
+                return SupportedTier.None;
+            }
+        }
+
+        private SupportedTier ResolveQuarterPeriod(string ticker, FiscalQuarterPeriod period, bool isConfigureAwait, bool useCache)
+        {
+            if (!quarterDict.Has(ticker))
+            {
+                var company = GetCompany(ticker, isConfigureAwait, useCache);
+                quarterDict.Add(company.Ticker, company.SupportedQuarterRanges);
+            }
+            return quarterDict.Get(ticker, period);
         }
 
         private Company GetCompany(string ticker, bool isConfigureAwait, bool useCache)

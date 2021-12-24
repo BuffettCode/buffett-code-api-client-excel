@@ -1,4 +1,3 @@
-using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
 using System;
 using System.Collections.Generic;
@@ -86,9 +85,7 @@ namespace BuffettCodeCommon.Period
             }
         }
 
-        private Dictionary<string, string> ToApiParameter() => new Dictionary<string, string>() { { ApiRequestParamConfig.KeyFrom, from
-        .ToString() }, { ApiRequestParamConfig.KeyTo, to.ToString() } };
-
+        public uint TotalGap() => (uint)ComparablePeriodUtil.GetGap(from, to);
     }
 
 }

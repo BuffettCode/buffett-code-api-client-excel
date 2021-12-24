@@ -14,10 +14,12 @@ namespace BuffettCodeExcelFunctions.Tests
 
             // LYLQ
             Assert.AreEqual(DataTypeConfig.Quarter, DataTypeResolver.Resolve("LYLQ"));
+            Assert.AreEqual(DataTypeConfig.Quarter, DataTypeResolver.Resolve("LY-1LQ"));
+            Assert.AreEqual(DataTypeConfig.Quarter, DataTypeResolver.Resolve("LYLQ-1"));
+            Assert.AreEqual(DataTypeConfig.Quarter, DataTypeResolver.Resolve("LY-1LQ-2"));
 
             // Quarter
             Assert.AreEqual(DataTypeConfig.Quarter, DataTypeResolver.Resolve("2020Q1"));
-
             // Daily
             Assert.AreEqual(DataTypeConfig.Daily, DataTypeResolver.Resolve("2020-01-01"));
 
