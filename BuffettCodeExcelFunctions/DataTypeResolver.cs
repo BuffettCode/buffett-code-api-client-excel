@@ -8,21 +8,13 @@ namespace BuffettCodeExcelFunctions
     {
         public static DataTypeConfig Resolve(string periodParam)
         {
-            if (periodParam.Equals("latest"))
+            if (PeriodRegularExpressionConfig.BCodeUdfDailyInputRegex.IsMatch(periodParam))
             {
                 return DataTypeConfig.Daily;
             }
-            else if (PeriodRegularExpressionConfig.FiscalQuarterRegex.IsMatch(periodParam))
+            else if (PeriodRegularExpressionConfig.BCodeUdfFiscalQuarterInputRegex.IsMatch(periodParam))
             {
                 return DataTypeConfig.Quarter;
-            }
-            else if (PeriodRegularExpressionConfig.RelativeFiscalQuarterRegex.IsMatch(periodParam))
-            {
-                return DataTypeConfig.Quarter;
-            }
-            else if (PeriodRegularExpressionConfig.DayRegex.IsMatch(periodParam))
-            {
-                return DataTypeConfig.Daily;
             }
             else
             {

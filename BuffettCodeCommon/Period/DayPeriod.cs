@@ -1,6 +1,4 @@
-using BuffettCodeCommon.Config;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 
 namespace BuffettCodeCommon.Period
@@ -79,10 +77,6 @@ namespace BuffettCodeCommon.Period
         public IComparablePeriod Next() => Create(Value.AddDays(1));
 
         public IComparablePeriod Prev() => Create(Value.AddDays(-1));
-
-        public Dictionary<string, string> ToV3Parameter()
-         => new Dictionary<string, string>() { { ApiRequestParamConfig.KeyDate, ToString() }, };
-
     }
 
 

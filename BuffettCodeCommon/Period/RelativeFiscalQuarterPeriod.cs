@@ -1,7 +1,6 @@
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
 using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace BuffettCodeCommon.Period
@@ -21,7 +20,7 @@ namespace BuffettCodeCommon.Period
 
         public static RelativeFiscalQuarterPeriod CreateLatest() => new RelativeFiscalQuarterPeriod(0, 0);
 
-        private static uint ParseRelativeValue(string groupName, Match match)
+        public static uint ParseRelativeValue(string groupName, Match match)
         {
             var prevStr = match.Groups[groupName].Value.Trim();
             return string.IsNullOrEmpty(prevStr) ? 0 : uint.Parse(prevStr);
@@ -97,11 +96,6 @@ namespace BuffettCodeCommon.Period
             return new RelativeFiscalQuarterPeriod(prevYears, prevQuarters - 1);
         }
 
-        private Dictionary<string, string> ToParamater() => new Dictionary<string, string>() { { ApiRequestParamConfig.KeyFy, FiscalYearAsString() }, { ApiRequestParamConfig.KeyFq, FiscalQuarterAsString() } };
-
-        public Dictionary<string, string> ToV2Parameter() => ToParamater();
-        public Dictionary<string, string> ToV3Parameter() => ToParamater();
-
         public override string ToString() => $"{FiscalYearAsString()}{FiscalQuarterAsString()}";
 
         public override int GetHashCode() => (prevYears, prevQuarters).GetHashCode();
@@ -128,6 +122,8 @@ namespace BuffettCodeCommon.Period
             }
         }
 
+        public uint PrevYears => prevYears;
+        public uint PrevQuarters => prevQuarters;
 
     }
 }

@@ -12,6 +12,8 @@ namespace BuffettCodeIO.Resolver
     {
         private readonly Dictionary<string, DataTypeConfig> mappingTable = new Dictionary<string, DataTypeConfig>();
         private static readonly ApiV3LegacyDataTypeResolver instance = new ApiV3LegacyDataTypeResolver();
+        private static readonly TickerQuarterParameter quarterParameter = TickerQuarterParameter.Create(ApiRequestParamConfig.ValueRepresentativeJpTicker, RelativeFiscalQuarterPeriod.CreateLatest());
+        private static readonly TickerDayParameter dayParameter = TickerDayParameter.Create(ApiRequestParamConfig.ValueRepresentativeJpTicker, LatestDayPeriod.GetInstance());
 
         private ApiV3LegacyDataTypeResolver()
         {
@@ -22,11 +24,11 @@ namespace BuffettCodeIO.Resolver
             // 適当にAPI をたたいて description を取得する
             var quarter = parser.Parse(
                 DataTypeConfig.Quarter,
-                apiClient.Get(DataTypeConfig.Quarter, ApiRequestParamConfig.ValueRepresentativeJpTicker, RelativeFiscalQuarterPeriod.CreateLatest(), false, false, true)
+                apiClient.Get(DataTypeConfig.Quarter, quarterParameter, false, false, true)
                 );
             var daily = parser.Parse(
                 DataTypeConfig.Daily,
-                apiClient.Get(DataTypeConfig.Daily, ApiRequestParamConfig.ValueRepresentativeJpTicker, LatestDayPeriod.GetInstance(), false, false, true)
+                apiClient.Get(DataTypeConfig.Daily, dayParameter, false, false, true)
                 );
 
             // quarter を優先で map を作る

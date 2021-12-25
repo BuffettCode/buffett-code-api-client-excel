@@ -81,20 +81,14 @@ namespace BuffettCodeCommon.Period.Tests
         }
 
         [TestMethod()]
-        public void ToV3ParameterTest()
+        public void BeforeTest()
         {
-            var parameter = FiscalQuarterPeriod.Create(2020, 1).ToV3Parameter();
-            Assert.AreEqual("2020", parameter["fy"]);
-            Assert.AreEqual("1", parameter["fq"]);
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2020, 3), FiscalQuarterPeriod.Create(2021, 1).Before(0, 2));
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2020, 3), FiscalQuarterPeriod.Create(2022, 3).Before(1, 4));
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2020, 2), FiscalQuarterPeriod.Create(2022, 3).Before(1, 5));
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2020, 1), FiscalQuarterPeriod.Create(2021, 3).Before(1, 2));
+            Assert.AreEqual(FiscalQuarterPeriod.Create(2020, 1), FiscalQuarterPeriod.Create(2021, 3).Before(0, 6));
         }
 
-        [TestMethod()]
-        public void ToV2ParameterTest()
-        {
-            var parameter = FiscalQuarterPeriod.Create(2020, 1).ToV2Parameter();
-            Assert.AreEqual("2020", parameter["fy"]);
-            Assert.AreEqual("1", parameter["fq"]);
-
-        }
     }
 }

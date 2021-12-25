@@ -66,30 +66,6 @@ namespace BuffettCodeCommon.Period.Tests
         }
 
         [TestMethod()]
-        public void ToV2ParameterTest()
-        {
-            var param1 = RelativeFiscalQuarterPeriod.Create(0, 1).ToV2Parameter();
-            Assert.AreEqual("LY", param1["fy"]);
-            Assert.AreEqual("LQ-1", param1["fq"]);
-            var param2 = RelativeFiscalQuarterPeriod.Create(1, 2).ToV2Parameter
-                ();
-            Assert.AreEqual("LY-1", param2["fy"]);
-            Assert.AreEqual("LQ-2", param2["fq"]);
-        }
-
-        [TestMethod()]
-        public void ToV3ParameterTest()
-        {
-            var param1 = RelativeFiscalQuarterPeriod.Create(0, 1).ToV2Parameter();
-            Assert.AreEqual("LY", param1["fy"]);
-            Assert.AreEqual("LQ-1", param1["fq"]);
-            var param2 = RelativeFiscalQuarterPeriod.Create(1, 2).ToV2Parameter
-                ();
-            Assert.AreEqual("LY-1", param2["fy"]);
-            Assert.AreEqual("LQ-2", param2["fq"]);
-        }
-
-        [TestMethod()]
         public void ToStringTest()
         {
             Assert.AreEqual("LYLQ-1", RelativeFiscalQuarterPeriod.Create(0, 1).ToString());

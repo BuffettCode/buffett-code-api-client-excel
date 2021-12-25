@@ -1,7 +1,5 @@
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
-using BuffettCodeCommon.Period;
-using BuffettCodeCommon.Validator;
 using Newtonsoft.Json.Linq;
 
 
@@ -15,24 +13,23 @@ namespace BuffettCodeAPIClient
             this.apiClientCore = apiClientCore;
         }
 
-        public JObject GetDaily(string ticker, IDailyPeriod day, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
+        public JObject GetDaily(TickerDayParameter parameter, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
         {
-            var request = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(ticker, day, useOndemand);
-            JpTickerValidator.Validate(ticker);
+            var request = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(parameter, useOndemand);
             var response = apiClientCore.Get(request, isConfigureAwait, useCache);
             return ApiGetResponseBodyParser.Parse(response);
         }
 
-        public JObject GetQuarter(string ticker, IQuarterlyPeriod period, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
+        public JObject GetQuarter(TickerQuarterParameter parameter, bool useOndemand, bool isConfigureAwait = true, bool useCache = true)
         {
-            var request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(ticker, period, useOndemand);
+            var request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(parameter, useOndemand);
             var response = apiClientCore.Get(request, isConfigureAwait, useCache);
             return ApiGetResponseBodyParser.Parse(response);
         }
 
-        public JObject GetQuarterRange(string ticker, FiscalQuarterPeriod from, FiscalQuarterPeriod to, bool isConfigureAwait = true, bool useCache = true)
+        public JObject GetQuarterRange(TickerPeriodRangeParameter parameter, bool isConfigureAwait = true, bool useCache = true)
         {
-            var request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRangeRequest(ticker, from, to);
+            var request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRangeRequest(parameter);
             var response = apiClientCore.Get(request, isConfigureAwait, useCache);
             return ApiGetResponseBodyParser.Parse(response);
         }
@@ -41,34 +38,34 @@ namespace BuffettCodeAPIClient
 
         public string GetApiKey() => apiClientCore.GetApiKey();
 
-        public JObject Get(DataTypeConfig dataType, string ticker, IPeriod period, bool useOndemand, bool isConfigureAwait, bool useCache)
+        public JObject Get(DataTypeConfig dataType, ITickerPeriodParameter parameter, bool useOndemand, bool isConfigureAwait, bool useCache)
         {
             switch (dataType)
             {
                 case DataTypeConfig.Daily:
-                    return GetDaily(ticker, (IDailyPeriod)period, useOndemand, isConfigureAwait, useCache);
+                    return GetDaily(parameter as TickerDayParameter, useOndemand, isConfigureAwait, useCache);
                 case DataTypeConfig.Quarter:
-                    return GetQuarter(ticker, (IQuarterlyPeriod)period, useOndemand, isConfigureAwait, useCache);
+                    return GetQuarter(parameter as TickerQuarterParameter, useOndemand, isConfigureAwait, useCache);
                 case DataTypeConfig.Company:
-                    return GetCompany(ticker, isConfigureAwait, useCache);
+                    return GetCompany(parameter as TickerEmptyPeriodParameter, isConfigureAwait, useCache);
                 default:
                     throw new NotSupportedDataTypeException($"Get {dataType} is not supported at V3");
             }
         }
 
-        public JObject GetRange(DataTypeConfig dataType, string ticker, IPeriod from, IPeriod to, bool useOndemand, bool isConfigureAwait, bool useCache)
+        public JObject GetRange(DataTypeConfig dataType, TickerPeriodRangeParameter parameter, bool useOndemand, bool isConfigureAwait, bool useCache)
         {
             switch (dataType)
             {
                 case DataTypeConfig.Quarter:
-                    return GetQuarterRange(ticker, (FiscalQuarterPeriod)from, (FiscalQuarterPeriod)to, isConfigureAwait, useCache);
+                    return GetQuarterRange(parameter, isConfigureAwait, useCache);
                 default:
                     throw new NotSupportedDataTypeException($"Get {dataType} is not supported at V3");
             }
         }
-        public JObject GetCompany(string ticker, bool isConfigureAwait = true, bool useCache = true)
+        public JObject GetCompany(TickerEmptyPeriodParameter parameter, bool isConfigureAwait = true, bool useCache = true)
         {
-            var request = BuffettCodeApiV3RequestCreator.CreateGetCompanyRequest(ticker);
+            var request = BuffettCodeApiV3RequestCreator.CreateGetCompanyRequest(parameter);
             var response = apiClientCore.Get(request, isConfigureAwait, useCache);
             return ApiGetResponseBodyParser.Parse(response);
         }

@@ -1,7 +1,5 @@
-using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Validator;
 using System;
-using System.Collections.Generic;
 
 namespace BuffettCodeCommon.Period
 {
@@ -92,10 +90,24 @@ namespace BuffettCodeCommon.Period
 
         public override string ToString() => $"{year}Q{quarter}";
 
-        private Dictionary<string, string> ToApiParameter() => new Dictionary<string, string>() { { ApiRequestParamConfig.KeyFy, year.ToString() }, { ApiRequestParamConfig.KeyFq, quarter.ToString() } };
+        public FiscalQuarterPeriod Before(uint prevYears, uint prevQuarters)
+        {
+            if (prevQuarters >= 4)
+            {
+                return Before(prevYears + 1, prevQuarters - 4);
 
-        public Dictionary<string, string> ToV3Parameter() => ToApiParameter();
-
-        public Dictionary<string, string> ToV2Parameter() => ToApiParameter();
+            }
+            else
+            {
+                if (quarter > prevQuarters)
+                {
+                    return Create(year - prevYears, quarter - prevQuarters);
+                }
+                else
+                {
+                    return Create(year - prevYears - 1, 4 + quarter - prevQuarters);
+                }
+            }
+        }
     }
 }

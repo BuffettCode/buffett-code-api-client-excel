@@ -76,6 +76,8 @@
     <Compile Include="Period\Snapshot.cs" />
     <Compile Include="Registry\BuffettCodeRegistryAccessor.cs" />
     <Compile Include="Validator\ApiKeyValidator.cs" />
+    <Compile Include="Validator\ApiFyParameterValidator.cs" />
+    <Compile Include="Validator\ApiFqParameterValidator.cs" />
     <Compile Include="Validator\CSVOutputEncodingValidator.cs" />
     <Compile Include="Validator\FiscalQuarterValidator.cs" />
     <Compile Include="Validator\FiscalYearValidator.cs" />
