@@ -1,5 +1,4 @@
 using BuffettCodeCommon.Config;
-using BuffettCodeCommon.Exception;
 using BuffettCodeCommon.Period;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -13,28 +12,23 @@ namespace BuffettCodeAPIClient.Tests
         {
             // use ondemand
             var ticker = "6501";
-            var day = DayPeriod.Create(2021, 1, 1);
-            var request = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(ticker, day, true);
+            var parameter = TickerDayParameter.Create(ticker, DayPeriod.Create(2021, 1, 1));
+            var request = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(parameter, true);
             Assert.AreEqual(BuffettCodeApiV3Config.ENDPOINT_ONDEMAND_DAILY, request.EndPoint);
             Assert.AreEqual(ticker, request.Parameters["ticker"]);
             Assert.AreEqual("2021-01-01", request.Parameters["date"]);
 
             // not use ondemand
-            request = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(ticker, day, false);
+            request = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(parameter, false);
             Assert.AreEqual(BuffettCodeApiV3Config.ENDPOINT_DAILY, request.EndPoint);
             Assert.AreEqual(ticker, request.Parameters["ticker"]);
             Assert.AreEqual("2021-01-01", request.Parameters["date"]);
 
             // latest case
-            request = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(ticker, LatestDayPeriod.GetInstance(), false);
+            request = BuffettCodeApiV3RequestCreator.CreateGetDailyRequest(TickerDayParameter.Create(ticker, LatestDayPeriod.GetInstance()), false);
             Assert.AreEqual(BuffettCodeApiV3Config.ENDPOINT_DAILY, request.EndPoint);
             Assert.AreEqual(ticker, request.Parameters["ticker"]);
             Assert.AreEqual("latest", request.Parameters["date"]);
-
-
-
-            // validation error
-            Assert.ThrowsException<ValidationError>(() => BuffettCodeApiV3RequestCreator.CreateGetDailyRequest("aa", day, false));
         }
 
         [TestMethod()]
@@ -43,42 +37,21 @@ namespace BuffettCodeAPIClient.Tests
             var ticker = "6591";
             uint fiscalYear = 2019;
             uint fiscalQuarter = 3;
-            var period = FiscalQuarterPeriod.Create(fiscalYear, fiscalQuarter);
+            var parameter = TickerQuarterParameter.Create(ticker, FiscalQuarterPeriod.Create(fiscalYear, fiscalQuarter));
 
             // use ondemand
-            var request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(ticker, period, true);
+            var request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(parameter, true);
             Assert.AreEqual(request.EndPoint, BuffettCodeApiV3Config.ENDPOINT_ONDEMAND_QUARTER);
             Assert.AreEqual(ticker, request.Parameters["ticker"]);
             Assert.AreEqual(fiscalYear.ToString(), request.Parameters["fy"]);
             Assert.AreEqual(fiscalQuarter.ToString(), request.Parameters["fq"]);
 
             // not use ondemand
-            request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(ticker, period, false);
+            request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(parameter, false);
             Assert.AreEqual(request.EndPoint, BuffettCodeApiV3Config.ENDPOINT_QUARTER);
             Assert.AreEqual(ticker, request.Parameters["ticker"]);
             Assert.AreEqual(fiscalYear.ToString(), request.Parameters["fy"]);
             Assert.AreEqual(fiscalQuarter.ToString(), request.Parameters["fq"]);
-
-            // latest case
-            request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(ticker, RelativeFiscalQuarterPeriod.CreateLatest(), false);
-            Assert.AreEqual(request.EndPoint, BuffettCodeApiV2Config.ENDPOINT_QUARTER);
-            Assert.AreEqual(ticker, request.Parameters["ticker"]);
-            Assert.AreEqual("LY", request.Parameters["fy"]);
-            Assert.AreEqual("LQ", request.Parameters["fq"]);
-
-            // relative case
-            request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest(ticker, RelativeFiscalQuarterPeriod.Create(1, 2), false);
-            Assert.AreEqual(request.EndPoint, BuffettCodeApiV2Config.ENDPOINT_QUARTER);
-            Assert.AreEqual(ticker, request.Parameters["ticker"]);
-            Assert.AreEqual("LY-1", request.Parameters["fy"]);
-            Assert.AreEqual("LQ-2", request.Parameters["fq"]);
-
-            // validation Errors
-            Assert.ThrowsException<ValidationError>(
-                () =>
-                BuffettCodeApiV3RequestCreator.CreateGetQuarterRequest("aaa", period, false)
-                );
-
         }
 
         [TestMethod()]
@@ -91,28 +64,22 @@ namespace BuffettCodeAPIClient.Tests
 
             var from = FiscalQuarterPeriod.Parse(fromStr);
             var to = FiscalQuarterPeriod.Parse(toStr);
+            var parameter = TickerPeriodRangeParameter.Create(ticker, from, to);
 
-            var request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRangeRequest(ticker, from, to);
+            var request = BuffettCodeApiV3RequestCreator.CreateGetQuarterRangeRequest(parameter);
             Assert.AreEqual(request.EndPoint, BuffettCodeApiV3Config.ENDPOINT_BULK_QUARTER);
             Assert.AreEqual(ticker, request.Parameters["ticker"]);
             Assert.AreEqual(fromStr, request.Parameters["from"]);
             Assert.AreEqual(toStr, request.Parameters["to"]);
-
-            // validation errors
-            Assert.ThrowsException<ValidationError>(() => BuffettCodeApiV3RequestCreator.CreateGetQuarterRangeRequest("aaa", from, to));
         }
 
         [TestMethod()]
         public void CreateGetCompanyRequestTest()
         {
-            // ok case
             var ticker = "1234";
-            var request = BuffettCodeApiV3RequestCreator.CreateGetCompanyRequest(ticker);
+            var request = BuffettCodeApiV3RequestCreator.CreateGetCompanyRequest(TickerEmptyPeriodParameter.Create(ticker, Snapshot.GetInstance()));
             Assert.AreEqual(request.EndPoint, BuffettCodeApiV3Config.ENDPOINT_COMPANY);
             Assert.AreEqual(ticker, request.Parameters["ticker"]);
-
-            // validation errors
-            Assert.ThrowsException<ValidationError>(() => BuffettCodeApiV3RequestCreator.CreateGetCompanyRequest("aaa"));
         }
     }
 }

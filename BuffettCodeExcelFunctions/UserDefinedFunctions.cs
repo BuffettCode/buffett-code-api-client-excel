@@ -6,10 +6,11 @@ namespace BuffettCodeExcelFunctions
     using ExcelDna.Integration;
     using System;
 
+
     public static class UserDefinedFunctions
     {
-        private static readonly BCodeExecutor bCodeExecutor = new BCodeExecutor(BuffettCodeApiVersion.Version3);
         private static readonly BCodeLegacyExecutor bCodeLegacyExecutor = new BCodeLegacyExecutor(BuffettCodeApiVersion.Version2);
+        private static readonly BCodeExecutor bCodeExecutor = new BCodeExecutor(BuffettCodeApiVersion.Version3);
 
         private static bool ParseBoolParameter(string parameter, bool defaultValue)
         {
@@ -23,28 +24,18 @@ namespace BuffettCodeExcelFunctions
             }
         }
 
-        private static bool IsLegacyMode(string parameter)
-        {
-            try
-            {
-                PeriodResolver.Resolve(parameter);
-                return false;
-            }
-            catch (ValidationError)
-            {
-                return true;
-            }
-        }
+        private static bool IsLegacyMode(string parameter) => !(PeriodRegularExpressionConfig.BCodeUdfFiscalQuarterInputRegex.IsMatch(parameter) || PeriodRegularExpressionConfig.BCodeUdfDailyInputRegex.IsMatch(parameter));
 
 
         [ExcelFunction(Description = "Getting values using BuffettCode API", Name = "BCODE")]
         public static string BCode(string ticker, string parameter1, string parameter2, string parameter3, string parameter4 = "", string parameter5 = "")
         {
+            var isLegacyMode = IsLegacyMode(parameter1);
             var propertyName = "";
             try
             {
                 // legacy mode
-                if (IsLegacyMode(parameter1))
+                if (isLegacyMode)
                 {
                     var fyParameter = parameter1;
                     var fqParameter = parameter2;
@@ -56,12 +47,13 @@ namespace BuffettCodeExcelFunctions
                 // current mode
                 else
                 {
+                    var periodParam = parameter1;
                     propertyName = parameter2;
-                    var period = PeriodResolver.Resolve(parameter1);
-                    var dataType = DataTypeResolver.Resolve(parameter1);
+                    BCodeUdfPeriodParameterValidator.Validate(periodParam);
+                    var dataType = DataTypeResolver.Resolve(periodParam);
                     var isRawValue = ParseBoolParameter(parameter3, false);
                     var isWithUnit = ParseBoolParameter(parameter4, false);
-                    return bCodeExecutor.Execute(ticker, dataType, period, propertyName, isRawValue, isWithUnit);
+                    return bCodeExecutor.Execute(ticker, dataType, periodParam, propertyName, isRawValue, isWithUnit);
                 }
             }
             catch (Exception e)

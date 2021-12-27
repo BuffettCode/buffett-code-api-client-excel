@@ -1,8 +1,10 @@
+using BuffettCodeAPIClient;
 using BuffettCodeCommon;
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Period;
 using BuffettCodeIO;
 using BuffettCodeIO.Property;
+
 
 namespace BuffettCodeExcelFunctions
 {
@@ -18,7 +20,14 @@ namespace BuffettCodeExcelFunctions
             );
         }
 
-        public IApiResource Fetch(DataTypeConfig dataType, string ticker, IPeriod period, bool isConfigureAwait, bool useCache) => processor.UpdateIfNeeded(config.ApiKey, config.IsOndemandEndpointEnabled).GetApiResource(dataType, ticker, period, isConfigureAwait, useCache);
+        public IApiResource Fetch(DataTypeConfig dataType, ITickerPeriodParameter parameter, bool isConfigureAwait, bool useCache) => processor.UpdateIfNeeded(config.ApiKey, config.IsOndemandEndpointEnabled).GetApiResource(dataType, parameter, isConfigureAwait, useCache);
+
+        public FiscalQuarterPeriod FetchLatestFiscalQuarter(string ticker, bool isConfigureAwait, bool useCache)
+        {
+            var company = Fetch(DataTypeConfig.Company, TickerEmptyPeriodParameter.Create(ticker, Snapshot.GetInstance()), isConfigureAwait, useCache) as Company;
+            // use ondemand latest quarter period
+            return company.SupportedQuarterRanges.OndemandTierRange.To;
+        }
 
     }
 }

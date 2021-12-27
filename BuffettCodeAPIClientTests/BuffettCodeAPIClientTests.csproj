@@ -76,9 +76,13 @@
     <Compile Include="BuffettCodeApiV3RequestCreatorTests.cs" />
     <Compile Include="ApiRequestCacheHelperTests.cs" />
     <Compile Include="CacheKeyCreatorTests.cs" />
+    <Compile Include="TickerDayParameterTests.cs" />
+    <Compile Include="TickerEmptyPeriodParameterTests.cs" />
     <Compile Include="ErrorMockApiClientCore.cs" />
     <Compile Include="MockApiClientCore.cs" />
+    <Compile Include="PeriodRangeParameterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TickerQuarterParameterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

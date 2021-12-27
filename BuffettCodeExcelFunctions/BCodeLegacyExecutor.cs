@@ -18,8 +18,8 @@ namespace BuffettCodeExcelFunctions
         public string Execute(string ticker, string fyParameter, string fqParameter, string propertyName, bool isRawValue = false, bool isWithUnit = false)
         {
             var dataType = resolver.Resolve(propertyName);
-            var period = new PeriodBuilderForLegacy().SetDataType(dataType).SetParameters(fyParameter, fqParameter).Build();
-            var apiResource = fetcher.Fetch(dataType, ticker, period, true, true);
+            var parameter = new TickerParameterBuilderForLegacy().SetDataType(dataType).SetTicker(ticker).SetParameters(fyParameter, fqParameter).Build();
+            var apiResource = fetcher.Fetch(dataType, parameter, true, true);
             return PropertySelector.SelectFormattedValue(propertyName, apiResource, isRawValue, isWithUnit, false);
         }
     }

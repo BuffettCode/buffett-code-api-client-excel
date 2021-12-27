@@ -4,7 +4,7 @@ namespace BuffettCodeCommon.Period
 {
     public class ComparablePeriodUtil
     {
-        public static int GetGap(IComparablePeriod start, IComparablePeriod end)
+        public static int GetGap(IPeriod start, IPeriod end)
         {
             if (start is FiscalQuarterPeriod sfq && end is FiscalQuarterPeriod efq)
             {

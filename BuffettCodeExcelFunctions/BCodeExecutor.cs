@@ -1,21 +1,22 @@
 using BuffettCodeCommon.Config;
-using BuffettCodeCommon.Period;
 
 namespace BuffettCodeExcelFunctions
 {
     public class BCodeExecutor
     {
         private readonly ApiResourceFetcher fetcher;
+        private readonly TickerPiriodParameterBuilder builder;
 
         public BCodeExecutor(BuffettCodeApiVersion version)
         {
             fetcher = new ApiResourceFetcher(version);
+            builder = TickerPiriodParameterBuilder.Create(fetcher);
         }
 
-        public string Execute(string ticker, DataTypeConfig dataType, IPeriod period, string propertyName, bool isRawValue = false, bool isWithUnit = false)
+        public string Execute(string ticker, DataTypeConfig dataType, string periodParam, string propertyName, bool isRawValue = false, bool isWithUnit = false)
         {
-            var apiResource = fetcher.Fetch(dataType, ticker, period, true, true);
-            // todo use default unit config
+            var parameter = builder.SetTicker(ticker).SetPeriodParam(periodParam).Build();
+            var apiResource = fetcher.Fetch(dataType, parameter, true, true);
             return PropertySelector.SelectFormattedValue(propertyName, apiResource, isRawValue, isWithUnit, true);
         }
     }
