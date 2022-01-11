@@ -18,11 +18,6 @@ namespace BuffettCodeAddinRibbon.CsvDownload.Tests
                  ApiResourceGetter.Create(),
                  typeof(ApiResourceGetter)
             );
-            // use args
-            Assert.IsInstanceOfType(
-                 ApiResourceGetter.Create(Configuration.GetInstance()),
-                 typeof(ApiResourceGetter)
-            );
         }
 
         [TestMethod()]
@@ -33,7 +28,7 @@ namespace BuffettCodeAddinRibbon.CsvDownload.Tests
             var to = FiscalQuarterPeriod.Create(2020, 2);
             var outputSettings = CsvDownloadOutputSettings.Create(TabularOutputEncoding.SJIS, TabularOutputDestination.NewWorksheet);
             var parameters = CsvDownloadParameters.Create(ticker, from, to, outputSettings);
-            var quarters = ApiResourceGetter.Create(Configuration.GetInstance()).GetQuarters(parameters).ToArray();
+            var quarters = ApiResourceGetter.Create().GetQuarters(parameters).ToArray();
             var quarter2020Q1 = quarters[0];
             var quarter2020Q2 = quarters[1];
             Assert.AreEqual(2, quarters.Length);
