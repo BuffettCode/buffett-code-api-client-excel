@@ -73,6 +73,11 @@ namespace BuffettCodeCommon.Tests
             // true => false
             configForTest.IsOndemandEndpointEnabled = false;
             Assert.IsFalse(configForTest.IsOndemandEndpointEnabled);
+
+            // check validation
+            configForTest.IsOndemandEndpointEnabled = true;
+            configForTest.IsForceOndemandApi = true;
+            Assert.ThrowsException<AddinConfigurationException>(() => configForTest.IsOndemandEndpointEnabled = false);
         }
 
         [TestMethod()]
@@ -88,6 +93,26 @@ namespace BuffettCodeCommon.Tests
             // true => false
             configForTest.DebugMode = false;
             Assert.IsFalse(configForTest.DebugMode);
+        }
+
+        [TestMethod()]
+        public void TestIsForceOndemandApiEnabled()
+        {
+            // check default value
+            Assert.IsFalse(configForTest.IsForceOndemandApi);
+
+            // false => true
+            // check validation 
+            configForTest.IsOndemandEndpointEnabled = false;
+            Assert.ThrowsException<AddinConfigurationException>(() => configForTest.IsForceOndemandApi = true);
+            // set IsOndemandEndpointEnable
+            configForTest.IsOndemandEndpointEnabled = true;
+            configForTest.IsForceOndemandApi = true;
+            Assert.IsTrue(configForTest.IsForceOndemandApi);
+
+            // true => false
+            configForTest.IsForceOndemandApi = false;
+            Assert.IsFalse(configForTest.IsForceOndemandApi);
         }
     }
 }

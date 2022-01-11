@@ -8,33 +8,47 @@ namespace BuffettCodeAddinRibbon.Settings
         private readonly string apiKey;
         private readonly bool enabledOndemandEndpoint;
         private readonly bool debugMode;
+        private readonly bool forceOndemandEndpoint;
 
         public string ApiKey => apiKey;
         public bool IsOndemandEndpointEnabled => enabledOndemandEndpoint;
         public bool DebugMode => debugMode;
 
-        private AddinSettings(string apiKey, bool useOndemandEndpoint, bool debugMode)
+        public bool IsForceOndemandEndpoint => forceOndemandEndpoint;
+
+        private AddinSettings(string apiKey, bool useOndemandEndpoint, bool debugMode, bool forceOndemandEndpoint)
         {
             this.apiKey = apiKey;
             this.enabledOndemandEndpoint = useOndemandEndpoint;
             this.debugMode = debugMode;
+            this.forceOndemandEndpoint = forceOndemandEndpoint;
         }
 
-        public static AddinSettings Create(string apiKey, bool useOndemandEndpoint, bool debugMode)
+        public static AddinSettings Create(string apiKey, bool useOndemandEndpoint, bool debugMode, bool forceOndemandEndpoint)
         {
             ApiKeyValidator.Validate(apiKey);
-            return new AddinSettings(apiKey, useOndemandEndpoint, debugMode);
+            return new AddinSettings(apiKey, useOndemandEndpoint, debugMode, forceOndemandEndpoint);
         }
 
         public static AddinSettings Create(Configuration config)
         {
-            return new AddinSettings(config.ApiKey, config.IsOndemandEndpointEnabled, config.DebugMode);
+            return new AddinSettings(config.ApiKey, config.IsOndemandEndpointEnabled, config.DebugMode, config.IsForceOndemandApi);
         }
 
         public void SaveToConfiguration(Configuration config)
         {
             config.ApiKey = apiKey;
-            config.IsOndemandEndpointEnabled = enabledOndemandEndpoint;
+            // if ondemand endpoint is disabled, set force ondemand as false
+            if (enabledOndemandEndpoint)
+            {
+                config.IsOndemandEndpointEnabled = true;
+                config.IsForceOndemandApi = forceOndemandEndpoint;
+            }
+            else
+            {
+                config.IsForceOndemandApi = false;
+                config.IsOndemandEndpointEnabled = false;
+            }
             config.DebugMode = debugMode;
         }
 

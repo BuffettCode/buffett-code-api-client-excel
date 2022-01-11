@@ -204,5 +204,6 @@ namespace BuffettCodeAddinRibbon
             }
             return null;
         }
+
     }
 }

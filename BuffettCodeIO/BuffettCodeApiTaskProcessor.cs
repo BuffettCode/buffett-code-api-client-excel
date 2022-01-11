@@ -1,4 +1,5 @@
 using BuffettCodeAPIClient;
+using BuffettCodeCommon;
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Period;
 using BuffettCodeIO.Parser;
@@ -15,48 +16,41 @@ namespace BuffettCodeIO
         private readonly IBuffettCodeApiClient client;
         private readonly IApiResponseParser parser;
         private readonly ApiTaskHelper taskHelper;
-        private bool isOndemandEndpointEnabled;
-        private static readonly object updateLock = new object();
+        private static readonly Configuration config = Configuration.GetInstance();
 
-        public BuffettCodeApiTaskProcessor(BuffettCodeApiVersion version, string apiKey, bool useOndemandEndpoint)
+        public BuffettCodeApiTaskProcessor(BuffettCodeApiVersion version)
         {
-            client = ApiClientFactory.Create(version, apiKey);
+            client = ApiClientFactory.Create(version, config.ApiKey);
             parser = ApiResponseParserFactory.Create(version);
             var tierResolver = PeriodSupportedTierResolver.Create(client, parser);
             taskHelper = new ApiTaskHelper(tierResolver);
-            this.isOndemandEndpointEnabled = useOndemandEndpoint;
         }
 
-        public BuffettCodeApiTaskProcessor UpdateIfNeeded(string apiKey, bool useOndemandEndpoint)
+        private void UpdateApiKeyIfNeeded()
         {
-            lock (updateLock)
+            if (!client.GetApiKey().Equals(config.ApiKey))
             {
-                if (!client.GetApiKey().Equals(apiKey))
-                {
-                    client.UpdateApiKey(apiKey);
-                }
-                if (isOndemandEndpointEnabled != useOndemandEndpoint)
-                {
-                    isOndemandEndpointEnabled = useOndemandEndpoint;
-                }
+                client.UpdateApiKey(config.ApiKey);
             }
-            return this;
         }
 
         public IApiResource GetApiResource(DataTypeConfig dataType, ITickerPeriodParameter parameter, bool isConfigureAwait = true, bool useCache = true)
         {
-            var useOndemand = taskHelper.ShouldUseOndemandEndpoint(dataType, parameter.GetTicker(), parameter.GetPeriod(), isOndemandEndpointEnabled, isConfigureAwait, useCache);
+            UpdateApiKeyIfNeeded();
+            var useOndemand = config.IsForceOndemandApi ? true : taskHelper.ShouldUseOndemandEndpoint(dataType, parameter.GetTicker(), parameter.GetPeriod(), config.IsOndemandEndpointEnabled, isConfigureAwait, useCache);
+            client.UpdateApiKey(config.ApiKey);
             var json = client.Get(dataType, parameter, useOndemand, isConfigureAwait, useCache);
             return parser.Parse(dataType, json);
         }
 
         public IList<IApiResource> GetApiResources(DataTypeConfig dataType, string ticker, IComparablePeriod from, IComparablePeriod to, bool isConfigureAwait = true, bool useCache = true)
         {
+            UpdateApiKeyIfNeeded();
             if (from.CompareTo(to) > 0)
             {
                 throw new ArgumentException($"from={from} is more than to={to}");
             }
-            var endOfOndemandPeriod = taskHelper.FindEndOfOndemandPeriod(dataType, ticker, PeriodRange<IComparablePeriod>.Create(from, to), isOndemandEndpointEnabled, isConfigureAwait, useCache);
+            var endOfOndemandPeriod = taskHelper.FindEndOfOndemandPeriod(dataType, ticker, PeriodRange<IComparablePeriod>.Create(from, to), config.IsOndemandEndpointEnabled, isConfigureAwait, useCache);
 
             // use fixed tier from all range
             if (endOfOndemandPeriod is null)
