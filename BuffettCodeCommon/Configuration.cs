@@ -77,7 +77,14 @@ namespace BuffettCodeCommon
         public bool IsOndemandEndpointEnabled
         {
             get => IsTrue(BuffettCodeRegistryConfig.NameIsOndemandEndpointEnabled, IsOndemandEndpointEnabledDefault);
-            set => registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameIsOndemandEndpointEnabled, value);
+            set
+            {
+                if (value is false && IsForceOndemandApiEnabled)
+                {
+                    throw new AddinConfigurationException("set ForceOndemandApiEnabled as false at first.");
+                }
+                registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameIsOndemandEndpointEnabled, value);
+            }
         }
 
         /// <summary>
@@ -95,7 +102,14 @@ namespace BuffettCodeCommon
         public bool IsForceOndemandApiEnabled
         {
             get => IsTrue(BuffettCodeRegistryConfig.NameForceOndemandApiEnabled, IsForceOndemandApiEnabledDefault);
-            set => registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameForceOndemandApiEnabled, value);
+            set
+            {
+                if (value is true && !IsOndemandEndpointEnabled)
+                {
+                    throw new AddinConfigurationException("set IsOndemandApiEnabled as true at first.");
+                }
+                registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameForceOndemandApiEnabled, value);
+            }
         }
 
         public string KeyName => registryAccessor.KeyName;
