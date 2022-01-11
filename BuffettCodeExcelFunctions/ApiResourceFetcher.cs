@@ -16,11 +16,10 @@ namespace BuffettCodeExcelFunctions
 
         public ApiResourceFetcher(BuffettCodeApiVersion version)
         {
-            processor = new BuffettCodeApiTaskProcessor(version, config.ApiKey, config.IsOndemandEndpointEnabled
-            );
+            processor = new BuffettCodeApiTaskProcessor(version);
         }
 
-        public IApiResource Fetch(DataTypeConfig dataType, ITickerPeriodParameter parameter, bool isConfigureAwait, bool useCache) => processor.UpdateIfNeeded(config.ApiKey, config.IsOndemandEndpointEnabled).GetApiResource(dataType, parameter, isConfigureAwait, useCache);
+        public IApiResource Fetch(DataTypeConfig dataType, ITickerPeriodParameter parameter, bool isConfigureAwait, bool useCache) => processor.GetApiResource(dataType, parameter, isConfigureAwait, useCache);
 
         public FiscalQuarterPeriod FetchLatestFiscalQuarter(string ticker, bool isConfigureAwait, bool useCache)
         {

@@ -1,5 +1,4 @@
 using BuffettCodeAddinRibbon.Settings;
-using BuffettCodeCommon;
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Period;
 using BuffettCodeIO;
@@ -18,15 +17,10 @@ namespace BuffettCodeAddinRibbon.CsvDownload
             this.processor = processor;
         }
 
-        public static ApiResourceGetter Create(Configuration config)
-        {
-            var processor = new BuffettCodeApiTaskProcessor(BuffettCodeApiVersion.Version3, config.ApiKey, config.IsOndemandEndpointEnabled);
-            return new ApiResourceGetter(processor);
-        }
-
         public static ApiResourceGetter Create()
         {
-            return Create(Configuration.GetInstance());
+            var processor = new BuffettCodeApiTaskProcessor(BuffettCodeApiVersion.Version3);
+            return new ApiResourceGetter(processor);
         }
 
         public IEnumerable<Quarter> GetQuarters(CsvDownloadParameters parameters)
