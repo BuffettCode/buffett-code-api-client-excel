@@ -89,5 +89,20 @@ namespace BuffettCodeCommon.Tests
             configForTest.DebugMode = false;
             Assert.IsFalse(configForTest.DebugMode);
         }
+
+        [TestMethod()]
+        public void TestIsForceOndemandApiEnabled()
+        {
+            // check default value
+            Assert.IsFalse(configForTest.IsForceOndemandApiEnabled);
+
+            // false => true
+            configForTest.IsForceOndemandApiEnabled = true;
+            Assert.IsTrue(configForTest.IsForceOndemandApiEnabled);
+
+            // true => false
+            configForTest.IsForceOndemandApiEnabled = false;
+            Assert.IsFalse(configForTest.IsForceOndemandApiEnabled);
+        }
     }
 }

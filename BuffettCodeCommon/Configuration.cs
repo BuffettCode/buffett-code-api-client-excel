@@ -39,8 +39,12 @@ namespace BuffettCodeCommon
         /// <summary>
         /// デフォルトでは DebugMode は false
         /// </summary>
-        private static readonly bool DebugModeDefault = false;
+        private static readonly bool IsDebugModeDefault = false;
 
+        /// <summary>
+        /// デフォルトでは ForceOndemandApiEnabled は false
+        /// </summary>
+        private static readonly bool IsForceOndemandApiEnabledDefault = false;
 
         /// <summary>
         /// バフェットコードのAPIキー
@@ -81,8 +85,17 @@ namespace BuffettCodeCommon
         /// </summary>
         public bool DebugMode
         {
-            get => IsTrue(BuffettCodeRegistryConfig.NameDebugMode, DebugModeDefault);
+            get => IsTrue(BuffettCodeRegistryConfig.NameDebugMode, IsDebugModeDefault);
             set => registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameDebugMode, value);
+        }
+
+        /// <summary>
+        /// オンデマンドモードを強制する
+        /// </summary>
+        public bool IsForceOndemandApiEnabled
+        {
+            get => IsTrue(BuffettCodeRegistryConfig.NameForceOndemandApiEnabled, IsForceOndemandApiEnabledDefault);
+            set => registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameForceOndemandApiEnabled, value);
         }
 
         public string KeyName => registryAccessor.KeyName;
