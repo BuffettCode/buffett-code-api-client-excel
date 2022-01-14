@@ -13,9 +13,10 @@ namespace BuffettCodeCommon.Registry
         public static readonly string NameApiKey = "ApiKey";
 
         public static readonly string NameIsOndemandEndpointEnabled = "IsOndemandEndpointEnabled";
-        public static readonly string NameClearCache = "ClearCache";
 
         public static readonly string NameDebugMode = "DebugMode";
+
+        public static readonly string NameForceOndemandApi = "ForceOndemandApi";
 
         public static readonly ISet<string> SubKeys = new HashSet<string>
         {
@@ -28,8 +29,8 @@ namespace BuffettCodeCommon.Registry
         {
             NameApiKey,
             NameIsOndemandEndpointEnabled,
-            NameClearCache,
             NameDebugMode,
+            NameForceOndemandApi,
         };
 
     }

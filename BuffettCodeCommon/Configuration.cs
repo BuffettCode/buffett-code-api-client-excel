@@ -39,8 +39,12 @@ namespace BuffettCodeCommon
         /// <summary>
         /// デフォルトでは DebugMode は false
         /// </summary>
-        private static readonly bool DebugModeDefault = false;
+        private static readonly bool IsDebugModeDefault = false;
 
+        /// <summary>
+        /// デフォルトでは ForceOndemandApi は false
+        /// </summary>
+        private static readonly bool IsForceOndemandApiDefault = false;
 
         /// <summary>
         /// バフェットコードのAPIキー
@@ -73,7 +77,14 @@ namespace BuffettCodeCommon
         public bool IsOndemandEndpointEnabled
         {
             get => IsTrue(BuffettCodeRegistryConfig.NameIsOndemandEndpointEnabled, IsOndemandEndpointEnabledDefault);
-            set => registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameIsOndemandEndpointEnabled, value);
+            set
+            {
+                if (value is false && IsForceOndemandApi)
+                {
+                    throw new AddinConfigurationException("set ForceOndemandApi as false at first.");
+                }
+                registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameIsOndemandEndpointEnabled, value);
+            }
         }
 
         /// <summary>
@@ -81,8 +92,24 @@ namespace BuffettCodeCommon
         /// </summary>
         public bool DebugMode
         {
-            get => IsTrue(BuffettCodeRegistryConfig.NameDebugMode, DebugModeDefault);
+            get => IsTrue(BuffettCodeRegistryConfig.NameDebugMode, IsDebugModeDefault);
             set => registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameDebugMode, value);
+        }
+
+        /// <summary>
+        /// オンデマンドモードを強制する
+        /// </summary>
+        public bool IsForceOndemandApi
+        {
+            get => IsTrue(BuffettCodeRegistryConfig.NameForceOndemandApi, IsForceOndemandApiDefault);
+            set
+            {
+                if (value is true && !IsOndemandEndpointEnabled)
+                {
+                    throw new AddinConfigurationException("set IsOndemandApiEnabled as true at first.");
+                }
+                registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameForceOndemandApi, value);
+            }
         }
 
         public string KeyName => registryAccessor.KeyName;

@@ -13,6 +13,12 @@ namespace BuffettCodeAddinRibbon
             textAPIKey.Text = setting.ApiKey;
             checkDebugMode.Checked = setting.DebugMode;
             checkIsOndemandEndpointEnabled.Checked = setting.IsOndemandEndpointEnabled;
+            checkForceOndemandApi.Checked = setting.IsForceOndemandEndpoint;
+            if (!checkIsOndemandEndpointEnabled.Checked)
+            {
+                checkForceOndemandApi.Visible = false;
+                forceOndemandEndpointDesc.Visible = false;
+            }
         }
 
         private void SettingForm_Load(object sender, EventArgs e)
@@ -31,6 +37,8 @@ namespace BuffettCodeAddinRibbon
         }
 
         public bool IsOndemandEndpointEnabled() => checkIsOndemandEndpointEnabled.Checked;
+
+        public bool IsForceOndemandEndpoint() => checkForceOndemandApi.Checked;
 
         private void ButtonOK_Click(object sender, EventArgs e)
         {
@@ -79,5 +87,31 @@ namespace BuffettCodeAddinRibbon
         {
 
         }
+
+        private void TabDeveloper_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckIsOndemandEndpointEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkIsOndemandEndpointEnabled.Checked)
+            {
+                checkForceOndemandApi.Visible = true; 
+                forceOndemandEndpointDesc.Visible = true;
+            }
+            else 
+            {
+                checkForceOndemandApi.Visible = false;
+                forceOndemandEndpointDesc.Visible = false;
+                checkForceOndemandApi.Checked = false;
+            }
+        }
+
+        private void CheckForceOndemandEndpoint_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
