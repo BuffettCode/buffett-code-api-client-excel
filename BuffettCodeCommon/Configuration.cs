@@ -42,9 +42,9 @@ namespace BuffettCodeCommon
         private static readonly bool IsDebugModeDefault = false;
 
         /// <summary>
-        /// デフォルトでは ForceOndemandApiEnabled は false
+        /// デフォルトでは ForceOndemandApi は false
         /// </summary>
-        private static readonly bool IsForceOndemandApiEnabledDefault = false;
+        private static readonly bool IsForceOndemandApiDefault = false;
 
         /// <summary>
         /// バフェットコードのAPIキー
@@ -79,9 +79,9 @@ namespace BuffettCodeCommon
             get => IsTrue(BuffettCodeRegistryConfig.NameIsOndemandEndpointEnabled, IsOndemandEndpointEnabledDefault);
             set
             {
-                if (value is false && IsForceOndemandApiEnabled)
+                if (value is false && IsForceOndemandApi)
                 {
-                    throw new AddinConfigurationException("set ForceOndemandApiEnabled as false at first.");
+                    throw new AddinConfigurationException("set ForceOndemandApi as false at first.");
                 }
                 registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameIsOndemandEndpointEnabled, value);
             }
@@ -99,16 +99,16 @@ namespace BuffettCodeCommon
         /// <summary>
         /// オンデマンドモードを強制する
         /// </summary>
-        public bool IsForceOndemandApiEnabled
+        public bool IsForceOndemandApi
         {
-            get => IsTrue(BuffettCodeRegistryConfig.NameForceOndemandApiEnabled, IsForceOndemandApiEnabledDefault);
+            get => IsTrue(BuffettCodeRegistryConfig.NameForceOndemandApi, IsForceOndemandApiDefault);
             set
             {
                 if (value is true && !IsOndemandEndpointEnabled)
                 {
                     throw new AddinConfigurationException("set IsOndemandApiEnabled as true at first.");
                 }
-                registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameForceOndemandApiEnabled, value);
+                registryAccessor.SaveRegistryValue(BuffettCodeRegistryConfig.NameForceOndemandApi, value);
             }
         }
 

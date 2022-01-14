@@ -37,7 +37,7 @@ namespace BuffettCodeIO
         public IApiResource GetApiResource(DataTypeConfig dataType, ITickerPeriodParameter parameter, bool isConfigureAwait = true, bool useCache = true)
         {
             UpdateApiKeyIfNeeded();
-            var useOndemand = config.IsForceOndemandApiEnabled ? true : taskHelper.ShouldUseOndemandEndpoint(dataType, parameter.GetTicker(), parameter.GetPeriod(), config.IsOndemandEndpointEnabled, isConfigureAwait, useCache);
+            var useOndemand = config.IsForceOndemandApi ? true : taskHelper.ShouldUseOndemandEndpoint(dataType, parameter.GetTicker(), parameter.GetPeriod(), config.IsOndemandEndpointEnabled, isConfigureAwait, useCache);
             client.UpdateApiKey(config.ApiKey);
             var json = client.Get(dataType, parameter, useOndemand, isConfigureAwait, useCache);
             return parser.Parse(dataType, json);

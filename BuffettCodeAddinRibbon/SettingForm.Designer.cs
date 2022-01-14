@@ -36,7 +36,7 @@ namespace BuffettCodeAddinRibbon
             this.checkDebugMode = new System.Windows.Forms.CheckBox();
             this.tabAPI = new System.Windows.Forms.TabPage();
             this.DescOndemandEndpointEnabled = new System.Windows.Forms.Label();
-            this.checkForceOndemandApiEnabled = new System.Windows.Forms.CheckBox();
+            this.checkForceOndemandApi = new System.Windows.Forms.CheckBox();
             this.apiSpecialNotesLink = new System.Windows.Forms.LinkLabel();
             this.ondemandModeDesc = new System.Windows.Forms.TextBox();
             this.checkIsOndemandEndpointEnabled = new System.Windows.Forms.CheckBox();
@@ -111,7 +111,7 @@ namespace BuffettCodeAddinRibbon
             // 
             this.tabAPI.Controls.Add(this.ForceOndemandEndpointDesc);
             this.tabAPI.Controls.Add(this.DescOndemandEndpointEnabled);
-            this.tabAPI.Controls.Add(this.checkForceOndemandApiEnabled);
+            this.tabAPI.Controls.Add(this.checkForceOndemandApi);
             this.tabAPI.Controls.Add(this.apiSpecialNotesLink);
             this.tabAPI.Controls.Add(this.ondemandModeDesc);
             this.tabAPI.Controls.Add(this.checkIsOndemandEndpointEnabled);
@@ -139,14 +139,14 @@ namespace BuffettCodeAddinRibbon
             // 
             // checkForceOndemandApiEnabled
             // 
-            this.checkForceOndemandApiEnabled.AutoSize = true;
-            this.checkForceOndemandApiEnabled.Location = new System.Drawing.Point(10, 95);
-            this.checkForceOndemandApiEnabled.Name = "checkForceOndemandApiEnabled";
-            this.checkForceOndemandApiEnabled.Size = new System.Drawing.Size(251, 16);
-            this.checkForceOndemandApiEnabled.TabIndex = 8;
-            this.checkForceOndemandApiEnabled.Text = "常に従量課金APIを利用する (制限回避モード)";
-            this.checkForceOndemandApiEnabled.UseVisualStyleBackColor = true;
-            this.checkForceOndemandApiEnabled.CheckedChanged += new System.EventHandler(this.CheckForceOndemandEndpointEnabled_CheckedChanged);
+            this.checkForceOndemandApi.AutoSize = true;
+            this.checkForceOndemandApi.Location = new System.Drawing.Point(10, 95);
+            this.checkForceOndemandApi.Name = "checkForceOndemandApiEnabled";
+            this.checkForceOndemandApi.Size = new System.Drawing.Size(251, 16);
+            this.checkForceOndemandApi.TabIndex = 8;
+            this.checkForceOndemandApi.Text = "常に従量課金APIを利用する (制限回避モード)";
+            this.checkForceOndemandApi.UseVisualStyleBackColor = true;
+            this.checkForceOndemandApi.CheckedChanged += new System.EventHandler(this.CheckForceOndemandEndpoint_CheckedChanged);
             // 
             // apiSpecialNotesLink
             // 
@@ -272,7 +272,7 @@ namespace BuffettCodeAddinRibbon
         private System.Windows.Forms.TextBox ondemandModeDesc;
         private System.Windows.Forms.LinkLabel apiSpecialNotesLink;
         private System.Windows.Forms.LinkLabel ondemandUsageEntryLink;
-        private System.Windows.Forms.CheckBox checkForceOndemandApiEnabled;
+        private System.Windows.Forms.CheckBox checkForceOndemandApi;
         private System.Windows.Forms.Label DescOndemandEndpointEnabled;
         private System.Windows.Forms.Label ForceOndemandEndpointDesc;
     }

@@ -16,7 +16,7 @@ namespace BuffettCodeCommon.Registry
 
         public static readonly string NameDebugMode = "DebugMode";
 
-        public static readonly string NameForceOndemandApiEnabled = "ForceOndemandApiEnabled";
+        public static readonly string NameForceOndemandApi = "ForceOndemandApi";
 
         public static readonly ISet<string> SubKeys = new HashSet<string>
         {
@@ -30,7 +30,7 @@ namespace BuffettCodeCommon.Registry
             NameApiKey,
             NameIsOndemandEndpointEnabled,
             NameDebugMode,
-            NameForceOndemandApiEnabled,
+            NameForceOndemandApi,
         };
 
     }

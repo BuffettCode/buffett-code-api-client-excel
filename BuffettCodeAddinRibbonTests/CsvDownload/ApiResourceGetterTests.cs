@@ -1,5 +1,4 @@
 using BuffettCodeAddinRibbon.Settings;
-using BuffettCodeCommon;
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Period;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

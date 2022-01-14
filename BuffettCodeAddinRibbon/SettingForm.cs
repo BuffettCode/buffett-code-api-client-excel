@@ -13,6 +13,7 @@ namespace BuffettCodeAddinRibbon
             textAPIKey.Text = setting.ApiKey;
             checkDebugMode.Checked = setting.DebugMode;
             checkIsOndemandEndpointEnabled.Checked = setting.IsOndemandEndpointEnabled;
+            checkForceOndemandApi.Checked = setting.IsForceOndemandEndpoint;
         }
 
         private void SettingForm_Load(object sender, EventArgs e)
@@ -31,6 +32,8 @@ namespace BuffettCodeAddinRibbon
         }
 
         public bool IsOndemandEndpointEnabled() => checkIsOndemandEndpointEnabled.Checked;
+
+        public bool IsForceOndemandEndpoint() => checkForceOndemandApi.Checked;
 
         private void ButtonOK_Click(object sender, EventArgs e)
         {
@@ -90,7 +93,7 @@ namespace BuffettCodeAddinRibbon
 
         }
 
-        private void CheckForceOndemandEndpointEnabled_CheckedChanged(object sender, EventArgs e)
+        private void CheckForceOndemandEndpoint_CheckedChanged(object sender, EventArgs e)
         {
 
         }
