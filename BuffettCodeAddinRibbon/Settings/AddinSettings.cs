@@ -46,8 +46,8 @@ namespace BuffettCodeAddinRibbon.Settings
             }
             else
             {
-                config.IsOndemandEndpointEnabled = false;
                 config.IsForceOndemandApi = false;
+                config.IsOndemandEndpointEnabled = false;
             }
             config.DebugMode = debugMode;
         }

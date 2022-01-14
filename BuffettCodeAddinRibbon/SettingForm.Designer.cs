@@ -35,6 +35,7 @@ namespace BuffettCodeAddinRibbon
             this.tabDeveloper = new System.Windows.Forms.TabPage();
             this.checkDebugMode = new System.Windows.Forms.CheckBox();
             this.tabAPI = new System.Windows.Forms.TabPage();
+            this.forceOndemandEndpointDesc = new System.Windows.Forms.Label();
             this.DescOndemandEndpointEnabled = new System.Windows.Forms.Label();
             this.checkForceOndemandApi = new System.Windows.Forms.CheckBox();
             this.apiSpecialNotesLink = new System.Windows.Forms.LinkLabel();
@@ -43,7 +44,6 @@ namespace BuffettCodeAddinRibbon
             this.labelAPIKey = new System.Windows.Forms.Label();
             this.textAPIKey = new System.Windows.Forms.TextBox();
             this.ondemandUsageEntryLink = new System.Windows.Forms.LinkLabel();
-            this.ForceOndemandEndpointDesc = new System.Windows.Forms.Label();
             this.tabConrtoll.SuspendLayout();
             this.tabDeveloper.SuspendLayout();
             this.tabAPI.SuspendLayout();
@@ -109,7 +109,7 @@ namespace BuffettCodeAddinRibbon
             // 
             // tabAPI
             // 
-            this.tabAPI.Controls.Add(this.ForceOndemandEndpointDesc);
+            this.tabAPI.Controls.Add(this.forceOndemandEndpointDesc);
             this.tabAPI.Controls.Add(this.DescOndemandEndpointEnabled);
             this.tabAPI.Controls.Add(this.checkForceOndemandApi);
             this.tabAPI.Controls.Add(this.apiSpecialNotesLink);
@@ -127,6 +127,16 @@ namespace BuffettCodeAddinRibbon
             this.tabAPI.UseVisualStyleBackColor = true;
             this.tabAPI.Click += new System.EventHandler(this.TabAPI_Click);
             // 
+            // forceOndemandEndpointDesc
+            // 
+            this.forceOndemandEndpointDesc.AutoSize = true;
+            this.forceOndemandEndpointDesc.Font = new System.Drawing.Font("MS UI Gothic", 8F);
+            this.forceOndemandEndpointDesc.Location = new System.Drawing.Point(30, 112);
+            this.forceOndemandEndpointDesc.Name = "forceOndemandEndpointDesc";
+            this.forceOndemandEndpointDesc.Size = new System.Drawing.Size(269, 11);
+            this.forceOndemandEndpointDesc.TabIndex = 10;
+            this.forceOndemandEndpointDesc.Text = "常にバフェットコードAPIの従量課金エンドポイントを利用します";
+            // 
             // DescOndemandEndpointEnabled
             // 
             this.DescOndemandEndpointEnabled.AutoSize = true;
@@ -137,11 +147,11 @@ namespace BuffettCodeAddinRibbon
             this.DescOndemandEndpointEnabled.TabIndex = 9;
             this.DescOndemandEndpointEnabled.Text = "バフェットコードAPIの従量課金エンドポイントの利用を可能にします";
             // 
-            // checkForceOndemandApiEnabled
+            // checkForceOndemandApi
             // 
             this.checkForceOndemandApi.AutoSize = true;
-            this.checkForceOndemandApi.Location = new System.Drawing.Point(10, 95);
-            this.checkForceOndemandApi.Name = "checkForceOndemandApiEnabled";
+            this.checkForceOndemandApi.Location = new System.Drawing.Point(20, 95);
+            this.checkForceOndemandApi.Name = "checkForceOndemandApi";
             this.checkForceOndemandApi.Size = new System.Drawing.Size(251, 16);
             this.checkForceOndemandApi.TabIndex = 8;
             this.checkForceOndemandApi.Text = "常に従量課金APIを利用する (制限回避モード)";
@@ -223,16 +233,6 @@ namespace BuffettCodeAddinRibbon
             this.ondemandUsageEntryLink.Text = "Web API従量課金エンドポイントのご利用にあたって";
             this.ondemandUsageEntryLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.OndemandUsageEntryLink_LinkClicked);
             // 
-            // ForceOndemandEndpointDesc
-            // 
-            this.ForceOndemandEndpointDesc.AutoSize = true;
-            this.ForceOndemandEndpointDesc.Font = new System.Drawing.Font("MS UI Gothic", 8F);
-            this.ForceOndemandEndpointDesc.Location = new System.Drawing.Point(20, 112);
-            this.ForceOndemandEndpointDesc.Name = "ForceOndemandEndpointDesc";
-            this.ForceOndemandEndpointDesc.Size = new System.Drawing.Size(269, 11);
-            this.ForceOndemandEndpointDesc.TabIndex = 10;
-            this.ForceOndemandEndpointDesc.Text = "常にバフェットコードAPIの従量課金エンドポイントを利用します";
-            // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -274,7 +274,7 @@ namespace BuffettCodeAddinRibbon
         private System.Windows.Forms.LinkLabel ondemandUsageEntryLink;
         private System.Windows.Forms.CheckBox checkForceOndemandApi;
         private System.Windows.Forms.Label DescOndemandEndpointEnabled;
-        private System.Windows.Forms.Label ForceOndemandEndpointDesc;
+        private System.Windows.Forms.Label forceOndemandEndpointDesc;
     }
 
 }

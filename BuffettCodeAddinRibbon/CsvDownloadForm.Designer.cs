@@ -51,34 +51,38 @@ namespace BuffettCodeAddinRibbon
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 27);
+            this.label1.Location = new System.Drawing.Point(20, 18);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 18);
+            this.label1.Size = new System.Drawing.Size(56, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "銘柄コード";
             // 
             // textTicker
             // 
-            this.textTicker.Location = new System.Drawing.Point(36, 48);
+            this.textTicker.Location = new System.Drawing.Point(22, 32);
+            this.textTicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textTicker.Name = "textTicker";
-            this.textTicker.Size = new System.Drawing.Size(118, 25);
+            this.textTicker.Size = new System.Drawing.Size(72, 19);
             this.textTicker.TabIndex = 1;
             this.textTicker.Text = "6501";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 96);
+            this.label2.Location = new System.Drawing.Point(20, 64);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 18);
+            this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 2;
             this.label2.Text = "期間";
             // 
             // textFrom
             // 
-            this.textFrom.Location = new System.Drawing.Point(36, 117);
+            this.textFrom.Location = new System.Drawing.Point(22, 78);
+            this.textFrom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textFrom.Name = "textFrom";
-            this.textFrom.Size = new System.Drawing.Size(118, 25);
+            this.textFrom.Size = new System.Drawing.Size(72, 19);
             this.textFrom.TabIndex = 2;
             this.textFrom.Text = "2016Q1";
             this.textFrom.Validating += new System.ComponentModel.CancelEventHandler(this.TextFrom_Validating);
@@ -87,17 +91,19 @@ namespace BuffettCodeAddinRibbon
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(186, 120);
+            this.label3.Location = new System.Drawing.Point(112, 80);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(26, 18);
+            this.label3.Size = new System.Drawing.Size(17, 12);
             this.label3.TabIndex = 4;
             this.label3.Text = "～";
             // 
             // textTo
             // 
-            this.textTo.Location = new System.Drawing.Point(228, 117);
+            this.textTo.Location = new System.Drawing.Point(137, 78);
+            this.textTo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textTo.Name = "textTo";
-            this.textTo.Size = new System.Drawing.Size(118, 25);
+            this.textTo.Size = new System.Drawing.Size(72, 19);
             this.textTo.TabIndex = 3;
             this.textTo.Text = "2018Q4";
             this.textTo.Validating += new System.ComponentModel.CancelEventHandler(this.TextTo_Validating);
@@ -105,9 +111,10 @@ namespace BuffettCodeAddinRibbon
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(296, 352);
+            this.buttonOK.Location = new System.Drawing.Point(178, 235);
+            this.buttonOK.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(92, 30);
+            this.buttonOK.Size = new System.Drawing.Size(55, 20);
             this.buttonOK.TabIndex = 8;
             this.buttonOK.Text = "出力";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -117,9 +124,11 @@ namespace BuffettCodeAddinRibbon
             // 
             this.groupOutput.Controls.Add(this.radioSheet);
             this.groupOutput.Controls.Add(this.radioCSV);
-            this.groupOutput.Location = new System.Drawing.Point(27, 172);
+            this.groupOutput.Location = new System.Drawing.Point(16, 115);
+            this.groupOutput.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupOutput.Name = "groupOutput";
-            this.groupOutput.Size = new System.Drawing.Size(361, 61);
+            this.groupOutput.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupOutput.Size = new System.Drawing.Size(217, 41);
             this.groupOutput.TabIndex = 11;
             this.groupOutput.TabStop = false;
             this.groupOutput.Text = "出力先";
@@ -127,9 +136,10 @@ namespace BuffettCodeAddinRibbon
             // radioSheet
             // 
             this.radioSheet.AutoSize = true;
-            this.radioSheet.Location = new System.Drawing.Point(201, 24);
+            this.radioSheet.Location = new System.Drawing.Point(121, 16);
+            this.radioSheet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioSheet.Name = "radioSheet";
-            this.radioSheet.Size = new System.Drawing.Size(122, 22);
+            this.radioSheet.Size = new System.Drawing.Size(82, 16);
             this.radioSheet.TabIndex = 5;
             this.radioSheet.TabStop = true;
             this.radioSheet.Text = "新しいシート";
@@ -140,9 +150,10 @@ namespace BuffettCodeAddinRibbon
             // 
             this.radioCSV.AutoSize = true;
             this.radioCSV.Checked = true;
-            this.radioCSV.Location = new System.Drawing.Point(9, 24);
+            this.radioCSV.Location = new System.Drawing.Point(5, 16);
+            this.radioCSV.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioCSV.Name = "radioCSV";
-            this.radioCSV.Size = new System.Drawing.Size(118, 22);
+            this.radioCSV.Size = new System.Drawing.Size(80, 16);
             this.radioCSV.TabIndex = 4;
             this.radioCSV.TabStop = true;
             this.radioCSV.Text = "CSVファイル";
@@ -153,19 +164,23 @@ namespace BuffettCodeAddinRibbon
             // 
             this.groupEncoding.Controls.Add(this.radioShiftJIS);
             this.groupEncoding.Controls.Add(this.radioUTF8);
-            this.groupEncoding.Location = new System.Drawing.Point(27, 253);
+            this.groupEncoding.Location = new System.Drawing.Point(16, 169);
+            this.groupEncoding.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupEncoding.Name = "groupEncoding";
-            this.groupEncoding.Size = new System.Drawing.Size(361, 64);
+            this.groupEncoding.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupEncoding.Size = new System.Drawing.Size(217, 43);
             this.groupEncoding.TabIndex = 12;
             this.groupEncoding.TabStop = false;
             this.groupEncoding.Text = "文字コード";
+            this.groupEncoding.Enter += new System.EventHandler(this.groupEncoding_Enter);
             // 
             // radioShiftJIS
             // 
             this.radioShiftJIS.AutoSize = true;
-            this.radioShiftJIS.Location = new System.Drawing.Point(201, 24);
+            this.radioShiftJIS.Location = new System.Drawing.Point(121, 16);
+            this.radioShiftJIS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioShiftJIS.Name = "radioShiftJIS";
-            this.radioShiftJIS.Size = new System.Drawing.Size(93, 22);
+            this.radioShiftJIS.Size = new System.Drawing.Size(64, 16);
             this.radioShiftJIS.TabIndex = 7;
             this.radioShiftJIS.Text = "ShiftJIS";
             this.radioShiftJIS.UseVisualStyleBackColor = true;
@@ -174,9 +189,10 @@ namespace BuffettCodeAddinRibbon
             // 
             this.radioUTF8.AutoSize = true;
             this.radioUTF8.Checked = true;
-            this.radioUTF8.Location = new System.Drawing.Point(9, 25);
+            this.radioUTF8.Location = new System.Drawing.Point(5, 17);
+            this.radioUTF8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioUTF8.Name = "radioUTF8";
-            this.radioUTF8.Size = new System.Drawing.Size(75, 22);
+            this.radioUTF8.Size = new System.Drawing.Size(51, 16);
             this.radioUTF8.TabIndex = 6;
             this.radioUTF8.TabStop = true;
             this.radioUTF8.Text = "UTF8";
@@ -186,11 +202,11 @@ namespace BuffettCodeAddinRibbon
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // CSVForm
+            // CsvDownloadForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(413, 409);
+            this.ClientSize = new System.Drawing.Size(248, 273);
             this.Controls.Add(this.groupEncoding);
             this.Controls.Add(this.groupOutput);
             this.Controls.Add(this.buttonOK);
@@ -201,9 +217,10 @@ namespace BuffettCodeAddinRibbon
             this.Controls.Add(this.textTicker);
             this.Controls.Add(this.label1);
             this.Location = new System.Drawing.Point(100, 100);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "CSVForm";
+            this.Name = "CsvDownloadForm";
             this.Text = "CSV出力";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CSVForm_FormClosing);
             this.groupOutput.ResumeLayout(false);

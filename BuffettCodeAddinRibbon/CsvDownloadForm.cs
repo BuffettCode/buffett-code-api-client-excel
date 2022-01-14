@@ -204,5 +204,10 @@ namespace BuffettCodeAddinRibbon
             }
             return null;
         }
+
+        private void groupEncoding_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
