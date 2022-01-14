@@ -172,7 +172,6 @@ namespace BuffettCodeAddinRibbon
             this.groupEncoding.TabIndex = 12;
             this.groupEncoding.TabStop = false;
             this.groupEncoding.Text = "文字コード";
-            this.groupEncoding.Enter += new System.EventHandler(this.groupEncoding_Enter);
             // 
             // radioShiftJIS
             // 
