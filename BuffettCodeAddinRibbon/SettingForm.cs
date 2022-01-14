@@ -79,5 +79,21 @@ namespace BuffettCodeAddinRibbon
         {
 
         }
+
+        private void TabDeveloper_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckIsOndemandEndpointEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckForceOndemandEndpointEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

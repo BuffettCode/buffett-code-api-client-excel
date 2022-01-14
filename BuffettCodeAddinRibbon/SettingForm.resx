@@ -118,12 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ondemandModeDesc.Text" xml:space="preserve">
-    <value>必要に応じて、バフェット・コードの従量課金エンドポイントを利用するようになります。
-
-
+    <value>
 従量課金エンドポイントを利用すると、定額料金の範囲（直近5年）より過去の財務数値を取得することができるようになります。
 財務数値の取得に従量課金のエンドポイントを利用する必要性の有無は、エクセルアドイン内部で都度判定します。
-従量課金エンドポイントを利用すると、月額利用料とは別に1回のAPIコールあたり8.8円（税込）が課金されますのでご注意ください。
+従量課金エンドポイントを利用すると、月額利用料とは別に1回のAPIコールごとに従量課金されますのでご注意ください。
 詳細や注意事項、FAQについては下記をご確認ください。</value>
   </data>
 </root>
