@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?define ProductVersion = "1.0.1.7"?>
+<?define ProductVersion = "1.0.1.8"?>
 <?define ProductUpgradeCode = "01f57a17-805a-4747-98be-543efcb7e17f"?>
 
 <!-- ref https://github.com/Excel-DNA/WiXInstaller/blob/master/Source/ExcelAddInDeploy/Product.wxs -->
