@@ -79,7 +79,7 @@ namespace BuffettCodeCommon
             get => IsTrue(BuffettCodeRegistryConfig.NameIsOndemandEndpointEnabled, IsOndemandEndpointEnabledDefault);
             set
             {
-                if (value is false && IsForceOndemandApi)
+                if (!value && IsForceOndemandApi)
                 {
                     throw new AddinConfigurationException("set ForceOndemandApi as false at first.");
                 }
@@ -104,7 +104,7 @@ namespace BuffettCodeCommon
             get => IsTrue(BuffettCodeRegistryConfig.NameForceOndemandApi, IsForceOndemandApiDefault);
             set
             {
-                if (value is true && !IsOndemandEndpointEnabled)
+                if (value && !IsOndemandEndpointEnabled)
                 {
                     throw new AddinConfigurationException("set IsOndemandApiEnabled as true at first.");
                 }
