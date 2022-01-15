@@ -5,6 +5,7 @@ using BuffettCodeCommon;
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
 using BuffettCodeCommon.Period;
+using BuffettCodeCommon.Validator;
 using BuffettCodeIO.Property;
 using BuffettCodeIO.TabularOutput;
 using System;
@@ -15,10 +16,6 @@ namespace BuffettCodeAddinRibbon
 {
     public partial class CsvDownloadForm : Form
     {
-
-        private static readonly int lowerLimitYear = 2008;
-
-        private static readonly int upperLimitYear = DateTime.Today.Year;
 
         private readonly TabularWriterBuilder<Quarter> quarterTabularWriterBuilder = new TabularWriterBuilder<Quarter>();
         private readonly ApiResourceGetter apiResourceGetter = ApiResourceGetter.Create();
@@ -119,14 +116,14 @@ namespace BuffettCodeAddinRibbon
 
         private bool ValidateControls()
         {
-            var message = ValidateQuarter(textFrom.Text);
-            if (!string.IsNullOrEmpty(message))
+            var errorMessage = CsvDownloadFormValidator.ValidateFiscalQuarter(textFrom.Text);
+            if (!string.IsNullOrEmpty(errorMessage))
             {
                 textFrom.Select();
                 return false;
             }
-            message = ValidateQuarter(textTo.Text);
-            if (!string.IsNullOrEmpty(message))
+            errorMessage = CsvDownloadFormValidator.ValidateFiscalQuarter(textTo.Text);
+            if (!string.IsNullOrEmpty(errorMessage))
             {
                 textTo.Select();
                 return false;
@@ -149,11 +146,11 @@ namespace BuffettCodeAddinRibbon
 
         private void TextFrom_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var message = ValidateQuarter(textFrom.Text);
-            if (!string.IsNullOrEmpty(message))
+            var errorMessage = CsvDownloadFormValidator.ValidateFiscalQuarter(textFrom.Text);
+            if (!string.IsNullOrEmpty(errorMessage))
             {
                 e.Cancel = true;
-                errorProvider.SetError(textFrom, message);
+                errorProvider.SetError(textFrom, errorMessage);
             }
         }
 
@@ -164,11 +161,11 @@ namespace BuffettCodeAddinRibbon
 
         private void TextTo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var message = ValidateQuarter(textTo.Text);
-            if (!string.IsNullOrEmpty(message))
+            var errorMessage = CsvDownloadFormValidator.ValidateFiscalQuarter(textTo.Text);
+            if (!string.IsNullOrEmpty(errorMessage))
             {
                 e.Cancel = true;
-                errorProvider.SetError(textTo, message);
+                errorProvider.SetError(textTo, errorMessage);
             }
         }
 
@@ -177,35 +174,35 @@ namespace BuffettCodeAddinRibbon
             errorProvider.SetError(textTo, "");
         }
 
-        private string ValidateQuarter(string param)
+        private string ValidateFiscalQuarter(string param)
         {
             var tokens = param.Split('Q');
             if (tokens.Length != 2)
             {
                 return "フォーマットが正しくありません。(例: 2017Q1)";
             }
-            if (!int.TryParse(tokens[0], out int year))
+            else if (!uint.TryParse(tokens[0], out uint year))
             {
                 return "年が数値ではありません。";
             }
-            else if (year < lowerLimitYear)
-            {
-                return lowerLimitYear + "年以降で指定してください。";
-            }
-            else if (year > upperLimitYear)
-            {
-                return upperLimitYear + "年以前で指定してください。";
-            }
-            if (!int.TryParse(tokens[1], out int quarter))
+            else if (!uint.TryParse(tokens[1], out uint quarter))
             {
                 return "四半期が数値ではありません。";
             }
-            else if (quarter < 1 || quarter > 4)
+            else
             {
-                return lowerLimitYear + "四半期は1~4を指定してください。";
+                try
+                {
+                    FiscalYearValidator.Validate(year);
+                }
+                catch (ValidationError) { return $"年の設定が不正です: {year}"; }
+                try
+                {
+                    FiscalQuarterValidator.Validate(quarter);
+                }
+                catch (ValidationError) { return $"四半期の設定が不正です: {quarter}"; }
             }
             return null;
         }
-
     }
 }

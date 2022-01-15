@@ -97,10 +97,10 @@ namespace BuffettCodeAddinRibbon
         {
             if (checkIsOndemandEndpointEnabled.Checked)
             {
-                checkForceOndemandApi.Visible = true; 
+                checkForceOndemandApi.Visible = true;
                 forceOndemandEndpointDesc.Visible = true;
             }
-            else 
+            else
             {
                 checkForceOndemandApi.Visible = false;
                 forceOndemandEndpointDesc.Visible = false;
