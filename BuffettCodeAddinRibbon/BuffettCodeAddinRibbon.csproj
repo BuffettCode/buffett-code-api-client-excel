@@ -200,6 +200,7 @@
   -->
   <ItemGroup>
     <Compile Include="CsvDownload\ApiResourceGetter.cs" />
+    <Compile Include="CsvDownload\CsvDownloadFormValidator.cs" />
     <Compile Include="CsvDownload\CsvDownloadExceptionHandler.cs" />
     <Compile Include="Settings\AddinSettings.cs" />
     <Compile Include="Settings\CsvDownloadDefaultParametersHandler.cs" />
