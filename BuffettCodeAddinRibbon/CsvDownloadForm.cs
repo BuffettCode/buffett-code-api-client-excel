@@ -37,7 +37,9 @@ namespace BuffettCodeAddinRibbon
             textFrom.Text = parameters.Range.From.ToString();
             textTo.Text = parameters.Range.To.ToString();
             radioCSV.Checked = parameters.IsCreateNewFile();
+            radioSheet.Checked = !parameters.IsCreateNewFile();
             radioUTF8.Checked = parameters.IsUTF8Encoding();
+            radioShiftJIS.Checked = !parameters.IsUTF8Encoding();
         }
 
         private CsvDownloadParameters CreateParametersFromFormValues()
