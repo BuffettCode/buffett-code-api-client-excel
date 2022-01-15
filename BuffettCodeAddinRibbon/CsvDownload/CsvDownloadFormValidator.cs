@@ -10,7 +10,7 @@ namespace BuffettCodeAddinRibbon.CsvDownload
             var tokens = fiscalPeriodParam.Split('Q');
             if (tokens.Length != 2)
             {
-                return "フォーマットが正しくありません。(例: 2017Q1)";
+                return "フォーマットが正しくありません。'2017Q1'のように設定してください";
             }
             else if (!uint.TryParse(tokens[0], out uint year))
             {
