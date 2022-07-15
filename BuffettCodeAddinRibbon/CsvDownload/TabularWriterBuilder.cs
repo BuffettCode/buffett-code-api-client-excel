@@ -1,3 +1,4 @@
+using BuffettCode;
 using BuffettCodeAddinRibbon.Settings;
 using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Exception;
@@ -29,7 +30,7 @@ namespace BuffettCodeAddinRibbon.CsvDownload
                 case TabularOutputDestination.NewCsvFile:
                     return BuildCsvFileTabluarWriter(true);
                 case TabularOutputDestination.NewWorksheet:
-                    Worksheet worksheet = Globals.ThisAddIn.Application.Worksheets.Add();
+                    Worksheet worksheet =  Globals.ThisAddIn.Application.Worksheets.Add();
                     return BuildWorksheetTabularWriter(worksheet);
 
                 // for unit testing
