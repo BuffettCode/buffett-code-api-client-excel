@@ -55,8 +55,6 @@
     <Compile Include="ApiClientFactory.cs" />
     <Compile Include="BuffettCodeApiV3RequestCreator.cs" />
     <Compile Include="BuffettCodeApiV3Client.cs" />
-    <Compile Include="BuffettCodeApiV2Client.cs" />
-    <Compile Include="BuffettCodeApiV2RequestCreator.cs" />
     <Compile Include="ApiGetResponseBodyParser.cs" />
     <Compile Include="ApiGetRequest.cs" />
     <Compile Include="CacheKeyCreator.cs" />

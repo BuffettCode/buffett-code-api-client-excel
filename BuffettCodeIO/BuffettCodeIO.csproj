@@ -74,8 +74,6 @@
     <Compile Include="Parser\ApiV3ResponseParser.cs" />
     <Compile Include="Property\FixedTierRange.cs" />
     <Compile Include="Property\Daily.cs" />
-    <Compile Include="Resolver\ApiV3LegacyDataTypeResolver.cs" />
-    <Compile Include="Resolver\LegacyDataTypeResolver.cs" />
     <Compile Include="TabularOutput\WorksheetTabularWriter.cs" />
     <Compile Include="TabularOutput\TabularFormatter.cs" />
     <Compile Include="TabularOutput\FormattedValueSelector.cs" />
@@ -86,7 +84,6 @@
     <Compile Include="Property\SupportedPeriodRange.cs" />
     <Compile Include="Resolver\SupportedTierDictionary.cs" />
     <Compile Include="Resolver\PeriodSupportedTierResolver.cs" />
-    <Compile Include="Parser\ApiV2ResponseParser.cs" />
     <Compile Include="Parser\ApiResponseParserFactory.cs" />
     <Compile Include="Parser\FixedTierRangeParser.cs" />
     <Compile Include="Parser\PropertyNames.cs" />
@@ -102,10 +99,7 @@
     <Compile Include="Formatter\NumericFormatter.cs" />
     <Compile Include="Formatter\IPropertyFormatter.cs" />
     <Compile Include="Formatter\PropertyFormatterFactory.cs" />
-    <Compile Include="Resolver\ILegacyDataTypeResolver.cs" />
-    <Compile Include="Resolver\ApiV2LegacyDataTypeResolver.cs" />
     <Compile Include="Formatter\InactionFormatter.cs" />
-    <Compile Include="Property\Indicator.cs" />
     <Compile Include="Formatter\RatioFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Property\IApiResource.cs" />

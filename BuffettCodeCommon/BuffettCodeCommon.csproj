@@ -61,6 +61,7 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="Exception\BaseBuffettCodeException.cs" />
     <Compile Include="Exception\ApiResponseParserException.cs" />
+    <Compile Include="Exception\UDFUnsupportedSyntaxException.cs" />
     <Compile Include="Exception\NonSupportedApiVersionException.cs" />
     <Compile Include="Exception\NotSupportedCSVOutputDestinationException.cs" />
     <Compile Include="Exception\NotSupportedTierException.cs" />

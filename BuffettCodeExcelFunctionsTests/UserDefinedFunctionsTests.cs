@@ -8,17 +8,17 @@ namespace BuffettCodeExcelFunctions.Tests
     public class UserDefinedFunctionsTests
     {
         [TestMethod()]
-        public void IsLegacyModeTest()
+        public void IsV2Syntax()
         {
             var udf = new PrivateType(typeof(UserDefinedFunctions));
-            Assert.IsTrue((bool)udf.InvokeStatic("IsLegacyMode", ""));
-            Assert.IsTrue((bool)udf.InvokeStatic("IsLegacyMode", "2020"));
-            Assert.IsFalse((bool)udf.InvokeStatic("IsLegacyMode", "2020-01-01"));
-            Assert.IsFalse((bool)udf.InvokeStatic("IsLegacyMode", "2020Q1"));
-            Assert.IsFalse((bool)udf.InvokeStatic("IsLegacyMode", "LYLQ"));
-            Assert.IsFalse((bool)udf.InvokeStatic("IsLegacyMode", "LY-1Q3"));
-            Assert.IsFalse((bool)udf.InvokeStatic("IsLegacyMode", "LY-3LQ-2"));
-            Assert.IsFalse((bool)udf.InvokeStatic("IsLegacyMode", "2020LQ-2"));
+            Assert.IsTrue((bool)udf.InvokeStatic("IsV2Syntax", ""));
+            Assert.IsTrue((bool)udf.InvokeStatic("IsV2Syntax", "2020"));
+            Assert.IsFalse((bool)udf.InvokeStatic("IsV2Syntax", "2020-01-01"));
+            Assert.IsFalse((bool)udf.InvokeStatic("IsV2Syntax", "2020Q1"));
+            Assert.IsFalse((bool)udf.InvokeStatic("IsV2Syntax", "LYLQ"));
+            Assert.IsFalse((bool)udf.InvokeStatic("IsV2Syntax", "LY-1Q3"));
+            Assert.IsFalse((bool)udf.InvokeStatic("IsV2Syntax", "LY-3LQ-2"));
+            Assert.IsFalse((bool)udf.InvokeStatic("IsV2Syntax", "2020LQ-2"));
         }
 
 
