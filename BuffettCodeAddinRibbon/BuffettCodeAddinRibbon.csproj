@@ -301,7 +301,7 @@
     <ManifestKeyFile>..\Certificates\BuffettCodeTest.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>9843c635bcd976868ffcb98ecc2877408cd5ff61</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>D2D1F60C6D24A9993915AD2B056F07CA359A8533</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
