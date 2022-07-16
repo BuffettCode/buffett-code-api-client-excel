@@ -61,7 +61,7 @@ namespace BuffettCodeExcelFunctions
             }
             else if (bce is UDFObsoletedFunctionCallException)
             {
-                message = $"その関数は利用できなくなりました::{bce.Message}";
+                message = $"サポートを終了した関数呼び出し形式です::{bce.Message}";
             }
             else
             {
