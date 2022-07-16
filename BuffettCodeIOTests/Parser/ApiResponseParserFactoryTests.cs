@@ -9,7 +9,6 @@ namespace BuffettCodeIO.Parser.Tests
         [TestMethod()]
         public void CreateTest()
         {
-            Assert.IsInstanceOfType(ApiResponseParserFactory.Create(BuffettCodeApiVersion.Version2), typeof(ApiV2ResponseParser));
             Assert.IsInstanceOfType(ApiResponseParserFactory.Create(BuffettCodeApiVersion.Version3), typeof(ApiV3ResponseParser));
         }
     }

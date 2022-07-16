@@ -59,6 +59,10 @@ namespace BuffettCodeExcelFunctions
             {
                 message = $"入力された値が不正です::{bce.Message}";
             }
+            else if (bce is UDFUnsupportedSyntaxException)
+            {
+                message = $"その関数は利用できなくなりました::{bce.Message}";
+            }
             else
             {
                 message = $"未定義のエラー::{e.Message}";

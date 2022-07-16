@@ -8,8 +8,6 @@ namespace BuffettCodeIO.Parser
         {
             switch (version)
             {
-                case BuffettCodeApiVersion.Version2:
-                    return new ApiV2ResponseParser();
                 case BuffettCodeApiVersion.Version3:
                     return new ApiV3ResponseParser();
                 default:

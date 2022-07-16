@@ -1,3 +1,4 @@
+using BuffettCode;
 using BuffettCodeAddinRibbon.Settings;
 using BuffettCodeCommon;
 using BuffettCodeCommon.Exception;

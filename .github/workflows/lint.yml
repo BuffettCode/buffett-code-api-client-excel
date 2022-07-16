@@ -24,7 +24,7 @@ jobs:
     # Name the Job
     name: Lint Code Base
     # Set the agent to run on, Container action is only supported on Linux
-    runs-on: windows-latest 
+    runs-on: windows-2019
 
     ##################
     # Load all steps #

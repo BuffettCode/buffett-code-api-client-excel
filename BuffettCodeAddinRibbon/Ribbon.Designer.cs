@@ -1,3 +1,4 @@
+using BuffettCode;
 namespace BuffettCodeAddinRibbon
 {
     partial class Ribbon : Microsoft.Office.Tools.Ribbon.RibbonBase
@@ -129,11 +130,4 @@ namespace BuffettCodeAddinRibbon
         internal Microsoft.Office.Tools.Ribbon.RibbonBox rightBox;
     }
 
-    partial class ThisRibbonCollection
-    {
-        internal Ribbon Ribbon1
-        {
-            get { return this.GetRibbon<Ribbon>(); }
-        }
-    }
 }

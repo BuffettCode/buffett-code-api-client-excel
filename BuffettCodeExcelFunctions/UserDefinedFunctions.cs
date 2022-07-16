@@ -9,7 +9,6 @@ namespace BuffettCodeExcelFunctions
 
     public static class UserDefinedFunctions
     {
-        private static readonly BCodeLegacyExecutor bCodeLegacyExecutor = new BCodeLegacyExecutor(BuffettCodeApiVersion.Version2);
         private static readonly BCodeExecutor bCodeExecutor = new BCodeExecutor(BuffettCodeApiVersion.Version3);
 
         private static bool ParseBoolParameter(string parameter, bool defaultValue)
@@ -24,37 +23,27 @@ namespace BuffettCodeExcelFunctions
             }
         }
 
-        private static bool IsLegacyMode(string parameter) => !(PeriodRegularExpressionConfig.BCodeUdfFiscalQuarterInputRegex.IsMatch(parameter) || PeriodRegularExpressionConfig.BCodeUdfDailyInputRegex.IsMatch(parameter));
+        private static bool IsV2Syntax(string parameter) => !(PeriodRegularExpressionConfig.BCodeUdfFiscalQuarterInputRegex.IsMatch(parameter) || PeriodRegularExpressionConfig.BCodeUdfDailyInputRegex.IsMatch(parameter));
 
 
         [ExcelFunction(Description = "Getting values using BuffettCode API", Name = "BCODE")]
-        public static string BCode(string ticker, string parameter1, string parameter2, string parameter3, string parameter4 = "", string parameter5 = "")
+        public static string BCode(string ticker, string parameter1, string parameter2, string parameter3, string parameter4 = "")
         {
-            var isLegacyMode = IsLegacyMode(parameter1);
             var propertyName = "";
             try
             {
-                // legacy mode
-                if (isLegacyMode)
+                if (IsV2Syntax(parameter1))
                 {
-                    var fyParameter = parameter1;
-                    var fqParameter = parameter2;
-                    propertyName = parameter3;
-                    var isRawValue = ParseBoolParameter(parameter4, false);
-                    var isWithUnit = ParseBoolParameter(parameter5, false);
-                    return bCodeLegacyExecutor.Execute(ticker, fyParameter, fqParameter, propertyName, isRawValue, isWithUnit);
+                    throw new UDFUnsupportedSyntaxException("BCODE V2 function is not supported anymore.");
                 }
-                // current mode
-                else
-                {
-                    var periodParam = parameter1;
-                    propertyName = parameter2;
-                    BCodeUdfPeriodParameterValidator.Validate(periodParam);
-                    var dataType = DataTypeResolver.Resolve(periodParam);
-                    var isRawValue = ParseBoolParameter(parameter3, false);
-                    var isWithUnit = ParseBoolParameter(parameter4, false);
-                    return bCodeExecutor.Execute(ticker, dataType, periodParam, propertyName, isRawValue, isWithUnit);
-                }
+                var periodParam = parameter1;
+                propertyName = parameter2;
+                BCodeUdfPeriodParameterValidator.Validate(periodParam);
+                var dataType = DataTypeResolver.Resolve(periodParam);
+                var isRawValue = ParseBoolParameter(parameter3, false);
+                var isWithUnit = ParseBoolParameter(parameter4, false);
+                return bCodeExecutor.Execute(ticker, dataType, periodParam, propertyName, isRawValue, isWithUnit);
+
             }
             catch (Exception e)
             {

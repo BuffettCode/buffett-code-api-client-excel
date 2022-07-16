@@ -2,7 +2,6 @@ namespace BuffettCodeCommon.Config
 {
     public enum BuffettCodeApiVersion
     {
-        Version2 = 2,
         Version3 = 3,
     }
     public static class BuffettCodeApiKeyConfig
