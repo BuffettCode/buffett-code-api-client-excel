@@ -77,13 +77,13 @@
     <Compile Include="Validator\JpTickerValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BuffettCodeCommon\BuffettCodeCommon.csproj">
       <Project>{8552CFD4-39C4-47D9-A0FA-BE33B952465A}</Project>
       <Name>BuffettCodeCommon</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
