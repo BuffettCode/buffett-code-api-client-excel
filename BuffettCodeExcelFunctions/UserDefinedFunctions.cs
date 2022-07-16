@@ -34,7 +34,7 @@ namespace BuffettCodeExcelFunctions
             {
                 if (IsV2Syntax(parameter1))
                 {
-                    throw new UDFUnsupportedSyntaxException("BCODE V2 function is not supported anymore.");
+                    throw new UDFObsoletedFunctionCallException("BCODE V2 function is not supported anymore.");
                 }
                 var periodParam = parameter1;
                 propertyName = parameter2;
