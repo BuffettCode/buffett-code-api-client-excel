@@ -59,9 +59,9 @@ namespace BuffettCodeExcelFunctions
             {
                 message = $"入力された値が不正です::{bce.Message}";
             }
-            else if (bce is UDFUnsupportedSyntaxException)
+            else if (bce is UDFObsoletedFunctionCallException)
             {
-                message = $"その関数は利用できなくなりました::{bce.Message}";
+                message = $"サポートを終了した関数呼び出し形式です::{bce.Message}";
             }
             else
             {
