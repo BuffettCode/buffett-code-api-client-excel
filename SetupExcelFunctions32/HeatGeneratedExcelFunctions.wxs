@@ -77,6 +77,18 @@
             <Component Id="cmp196F1D763CBB036DA160606D8D0E27DA" Guid="*">
                 <File Id="fil83D9BCFD839F35A59CAF8AB3AB656AE9" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\Newtonsoft.Json.xml" />
             </Component>
+            <Component Id="cmpAD568283CFD6A75645ED0ECDD761D85E" Guid="*">
+                <File Id="filA12D9DE081467DACFD3B4C1025434C4C" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\System.Buffers.dll" />
+            </Component>
+            <Component Id="cmpFB525AB8CB9FAB0057B5359FFF6543A1" Guid="*">
+                <File Id="fil5088F94E71D948D60D111B42E87143D6" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\System.Collections.Immutable.dll" />
+            </Component>
+            <Component Id="cmp5A904851F9DE7369E243943F4E5027FA" Guid="*">
+                <File Id="fil5EC8BD617ECC4CAA66A5310AFD181E04" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\System.Memory.dll" />
+            </Component>
+            <Component Id="cmpB5468F5DF6425D31E8036A019997ED81" Guid="*">
+                <File Id="filB997D5ACF1187050162A1467E8B6D9B7" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\System.Numerics.Vectors.dll" />
+            </Component>
             <Component Id="cmp676B532506E78F84084C12B1FAE054E3" Guid="*">
                 <File Id="fil9B24D665A20C2F5F03044136BBBE054F" KeyPath="yes" Source="$(var.FunctionsHarvestPath)\System.ValueTuple.dll" />
             </Component>
@@ -112,6 +124,10 @@
             <ComponentRef Id="cmp2068870D6EA8EBA19E43D6369C5CF0CA" />
             <ComponentRef Id="cmp6616CB17E4922802E5C84B9C16935052" />
             <ComponentRef Id="cmp196F1D763CBB036DA160606D8D0E27DA" />
+            <ComponentRef Id="cmpAD568283CFD6A75645ED0ECDD761D85E" />
+            <ComponentRef Id="cmpFB525AB8CB9FAB0057B5359FFF6543A1" />
+            <ComponentRef Id="cmp5A904851F9DE7369E243943F4E5027FA" />
+            <ComponentRef Id="cmpB5468F5DF6425D31E8036A019997ED81" />
             <ComponentRef Id="cmp676B532506E78F84084C12B1FAE054E3" />
             <ComponentRef Id="cmp693DF999232B83CFADE3AF4AFB0A0D94" />
         </ComponentGroup>

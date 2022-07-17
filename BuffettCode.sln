@@ -43,8 +43,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffettCodeAddinRibbonTests", "BuffettCodeAddinRibbonTests\BuffettCodeAddinRibbonTests.csproj", "{00A6A593-A87D-4DD2-8B06-8A36CFC6C3AA}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SetupAddinRibbon32", "SetupAddinRibbon32\SetupAddinRibbon32.wixproj", "{E1016C59-0448-4BFA-B89D-BB3C960F1F16}"
+	ProjectSection(ProjectDependencies) = postProject
+		{00A6A593-A87D-4DD2-8B06-8A36CFC6C3AA} = {00A6A593-A87D-4DD2-8B06-8A36CFC6C3AA}
+	EndProjectSection
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SetupExcelFunctions32", "SetupExcelFunctions32\SetupExcelFunctions32.wixproj", "{9D5AFF0E-0EA3-4318-8BE4-941FC1DAF261}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AD8A3F1E-584E-46C1-ACEE-A749433B99B2} = {AD8A3F1E-584E-46C1-ACEE-A749433B99B2}
+	EndProjectSection
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "BuffettCodeExcelAddin32Installer", "BuffettCodeExcelAddin32Installer\BuffettCodeExcelAddin32Installer.wixproj", "{4D7EB0F3-E548-42EF-A99E-6C059800C654}"
 EndProject

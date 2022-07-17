@@ -42,4 +42,5 @@ namespace BuffettCodeCommon.Config
         public static readonly string API_SPECIAL_NOTES = "https://www.buffett-code.com/legal/web_api/special_notes";
         public static readonly string ONDEMAND_API_USAGE_ENTRY = "https://blog.buffett-code.com/entry/ondemand_api_usage";
     }
+
 }

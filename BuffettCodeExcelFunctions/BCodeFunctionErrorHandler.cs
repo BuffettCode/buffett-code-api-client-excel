@@ -23,9 +23,9 @@ namespace BuffettCodeExcelFunctions
             {
                 message = $"指定された項目が見つかりません:{propertyName}";
             }
-            else if (bce is QuotaException)
+            else if (bce is DailyQuotaException)
             {
-                message = "APIの実行回数が上限に達しました";
+                message = "一日当たりのAPIの実行回数が上限に達しました";
             }
             else if (bce is InvalidAPIKeyException)
             {
@@ -50,6 +50,10 @@ namespace BuffettCodeExcelFunctions
             else if (bce is ResourceNotFoundException)
             {
                 message = $"存在しないデータにアクセスしようとしています。::{bce.Message}";
+            }
+            else if (bce is ApiMonthlyLimitExceededException)
+            {
+                message = $"今月のAPIの実行回数が上限に達しました::{bce.Message}";
             }
             else if (bce is BuffettCodeApiClientException)
             {

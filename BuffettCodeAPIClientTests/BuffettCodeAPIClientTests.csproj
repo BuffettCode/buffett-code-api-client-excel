@@ -74,6 +74,7 @@
     <Compile Include="BuffettCodeApiV3RequestCreatorTests.cs" />
     <Compile Include="ApiRequestCacheHelperTests.cs" />
     <Compile Include="CacheKeyCreatorTests.cs" />
+    <Compile Include="GetRequestErrorHandlerTests.cs" />
     <Compile Include="TickerDayParameterTests.cs" />
     <Compile Include="TickerEmptyPeriodParameterTests.cs" />
     <Compile Include="ErrorMockApiClientCore.cs" />
