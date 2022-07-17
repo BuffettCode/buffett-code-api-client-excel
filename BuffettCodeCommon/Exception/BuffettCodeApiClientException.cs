@@ -20,13 +20,13 @@ namespace BuffettCodeCommon.Exception
         public InvalidAPIKeyException(string message, Exception inner) : base(message, inner) { }
     }
 
-    public class QuotaException : BuffettCodeApiClientException
+    public class DailyQuotaException : BuffettCodeApiClientException
     {
-        public QuotaException() : base() { }
+        public DailyQuotaException() : base() { }
 
-        public QuotaException(string message) : base(message) { }
+        public DailyQuotaException(string message) : base(message) { }
 
-        public QuotaException(string message, Exception inner) : base(message, inner) { }
+        public DailyQuotaException(string message, Exception inner) : base(message, inner) { }
 
     }
 
@@ -47,6 +47,16 @@ namespace BuffettCodeCommon.Exception
         public ResourceNotFoundException(string message) : base(message) { }
 
         public ResourceNotFoundException(string message, Exception inner) : base(message, inner) { }
+
+    }
+
+    public class ApiMonthlyLimitExceededException : BuffettCodeApiClientException
+    {
+        public ApiMonthlyLimitExceededException() : base() { }
+
+        public ApiMonthlyLimitExceededException(string message) : base(message) { }
+
+        public ApiMonthlyLimitExceededException(string message, Exception inner) : base(message, inner) { }
 
     }
 

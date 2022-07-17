@@ -1,6 +1,4 @@
-using BuffettCodeCommon.Exception;
 using System;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -48,17 +46,7 @@ namespace BuffettCodeAPIClient
             {
                 if (!response.IsSuccessStatusCode)
                 {
-                    switch ((int)response.StatusCode)
-                    {
-                        case (int)HttpStatusCode.Forbidden:
-                            throw new InvalidAPIKeyException($"request={request}");
-                        case (int)HttpStatusCode.NotFound:
-                            throw new ResourceNotFoundException($"request={request}");
-                        case 429: // Quota Error
-                            throw new QuotaException($"request={request}");
-                        default:
-                            throw new BuffettCodeApiClientException($"request={request}");
-                    }
+                    GetRequestErrorHandler.Handle(request, response);
                 }
                 var content = response.Content.ReadAsStringAsync().Result;
                 return content;

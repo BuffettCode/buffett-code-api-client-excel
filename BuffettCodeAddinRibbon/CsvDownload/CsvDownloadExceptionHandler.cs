@@ -20,9 +20,9 @@ namespace BuffettCodeAddinRibbon.CsvDownload
             {
                 return "テスト用のAPIキーでは末尾が01の銘柄コードのみ使用できます。";
             }
-            else if (exception is QuotaException)
+            else if (exception is DailyQuotaException)
             {
-                return "APIの実行回数が上限に達しました。";
+                return "一日当たりのAPIの実行回数が上限に達しました。";
             }
             else if (exception is InvalidAPIKeyException)
             {
@@ -39,6 +39,10 @@ namespace BuffettCodeAddinRibbon.CsvDownload
             else if (exception is ResourceNotFoundException)
             {
                 return $"存在しないデータにアクセスしようとしています。";
+            }
+            else if (exception is ApiMonthlyLimitExceededException)
+            {
+                return "今月のAPIの実行回数が上限に達しました。";
             }
             else
             {

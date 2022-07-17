@@ -62,6 +62,9 @@
             <Component Id="cmp58DACAD6E5ECA27D45E862422C36391A" Guid="*">
                 <File Id="fil85D2AAC1FD1C3BCA4D56A89865C93BF7" KeyPath="yes" Source="$(var.RibbonHarvestPath)\System.Buffers.xml" />
             </Component>
+            <Component Id="cmpFB525AB8CB9FAB0057B5359FFF6543A1" Guid="*">
+                <File Id="fil5088F94E71D948D60D111B42E87143D6" KeyPath="yes" Source="$(var.RibbonHarvestPath)\System.Collections.Immutable.dll" />
+            </Component>
             <Component Id="cmp5A904851F9DE7369E243943F4E5027FA" Guid="*">
                 <File Id="fil5EC8BD617ECC4CAA66A5310AFD181E04" KeyPath="yes" Source="$(var.RibbonHarvestPath)\System.Memory.dll" />
             </Component>
@@ -110,6 +113,7 @@
             <ComponentRef Id="cmp196F1D763CBB036DA160606D8D0E27DA" />
             <ComponentRef Id="cmpAD568283CFD6A75645ED0ECDD761D85E" />
             <ComponentRef Id="cmp58DACAD6E5ECA27D45E862422C36391A" />
+            <ComponentRef Id="cmpFB525AB8CB9FAB0057B5359FFF6543A1" />
             <ComponentRef Id="cmp5A904851F9DE7369E243943F4E5027FA" />
             <ComponentRef Id="cmp72CFC8F9FE5280FECF3FC56AB41DA067" />
             <ComponentRef Id="cmpB5468F5DF6425D31E8036A019997ED81" />
