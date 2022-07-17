@@ -11,7 +11,7 @@ on:
       - 'v*' # only v* tag trigger release.yml
 jobs:
   build_and_release:
-    runs-on: windows-latest
+    runs-on: windows-2019
     env:
       CODE_SIGNING_CERTIFICATE: 'BuffettCode.pfx'
       CODE_SIGNING_CERTIFICATE_S3_URI: ${{ secrets.S3_CODE_SIGNING_PFX_URI }}
