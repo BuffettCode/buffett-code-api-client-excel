@@ -39,7 +39,7 @@ jobs:
     - name: Install dependencies
       run: .\scripts\install_dependencies.ps1
     - name: Run MSBuild using code signing certificate
-      run: MSBuild BuffettCode.sln /p:Configuration=Release /p:ManifestKeyFile="$env:CODE_SIGNING_CERTIFICATE" /p:ManifestCertificateThumbprint=${{ secrets.MANIFEST_CERTIFICATE_THUMBPRINT }} -maxcpucount
+      run: MSBuild BuffettCode.sln /p:Configuration=Release /p:ManifestKeyFile="$env:CODE_SIGNING_CERTIFICATE" /p:ManifestCertificateThumbprint=${{ secrets.MANIFEST_CERTIFICATE_THUMBPRINT }}
     - name: Run VSTest using Test API Token
       run: .\scripts\run_all_tests.ps1
     - name: Sign the built installer using signing certificate
