@@ -34,6 +34,9 @@ namespace BuffettCodeExcelFunctions.Tests
             Assert.AreEqual(TickerQuarterParameter.Create(ticker, "2019", "LQ-2", FiscalQuarterPeriod.Create(2018, 4)), TickerPeriodParameterCreator.Create(ticker, "2019LQ-2", latestQuarter));
             Assert.AreEqual(TickerQuarterParameter.Create(ticker, "LY-2", "4", FiscalQuarterPeriod.Create(2018, 4)), TickerPeriodParameterCreator.Create(ticker, "LY-2Q4", latestQuarter));
 
+            // Company
+            Assert.AreEqual(TickerEmptyPeriodParameter.Create(ticker, Snapshot.GetInstance()), TickerPeriodParameterCreator.Create(ticker, "COMPANY", null));
+
             // others
             Assert.ThrowsException<ValidationError>(() => TickerPeriodParameterCreator.Create(ticker, "dummy", null));
         }
