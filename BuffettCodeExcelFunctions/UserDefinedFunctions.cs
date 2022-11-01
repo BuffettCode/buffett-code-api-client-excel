@@ -23,7 +23,7 @@ namespace BuffettCodeExcelFunctions
             }
         }
 
-        private static bool IsV2Syntax(string parameter) => !(PeriodRegularExpressionConfig.BCodeUdfFiscalQuarterInputRegex.IsMatch(parameter) || PeriodRegularExpressionConfig.BCodeUdfDailyInputRegex.IsMatch(parameter));
+        private static bool IsV2Syntax(string parameter) => !(PeriodRegularExpressionConfig.BCodeUdfFiscalQuarterInputRegex.IsMatch(parameter) || PeriodRegularExpressionConfig.BCodeUdfDailyInputRegex.IsMatch(parameter) || PeriodRegularExpressionConfig.BCodeUdfCompanyString == parameter);
 
 
         [ExcelFunction(Description = "Getting values using BuffettCode API", Name = "BCODE")]

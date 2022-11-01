@@ -13,6 +13,10 @@ namespace BuffettCodeExcelFunctions
             {
                 return TickerDayParameter.Create(ticker, LatestDayPeriod.GetInstance());
             }
+            else if (PeriodRegularExpressionConfig.BCodeUdfCompanyString == periodParam)
+            {
+                return TickerEmptyPeriodParameter.Create(ticker, LatestDayPeriod.GetInstance());
+            }
             else if (PeriodRegularExpressionConfig.DayRegex.IsMatch(periodParam))
             {
                 return TickerDayParameter.Create(ticker, DayPeriod.Parse(periodParam));

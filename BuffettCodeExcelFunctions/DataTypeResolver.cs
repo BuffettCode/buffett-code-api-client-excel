@@ -16,6 +16,10 @@ namespace BuffettCodeExcelFunctions
             {
                 return DataTypeConfig.Quarter;
             }
+            else if (PeriodRegularExpressionConfig.BCodeUdfCompanyString == periodParam)
+            {
+                return DataTypeConfig.Company;
+            }
             else
             {
                 throw new ValidationError($"{periodParam} is not supported input format");
