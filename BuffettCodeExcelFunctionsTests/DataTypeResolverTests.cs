@@ -26,6 +26,9 @@ namespace BuffettCodeExcelFunctions.Tests
             // Daily
             Assert.AreEqual(DataTypeConfig.Daily, DataTypeResolver.Resolve("2020-01-01"));
 
+            // Company
+            Assert.AreEqual(DataTypeConfig.Company, DataTypeResolver.Resolve("COMPANY"));
+
             // others
             Assert.ThrowsException<ValidationError>(() => DataTypeResolver.Resolve("dummy"));
         }

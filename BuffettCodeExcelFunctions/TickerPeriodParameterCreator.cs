@@ -15,7 +15,7 @@ namespace BuffettCodeExcelFunctions
             }
             else if (PeriodRegularExpressionConfig.BCodeUdfCompanyString == periodParam)
             {
-                return TickerEmptyPeriodParameter.Create(ticker, LatestDayPeriod.GetInstance());
+                return TickerEmptyPeriodParameter.Create(ticker, Snapshot.GetInstance());
             }
             else if (PeriodRegularExpressionConfig.DayRegex.IsMatch(periodParam))
             {

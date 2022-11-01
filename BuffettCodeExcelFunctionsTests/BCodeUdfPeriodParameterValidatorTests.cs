@@ -19,6 +19,7 @@ namespace BuffettCodeExcelFunctions.Tests
             BCodeUdfPeriodParameterValidator.Validate("LY-1Q3");
             BCodeUdfPeriodParameterValidator.Validate("2012-12-12");
             BCodeUdfPeriodParameterValidator.Validate("latest");
+            BCodeUdfPeriodParameterValidator.Validate("COMPANY");
             // invalid cases
             Assert.ThrowsException<ValidationError>(() => BCodeUdfPeriodParameterValidator.Validate(""));
             Assert.ThrowsException<ValidationError>(() => BCodeUdfPeriodParameterValidator.Validate("dummy"));
@@ -26,6 +27,7 @@ namespace BuffettCodeExcelFunctions.Tests
             Assert.ThrowsException<ValidationError>(() => BCodeUdfPeriodParameterValidator.Validate("2020Q6"));
             Assert.ThrowsException<ValidationError>(() => BCodeUdfPeriodParameterValidator.Validate("2020"));
             Assert.ThrowsException<ValidationError>(() => BCodeUdfPeriodParameterValidator.Validate("Q3"));
+            Assert.ThrowsException<ValidationError>(() => BCodeUdfPeriodParameterValidator.Validate("company"));
         }
     }
 }
