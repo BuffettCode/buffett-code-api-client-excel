@@ -17,10 +17,7 @@ namespace BuffettCodeAPIClient
         public static object GetLockObject(ApiGetRequest request)
         {
             string lockKey = request.EndPoint;
-            if (request.Parameters.ContainsKey("ticker"))
-            {
-                lockKey += "_ticker=" + request.Parameters["ticker"];
-            }
+            lockKey += String.Join("&", request.Parameters.Select(kv => $"{kv.Key}={kv.Value}").OrderBy(str => str));
 
             if (!lockObjects.ContainsKey(lockKey))
             {
