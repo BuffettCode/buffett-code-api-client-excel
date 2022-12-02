@@ -70,6 +70,7 @@
     <Compile Include="ApiClientTestHelper.cs" />
     <Compile Include="ApiGetResponseReaderTests.cs" />
     <Compile Include="ApiGetResponseValidatorTests.cs" />
+    <Compile Include="ApiRequestLockTests.cs" />
     <Compile Include="BuffettCodeApiV3ClientTests.cs" />
     <Compile Include="BuffettCodeApiV3RequestCreatorTests.cs" />
     <Compile Include="ApiRequestCacheHelperTests.cs" />

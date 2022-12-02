@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ApiClientCore.cs" />
     <Compile Include="ApiClientFactory.cs" />
+    <Compile Include="ApiRequestLock.cs" />
     <Compile Include="BuffettCodeApiV3RequestCreator.cs" />
     <Compile Include="BuffettCodeApiV3Client.cs" />
     <Compile Include="ApiGetResponseBodyParser.cs" />

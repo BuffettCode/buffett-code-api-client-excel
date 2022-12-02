@@ -1,3 +1,4 @@
+using BuffettCodeCommon;
 using System;
 using System.Runtime.Caching;
 
@@ -34,15 +35,19 @@ namespace BuffettCodeAPIClient
 
         public string Get(ApiGetRequest request, bool isConfigureAwait, bool useCache)
         {
-            if (useCache && cacheHelper.HasCache(request))
+            lock (ApiRequestLock.GetLockObject(request))
             {
-                return (string)cacheHelper.Get(request);
-            }
-            else
-            {
-                return apiClientCore.Get(request, isConfigureAwait).Result;
+                if (useCache && cacheHelper.HasCache(request))
+                {
+                    return (string)cacheHelper.Get(request);
+                }
+                else
+                {
+                    string result = apiClientCore.Get(request, isConfigureAwait).Result;
+                    cacheHelper.Set(request, result);
+                    return result;
+                }
             }
         }
-
     }
 }
