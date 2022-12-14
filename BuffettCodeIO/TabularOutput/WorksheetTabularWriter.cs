@@ -22,11 +22,15 @@ namespace BuffettCodeIO.TabularOutput
         public void Write(Tabular<T> tabular)
         {
             uint rowIndex = 1;
+            worksheet.Application.ScreenUpdating = false;
+            worksheet.Application.Calculation = XlCalculation.xlCalculationManual;
             tabular.ToRows().ToList().ForEach(r =>
             {
                 WriteRow(rowIndex, r);
                 rowIndex++;
             });
+            worksheet.Application.Calculation = XlCalculation.xlCalculationAutomatic;
+            worksheet.Application.ScreenUpdating = true;
         }
 
         private void WriteRow(uint rowNumber, TabularRow row)
