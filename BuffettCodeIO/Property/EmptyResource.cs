@@ -18,6 +18,6 @@ namespace BuffettCodeIO.Property
 
         public static EmptyResource GetInstance() => singleton;
 
-        public IPeriod GetPeriod() => Snapshot.GetInstance();
+        public IIntent GetPeriod() => Snapshot.GetInstance();
     }
 }

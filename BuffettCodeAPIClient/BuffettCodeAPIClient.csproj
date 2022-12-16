@@ -64,13 +64,13 @@
     <Compile Include="ApiClientCoreWithCache.cs" />
     <Compile Include="ApiGetResponseValidator.cs" />
     <Compile Include="GetRequestErrorHandler.cs" />
-    <Compile Include="TickerEmptyPeriodParameter.cs" />
+    <Compile Include="TickerEmptyIntentParameter.cs" />
     <Compile Include="TickerPeriodRangeParameter.cs" />
     <Compile Include="TickerDayParameter.cs" />
     <Compile Include="TickerQuarterParameter.cs" />
     <Compile Include="IBuffettCodeApiClient.cs" />
     <Compile Include="IApiClientCore.cs" />
-    <Compile Include="IPeriodParameter.cs" />
+    <Compile Include="IIntentParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

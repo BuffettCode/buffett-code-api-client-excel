@@ -40,7 +40,7 @@ namespace BuffettCodeAPIClient.Tests
         public void GetCompanyTest()
         {
             var client = new BuffettCodeApiV3Client(mockApiCore);
-            var parameter = TickerEmptyPeriodParameter.Create("6501", Snapshot.GetInstance());
+            var parameter = TickerEmptyIntentParameter.Create("6501", Snapshot.GetInstance());
             Assert.IsNotNull(client.GetCompany(parameter, true, false));
         }
 
@@ -63,7 +63,7 @@ namespace BuffettCodeAPIClient.Tests
             var ticker = "2345";
             var day = TickerDayParameter.Create(ticker, DayPeriod.Create(2021, 2, 1));
             var fyFq = TickerQuarterParameter.Create(ticker, FiscalQuarterPeriod.Create(2019, 4));
-            var snapshot = TickerEmptyPeriodParameter.Create(ticker, Snapshot.GetInstance());
+            var snapshot = TickerEmptyIntentParameter.Create(ticker, Snapshot.GetInstance());
 
             Assert.IsNotNull(client.Get(DataTypeConfig.Daily, day, false, true, false));
             Assert.IsNotNull(client.Get(DataTypeConfig.Quarter, fyFq, false, true, false));

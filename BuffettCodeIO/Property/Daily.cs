@@ -24,7 +24,7 @@ namespace BuffettCodeIO.Property
 
         public PropertyDescription GetDescription(string propertyName) => descriptions.Get(propertyName);
 
-        public IPeriod GetPeriod() => period;
+        public IIntent GetPeriod() => period;
 
         public string Ticker => ticker;
 

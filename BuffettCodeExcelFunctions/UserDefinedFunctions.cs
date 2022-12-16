@@ -36,13 +36,13 @@ namespace BuffettCodeExcelFunctions
                 {
                     throw new UDFObsoletedFunctionCallException("Legacy 'BCODE(ticker, fy, fq, column)' function support has been ended");
                 }
-                var periodParam = parameter1;
+                var intent = parameter1;
                 propertyName = parameter2;
-                BCodeUdfPeriodParameterValidator.Validate(periodParam);
-                var dataType = DataTypeResolver.Resolve(periodParam);
+                BCodeUdfIntentValidator.Validate(intent);
+                var dataType = DataTypeResolver.Resolve(intent);
                 var isRawValue = ParseBoolParameter(parameter3, false);
                 var isWithUnit = ParseBoolParameter(parameter4, false);
-                return bCodeExecutor.Execute(ticker, dataType, periodParam, propertyName, isRawValue, isWithUnit);
+                return bCodeExecutor.Execute(ticker, dataType, intent, propertyName, isRawValue, isWithUnit);
 
             }
             catch (Exception e)

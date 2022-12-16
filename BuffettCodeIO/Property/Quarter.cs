@@ -70,7 +70,7 @@ namespace BuffettCodeIO.Property
 
         public override int GetHashCode() => (ticker, period, properties, descriptions).GetHashCode();
 
-        public IPeriod GetPeriod() => period;
+        public IIntent GetPeriod() => period;
 
     }
 }

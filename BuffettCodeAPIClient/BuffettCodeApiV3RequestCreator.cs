@@ -26,7 +26,7 @@ namespace BuffettCodeAPIClient
         {
             return new ApiGetRequest(BuffettCodeApiV3Config.ENDPOINT_BULK_QUARTER, parameter.ToApiV3Parameters());
         }
-        public static ApiGetRequest CreateGetCompanyRequest(TickerEmptyPeriodParameter parameter)
+        public static ApiGetRequest CreateGetCompanyRequest(TickerEmptyIntentParameter parameter)
         {
             return new ApiGetRequest(BuffettCodeApiV3Config.ENDPOINT_COMPANY, parameter.ToApiV3Parameters());
         }

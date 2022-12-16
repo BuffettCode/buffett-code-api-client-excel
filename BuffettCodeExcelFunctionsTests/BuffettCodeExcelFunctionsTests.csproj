@@ -56,9 +56,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="BCodeUdfPeriodParameterValidatorTests.cs" />
+    <Compile Include="BCodeUdfIntentParameterValidatorTests.cs" />
     <Compile Include="DataTypeResolverTests.cs" />
-    <Compile Include="TickerPeriodParameterCreatorTests.cs" />
+    <Compile Include="TickerIntentParameterCreatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertySelectorTests.cs" />
     <Compile Include="UserDefinedFunctionsTests.cs" />

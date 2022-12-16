@@ -10,7 +10,7 @@ namespace BuffettCodeIO.Property
 
         ICollection<string> GetPropertyNames();
 
-        IPeriod GetPeriod();
+        IIntent GetPeriod();
 
     }
 

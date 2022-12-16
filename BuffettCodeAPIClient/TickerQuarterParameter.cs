@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BuffettCodeAPIClient
 {
-    public class TickerQuarterParameter : IApiV2Parameter, IApiV3Parameter, ITickerPeriodParameter
+    public class TickerQuarterParameter : IApiV2Parameter, IApiV3Parameter, ITickerIntentParameter
     {
         private readonly string ticker;
         private readonly string fyParam;
@@ -41,7 +41,7 @@ namespace BuffettCodeAPIClient
         public Dictionary<string, string> ToApiV2Parameters() => ToApiParameter();
         public Dictionary<string, string> ToApiV3Parameters() => ToApiParameter();
 
-        public IPeriod GetPeriod() => period;
+        public IIntent GetIntent() => period;
 
         public string GetTicker() => ticker;
 

@@ -26,7 +26,7 @@ namespace BuffettCodeIO.Resolver
         public static PeriodSupportedTierResolver Create(IBuffettCodeApiClient apiClient, IApiResponseParser parser) => new PeriodSupportedTierResolver(apiClient, parser, new SupportedTierDictionary<FiscalQuarterPeriod>(), new SupportedTierDictionary<DayPeriod>());
 
 
-        public SupportedTier Resolve(string ticker, IPeriod period, bool isConfigureAwait, bool useCache)
+        public SupportedTier Resolve(string ticker, IIntent period, bool isConfigureAwait, bool useCache)
         {
             // snapshot is always fixed tier
             if (period is Snapshot)
@@ -98,7 +98,7 @@ namespace BuffettCodeIO.Resolver
 
         private Company GetCompany(string ticker, bool isConfigureAwait, bool useCache)
         {
-            var json = apiClient.Get(DataTypeConfig.Company, TickerEmptyPeriodParameter.Create(ticker, Snapshot.GetInstance()), false, isConfigureAwait, useCache);
+            var json = apiClient.Get(DataTypeConfig.Company, TickerEmptyIntentParameter.Create(ticker, Snapshot.GetInstance()), false, isConfigureAwait, useCache);
             return parser.Parse(DataTypeConfig.Company, json) as Company;
         }
     }

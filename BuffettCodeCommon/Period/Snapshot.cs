@@ -1,6 +1,6 @@
 namespace BuffettCodeCommon.Period
 {
-    public class Snapshot : IPeriod
+    public class Snapshot : IIntent
     {
         private static readonly Snapshot instance = new Snapshot();
         private Snapshot() { }

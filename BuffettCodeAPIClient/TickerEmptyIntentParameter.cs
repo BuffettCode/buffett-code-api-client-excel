@@ -5,24 +5,24 @@ using System.Collections.Generic;
 
 namespace BuffettCodeAPIClient
 {
-    public class TickerEmptyPeriodParameter : IApiV2Parameter, IApiV3Parameter, ITickerPeriodParameter
+    public class TickerEmptyIntentParameter : IApiV2Parameter, IApiV3Parameter, ITickerIntentParameter
 
     {
         private readonly string ticker;
-        private readonly IPeriod period;
+        private readonly IIntent intent;
 
-        private TickerEmptyPeriodParameter(string ticker, IPeriod period)
+        private TickerEmptyIntentParameter(string ticker, IIntent intent)
         {
             this.ticker = ticker;
-            this.period = period;
+            this.intent = intent;
         }
 
-        public IPeriod GetPeriod() => period;
+        public IIntent GetIntent() => intent;
 
-        public static TickerEmptyPeriodParameter Create(string ticker, IPeriod period)
+        public static TickerEmptyIntentParameter Create(string ticker, IIntent intent)
         {
             JpTickerValidator.Validate(ticker);
-            return new TickerEmptyPeriodParameter(ticker, period);
+            return new TickerEmptyIntentParameter(ticker, intent);
         }
 
         public Dictionary<string, string> ToApiV2Parameters() => new Dictionary<string, string>() { { ApiRequestParamConfig.KeyTicker, ticker }, };
@@ -32,9 +32,9 @@ namespace BuffettCodeAPIClient
 
         public override bool Equals(object obj)
         {
-            if (obj is TickerEmptyPeriodParameter tep)
+            if (obj is TickerEmptyIntentParameter tep)
             {
-                return tep.ticker.Equals(ticker) && tep.period.Equals(period);
+                return tep.ticker.Equals(ticker) && tep.intent.Equals(intent);
             }
             else
             {

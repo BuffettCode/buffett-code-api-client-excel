@@ -69,7 +69,7 @@ namespace BuffettCodeCommon.Period
 
         public uint TotalPrevQuarters => 4 * prevYears + prevQuarters;
 
-        public int CompareTo(IPeriod other)
+        public int CompareTo(IIntent other)
         {
             if (other is null)
             {

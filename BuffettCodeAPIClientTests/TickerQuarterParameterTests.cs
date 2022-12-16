@@ -14,14 +14,14 @@ namespace BuffettCodeAPIClient.Tests
             // fiscal quarter period
             var quarter = FiscalQuarterPeriod.Create(2020, 1);
             Assert.AreEqual("2020Q1",
-                TickerQuarterParameter.Create(ticker, FiscalQuarterPeriod.Create(2020, 1)).GetPeriod().ToString());
+                TickerQuarterParameter.Create(ticker, FiscalQuarterPeriod.Create(2020, 1)).GetIntent().ToString());
 
             Assert.AreEqual("2020Q1",
-                TickerQuarterParameter.Create(ticker, "LY-1", "LQ-20", FiscalQuarterPeriod.Create(2020, 1)).GetPeriod().ToString());
+                TickerQuarterParameter.Create(ticker, "LY-1", "LQ-20", FiscalQuarterPeriod.Create(2020, 1)).GetIntent().ToString());
 
 
             Assert.AreEqual("LYLQ",
-                TickerQuarterParameter.Create(ticker, RelativeFiscalQuarterPeriod.Create(0, 0)).GetPeriod().ToString());
+                TickerQuarterParameter.Create(ticker, RelativeFiscalQuarterPeriod.Create(0, 0)).GetIntent().ToString());
 
             // validation checks
             Assert.ThrowsException<ValidationError>(() => TickerQuarterParameter.Create("dummy", "LY", "LQ", quarter));
@@ -69,8 +69,8 @@ namespace BuffettCodeAPIClient.Tests
             var ticker = "1234";
             var period = FiscalQuarterPeriod.Create(2020, 1);
 
-            Assert.AreEqual(period, TickerQuarterParameter.Create(ticker, period).GetPeriod());
-            Assert.AreEqual(period, TickerQuarterParameter.Create(ticker, "LY", "LQ", period).GetPeriod());
+            Assert.AreEqual(period, TickerQuarterParameter.Create(ticker, period).GetIntent());
+            Assert.AreEqual(period, TickerQuarterParameter.Create(ticker, "LY", "LQ", period).GetIntent());
         }
 
         [TestMethod()]

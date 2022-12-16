@@ -49,11 +49,11 @@
   <ItemGroup>
     <Compile Include="BCodeFunctionErrorHandler.cs" />
     <Compile Include="BCodeExecutor.cs" />
-    <Compile Include="BCodeUdfPeriodParameterValidator.cs" />
-    <Compile Include="TickerPiriodParameterBuilder.cs" />
+    <Compile Include="BCodeUdfIntentValidator.cs" />
+    <Compile Include="TickerIntentBuilder.cs" />
     <Compile Include="DataTypeResolver.cs" />
-    <Compile Include="ITickerPeriodParameterBuilder.cs" />
-    <Compile Include="TickerPeriodParameterCreator.cs" />
+    <Compile Include="ITickerIntentBuilder.cs" />
+    <Compile Include="TickerIntentCreator.cs" />
     <Compile Include="PropertySelector.cs" />
     <Compile Include="ApiResourceFetcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
