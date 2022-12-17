@@ -7,12 +7,12 @@ using System.Collections.Generic;
 
 namespace BuffettCodeAPIClient
 {
-    public class TickerDayParameter : IApiV3Parameter, IPeriodParameter, ITickerPeriodParameter
+    public class TickerDayParameter : IApiV3Parameter, IIntentParameter, ITickerIntentParameter
     {
         private readonly string ticker;
         private readonly string dateParam;
         private readonly IDailyPeriod period;
-        public IPeriod GetPeriod() => period;
+        public IIntent GetIntent() => period;
 
         private TickerDayParameter(string ticker, string dateParam, IDailyPeriod period)
         {

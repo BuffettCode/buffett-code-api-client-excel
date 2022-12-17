@@ -35,7 +35,7 @@ namespace BuffettCodeCommon.Period
             return FiscalQuarterPeriod.Create(fyFq[0], fyFq[1]);
         }
 
-        public int CompareTo(IPeriod other)
+        public int CompareTo(IIntent other)
         {
             if (other is null)
             {

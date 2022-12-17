@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace BuffettCodeAPIClient
 {
 
-    public interface IPeriodParameter
+    public interface IIntentParameter
     {
-        IPeriod GetPeriod();
+        IIntent GetIntent();
     }
 
     public interface ITickerParameter
@@ -15,7 +15,7 @@ namespace BuffettCodeAPIClient
 
     }
 
-    public interface ITickerPeriodParameter : IPeriodParameter, ITickerParameter { }
+    public interface ITickerIntentParameter : IIntentParameter, ITickerParameter { }
 
     public interface IApiV2Parameter
     {

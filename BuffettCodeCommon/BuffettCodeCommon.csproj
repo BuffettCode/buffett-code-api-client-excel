@@ -73,7 +73,7 @@
     <Compile Include="Period\PeriodRange.cs" />
     <Compile Include="Period\DayPeriod.cs" />
     <Compile Include="Period\FiscalQuarterPeriod.cs" />
-    <Compile Include="Period\IPeriod.cs" />
+    <Compile Include="Period\IIntent.cs" />
     <Compile Include="Period\Snapshot.cs" />
     <Compile Include="Registry\BuffettCodeRegistryAccessor.cs" />
     <Compile Include="Validator\ApiKeyValidator.cs" />

@@ -23,9 +23,9 @@ namespace BuffettCodeAPIClient.Tests
         {
             var ticker = "1234";
             var period = DayPeriod.Create(2021, 1, 1);
-            Assert.AreEqual(period, TickerDayParameter.Create(ticker, period).GetPeriod());
-            Assert.AreEqual(LatestDayPeriod.GetInstance(), TickerDayParameter.Create(ticker, "latest").GetPeriod());
-            Assert.AreEqual(period, TickerDayParameter.Create(ticker, "2021-01-01").GetPeriod());
+            Assert.AreEqual(period, TickerDayParameter.Create(ticker, period).GetIntent());
+            Assert.AreEqual(LatestDayPeriod.GetInstance(), TickerDayParameter.Create(ticker, "latest").GetIntent());
+            Assert.AreEqual(period, TickerDayParameter.Create(ticker, "2021-01-01").GetIntent());
 
             // validation error
             Assert.ThrowsException<ValidationError>(() => TickerDayParameter.Create("dummy", period));

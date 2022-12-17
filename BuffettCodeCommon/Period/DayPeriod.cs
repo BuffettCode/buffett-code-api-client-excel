@@ -58,7 +58,7 @@ namespace BuffettCodeCommon.Period
         }
         public override string ToString() => value.ToString(dateFormat);
 
-        public int CompareTo(IPeriod other)
+        public int CompareTo(IIntent other)
         {
             if (other is null)
             {

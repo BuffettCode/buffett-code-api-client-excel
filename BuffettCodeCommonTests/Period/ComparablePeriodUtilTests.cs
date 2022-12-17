@@ -11,12 +11,12 @@ namespace BuffettCodeCommon.Period.Tests
             // quarter
             var fq2020Q1 = FiscalQuarterPeriod.Create(2020, 1);
             var fq2020Q2 = FiscalQuarterPeriod.Create(2020, 2);
-            Assert.AreEqual(1, ComparablePeriodUtil.GetGap(fq2020Q1, (IPeriod)fq2020Q2));
+            Assert.AreEqual(1, ComparablePeriodUtil.GetGap(fq2020Q1, (IIntent)fq2020Q2));
 
             // day
             var day20200101 = DayPeriod.Create(2020, 1, 1);
             var day20200102 = DayPeriod.Create(2020, 1, 2);
-            Assert.AreEqual(1, ComparablePeriodUtil.GetGap(day20200101, (IPeriod)day20200102));
+            Assert.AreEqual(1, ComparablePeriodUtil.GetGap(day20200101, (IIntent)day20200102));
         }
 
         [TestMethod()]

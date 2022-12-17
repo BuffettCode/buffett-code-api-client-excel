@@ -77,7 +77,7 @@ namespace BuffettCodeAPIClient.Tests
         public void CreateGetCompanyRequestTest()
         {
             var ticker = "1234";
-            var request = BuffettCodeApiV3RequestCreator.CreateGetCompanyRequest(TickerEmptyPeriodParameter.Create(ticker, Snapshot.GetInstance()));
+            var request = BuffettCodeApiV3RequestCreator.CreateGetCompanyRequest(TickerEmptyIntentParameter.Create(ticker, Snapshot.GetInstance()));
             Assert.AreEqual(request.EndPoint, BuffettCodeApiV3Config.ENDPOINT_COMPANY);
             Assert.AreEqual(ticker, request.Parameters["ticker"]);
         }

@@ -5,36 +5,36 @@ using BuffettCodeCommon.Period;
 
 namespace BuffettCodeExcelFunctions
 {
-    public class TickerPeriodParameterCreator
+    public class TickerIntentCreator
     {
-        public static ITickerPeriodParameter Create(string ticker, string periodParam, FiscalQuarterPeriod latestFiscalQuarterPeriod)
+        public static ITickerIntentParameter Create(string ticker, string intent, FiscalQuarterPeriod latestFiscalQuarterPeriod)
         {
-            if (periodParam.Equals("latest"))
+            if (intent.Equals("latest"))
             {
                 return TickerDayParameter.Create(ticker, LatestDayPeriod.GetInstance());
             }
-            else if (PeriodRegularExpressionConfig.BCodeUdfCompanyString == periodParam)
+            else if (PeriodRegularExpressionConfig.BCodeUdfCompanyString == intent)
             {
-                return TickerEmptyPeriodParameter.Create(ticker, Snapshot.GetInstance());
+                return TickerEmptyIntentParameter.Create(ticker, Snapshot.GetInstance());
             }
-            else if (PeriodRegularExpressionConfig.DayRegex.IsMatch(periodParam))
+            else if (PeriodRegularExpressionConfig.DayRegex.IsMatch(intent))
             {
-                return TickerDayParameter.Create(ticker, DayPeriod.Parse(periodParam));
+                return TickerDayParameter.Create(ticker, DayPeriod.Parse(intent));
             }
-            else if (PeriodRegularExpressionConfig.FiscalQuarterRegex.IsMatch(periodParam))
+            else if (PeriodRegularExpressionConfig.FiscalQuarterRegex.IsMatch(intent))
             {
-                var period = FiscalQuarterPeriod.Parse(periodParam);
+                var period = FiscalQuarterPeriod.Parse(intent);
                 return TickerQuarterParameter.Create(ticker, period);
             }
-            else if (PeriodRegularExpressionConfig.RelativeFiscalQuarterRegex.IsMatch(periodParam))
+            else if (PeriodRegularExpressionConfig.RelativeFiscalQuarterRegex.IsMatch(intent))
             {
-                var period = RelativeFiscalQuarterPeriod.Parse(periodParam);
+                var period = RelativeFiscalQuarterPeriod.Parse(intent);
                 return TickerQuarterParameter.Create(ticker, period);
             }
-            else if (PeriodRegularExpressionConfig.BCodeUdfFiscalQuarterInputRegex.IsMatch(periodParam))
+            else if (PeriodRegularExpressionConfig.BCodeUdfFiscalQuarterInputRegex.IsMatch(intent))
             {
                 var match = PeriodRegularExpressionConfig.BCodeUdfFiscalQuarterInputRegex
-                .Match(periodParam);
+                .Match(intent);
                 var fy = match.Groups["fiscalYear"].Value.Trim();
                 var fq = match.Groups["fiscalQuarter"].Value.Trim();
                 if (fy.Contains("LY"))
@@ -56,13 +56,13 @@ namespace BuffettCodeExcelFunctions
                 }
                 else
                 {
-                    throw new ValidationError($"{periodParam} is not supported input format");
+                    throw new ValidationError($"{intent} is not supported input format");
                 }
 
             }
             else
             {
-                throw new ValidationError($"{periodParam} is not supported input format");
+                throw new ValidationError($"{intent} is not supported input format");
             }
         }
     }

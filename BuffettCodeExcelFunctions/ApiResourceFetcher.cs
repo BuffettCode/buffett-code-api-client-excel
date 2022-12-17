@@ -19,11 +19,11 @@ namespace BuffettCodeExcelFunctions
             processor = new BuffettCodeApiTaskProcessor(version);
         }
 
-        public IApiResource Fetch(DataTypeConfig dataType, ITickerPeriodParameter parameter, bool isConfigureAwait, bool useCache) => processor.GetApiResource(dataType, parameter, isConfigureAwait, useCache);
+        public IApiResource Fetch(DataTypeConfig dataType, ITickerIntentParameter parameter, bool isConfigureAwait, bool useCache) => processor.GetApiResource(dataType, parameter, isConfigureAwait, useCache);
 
         public FiscalQuarterPeriod FetchLatestFiscalQuarter(string ticker, bool isConfigureAwait, bool useCache)
         {
-            var company = Fetch(DataTypeConfig.Company, TickerEmptyPeriodParameter.Create(ticker, Snapshot.GetInstance()), isConfigureAwait, useCache) as Company;
+            var company = Fetch(DataTypeConfig.Company, TickerEmptyIntentParameter.Create(ticker, Snapshot.GetInstance()), isConfigureAwait, useCache) as Company;
             // use ondemand latest quarter period
             return company.SupportedQuarterRanges.OndemandTierRange.To;
         }

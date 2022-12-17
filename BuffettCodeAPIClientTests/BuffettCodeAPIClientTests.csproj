@@ -77,7 +77,7 @@
     <Compile Include="CacheKeyCreatorTests.cs" />
     <Compile Include="GetRequestErrorHandlerTests.cs" />
     <Compile Include="TickerDayParameterTests.cs" />
-    <Compile Include="TickerEmptyPeriodParameterTests.cs" />
+    <Compile Include="TickerEmptyIntentParameterTests.cs" />
     <Compile Include="ErrorMockApiClientCore.cs" />
     <Compile Include="MockApiClientCore.cs" />
     <Compile Include="PeriodRangeParameterTests.cs" />

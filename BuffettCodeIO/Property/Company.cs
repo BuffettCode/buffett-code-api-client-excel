@@ -46,7 +46,7 @@ namespace BuffettCodeIO.Property
 
         public ICollection<string> GetPropertyNames() => properties.Names;
 
-        public IPeriod GetPeriod() => Snapshot.GetInstance();
+        public IIntent GetPeriod() => Snapshot.GetInstance();
         public string Ticker => ticker;
 
         public SupportedTierRange<FiscalQuarterPeriod> SupportedQuarterRanges => supportedQuarterRanges;
