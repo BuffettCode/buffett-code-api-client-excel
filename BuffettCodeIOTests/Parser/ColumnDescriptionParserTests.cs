@@ -22,6 +22,17 @@ namespace BuffettCodeIO.Parser.Tests
             Assert.AreEqual(ordinary_income.Name, "ordinary_income");
             Assert.AreEqual(ordinary_income.JpName, "経常利益");
             Assert.AreEqual(ordinary_income.Unit, "百万円");
+
+            var nested1 = descriptions.Get("prop_for_test.nested_prop_1");
+            Assert.AreEqual(nested1.Name, "prop_for_test.nested_prop_1");
+            Assert.AreEqual(nested1.JpName, "ネストプロパティ1");
+            Assert.AreEqual(nested1.Unit, "");
+
+            var nested2 = descriptions.Get("prop_for_test.nested_prop_2");
+            Assert.AreEqual(nested2.Name, "prop_for_test.nested_prop_2");
+            Assert.AreEqual(nested2.JpName, "ネストプロパティ2");
+            Assert.AreEqual(nested2.Unit, "円");
+
         }
     }
 }

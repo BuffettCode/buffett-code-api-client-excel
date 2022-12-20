@@ -17,6 +17,7 @@ namespace BuffettCodeIO.Parser.Tests
             var properties = PropertiesParser.Parse(json);
             Assert.AreEqual(properties.Get("company_name"), "株式会社カカクコム");
             Assert.AreEqual(properties.Get("current_assets"), "28774000000");
+            Assert.AreEqual(properties.Get("prop_for_test.nested"), "12345");
         }
     }
 }

@@ -118,6 +118,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="TestData\ApiV3Monthly.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestData\ColumnDescription.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

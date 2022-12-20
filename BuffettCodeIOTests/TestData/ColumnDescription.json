@@ -305,8 +305,18 @@
             "unit": "なし"
         },
         "edinet_title": {
-            "name_jp": "edinet開示資料名",
+          "name_jp": "edinet開示資料名",
+          "unit": "なし"
+        },
+        "prop_for_test": {
+          "nested_prop_1": {
+            "name_jp": "ネストプロパティ1",
             "unit": "なし"
+          },
+          "nested_prop_2": {
+            "name_jp": "ネストプロパティ2",
+            "unit": "円"
+          }
         }
     }
 }
