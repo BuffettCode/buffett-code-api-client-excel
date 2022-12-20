@@ -34,6 +34,13 @@ namespace BuffettCodeAPIClient
             return ApiGetResponseBodyParser.Parse(response);
         }
 
+        public JObject GetMonthly(TickerYearMonthParameter parameter, bool isConfigureAwait = true, bool useCache = true)
+        {
+            var request = BuffettCodeApiV3RequestCreator.CreateGetMonthlyRequest(parameter);
+            var response = apiClientCore.Get(request, isConfigureAwait, useCache);
+            return ApiGetResponseBodyParser.Parse(response);
+
+        }
         public void UpdateApiKey(string apiKey) => apiClientCore.UpdateApiKey(apiKey);
 
         public string GetApiKey() => apiClientCore.GetApiKey();
@@ -46,6 +53,8 @@ namespace BuffettCodeAPIClient
                     return GetDaily(parameter as TickerDayParameter, useOndemand, isConfigureAwait, useCache);
                 case DataTypeConfig.Quarter:
                     return GetQuarter(parameter as TickerQuarterParameter, useOndemand, isConfigureAwait, useCache);
+                case DataTypeConfig.Monthly:
+                    return GetMonthly(parameter as TickerYearMonthParameter, isConfigureAwait, useCache);
                 case DataTypeConfig.Company:
                     return GetCompany(parameter as TickerEmptyIntentParameter, isConfigureAwait, useCache);
                 default:

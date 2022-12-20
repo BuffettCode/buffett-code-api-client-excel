@@ -29,6 +29,7 @@ namespace BuffettCodeCommon.Config
         public static readonly string ENDPOINT_ONDEMAND_QUARTER = "ondemand/quarter";
         public static readonly string ENDPOINT_BULK_QUARTER = "bulk/quarter";
         public static readonly string ENDPOINT_COMPANY = "company";
+        public static readonly string ENDPOINT_MONTHLY = "monthly";
     }
 
 

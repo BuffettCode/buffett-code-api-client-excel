@@ -8,7 +8,11 @@ namespace BuffettCodeExcelFunctions
     {
         public static void Validate(string intent)
         {
-            if (!(PeriodRegularExpressionConfig.BCodeUdfFiscalQuarterInputRegex.IsMatch(intent) || PeriodRegularExpressionConfig.BCodeUdfDailyInputRegex.IsMatch(intent) || PeriodRegularExpressionConfig.BCodeUdfCompanyString == intent))
+            if (!(
+                    PeriodRegularExpressionConfig.BCodeUdfFiscalQuarterInputRegex.IsMatch(intent) ||
+                    PeriodRegularExpressionConfig.BCodeUdfDailyInputRegex.IsMatch(intent) ||
+                    PeriodRegularExpressionConfig.BCodeUdfMonthlyInputRegex.IsMatch(intent) ||
+                    PeriodRegularExpressionConfig.BCodeUdfCompanyString == intent))
             {
                 throw new ValidationError($"{intent} is not supported period format for BCODE");
             }

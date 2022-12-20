@@ -12,4 +12,6 @@ namespace BuffettCodeCommon.Period
     }
     public interface IQuarterlyPeriod : IIntent { }
     public interface IDailyPeriod : IIntent { }
+
+    public interface IYearMonthPeriod : IIntent { }
 }

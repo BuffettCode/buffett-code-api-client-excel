@@ -30,6 +30,9 @@ namespace BuffettCodeAPIClient
         {
             return new ApiGetRequest(BuffettCodeApiV3Config.ENDPOINT_COMPANY, parameter.ToApiV3Parameters());
         }
-
+        public static ApiGetRequest CreateGetMonthlyRequest(TickerYearMonthParameter parameter)
+        {
+            return new ApiGetRequest(BuffettCodeApiV3Config.ENDPOINT_MONTHLY, parameter.ToApiV3Parameters());
+        }
     }
 }

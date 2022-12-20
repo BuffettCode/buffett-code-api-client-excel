@@ -16,6 +16,10 @@ namespace BuffettCodeExcelFunctions
             {
                 return DataTypeConfig.Quarter;
             }
+            else if (PeriodRegularExpressionConfig.BCodeUdfMonthlyInputRegex.IsMatch(intent))
+            {
+                return DataTypeConfig.Monthly;
+            }
             else if (PeriodRegularExpressionConfig.BCodeUdfCompanyString == intent)
             {
                 return DataTypeConfig.Company;

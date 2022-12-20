@@ -38,6 +38,10 @@ namespace BuffettCodeIO.Resolver
             {
                 return SupportedTier.FixedTier;
             }
+            else if (period is YearMonthPeriod)
+            {
+                return SupportedTier.FixedTier;
+            }
             // handle fiscal quarter
             else if (period is FiscalQuarterPeriod fqp)
             {

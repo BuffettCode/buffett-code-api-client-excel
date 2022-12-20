@@ -29,6 +29,10 @@ namespace BuffettCodeExcelFunctions.Tests
             // Company
             Assert.AreEqual(DataTypeConfig.Company, DataTypeResolver.Resolve("COMPANY"));
 
+            // Monthly
+            Assert.AreEqual(DataTypeConfig.Monthly, DataTypeResolver.Resolve("201612"));
+            Assert.AreEqual(DataTypeConfig.Monthly, DataTypeResolver.Resolve("201701"));
+
             // others
             Assert.ThrowsException<ValidationError>(() => DataTypeResolver.Resolve("dummy"));
         }

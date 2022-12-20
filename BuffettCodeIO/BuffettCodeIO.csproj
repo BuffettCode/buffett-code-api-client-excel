@@ -74,6 +74,7 @@
     <Compile Include="Parser\ApiV3ResponseParser.cs" />
     <Compile Include="Property\FixedTierRange.cs" />
     <Compile Include="Property\Daily.cs" />
+    <Compile Include="Property\Monthly.cs" />
     <Compile Include="TabularOutput\WorksheetTabularWriter.cs" />
     <Compile Include="TabularOutput\TabularFormatter.cs" />
     <Compile Include="TabularOutput\FormattedValueSelector.cs" />

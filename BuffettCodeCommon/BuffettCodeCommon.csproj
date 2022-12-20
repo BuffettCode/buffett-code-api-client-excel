@@ -67,6 +67,7 @@
     <Compile Include="Exception\NotSupportedTierException.cs" />
     <Compile Include="Exception\NotSupportedDataTypeException.cs" />
     <Compile Include="Exception\PropertyNotFoundException.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Period\RelativeFiscalQuarterPeriod.cs" />
     <Compile Include="Period\LatestDayPeriod.cs" />
     <Compile Include="Period\ComparablePeriodUtil.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Period\FiscalQuarterPeriod.cs" />
     <Compile Include="Period\IIntent.cs" />
     <Compile Include="Period\Snapshot.cs" />
+    <Compile Include="Period\YearMonthPeriod.cs" />
     <Compile Include="Registry\BuffettCodeRegistryAccessor.cs" />
     <Compile Include="Validator\ApiKeyValidator.cs" />
     <Compile Include="Validator\ApiFyParameterValidator.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="Validator\FiscalQuarterValidator.cs" />
     <Compile Include="Validator\FiscalYearValidator.cs" />
     <Compile Include="Exception\ValidationError.cs" />
+    <Compile Include="Validator\MonthValidator.cs" />
     <Compile Include="Validator\TickerValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -15,7 +15,8 @@ namespace BuffettCodeIO.Parser
 
         private static PropertyDictionary ParseProperties(JToken propertiesRoot)
         {
-            var jProperties = propertiesRoot.Children()
+            var root = propertiesRoot.ToObject<JObject>();
+            var jProperties = root.Children()
             .Where(t => t is JProperty).Cast<JProperty>();
             return PropertiesParser.Parse(jProperties);
         }
@@ -83,6 +84,18 @@ namespace BuffettCodeIO.Parser
             );
         }
 
+        private static Monthly ParseMonthly(PropertyDictionary properties, PropertyDescriptionDictionary descriptions)
+        {
+            var year = Convert.ToUInt16(properties.Get(PropertyNames.Year));
+            var month = Convert.ToUInt16(properties.Get(PropertyNames.Month));
+            return Monthly.Create(properties.Get(PropertyNames.Ticker),
+                year,
+                month,
+                properties,
+                descriptions
+            );
+
+        }
         public IApiResource Parse(DataTypeConfig dataType, JObject json)
         {
             var columnDescriptions = FindProperty(PropertyNames.ColumnDescription, json);
@@ -101,6 +114,8 @@ namespace BuffettCodeIO.Parser
                         return ParseCompany(properties, descriptions);
                     case DataTypeConfig.Quarter:
                         return ParseQuarter(properties, descriptions);
+                    case DataTypeConfig.Monthly:
+                        return ParseMonthly(properties, descriptions);
                     case DataTypeConfig.Daily:
                         return ParseDaily(properties, descriptions);
                     default:

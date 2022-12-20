@@ -5,6 +5,7 @@ namespace BuffettCodeCommon.Config
     {
         Quarter,
         Daily,
+        Monthly,
         Company,
         // only v2 (deprecated)
         Indicator,

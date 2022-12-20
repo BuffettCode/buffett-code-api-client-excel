@@ -9,10 +9,8 @@ namespace BuffettCodeAPIClient
 
         public ApiGetRequest(string endPoint, Dictionary<string, string> parameters)
         {
-
             EndPoint = endPoint;
             Parameters = parameters;
-
         }
 
         public override string ToString() => $"EndPoint::{EndPoint}, Parameters::{string.Join(", ", Parameters)}";

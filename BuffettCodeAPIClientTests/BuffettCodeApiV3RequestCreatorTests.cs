@@ -81,5 +81,16 @@ namespace BuffettCodeAPIClient.Tests
             Assert.AreEqual(request.EndPoint, BuffettCodeApiV3Config.ENDPOINT_COMPANY);
             Assert.AreEqual(ticker, request.Parameters["ticker"]);
         }
+
+        [TestMethod()]
+        public void CreateGetMonthlyRequestTest()
+        {
+            var ticker = "1234";
+            var request = BuffettCodeApiV3RequestCreator.CreateGetMonthlyRequest(TickerYearMonthParameter.Create(ticker, YearMonthPeriod.Create(2019, 2);
+            Assert.AreEqual(request.EndPoint, BuffettCodeApiV3Config.ENDPOINT_MONTHLY);
+            Assert.AreEqual(ticker, request.Parameters["ticker"]);
+            Assert.AreEqual(2022, request.Parameters["year"]);
+            Assert.AreEqual(8, request.Parameters["month"]);
+        }
     }
 }

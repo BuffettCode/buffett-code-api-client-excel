@@ -8,6 +8,8 @@ namespace BuffettCodeIO.Parser
         public static readonly string ColumnDescription = "column_description";
         public static readonly string Ticker = "ticker";
         public static readonly string Day = "day";
+        public static readonly string Year = "year";
+        public static readonly string Month = "month";
         public static readonly string FiscalYear = "fiscal_year";
         public static readonly string FiscalQuarter = "fiscal_quarter";
         public static readonly string NameJp = "name_jp";
