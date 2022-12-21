@@ -14,12 +14,7 @@ namespace BuffettCodeIO.Parser
         {
             try
             {
-                var props = new List<JProperty>();
-                foreach (JToken root in jProperties)
-                {
-                    CollectJProperties(root, n => props.Add(n as JProperty));
-                }
-                var properties = props.ToDictionary(p => p.Path, p => ValueNormalizer.Normalize(p.Value.ToString()));
+                var properties = FlattenProperties(jProperties);
                 return new PropertyDictionary(properties);
             }
             catch (Exception e)
@@ -28,8 +23,17 @@ namespace BuffettCodeIO.Parser
             }
         }
 
+        private static Dictionary<string, string> FlattenProperties(IEnumerable<JProperty> jProperties)
+        {
+            var props = new List<JProperty>();
+            foreach (JToken root in jProperties)
+            {
+                Walk(root, n => props.Add(n as JProperty));
+            }
+            return props.ToDictionary(p => p.Path, p => ValueNormalizer.Normalize(p.Value.ToString()));
+        }
 
-        private static void CollectJProperties(JToken node, Action<JToken> action)
+        private static void Walk(JToken node, Action<JToken> action)
         {
             if (node is JProperty)
             {
@@ -37,15 +41,8 @@ namespace BuffettCodeIO.Parser
             }
             foreach (JToken child in node.Children())
             {
-                CollectJProperties(child, action);
+                Walk(child, action);
             }
-        }
-
-        private static string GetName(JProperty property)
-        {
-            var propLen = PropertyNames.Data.Length + 1;
-            var path = property.Path;
-            return path.Substring(path.IndexOf(PropertyNames.Data) + propLen);
         }
     }
 }

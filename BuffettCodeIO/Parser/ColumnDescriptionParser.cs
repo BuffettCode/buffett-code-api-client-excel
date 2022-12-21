@@ -16,15 +16,8 @@ namespace BuffettCodeIO.Parser
             {
                 try
                 {
-                    var descs = new List<JProperty>();
-                    foreach (JToken root in columnDescription)
-                    {
-                        WalkDescription(root, n => descs.Add(n as JProperty));
-                    }
-
-                    var dict = descs.Select(t => ToPropertyDescription(t))
-                                    .ToDictionary(p => p.Name, p => p);
-                    return new PropertyDescriptionDictionary(dict);
+                    var descriptions = FlattenDescriptions(columnDescription);
+                    return new PropertyDescriptionDictionary(descriptions);
                 }
                 catch (Exception e)
                 {
@@ -37,7 +30,19 @@ namespace BuffettCodeIO.Parser
             }
         }
 
-        private static void WalkDescription(JToken node, Action<JToken> action)
+        private static Dictionary<string, PropertyDescription> FlattenDescriptions(IList<JToken> columnDescription)
+        {
+            var descs = new List<JProperty>();
+            foreach (JToken root in columnDescription)
+            {
+                Walk(root, n => descs.Add(n as JProperty));
+            }
+
+            return descs.Select(t => ToPropertyDescription(t))
+                            .ToDictionary(p => p.Name, p => p);
+
+        }
+        private static void Walk(JToken node, Action<JToken> action)
         {
             if (node is JProperty && IsDescriptionColumn(node as JProperty))
             {
@@ -47,7 +52,7 @@ namespace BuffettCodeIO.Parser
             {
                 foreach (JToken child in node.Children())
                 {
-                    WalkDescription(child, action);
+                    Walk(child, action);
                 }
             }
         }
