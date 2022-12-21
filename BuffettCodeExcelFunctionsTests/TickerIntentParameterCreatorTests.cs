@@ -38,8 +38,8 @@ namespace BuffettCodeExcelFunctions.Tests
             Assert.AreEqual(TickerEmptyIntentParameter.Create(ticker, Snapshot.GetInstance()), TickerIntentCreator.Create(ticker, "COMPANY", null));
 
             // Monthly
-            Assert.AreEqual(TickerYearMonthParameter.Create(ticker, YearMonthPeriod.Create(2021, 3)), TickerIntentCreator.Create(ticker, "202103", null));
-            Assert.AreEqual(TickerYearMonthParameter.Create(ticker, YearMonthPeriod.Create(2022, 12)), TickerIntentCreator.Create(ticker, "202212", null));
+            Assert.AreEqual(TickerYearMonthParameter.Create(ticker, YearMonthPeriod.Create(2021, 3)), TickerIntentCreator.Create(ticker, "2021-03", null));
+            Assert.AreEqual(TickerYearMonthParameter.Create(ticker, YearMonthPeriod.Create(2022, 12)), TickerIntentCreator.Create(ticker, "2022-12", null));
 
             // others
             Assert.ThrowsException<ValidationError>(() => TickerIntentCreator.Create(ticker, "dummy", null));

@@ -31,7 +31,7 @@ namespace BuffettCodeCommon.Period
         public static YearMonthPeriod Parse(string yearMonth)
         {
             var yearStr = yearMonth.Substring(0, 4);
-            var monthStr = yearMonth.Substring(4, 2);
+            var monthStr = yearMonth.Substring(5, 2);
             return Create(uint.Parse(yearStr), uint.Parse(monthStr));
         }
 
@@ -60,7 +60,7 @@ namespace BuffettCodeCommon.Period
 
         public IComparablePeriod Next() => (Month < 12) ? Create(Year, Month + 1) : Create(Year + 1, 1);
 
-        public override string ToString() => String.Format("{0}{1:00}", year, month);
+        public override string ToString() => String.Format("{0}-{1:00}", year, month);
 
 
         public int CompareTo(IIntent other)

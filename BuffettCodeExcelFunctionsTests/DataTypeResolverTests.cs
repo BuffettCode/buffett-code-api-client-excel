@@ -30,8 +30,8 @@ namespace BuffettCodeExcelFunctions.Tests
             Assert.AreEqual(DataTypeConfig.Company, DataTypeResolver.Resolve("COMPANY"));
 
             // Monthly
-            Assert.AreEqual(DataTypeConfig.Monthly, DataTypeResolver.Resolve("201612"));
-            Assert.AreEqual(DataTypeConfig.Monthly, DataTypeResolver.Resolve("201701"));
+            Assert.AreEqual(DataTypeConfig.Monthly, DataTypeResolver.Resolve("2016-12"));
+            Assert.AreEqual(DataTypeConfig.Monthly, DataTypeResolver.Resolve("2017-01"));
 
             // others
             Assert.ThrowsException<ValidationError>(() => DataTypeResolver.Resolve("dummy"));

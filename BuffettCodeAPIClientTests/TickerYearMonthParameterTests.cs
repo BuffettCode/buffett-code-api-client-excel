@@ -13,7 +13,7 @@ namespace BuffettCodeAPIClient.Tests
             var ticker = "1234";
             var param = TickerYearMonthParameter.Create(ticker, YearMonthPeriod.Create(2022, 1));
             Assert.AreEqual(ticker, param.GetTicker());
-            Assert.AreEqual("202201", param.GetIntent().ToString());
+            Assert.AreEqual("2022-01", param.GetIntent().ToString());
         }
 
         [TestMethod()]

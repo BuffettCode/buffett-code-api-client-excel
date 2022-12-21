@@ -10,7 +10,7 @@ namespace BuffettCodeCommon.Config
 
         public static readonly Regex FiscalQuarterRegex = new Regex(@"^[12]\d{3}Q[1-5]$");
 
-        public static readonly Regex YearMonthRegex = new Regex(@"^(?<year>[12]\d{3})(?<month>[01]\d)$");
+        public static readonly Regex YearMonthRegex = new Regex(@"^(?<year>[12]\d{3})-(?<month>[01]\d)$");
 
         public static readonly Regex DayRegex = new Regex(@"^[12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$");
 
@@ -20,7 +20,7 @@ namespace BuffettCodeCommon.Config
 
         public static readonly Regex BCodeUdfDailyInputRegex = new Regex(@"^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]))|(latest)$");
 
-        public static readonly Regex BCodeUdfMonthlyInputRegex = new Regex(@"^(?<year>[12]\d{3})(?<month>[01]\d)$");
+        public static readonly Regex BCodeUdfMonthlyInputRegex = new Regex(@"^(?<year>[12]\d{3})-(?<month>[01]\d)$");
 
         public static readonly string BCodeUdfCompanyString = "COMPANY";
     }

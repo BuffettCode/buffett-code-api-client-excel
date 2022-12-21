@@ -10,7 +10,7 @@ namespace BuffettCodeCommonTests.Period
         [TestMethod]
         public void ParseTest()
         {
-            var period = YearMonthPeriod.Parse("202202");
+            var period = YearMonthPeriod.Parse("2022-02");
             Assert.AreEqual(period.Year, (uint)2022);
             Assert.AreEqual(period.Month, (uint)2);
         }
