@@ -72,6 +72,7 @@
     <Compile Include="IApiClientCore.cs" />
     <Compile Include="IIntentParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TickerYearMonthParameter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

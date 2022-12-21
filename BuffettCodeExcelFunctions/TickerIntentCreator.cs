@@ -26,6 +26,11 @@ namespace BuffettCodeExcelFunctions
                 var period = FiscalQuarterPeriod.Parse(intent);
                 return TickerQuarterParameter.Create(ticker, period);
             }
+            else if (PeriodRegularExpressionConfig.YearMonthRegex.IsMatch(intent))
+            {
+                var period = YearMonthPeriod.Parse(intent);
+                return TickerYearMonthParameter.Create(ticker, period);
+            }
             else if (PeriodRegularExpressionConfig.RelativeFiscalQuarterRegex.IsMatch(intent))
             {
                 var period = RelativeFiscalQuarterPeriod.Parse(intent);

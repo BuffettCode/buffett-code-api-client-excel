@@ -24,8 +24,20 @@ namespace BuffettCodeIO.Parser.Tests
             Assert.AreEqual(company.Ticker, "2801");
             Assert.AreEqual(company.GetDescription("tosyo_33category").JpName, "東証33業種");
             Assert.AreEqual(company.GetDescription("url").Unit, "");
+            Assert.AreEqual(company.GetDescription("fixed_tier_range.oldest_date").JpName, "定額利用可能な下限の日付");
+            Assert.AreEqual(company.GetDescription("fixed_tier_range.oldest_fiscal_year").JpName, "定額利用可能な下限の決算年度");
+            Assert.AreEqual(company.GetDescription("fixed_tier_range.oldest_fiscal_quarter").JpName, "定額利用可能な下限の決算四半期");
+            Assert.AreEqual(company.GetDescription("fixed_tier_range.latest_fiscal_year").JpName, "定額利用可能な上限の決算年度");
+            Assert.AreEqual(company.GetDescription("fixed_tier_range.latest_fiscal_quarter").JpName, "定額利用可能な上限の決算四半期");
+
             Assert.AreEqual(company.GetValue("url"), @"http://www.kikkoman.co.jp/");
             Assert.AreEqual(company.GetValue("accounting_standard"), "IFRS");
+            Assert.AreEqual(company.GetValue("fixed_tier_range.oldest_date"), "2016-11-15");
+            Assert.AreEqual(company.GetValue("fixed_tier_range.oldest_fiscal_year"), "2016");
+            Assert.AreEqual(company.GetValue("fixed_tier_range.oldest_fiscal_quarter"), "3");
+            Assert.AreEqual(company.GetValue("fixed_tier_range.latest_fiscal_year"), "2021");
+            Assert.AreEqual(company.GetValue("fixed_tier_range.latest_fiscal_quarter"), "2");
+
             var supportedQuarterRanges = company.SupportedQuarterRanges;
 
             Assert.AreEqual((uint)2004, supportedQuarterRanges.OndemandTierRange.From.Year);
@@ -91,6 +103,67 @@ namespace BuffettCodeIO.Parser.Tests
             Assert.AreEqual(quarters[0].GetDescription("employee_num").Unit, "人");
             Assert.AreEqual(quarters[0].GetValue("company_name"), "株式会社日立製作所");
         }
+
+        [TestMethod()]
+        [DeploymentItem(@"TestData\ApiV3Monthly.json", @"TestData")]
+        public void ParseMonthlyTest()
+        {
+            var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData\ApiV3Monthly.json"));
+            var monthly = (Monthly)parser.Parse(DataTypeConfig.Monthly, json);
+            Assert.AreEqual(monthly.Ticker, "3501");
+            Assert.AreEqual(monthly.GetPeriod(), YearMonthPeriod.Create(2022, 5));
+            Assert.AreEqual(monthly.GetDescription("ticker").JpName, "ティッカー");
+            Assert.AreEqual(monthly.GetDescription("year").JpName, "年");
+            Assert.AreEqual(monthly.GetDescription("month").JpName, "月");
+            Assert.AreEqual(monthly.GetDescription("beta.years_2.start_date").JpName, "開始日");
+            Assert.AreEqual(monthly.GetDescription("beta.years_2.end_date").JpName, "終了日");
+            Assert.AreEqual(monthly.GetDescription("beta.years_2.beta").JpName, "β");
+            Assert.AreEqual(monthly.GetDescription("beta.years_2.alpha").JpName, "α");
+            Assert.AreEqual(monthly.GetDescription("beta.years_2.r").JpName, "相関係数");
+            Assert.AreEqual(monthly.GetDescription("beta.years_2.r_squared").JpName, "決定係数");
+            Assert.AreEqual(monthly.GetDescription("beta.years_2.count").JpName, "利用データ数");
+            Assert.AreEqual(monthly.GetDescription("beta.years_3.start_date").JpName, "開始日");
+            Assert.AreEqual(monthly.GetDescription("beta.years_3.end_date").JpName, "終了日");
+            Assert.AreEqual(monthly.GetDescription("beta.years_3.beta").JpName, "β");
+            Assert.AreEqual(monthly.GetDescription("beta.years_3.alpha").JpName, "α");
+            Assert.AreEqual(monthly.GetDescription("beta.years_3.r").JpName, "相関係数");
+            Assert.AreEqual(monthly.GetDescription("beta.years_3.r_squared").JpName, "決定係数");
+            Assert.AreEqual(monthly.GetDescription("beta.years_3.count").JpName, "利用データ数");
+            Assert.AreEqual(monthly.GetDescription("beta.years_5.start_date").JpName, "開始日");
+            Assert.AreEqual(monthly.GetDescription("beta.years_5.end_date").JpName, "終了日");
+            Assert.AreEqual(monthly.GetDescription("beta.years_5.beta").JpName, "β");
+            Assert.AreEqual(monthly.GetDescription("beta.years_5.alpha").JpName, "α");
+            Assert.AreEqual(monthly.GetDescription("beta.years_5.r").JpName, "相関係数");
+            Assert.AreEqual(monthly.GetDescription("beta.years_5.r_squared").JpName, "決定係数");
+            Assert.AreEqual(monthly.GetDescription("beta.years_5.count").JpName, "利用データ数");
+
+            Assert.AreEqual(monthly.GetValue("ticker"), "3501");
+            Assert.AreEqual(monthly.GetValue("year"), "2022");
+            Assert.AreEqual(monthly.GetValue("month"), "5");
+            Assert.AreEqual(monthly.GetValue("beta.years_2.start_date"), "2020-06-01");
+            Assert.AreEqual(monthly.GetValue("beta.years_2.end_date"), "2022-05-31");
+            Assert.AreEqual(monthly.GetValue("beta.years_2.beta"), "0.27");
+            Assert.AreEqual(monthly.GetValue("beta.years_2.alpha"), "0");
+            Assert.AreEqual(monthly.GetValue("beta.years_2.r"), "0.11");
+            Assert.AreEqual(monthly.GetValue("beta.years_2.r_squared"), "0.01");
+            Assert.AreEqual(monthly.GetValue("beta.years_2.count"), "24");
+            Assert.AreEqual(monthly.GetValue("beta.years_3.start_date"), "2019-06-01");
+            Assert.AreEqual(monthly.GetValue("beta.years_3.end_date"), "2022-05-31");
+            Assert.AreEqual(monthly.GetValue("beta.years_3.beta"), "0.84");
+            Assert.AreEqual(monthly.GetValue("beta.years_3.alpha"), "-0.01");
+            Assert.AreEqual(monthly.GetValue("beta.years_3.r"), "0.41");
+            Assert.AreEqual(monthly.GetValue("beta.years_3.r_squared"), "0.17");
+            Assert.AreEqual(monthly.GetValue("beta.years_3.count"), "36");
+            Assert.AreEqual(monthly.GetValue("beta.years_5.start_date"), "2017-06-01");
+            Assert.AreEqual(monthly.GetValue("beta.years_5.end_date"), "2022-05-31");
+            Assert.AreEqual(monthly.GetValue("beta.years_5.beta"), "0.89");
+            Assert.AreEqual(monthly.GetValue("beta.years_5.alpha"), "0");
+            Assert.AreEqual(monthly.GetValue("beta.years_5.r"), "0.45");
+            Assert.AreEqual(monthly.GetValue("beta.years_5.r_squared"), "0.2");
+            Assert.AreEqual(monthly.GetValue("beta.years_5.count"), "60");
+
+        }
+
     }
 
 }

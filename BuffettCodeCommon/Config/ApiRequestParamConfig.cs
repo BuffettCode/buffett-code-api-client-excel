@@ -10,6 +10,8 @@ namespace BuffettCodeCommon.Config
         public static readonly string KeyFrom = "from";
         public static readonly string KeyTo = "to";
         public static readonly string KeyDate = "date";
+        public static readonly string KeyYear = "year";
+        public static readonly string KeyMonth = "month";
 
 
         public static readonly string ValueLy = "LY";

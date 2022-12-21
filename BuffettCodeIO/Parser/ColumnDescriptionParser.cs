@@ -1,3 +1,4 @@
+using BuffettCodeCommon;
 using BuffettCodeCommon.Exception;
 using BuffettCodeIO.Property;
 using Newtonsoft.Json.Linq;
@@ -15,8 +16,8 @@ namespace BuffettCodeIO.Parser
             {
                 try
                 {
-                    var dict = columnDescription.First().SelectMany(t => t.Children()).Where(t => t is JProperty).Cast<JProperty>().Where(_ => !PropertyNames.IgnoredPropertyNames.Contains(_.Name)).Select(t => ToPropertyDescription(t)).ToDictionary(p => p.Name, p => p);
-                    return new PropertyDescriptionDictionary(dict);
+                    var descriptions = FlattenDescriptions(columnDescription);
+                    return new PropertyDescriptionDictionary(descriptions);
                 }
                 catch (Exception e)
                 {
@@ -29,14 +30,46 @@ namespace BuffettCodeIO.Parser
             }
         }
 
-        private static PropertyDescription ToPropertyDescription(JProperty property)
+        private static Dictionary<string, PropertyDescription> FlattenDescriptions(IList<JToken> columnDescription)
         {
-            var name = property.Name;
-            var label = property.Value[PropertyNames.NameJp].ToString();
-            var unit = property.Value[PropertyNames.Unit].ToString();
+            var descs = new List<JProperty>();
+            foreach (JToken root in columnDescription)
+            {
+                Walk(root, n => descs.Add(n as JProperty));
+            }
 
-            return new PropertyDescription(name, label, unit);
+            return descs.Select(t => ToPropertyDescription(t))
+                            .ToDictionary(p => p.Name, p => p);
+
+        }
+        private static void Walk(JToken node, Action<JToken> action)
+        {
+            if (node is JProperty && IsDescriptionColumn(node as JProperty))
+            {
+                action(node);
+            }
+            else
+            {
+                foreach (JToken child in node.Children())
+                {
+                    Walk(child, action);
+                }
+            }
         }
 
+        private static bool IsDescriptionColumn(JProperty property)
+        {
+            return property.Value[PropertyNames.NameJp] != null && property.Value[PropertyNames.Unit] != null;
+        }
+
+        private static PropertyDescription ToPropertyDescription(JProperty property)
+        {
+            var propLen = PropertyNames.ColumnDescription.Length + 1;
+            var path = property.Path;
+            var name = path.Substring(path.IndexOf(PropertyNames.ColumnDescription) + propLen);
+            var label = property.Value[PropertyNames.NameJp].ToString();
+            var unit = property.Value[PropertyNames.Unit].ToString();
+            return new PropertyDescription(name, label, unit);
+        }
     }
 }

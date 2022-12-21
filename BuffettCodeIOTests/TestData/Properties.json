@@ -189,5 +189,8 @@
   "segment_member": null,
   "increase_in_properties": 346000000,
   "r_and_d_expenses": 35000000,
-  "desc_business": null
+  "desc_business": null,
+  "prop_for_test": {
+    "nested": 12345
+  }
 }

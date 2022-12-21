@@ -83,8 +83,10 @@
     <Compile Include="Validator\FiscalQuarterValidator.cs" />
     <Compile Include="Validator\FiscalYearValidator.cs" />
     <Compile Include="Exception\ValidationError.cs" />
+    <Compile Include="Validator\MonthValidator.cs" />
     <Compile Include="Validator\TickerValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Period\YearMonthPeriod.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

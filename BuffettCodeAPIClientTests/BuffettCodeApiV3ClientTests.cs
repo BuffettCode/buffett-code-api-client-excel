@@ -37,6 +37,14 @@ namespace BuffettCodeAPIClient.Tests
         }
 
         [TestMethod()]
+        public void GetMonthlyTest()
+        {
+            var client = new BuffettCodeApiV3Client(mockApiCore);
+            var parameter = TickerYearMonthParameter.Create("6501", YearMonthPeriod.Create(2022, 8));
+            Assert.IsNotNull(client.GetMonthly(parameter, false, false));
+        }
+
+        [TestMethod()]
         public void GetCompanyTest()
         {
             var client = new BuffettCodeApiV3Client(mockApiCore);
