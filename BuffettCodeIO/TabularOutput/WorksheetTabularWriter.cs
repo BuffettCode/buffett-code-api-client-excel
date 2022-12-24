@@ -23,13 +23,14 @@ namespace BuffettCodeIO.TabularOutput
         {
             uint rowIndex = 1;
             worksheet.Application.ScreenUpdating = false;
+            var calcConfig = worksheet.Application.Calculation;
             worksheet.Application.Calculation = XlCalculation.xlCalculationManual;
             tabular.ToRows().ToList().ForEach(r =>
             {
                 WriteRow(rowIndex, r);
                 rowIndex++;
             });
-            worksheet.Application.Calculation = XlCalculation.xlCalculationAutomatic;
+            worksheet.Application.Calculation = calcConfig;
             worksheet.Application.ScreenUpdating = true;
         }
 
