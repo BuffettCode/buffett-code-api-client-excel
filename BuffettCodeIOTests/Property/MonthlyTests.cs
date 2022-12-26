@@ -57,10 +57,10 @@ namespace BuffettCodeIOTests.Property
             var betaValue = monthly.GetValue("2y_beta");
             Assert.AreEqual("beta-value", betaValue);
 
-            var betaValue2 = monthly.GetDescription("beta.years_2.beta");
-            Assert.AreEqual("beta-value", betaValue2.Name);
+            var betaValue2 = monthly.GetValue("beta.years_2.beta");
+            Assert.AreEqual("beta-value", betaValue2);
 
-            var monthValue = monthly.GetDescription("month");
+            var monthValue = monthly.GetValue("month");
             Assert.AreEqual("month-value", monthValue);
         }
 
