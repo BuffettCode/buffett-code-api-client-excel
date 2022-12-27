@@ -28,16 +28,11 @@ namespace BuffettCodeIOTests.Property
             };
             var monthly = CreateMonthly("1234", 2022, 8, null, descriptions);
 
-            var betaDescription = monthly.GetDescription("2y_beta");
+            var betaDescription = monthly.GetDescription("beta.years_2.beta");
             Assert.AreEqual("beta-name", betaDescription.Name);
             Assert.AreEqual("beta-label", betaDescription.JpName);
             Assert.AreEqual("beta-unit", betaDescription.Unit);
-
-            var betaDescription2 = monthly.GetDescription("beta.years_2.beta");
-            Assert.AreEqual("beta-name", betaDescription2.Name);
-            Assert.AreEqual("beta-label", betaDescription2.JpName);
-            Assert.AreEqual("beta-unit", betaDescription2.Unit);
-            Assert.AreEqual(betaDescription, betaDescription2);
+            Assert.AreEqual(betaDescription, betaDescription);
 
             var monthDescription = monthly.GetDescription("month");
             Assert.AreEqual("month-name", monthDescription.Name);
@@ -54,15 +49,11 @@ namespace BuffettCodeIOTests.Property
             };
             var monthly = CreateMonthly("1234", 2022, 8, values, null);
 
-            var betaValue = monthly.GetValue("2y_beta");
+            var betaValue = monthly.GetValue("beta.years_2.beta");
             Assert.AreEqual("beta-value", betaValue);
-
-            var betaValue2 = monthly.GetValue("beta.years_2.beta");
-            Assert.AreEqual("beta-value", betaValue2);
 
             var monthValue = monthly.GetValue("month");
             Assert.AreEqual("month-value", monthValue);
         }
-
     }
 }

@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="BCodeUdfIntentParameterValidatorTests.cs" />
     <Compile Include="DataTypeResolverTests.cs" />
+    <Compile Include="PropertyNameResolverTests.cs" />
     <Compile Include="TickerIntentParameterCreatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertySelectorTests.cs" />
