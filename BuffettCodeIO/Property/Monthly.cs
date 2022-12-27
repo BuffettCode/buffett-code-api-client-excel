@@ -2,6 +2,7 @@ using BuffettCodeCommon.Period;
 using BuffettCodeCommon.Validator;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace BuffettCodeIO.Property
 {
     public class Monthly : IApiResource
     {
-        private static readonly Dictionary<string, string> ITEM_NAME_ALIASES = new Dictionary<string, string>
+        private static readonly ReadOnlyDictionary<string, string> ITEM_NAME_ALIASES = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>
         {
             {"2y_beta", "beta.years_2.beta"},
             {"3y_beta", "beta.years_3.beta"},
@@ -21,7 +22,7 @@ namespace BuffettCodeIO.Property
             {"2y_beta_count", "beta.years_2.count"},
             {"3y_beta_count", "beta.years_3.count"},
             {"5y_beta_count", "beta.years_5.count"}
-        };
+        });
 
         private readonly string ticker;
         private readonly YearMonthPeriod period;
@@ -37,18 +38,19 @@ namespace BuffettCodeIO.Property
             this.descriptions = descriptions;
         }
 
-        public PropertyDescription GetDescription(string propertyName)
+        private string GetKeyName(string propertyName)
         {
             if (ITEM_NAME_ALIASES.ContainsKey(propertyName))
             {
-                return descriptions.Get(ITEM_NAME_ALIASES[propertyName]);
-
+                return ITEM_NAME_ALIASES[propertyName];
             }
             else
             {
-                return descriptions.Get(propertyName);
+                return propertyName;
             }
         }
+
+        public PropertyDescription GetDescription(string propertyName) => descriptions.Get(GetKeyName(propertyName));
 
         public IIntent GetPeriod() => period;
 
@@ -57,19 +59,8 @@ namespace BuffettCodeIO.Property
 
         public ICollection<string> GetPropertyNames() => properties.Names;
 
-        public string GetValue(string propertyName)
-        {
-            if (ITEM_NAME_ALIASES.ContainsKey(propertyName))
-            {
-                return properties.Get(ITEM_NAME_ALIASES[propertyName]);
+        public string GetValue(string propertyName) => properties.Get(GetKeyName(propertyName));
 
-            }
-            else
-            {
-                return properties.Get(propertyName);
-            }
-
-        }
         public static Monthly Create(string ticker, uint year, uint month, PropertyDictionary properties, PropertyDescriptionDictionary descriptions)
         {
             JpTickerValidator.Validate(ticker);
