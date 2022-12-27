@@ -71,6 +71,7 @@
     <Compile Include="Formatter\PropertyFormatterFactoryTests.cs" />
     <Compile Include="Parser\ApiV3ResponseParserTests.cs" />
     <Compile Include="Property\DailyTests.cs" />
+    <Compile Include="Property\MonthlyTests.cs" />
     <Compile Include="Property\SupportedTierRangeTests.cs" />
     <Compile Include="TabularOutput\CsvFileTabularWriterTests.cs" />
     <Compile Include="TabularOutput\TabularOutputFormatterTests.cs" />

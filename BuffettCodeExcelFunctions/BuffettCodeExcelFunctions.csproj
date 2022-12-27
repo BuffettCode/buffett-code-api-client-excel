@@ -50,6 +50,7 @@
     <Compile Include="BCodeFunctionErrorHandler.cs" />
     <Compile Include="BCodeExecutor.cs" />
     <Compile Include="BCodeUdfIntentValidator.cs" />
+    <Compile Include="PropertyNameResolver.cs" />
     <Compile Include="TickerIntentBuilder.cs" />
     <Compile Include="DataTypeResolver.cs" />
     <Compile Include="ITickerIntentBuilder.cs" />

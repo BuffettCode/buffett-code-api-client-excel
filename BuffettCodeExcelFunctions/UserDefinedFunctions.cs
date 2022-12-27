@@ -32,22 +32,20 @@ namespace BuffettCodeExcelFunctions
 
 
         [ExcelFunction(Description = "Getting values using BuffettCode API", Name = "BCODE")]
-        public static string BCode(string ticker, string parameter1, string parameter2, string parameter3, string parameter4 = "")
+        public static string BCode(string ticker, string intent, string propertyName, string isRawValue, string isWithUnit = "")
         {
-            var propertyName = "";
             try
             {
-                if (IsV2Syntax(parameter1))
+                if (IsV2Syntax(intent))
                 {
                     throw new UDFObsoletedFunctionCallException("Legacy 'BCODE(ticker, fy, fq, column)' function support has been ended");
                 }
-                var intent = parameter1;
-                propertyName = parameter2;
+                propertyName = PropertyNameResolver.Resolve(propertyName);
                 BCodeUdfIntentValidator.Validate(intent);
                 var dataType = DataTypeResolver.Resolve(intent);
-                var isRawValue = ParseBoolParameter(parameter3, false);
-                var isWithUnit = ParseBoolParameter(parameter4, false);
-                return bCodeExecutor.Execute(ticker, dataType, intent, propertyName, isRawValue, isWithUnit);
+                var isRawValueBool = ParseBoolParameter(isRawValue, false);
+                var isWithUnitBool = ParseBoolParameter(isWithUnit, false);
+                return bCodeExecutor.Execute(ticker, dataType, intent, propertyName, isRawValueBool, isWithUnitBool);
 
             }
             catch (Exception e)
