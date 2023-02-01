@@ -1,19 +1,26 @@
+using BuffettCodeAPIClient;
+using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Period;
+using BuffettCodeIO.Parser;
 using BuffettCodeIO.Property;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace BuffettCodeIO.TabularOutput.Tests
 {
     [TestClass()]
     public class TabularTests
+
     {
         private static readonly string ticker = "1234";
         private static readonly string key = "test_key";
         private static readonly string value = "test_value";
         private static readonly string label = "ラベル";
         private static readonly string unit = "test_unit";
+        private static readonly ApiV3ResponseParser parser = new ApiV3ResponseParser();
+
 
         private static readonly FiscalQuarterPeriod period = FiscalQuarterPeriod.Create(2021, 3);
         private static readonly IDictionary<string, string> properties = new Dictionary<string, string> { { key, value } };
@@ -49,5 +56,56 @@ namespace BuffettCodeIO.TabularOutput.Tests
             Assert.AreEqual(1, firstDataRow.Values.Count);
             Assert.AreEqual(value, firstDataRow.Values[0]);
         }
+
+        [TestMethod()]
+        [DeploymentItem(@"TestData\ApiV3Quarter.json", @"TestData")]
+        public void TestDataQuarterJsonTest()
+        {
+            var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData\ApiV3Quarter.json"));
+            var quarter = (Quarter)parser.Parse(DataTypeConfig.Quarter, json);
+
+            var csvOutput = new Tabular<Quarter>();
+            var rows = csvOutput.Add(quarter).ToRows().ToArray();
+            var header = rows[0];
+            Assert.AreEqual("キー", header.Key);
+            Assert.AreEqual("項目名", header.Name);
+            Assert.AreEqual("単位", header.Unit);
+            Assert.AreEqual(1, header.Values.Count);
+            Assert.AreEqual("2020Q4", header.Values[0]);
+            Assert.AreEqual(194, rows.Length);
+            // check skipping "segment_member" childrens
+            Assert.IsTrue(rows.Any(row => row.Key.Contains("segment_member")));
+            Assert.IsFalse(rows.Any(row => row.Key.Contains("segment_member.")));
+        }
+
+
+        [TestMethod()]
+        [DeploymentItem(@"TestData\ApiV3BulkQuarter.json", @"TestData")]
+        public void TestDataBulkQuarterJsonJsonTest()
+        {
+            var csvOutput = new Tabular<Quarter>();
+            var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData\ApiV3BulkQuarter.json"));
+            var quarters = parser.ParseRange(DataTypeConfig.Quarter, json);
+            foreach (var quarter in quarters)
+            {
+                csvOutput.Add((
+                    Quarter)quarter);
+            }
+            var rows = csvOutput.ToRows().ToArray();
+
+            var header = rows[0];
+            Assert.AreEqual(194, rows.Length);
+            Assert.AreEqual("キー", header.Key);
+            Assert.AreEqual("項目名", header.Name);
+            Assert.AreEqual("単位", header.Unit);
+            Assert.AreEqual(4, header.Values.Count);
+            Assert.AreEqual("2020Q1", header.Values[0]);
+            Assert.AreEqual(194, rows.Length);
+            // check skipping "segment_member" childrens
+            Assert.IsTrue(rows.Any(row => row.Key.Contains("segment_member")));
+            Assert.IsFalse(rows.Any(row => row.Key.Contains("segment_member.")));
+
+        }
+
     }
 }
