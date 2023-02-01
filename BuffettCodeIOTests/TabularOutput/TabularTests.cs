@@ -1,12 +1,12 @@
+using BuffettCodeAPIClient;
+using BuffettCodeCommon.Config;
 using BuffettCodeCommon.Period;
+using BuffettCodeIO.Parser;
 using BuffettCodeIO.Property;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Linq;
-using BuffettCodeCommon.Config;
-using BuffettCodeAPIClient;
 using System.IO;
-using BuffettCodeIO.Parser;
+using System.Linq;
 
 namespace BuffettCodeIO.TabularOutput.Tests
 {
@@ -86,7 +86,8 @@ namespace BuffettCodeIO.TabularOutput.Tests
             var csvOutput = new Tabular<Quarter>();
             var json = ApiGetResponseBodyParser.Parse(File.ReadAllText(@"TestData\ApiV3BulkQuarter.json"));
             var quarters = parser.ParseRange(DataTypeConfig.Quarter, json);
-            foreach(var quarter in quarters) {
+            foreach (var quarter in quarters)
+            {
                 csvOutput.Add((
                     Quarter)quarter);
             }
