@@ -42,15 +42,15 @@ Visual Studio Tools for Office (VSTO)
 #### .NET Framework 3.5の有効化
 
 * Windowsでは「Windows の機能の有効化または無効化」 (Turn Windows features on or off) から、Windows ServerではServer Managerから、.NET Framework 3.5を有効化する必要がある
-* (WiX Toolsetが.NET Framework 3.5に依存するため必要)
+* (WiX Toolset が.NET Framework 3.5に依存するため必要)
 
-#### Wix Toolset 3.1.1 インストール
+#### Wix v3 Toolset 3.1.1 インストール
 
 * [オフィシャルサイト](https://github.com/wixtoolset/wix3/releases/tag/wix3111rtm)からインストーラ(exeファイル)をダウンロードしてインストール
 
-#### Wix Toolset Visual Studio 2019 Extension インストール
+#### Wix v3 Toolset Visual Studio 2019 Extension インストール
 
-* [オフィシャルサイト](https://wixtoolset.org/releases/)からインストーラをダウンロードしてインストール
+* [オフィシャルサイト](https://wixtoolset.org/docs/wix3/#recommended-build)から"Visual Studio 2019 Extension"用インストーラをダウンロードしてインストール
 
 #### git clone
 
