@@ -20,7 +20,8 @@ namespace BuffettCodeIO.TabularOutput
             // setup keys and values if empty
             if (keys.Count == 0)
             {
-                apiResource.GetPropertyNames().ToList().ForEach(p =>
+                // nest された json は対象外にする
+                apiResource.GetPropertyNames().Where(name => !name.Contains(".")).ToList().ForEach(p =>
                 {
                     keys.Add(p);
                     rowDict.Add(p, TabularRow.Create(apiResource.GetDescription(p)));
